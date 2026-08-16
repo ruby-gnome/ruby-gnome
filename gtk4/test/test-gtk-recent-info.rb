@@ -20,14 +20,25 @@ class TestGtkRecentInfo < Test::Unit::TestCase
   sub_test_case "instance methods" do
     def setup
       manager = Gtk::RecentManager.new
+      changed = false
+      manager.signal_connect(:changed) do
+        changed = true
+      end
       uri = "file:///#{__FILE__}"
       manager.add_item(uri)
       loop = GLib::MainLoop.new
-      GLib::Idle.add do
-        loop.quit
-        GLib::Source::REMOVE
+      n_checks = 0
+      GLib::Timeout.add(1) do
+        n_checks += 1
+        if changed or n_checks == 5000
+          loop.quit
+          GLib::Source::REMOVE
+        else
+          GLib::Source::CONTINUE
+        end
       end
       loop.run
+      raise "Gtk::RecentManager#add_item isn't completed" unless changed
       @info = manager.lookup_item(uri)
     end
 
