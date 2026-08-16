@@ -346,6 +346,7 @@ require "glib2/variant"
 require "glib2/variant-type"
 
 if GLib.const_defined?(:Repository)
+  require_relative "glib2/callable-info"
   require_relative "glib2/repository"
 end
 
