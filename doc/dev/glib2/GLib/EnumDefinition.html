@@ -971,12 +971,6 @@
       <pre class="lines">
 
 
-109
-110
-111
-112
-113
-114
 115
 116
 117
@@ -993,10 +987,16 @@
 128
 129
 130
-131</pre>
+131
+132
+133
+134
+135
+136
+137</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/glib-mkenums.rb', line 109</span>
+      <pre class="code"><span class="info file"># File 'lib/glib-mkenums.rb', line 115</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='id identifier rubyid_g_type_prefix'>g_type_prefix</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_options'>options</span> <span class='op'>||=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
@@ -1010,7 +1010,7 @@
             # GLIB_DEPRECATED_TYPE_IN_2_38_FOR(GTestSubprocessFlags)
             (?:\s+[\w()\s]+)?
             ;</span><span class='regexp_end'>/mx</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_force_flags'>force_flags</span><span class='comma'>,</span> <span class='id identifier rubyid_constants'>constants</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='op'>|</span>
-    <span class='id identifier rubyid_enum_options'>enum_options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+    <span class='id identifier rubyid_enum_options'>enum_options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='label'>id_prefix:</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:id_prefix</span><span class='rbracket'>]</span><span class='rbrace'>}</span>
     <span class='id identifier rubyid_enum_options'>enum_options</span><span class='lbracket'>[</span><span class='symbol'>:force_flags</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='op'>!</span><span class='id identifier rubyid_force_flags'>force_flags</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
     <span class='id identifier rubyid_force_flags_patterns'>force_flags_patterns</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:force_flags</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_flatten'>flatten</span>
     <span class='kw'>if</span> <span class='id identifier rubyid_force_flags_patterns'>force_flags_patterns</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_pattern'>pattern</span><span class='op'>|</span> <span class='id identifier rubyid_pattern'>pattern</span> <span class='op'>===</span> <span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
