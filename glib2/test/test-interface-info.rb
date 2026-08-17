@@ -93,16 +93,26 @@ class TestInterfaceInfo < Test::Unit::TestCase
   end
 
   def test_n_constants
-    omit("Find an interface info that has constants")
-    info = @repository.find("Gio", "XXX")
+    repository = GLib::Repository.new
+    begin
+      repository.require("GXml")
+    rescue GLib::RepositoryError
+      omit("GXml is needed")
+    end
+    info = repository.find("GXml", "IXsdSchema")
     assert do
       info.n_constants > 0
     end
   end
 
   def test_get_constant
-    omit("Find an interface info that has constants")
-    info = @repository.find("Gio", "XXX")
+    repository = GLib::Repository.new
+    begin
+      repository.require("GXml")
+    rescue GLib::RepositoryError
+      omit("GXml is needed")
+    end
+    info = repository.find("GXml", "IXsdSchema")
     assert_kind_of(GLib::ConstantInfo,
                    info.get_constant(0))
   end
