@@ -1,4 +1,4 @@
-# Copyright (C) 2017-2021  Ruby-GNOME Project Team
+# Copyright (C) 2017-2026  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -42,14 +42,17 @@ class TestGLibBytes < Test::Unit::TestCase
     def create_bytes(options={})
       data = "Hello"
       data.freeze if options[:freeze]
-      [data.object_id, GLib::Bytes.new(data)]
+      [WeakRef.new(data), GLib::Bytes.new(data)]
     end
 
     test "frozen" do
-      id, bytes = create_bytes(:freeze => true)
+      ref, bytes = create_bytes(:freeze => true)
       GC.start
+      assert do
+        ref.weakref_alive?
+      end
       assert_equal(bytes.to_s,
-                   ObjectSpace._id2ref(id))
+                   ref.to_s)
     end
   end
 
