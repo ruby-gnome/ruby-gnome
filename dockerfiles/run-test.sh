@@ -48,7 +48,7 @@ MAKEFLAGS="-j$(nproc)" rake -f /ruby-gnome/Rakefile gem:install
 if [ "${RUBY_GNOME_TEST_ENABLE:-yes}" != "no" ]; then
   if [ "${RUBY_GNOME_GLIB2_GIREPOSITORY_ENABLE:-no}" = "yes" ] && \
        apt --version; then
-    sudo apt install -y -V gir1.2-glib-2.0-dev
+    sudo apt install -y -V gir1.2-glib-2.0-dev gir1.2-gxml-0.20
   fi
   export RUBY_GNOME_BUILD_DIR="${PWD}"
   if type dbus-run-session > /dev/null 2>&1 &&
