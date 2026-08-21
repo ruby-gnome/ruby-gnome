@@ -68,9 +68,24 @@ cinfo_free(void *data)
     RGObjClassInfo *cinfo = data;
     g_hash_table_remove(gtype_to_cinfo, GUINT_TO_POINTER(cinfo->gtype));
     xfree(cinfo->name);
-    xfree(cinfo->data_type);
     xfree(cinfo);
 }
+
+/* All RGObjClassInfo wrappers share this single immutable type. It must
+ * outlive every wrapper object, because the GC reads its ->flags after
+ * the dfree callback returns (the RUBY_TYPED_EMBEDDABLE check in
+ * rb_data_free, Ruby >= 3.3). It is therefore static rather than
+ * allocated and freed per class. */
+static const rb_data_type_t rg_class_info_type = {
+    "RGObjClassInfo",
+    {
+        cinfo_mark,
+        cinfo_free,
+    },
+    NULL,
+    NULL,
+    RUBY_TYPED_FREE_IMMEDIATELY,
+};
 
 static RGObjClassInfo *
 rbgobj_class_info_define_without_lock(GType gtype,
@@ -99,52 +114,24 @@ rbgobj_class_info_fill_name(RGObjClassInfo *cinfo)
     cinfo->name = RB_ALLOC_N(char, RSTRING_LEN(rb_name) + 1);
     memcpy(cinfo->name, RSTRING_PTR(rb_name), RSTRING_LEN(rb_name));
     cinfo->name[RSTRING_LEN(rb_name)] = '\0';
-    cinfo->data_type->wrap_struct_name = cinfo->name;
-}
-
-static rb_data_type_t *
-rbgobj_class_info_create_data_type(VALUE klass)
-{
-    rb_data_type_t *data_type;
-
-    data_type = RB_ZALLOC(rb_data_type_t);
-    data_type->wrap_struct_name = "RGObjClassInfo";
-    data_type->function.dmark = cinfo_mark;
-    data_type->function.dfree = cinfo_free;
-    if (RB_TYPE_P(klass, RUBY_T_CLASS) && klass != rb_cObject) {
-        VALUE p = RCLASS_SUPER(klass);
-        while (p != rb_cObject) {
-            if (RB_TYPE_P(p, RUBY_T_DATA) && RTYPEDDATA_P(p)) {
-                data_type->parent = RTYPEDDATA_TYPE(p);
-                break;
-            }
-            p = RCLASS_SUPER(p);
-        }
-    }
-    data_type->flags = RUBY_TYPED_FREE_IMMEDIATELY;
-
-    return data_type;
 }
 
 static RGObjClassInfo *
 rbgobj_class_info_register_without_lock(GType gtype, VALUE klass)
 {
-    rb_data_type_t *data_type;
     RGObjClassInfo *cinfo;
     GType fundamental_type;
     RGObjClassInfoDynamic *cinfod;
     void *gclass = NULL;
     VALUE c;
 
-    data_type = rbgobj_class_info_create_data_type(klass);
-    c = TypedData_Make_Struct(rb_cObject, RGObjClassInfo, data_type, cinfo);
+    c = TypedData_Make_Struct(rb_cObject, RGObjClassInfo, &rg_class_info_type, cinfo);
     cinfo->klass = klass;
     cinfo->gtype = gtype;
     cinfo->mark  = NULL;
     cinfo->free  = NULL;
     cinfo->flags = 0;
     cinfo->name = NULL;
-    cinfo->data_type = data_type;
     rbgobj_class_info_fill_name(cinfo);
 
     fundamental_type = G_TYPE_FUNDAMENTAL(gtype);
@@ -367,7 +354,7 @@ rbgobj_class_info_lookup(VALUE klass)
         RGObjClassInfo *cinfo;
         TypedData_Get_Struct(data,
                              RGObjClassInfo,
-                             RTYPEDDATA_TYPE(data),
+                             &rg_class_info_type,
                              cinfo);
         return cinfo;
     }
@@ -523,13 +510,11 @@ rbgobj_register_class(VALUE klass,
                       gboolean klass2gtype,
                       gboolean gtype2klass)
 {
-    rb_data_type_t *data_type = NULL;
     RGObjClassInfo *cinfo = NULL;
     VALUE c = Qnil;
 
     if (klass2gtype) {
-        data_type = rbgobj_class_info_create_data_type(klass);
-        c = TypedData_Make_Struct(rb_cObject, RGObjClassInfo, data_type, cinfo);
+        c = TypedData_Make_Struct(rb_cObject, RGObjClassInfo, &rg_class_info_type, cinfo);
     }
     if (gtype2klass && !cinfo)
         cinfo = g_new(RGObjClassInfo, 1);
@@ -540,7 +525,6 @@ rbgobj_register_class(VALUE klass,
         cinfo->mark  = NULL;
         cinfo->free  = NULL;
         cinfo->flags = 0;
-        cinfo->data_type = data_type;
     }
 
     if (klass2gtype)
@@ -662,7 +646,7 @@ rg_s_try_convert(VALUE self, VALUE value)
 
             TypedData_Get_Struct(data,
                                  RGObjClassInfo,
-                                 RTYPEDDATA_TYPE(data),
+                                 &rg_class_info_type,
                                  cinfo);
             return rb_funcall(self, id_new, 1, SIZET2NUM(cinfo->gtype));
         }
