@@ -1,3 +1,5 @@
+require "pathname"
+
 base_dir = Pathname(__FILE__).dirname.parent.parent.parent.expand_path
 mkmf_gnome2_dir = base_dir + 'lib'
 
