@@ -1,0 +1,13 @@
+TARGET = "callback-requester/callback_requester.#{RbConfig::CONFIG['DLEXT']}"
+
+task default: TARGET
+
+file TARGET => ["callback-requester/extconf.rb", "callback-requester/callback-requester.c"] do |t|
+  cd "callback-requester" do
+    ruby "extconf.rb"
+    sh "make"
+  end
+end
+
+file "requester/extconf.rb"
+file "callback-requester/testcallback-requester.c"
