@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2019-2022  Ruby-GNOME Project Team
+ *  Copyright (C) 2019-2026  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -24,6 +24,7 @@ typedef struct RBGICallback_ {
     GIArgInfo *arg_info;
     GICallbackInfo *callback_info;
     gchar *method_name;
+    ID method_id;
     ffi_cif cif;
     ffi_closure *closure;
     gpointer *closure_native_address;
