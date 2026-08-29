@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2022  Ruby-GNOME Project Team
+ *  Copyright (C) 2012-2026  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -64,13 +64,10 @@ rb_gi_callback_invoke_without_protect(VALUE user_data)
     VALUE rb_args = rb_gi_arguments_get_rb_in_args(data->args);
 
     if (data->callback->method_name) {
-        ID id___send__;
         VALUE rb_receiver = rb_ary_shift(rb_args);
-        CONST_ID(id___send__, "__send__");
-        rb_ary_unshift(rb_args, rb_str_new_cstr(data->callback->method_name));
         data->rb_return_value =
             rb_funcallv(rb_receiver,
-                        id___send__,
+                        data->callback->method_id,
                         RARRAY_LENINT(rb_args),
                         RARRAY_CONST_PTR(rb_args));
     } else {
@@ -201,7 +198,13 @@ rb_gi_callback_new(GICallbackInfo *callback_info,
     RBGICallback *callback = RB_ZALLOC(RBGICallback);
     callback->callback_info = callback_info;
     g_base_info_ref(callback->callback_info);
-    callback->method_name = g_strdup(method_name);
+    if (method_name) {
+        callback->method_name = g_strdup(method_name);
+        callback->method_id = rb_intern(callback->method_name);
+    } else {
+        callback->method_name = NULL;
+        callback->method_id = 0;
+    }
     callback->closure =
         g_callable_info_create_closure(callback->callback_info,
                                        &(callback->cif),
