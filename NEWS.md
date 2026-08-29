@@ -1,5 +1,54 @@
 # NEWS
 
+## Ruby-GNOME 4.3.8: 2026-08-30
+
+This is a GObject Introspection based virtual method crash fix
+release.
+
+### Changes
+
+#### Ruby/GLib2
+
+  * Improvements
+    * Added `rbgutil_invoke_callback_async()`.
+      * [GH-1727](https://github.com/ruby-gnome/ruby-gnome/issues/1727)
+      * [GH-1731](https://github.com/ruby-gnome/ruby-gnome/issues/1731)
+      * Reported by KITAITI Makoto
+
+    * Use `WeakRef` instead of `ObjectSpace._id2ref`.
+
+#### Ruby/GObjectIntrospection
+
+  * Fixes
+    * Added missing `rb_converts` initializations.
+      * [GH-1723](https://github.com/ruby-gnome/ruby-gnome/issues/1723)
+      * Reported by Ryan P. McKinnon
+
+    * Fixed a crash bug when we call user defined virtual method.
+      * [GH-1743](https://github.com/ruby-gnome/ruby-gnome/issues/1743)
+      * [apache/arrow#50919](https://github.com/apache/arrow/issues/50919)
+      * Reported by Hiroyuki Sato
+
+#### Ruby/GStreamer
+
+  * Improvements
+    * Improved MemoryView column-major request flag verifications.
+      * [GH-1726](https://github.com/ruby-gnome/ruby-gnome/issues/1726)
+      * Patch by KITAITI Makoto
+
+  * Fixes
+    * Added missing MemoryView `item_desc` initializations.
+      * [GH-1725](https://github.com/ruby-gnome/ruby-gnome/issues/1725)
+      * Patch by KITAITI Makoto
+
+### Thanks
+
+  * Ryan P. McKinnon
+
+  * KITAITI Makoto
+
+  * Hiroyuki Sato
+
 ## Ruby-GNOME 4.3.7: 2026-07-13
 
 This is a Pango 1.58.0 support release.
