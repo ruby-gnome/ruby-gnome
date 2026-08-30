@@ -14,10 +14,14 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
+require "fiddle"
+
 class TestAudio < Test::Unit::TestCase
   include GStreamerTestUtils
 
   def test_audio_info
+    only_ruby_version(4, 1, 0)
+
     audio_info = Gst::AudioInfo.new
     audio_info.set_format(:encoded, 44100, 2)
     structure = audio_info.to_caps.structures[0]
@@ -33,6 +37,7 @@ class TestAudio < Test::Unit::TestCase
   end
 
   def test_audio_info_from_caps
+    only_ruby_version(4, 1, 0)
     only_gstreamer_version(1, 20)
 
     caps = Gst::Caps.new("audio/ogg")
@@ -50,5 +55,124 @@ class TestAudio < Test::Unit::TestCase
     assert_equal("F32LE", modified_structure["format"].value)
     assert_equal(16000, audio_info.rate)
     assert_equal(1, audio_info.channels)
+  end
+
+  def test_audio_make_sample
+    only_ruby_version(4, 1, 0)
+    only_gstreamer_version(1, 20)
+
+    rate = 16000
+    memory_view_producers = generate_samples(rate: rate)
+    memory_view_producers.each do |memory_view_producer|
+      sample = GstAudio.audio_make_sample(memory_view_producer, rate: rate)
+      info = Gst::AudioInfo.new(sample.caps)
+
+      assert_equal({
+                      layout: "interleaved",
+                      rate: rate,
+                      channels: 1
+                    },
+                    {
+                      layout: info.layout.nick,
+                      rate: info.rate,
+                      channels: info.channels
+                    })
+      Fiddle::MemoryView.export(memory_view_producer) do |view|
+        assert_equal("e", view.format)
+
+        actual = nil
+        sample.buffer.map(:read) {|map| actual = map.data}
+        assert_equal view.to_s, actual.pack("C*")
+      end
+    end
+  end
+
+  def test_audio_make_sample_stereo
+    only_ruby_version(4, 1, 0)
+    only_gstreamer_version(1, 20)
+
+    rate = 16000
+    memory_view_producers = generate_samples(channels: 2, rate: rate)
+    memory_view_producers.each do |memory_view_producer|
+      sample = GstAudio.audio_make_sample(memory_view_producer, rate: rate)
+      info = Gst::AudioInfo.new(sample.caps)
+
+      assert_equal({
+                      layout: "interleaved",
+                      rate: rate,
+                      channels: 2
+                    },
+                    {
+                      layout: info.layout.nick,
+                      rate: info.rate,
+                      channels: info.channels
+                    })
+      Fiddle::MemoryView.export(memory_view_producer) do |view|
+        assert_equal("e", view.format)
+
+        actual = nil
+        sample.buffer.map(:read) {|map| actual = map.data}
+        assert_equal view.to_s, actual.pack("C*")
+      end
+    end
+  end
+
+  def test_audio_make_sample_s16
+    only_ruby_version(4, 1, 0)
+    only_gstreamer_version(1, 20)
+
+    rate = 16000
+    memory_view_producers = generate_samples(format: "S16LE", rate: rate)
+    memory_view_producers.each do |memory_view_producer|
+      sample = GstAudio.audio_make_sample(memory_view_producer, rate: rate)
+      info = Gst::AudioInfo.new(sample.caps)
+
+      assert_equal({
+                      layout: "interleaved",
+                      rate: rate,
+                      channels: 1
+                    },
+                    {
+                      layout: info.layout.nick,
+                      rate: info.rate,
+                      channels: info.channels
+                    })
+      Fiddle::MemoryView.export(memory_view_producer) do |view|
+        assert_equal("s<", view.format)
+
+        actual = nil
+        sample.buffer.map(:read) {|map| actual = map.data}
+        assert_equal view.to_s, actual.pack("C*")
+      end
+    end
+  end
+
+  def test_audio_make_sample_without_rate
+    only_ruby_version(4, 1, 0)
+    only_gstreamer_version(1, 20)
+
+    memory_view_producer = generate_samples[0]
+
+    assert_raise(ArgumentError) do
+      GstAudio.audio_make_sample(memory_view_producer)
+    end
+  end
+
+  def test_audio_make_sample_non_memory_view_producer
+    only_ruby_version(4, 1, 0)
+    only_gstreamer_version(1, 20)
+
+    assert_raise(ArgumentError) do
+      GstAudio.audio_make_sample(Object.new, rate: 16000)
+    end
+  end
+
+  def test_audio_make_sample_without_format
+    only_ruby_version(4, 1, 0)
+    only_gstreamer_version(1, 20)
+
+    assert_raise ArgumentError do
+      GstAudio.audio_make_sample(Fiddle::Pointer["format not defined"], rate: 16000)
+    end
   end
 end
