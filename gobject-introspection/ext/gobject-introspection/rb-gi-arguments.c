@@ -2843,7 +2843,7 @@ rb_gi_arguments_fill_raw_result_glist_interface(
     }
 
     if (is_return_value) {
-        ffi_return_value->v_ulong = (gulong)list;
+        ffi_return_value->v_pointer = list;
     } else {
         *((gpointer *)raw_result) = list;
     }
@@ -2865,7 +2865,7 @@ rb_gi_arguments_fill_raw_result_glist(RBGIArguments *args,
     element_type_tag = g_type_info_get_tag(element_type_info);
 
     if (is_return_value) {
-        ffi_return_value->v_ulong = (gulong)NULL;
+        ffi_return_value->v_pointer = NULL;
     } else {
         *((gpointer *)raw_result) = NULL;
     }
@@ -3044,7 +3044,7 @@ rb_gi_arguments_fill_raw_result(RBGIArguments *args,
         break;
       case GI_TYPE_TAG_GTYPE:
         if (is_return_value) {
-            ffi_return_value->v_ulong = rbgobj_gtype_from_ruby(rb_result);
+            ffi_return_value->v_size = rbgobj_gtype_from_ruby(rb_result);
         } else {
             *((gsize *)raw_result) = rbgobj_gtype_from_ruby(rb_result);
         }
@@ -3056,7 +3056,7 @@ rb_gi_arguments_fill_raw_result(RBGIArguments *args,
                 result = g_strdup(result);
             }
             if (is_return_value) {
-                ffi_return_value->v_ulong = (gulong)result;
+                ffi_return_value->v_pointer = result;
             } else {
                 *((gchar **)raw_result) = (gchar *)result;
             }
@@ -3069,8 +3069,8 @@ rb_gi_arguments_fill_raw_result(RBGIArguments *args,
                  args->name,
                  g_type_tag_to_string(type_tag));
         /* if (is_return_value) { */
-        /*     ffi_return_value->v_ulong = */
-        /*         (gulong)rbg_filename_from_ruby(rb_result); */
+        /*     ffi_return_value->v_pointer = */
+        /*         rbg_filename_from_ruby(rb_result); */
         /* } else { */
         /*     *((gchar **)raw_result) = */
         /*         (gchar *)rbg_filename_from_ruby(rb_result); */
@@ -3084,7 +3084,7 @@ rb_gi_arguments_fill_raw_result(RBGIArguments *args,
                  args->name,
                  g_type_tag_to_string(type_tag));
         /* if (is_return_value) { */
-        /*     ffi_return_value->v_ulong = (gulong)(argument.v_pointer); */
+        /*     ffi_return_value->v_pointer = argument.v_pointer; */
         /* } else { */
         /*     *((gpointer *)raw_result) = argument.v_pointer; */
         /* } */
@@ -3113,7 +3113,7 @@ rb_gi_arguments_fill_raw_result(RBGIArguments *args,
                  args->name,
                  g_type_tag_to_string(type_tag));
         /* if (is_return_value) { */
-        /*     ffi_return_value->v_ulong = (gulong)(argument.v_pointer); */
+        /*     ffi_return_value->v_pointer = argument.v_pointer; */
         /* } else { */
         /*     *((gpointer *)raw_result) = argument.v_pointer; */
         /* } */
@@ -3125,7 +3125,7 @@ rb_gi_arguments_fill_raw_result(RBGIArguments *args,
                  args->name,
                  g_type_tag_to_string(type_tag));
         /* if (is_return_value) { */
-        /*     ffi_return_value->v_ulong = (gulong)(argument.v_pointer); */
+        /*     ffi_return_value->v_pointer = argument.v_pointer; */
         /* } else { */
         /*     *((GError **)raw_result) = argument.v_pointer; */
         /* } */
