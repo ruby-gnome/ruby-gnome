@@ -1,5 +1,18 @@
 # NEWS
 
+## Ruby-GNOME 4.3.9: 2026-09-03
+
+This is a GObject Introspection crash on Windows fix release.
+
+### Changes
+
+#### Ruby/GObjectIntrospection
+
+  * Fixes
+
+    * Fixed wrong type (32 bit type) for pointer (64 bit) and `GType`
+      (64 bit) on Windows.
+
 ## Ruby-GNOME 4.3.8: 2026-08-30
 
 This is a GObject Introspection based virtual method crash fix
