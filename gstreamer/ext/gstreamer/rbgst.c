@@ -70,6 +70,7 @@ Init_gstreamer (void)
     rbgobj_register_r2g_func(GST_TYPE_LIST, rg_gst_value_list_r2g);
     rbgobj_register_g2r_func(GST_TYPE_LIST, rg_gst_value_list_g2r);
 
+    rb_gst_init_audio();
     rb_gst_init_child_proxy();
     rb_gst_init_element();
     rb_gst_init_sample();

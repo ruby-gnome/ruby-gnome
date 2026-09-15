@@ -19,9 +19,6 @@ require "fiddle"
 class TestSample < Test::Unit::TestCase
   include GStreamerTestUtils
 
-  AUDIO_TEST_SRC_DEFAULT_SAMPLES_PER_BUFFER = 1024
-  AUDIO_TEST_SRC_RAMP = 1
-
   def test_memory_view_mono
     only_gstreamer_version(1, 20)
 
@@ -143,45 +140,5 @@ class TestSample < Test::Unit::TestCase
     Fiddle::MemoryView.export(sample) do |view|
       assert_equal(expected_data, view.to_s)
     end
-  end
-
-  private
-
-  def generate_samples(format: "F32LE", layout: "interleaved", rate: 16_000, channels: 1)
-    samples = []
-
-    pipeline = Gst::Pipeline.new("audio-generator")
-    src = Gst::ElementFactory.make("audiotestsrc", nil)
-    convert = Gst::ElementFactory.make("audioconvert", nil)
-    sink = Gst::ElementFactory.make("appsink", nil)
-
-    src.set_property("num-buffers", rate / AUDIO_TEST_SRC_DEFAULT_SAMPLES_PER_BUFFER)
-
-    caps = Gst::Caps.new("audio/x-raw")
-    caps["format"] = format
-    caps["rate", :int] = rate
-    caps["channels", :int] = channels
-    caps["layout"] = layout
-
-    sink.caps = caps
-
-    pipeline << src << convert << sink
-    src >> convert >> sink
-
-    pipeline.play
-    begin
-      loop do
-        sample = sink.try_pull_sample(Gst::SECOND)
-        if sample
-          samples << sample
-        else
-          break
-        end
-      end
-    ensure
-      pipeline.stop
-    end
-
-    samples
   end
 end
