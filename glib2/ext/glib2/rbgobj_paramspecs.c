@@ -269,6 +269,23 @@ object_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb,
                                 RVAL2CSTR_ACCEPT_NIL(blurb),
                                 rbgobj_gtype_from_ruby(object_type),
                                 resolve_flags(flags));
+    
+    rbgobj_param_spec_initialize(self, pspec);
+    return Qnil;
+}
+
+static VALUE
+typeinstance_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb,
+                  VALUE object_type, VALUE flags)
+{
+    GParamSpec* pspec;
+    pspec = g_param_spec_internal(G_TYPE_PARAM_OBJECT,
+                                RVAL2CSTR(name),
+                                RVAL2CSTR_ACCEPT_NIL(nick),
+                                RVAL2CSTR_ACCEPT_NIL(blurb),
+                                resolve_flags(flags));
+    
+    G_PARAM_SPEC(pspec)->value_type = rbgobj_gtype_from_ruby(object_type);
     rbgobj_param_spec_initialize(self, pspec);
     return Qnil;
 }
@@ -354,4 +371,7 @@ Init_gobject_gparamspecs(void)
 
     c = G_DEF_CLASS(G_TYPE_PARAM_OBJECT, "Object", cParamSpec);
     rb_define_method(c, "initialize", object_initialize, 5);
+    
+    c = G_DEF_CLASS(G_TYPE_PARAM_OBJECT, "TypeInstance", cParamSpec);
+    rb_define_method(c, "initialize", typeinstance_initialize, 5);
 }
