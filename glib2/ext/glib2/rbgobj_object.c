@@ -974,7 +974,14 @@ set_prop_func(GObject* object,
         g_free(name);
     }
 
-    rb_funcall(GOBJ2RVAL(object), ruby_setter, 1, GVAL2RVAL(value));
+    {
+        VALUE rb_object = GOBJ2RVAL(object);
+        VALUE rb_value = GVAL2RVAL(value);
+        rb_funcall(rb_object, ruby_setter, 1, rb_value);
+        if (G_TYPE_IS_OBJECT(G_PARAM_SPEC_VALUE_TYPE(pspec))) {
+            G_CHILD_SET(rb_object, rb_intern(g_param_spec_get_name(pspec)), rb_value);
+        }
+    }
 }
 
 void
