@@ -119,6 +119,23 @@ def windows_platform?
   /cygwin|mingw|mswin/ === RUBY_PLATFORM
 end
 
+if /mswin/ =~ RUBY_PLATFORM
+  # MSVC cannot link against a DLL directly: add_depend_package links
+  # dependent extensions against "#{target}-$(arch).lib" in the
+  # depended package's lib/ directory. Install the import library
+  # there along with the extension.
+  def create_makefile(*args, &block)
+    result = super
+    File.open("Makefile", "ab") do |makefile|
+      makefile.puts
+      makefile.puts("install-so: install-import-library")
+      makefile.puts("install-import-library: $(DLLIB)")
+      makefile.puts("\t$(INSTALL_DATA) $(TARGET)-$(arch).lib $(RUBYARCHDIR)")
+    end
+    result
+  end
+end
+
 # For backward compatibility
 def setup_windows(target_name, base_dir=nil)
   checking_for(checking_message("Windows")) do
