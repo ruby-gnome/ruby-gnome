@@ -88,6 +88,14 @@ rbgi_base_info_instance2robj(gpointer instance, gpointer user_data)
         ID id_ConstantInfo;
         RUBY_CONST_ID(id_ConstantInfo, "ConstantInfo");
         klass = rb_const_get(rbg_mGLib(), id_ConstantInfo);
+    } else if (type == GI_TYPE_ENUM_INFO) {
+        ID id_EnumInfo;
+        RUBY_CONST_ID(id_EnumInfo, "EnumInfo");
+        klass = rb_const_get(rbg_mGLib(), id_EnumInfo);
+    } else if (type == GI_TYPE_FLAGS_INFO) {
+        ID id_FlagsInfo;
+        RUBY_CONST_ID(id_FlagsInfo, "FlagsInfo");
+        klass = rb_const_get(rbg_mGLib(), id_FlagsInfo);
     } else if (type == GI_TYPE_FUNCTION_INFO) {
         ID id_FunctionInfo;
         RUBY_CONST_ID(id_FunctionInfo, "FunctionInfo");
@@ -116,6 +124,10 @@ rbgi_base_info_instance2robj(gpointer instance, gpointer user_data)
         ID id_TypeInfo;
         RUBY_CONST_ID(id_TypeInfo, "TypeInfo");
         klass = rb_const_get(rbg_mGLib(), id_TypeInfo);
+    } else if (type == GI_TYPE_UNION_INFO) {
+        ID id_UnionInfo;
+        RUBY_CONST_ID(id_UnionInfo, "UnionInfo");
+        klass = rb_const_get(rbg_mGLib(), id_UnionInfo);
     } else if (type == GI_TYPE_VFUNC_INFO) {
         ID id_VFuncInfo;
         RUBY_CONST_ID(id_VFuncInfo, "VFuncInfo");
