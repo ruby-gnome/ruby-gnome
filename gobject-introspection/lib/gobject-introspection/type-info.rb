@@ -1,4 +1,4 @@
-# Copyright (C) 2019  Ruby-GNOME Project Team
+# Copyright (C) 2019-2026  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -18,6 +18,10 @@ module GObjectIntrospection
   class TypeInfo
     def try_convert(value)
       tag.try_convert(self, value)
+    end
+
+    def match?(value)
+      tag.match?(self, value)
     end
 
     def description

@@ -1,4 +1,4 @@
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2026  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -19,5 +19,15 @@ class TestMemoryInputStream < Test::Unit::TestCase
     assert_nothing_raised do
       Gio::MemoryInputStream.new
     end
+  end
+
+  def test_new_string
+    stream = Gio::MemoryInputStream.new("data")
+    assert_equal("data", stream.read_bytes(4).to_s)
+  end
+
+  def test_new_bytes
+    stream = Gio::MemoryInputStream.new(GLib::Bytes.new("data"))
+    assert_equal("data", stream.read_bytes(4).to_s)
   end
 end

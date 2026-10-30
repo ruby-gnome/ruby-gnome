@@ -20,6 +20,10 @@ module GLib
       tag.try_convert(self, value)
     end
 
+    def match?(value)
+      tag.match?(self, value)
+    end
+
     def description
       tag.description(self)
     end

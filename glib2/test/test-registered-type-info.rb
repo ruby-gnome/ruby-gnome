@@ -70,4 +70,25 @@ class TestRegisteredTypeInfo < Test::Unit::TestCase
     info = @repository.find("GLib", "Mutex")
     assert_nil(info.type_name)
   end
+
+  def test_match
+    info = @repository.find("GLib", "Bytes")
+    assert do
+      info.match?(GLib::Bytes.new("data"))
+    end
+  end
+
+  def test_match_cast
+    info = @repository.find("GLib", "Bytes")
+    assert do
+      not info.match?("data")
+    end
+  end
+
+  def test_match_unresolved
+    info = @repository.find("GLib", "Cond")
+    assert do
+      not info.match?(Object.new)
+    end
+  end
 end
