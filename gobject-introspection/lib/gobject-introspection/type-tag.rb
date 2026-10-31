@@ -1,4 +1,4 @@
-# Copyright (C) 2019-2021  Ruby-GNOME Project Team
+# Copyright (C) 2019-2026  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -25,6 +25,15 @@ module GObjectIntrospection
       end
     end
 
+    def match?(type_info, value)
+      method = "match_#{nick}?"
+      if respond_to?(method, true)
+        __send__(method, type_info, value)
+      else
+        false
+      end
+    end
+
     def description(type_info)
       method = "description_#{nick}"
       if respond_to?(method, true)
@@ -46,6 +55,10 @@ module GObjectIntrospection
       end
     end
 
+    def match_boolean?(type_info, value)
+      value == true or value == false
+    end
+
     def try_convert_integer(type_info, value)
       if value.is_a?(Integer)
         value
@@ -65,6 +78,19 @@ module GObjectIntrospection
     alias_method :try_convert_int64, :try_convert_integer
     alias_method :try_convert_uint64, :try_convert_integer
 
+    def match_integer?(type_info, value)
+      value.is_a?(Integer)
+    end
+
+    alias_method :match_int8?, :match_integer?
+    alias_method :match_uint8?, :match_integer?
+    alias_method :match_int16?, :match_integer?
+    alias_method :match_uint16?, :match_integer?
+    alias_method :match_int32?, :match_integer?
+    alias_method :match_uint32?, :match_integer?
+    alias_method :match_int64?, :match_integer?
+    alias_method :match_uint64?, :match_integer?
+
     def try_convert_float(type_info, value)
       if value.is_a?(Float)
         value
@@ -77,8 +103,18 @@ module GObjectIntrospection
 
     alias_method :try_convert_double, :try_convert_float
 
+    def match_float?(type_info, value)
+      value.is_a?(Float)
+    end
+
+    alias_method :match_double?, :match_float?
+
     def try_convert_gtype(type_info, value)
       GLib::Type.try_convert(value)
+    end
+
+    def match_gtype?(type_info, value)
+      value.is_a?(GLib::Type)
     end
 
     def try_convert_utf8(type_info, value)
@@ -96,6 +132,10 @@ module GObjectIntrospection
       end
     end
 
+    def match_utf8?(type_info, value)
+      value.is_a?(String)
+    end
+
     def try_convert_filename(type_info, value)
       case value
       when String
@@ -111,6 +151,10 @@ module GObjectIntrospection
       end
     end
 
+    def match_filename?(type_info, value)
+      value.is_a?(String)
+    end
+
     def try_convert_array_like(type_info, value)
       value = Array.try_convert(value)
       return nil if value.nil?
@@ -121,6 +165,14 @@ module GObjectIntrospection
           return nil if v.nil?
         end
         v
+      end
+    end
+
+    def match_array_like?(type_info, value)
+      return false unless value.is_a?(Array)
+      element_type_info = get_element_type_info(type_info)
+      value.all? do |v|
+        v.nil? or element_type_info.match?(v)
       end
     end
 
@@ -146,11 +198,21 @@ module GObjectIntrospection
       try_convert_array_like(type_info, value)
     end
 
+    def match_array?(type_info, value)
+      case get_element_type_info(type_info).tag
+      when INT8, UINT8
+        return true if value.is_a?(String)
+      end
+      match_array_like?(type_info, value)
+    end
+
     alias_method :description_array, :description_array_like
 
     alias_method :try_convert_glist, :try_convert_array_like
+    alias_method :match_glist?, :match_array_like?
     alias_method :description_glist, :description_array_like
     alias_method :try_convert_gslist, :try_convert_array_like
+    alias_method :match_gslist?, :match_array_like?
     alias_method :description_gslist, :description_array_like
 
     def try_convert_ghash(type_info, value)
@@ -162,6 +224,10 @@ module GObjectIntrospection
       end
     end
 
+    def match_ghash?(type_info, value)
+      value.is_a?(Hash)
+    end
+
     def description_ghash(type_info)
       key_type = type_info.get_param_type(0)
       value_type = type_info.get_param_type(1)
@@ -170,6 +236,10 @@ module GObjectIntrospection
 
     def try_convert_interface(type_info, value)
       type_info.interface.try_convert(value)
+    end
+
+    def match_interface?(type_info, value)
+      type_info.interface.match?(value)
     end
 
     def description_interface(type_info)

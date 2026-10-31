@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2022  Ruby-GNOME Project Team
+ *  Copyright (C) 2012-2026  Ruby-GNOME Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -828,13 +828,26 @@ rb_gi_arguments_in_init_arg_ruby_array_c(RBGIArguments *args,
             gchar *raw_array = RSTRING_PTR(rb_arg);
             gsize length = RSTRING_LEN(rb_arg);
             if (metadata->transfer != GI_TRANSFER_NOTHING) {
-                rb_raise(rb_eNotImpError,
-                         "TODO: [%s] %s Ruby -> GIArgument(array/%s)[%s][%s]",
-                         metadata->name,
-                         rb_gi_direction_to_string(metadata->direction),
-                         rb_gi_array_type_to_string(metadata->array_type),
-                         g_type_tag_to_string(metadata->element_type.tag),
-                         rb_gi_transfer_to_string(metadata->transfer));
+                if (metadata->direction == GI_DIRECTION_INOUT) {
+                    rb_raise(rb_eNotImpError,
+                             "TODO: [%s] %s Ruby -> GIArgument(array/%s)[%s][%s]",
+                             metadata->name,
+                             rb_gi_direction_to_string(metadata->direction),
+                             rb_gi_array_type_to_string(metadata->array_type),
+                             g_type_tag_to_string(metadata->element_type.tag),
+                             rb_gi_transfer_to_string(metadata->transfer));
+                }
+#if GLIB_CHECK_VERSION(2, 68, 0)
+                raw_array = g_memdup2(raw_array, length);
+#else
+                if (length > 0) {
+                    gchar *copied_raw_array = g_malloc(length);
+                    memcpy(copied_raw_array, raw_array, length);
+                    raw_array = copied_raw_array;
+                } else {
+                    raw_array = NULL;
+                }
+#endif
             }
             if (metadata->direction == GI_DIRECTION_INOUT) {
                 metadata->in_arg->v_pointer = ALLOC(gpointer);

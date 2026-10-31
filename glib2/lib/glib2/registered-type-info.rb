@@ -19,16 +19,8 @@ module GLib
     def try_convert(value)
       return nil if value.nil?
 
-      type = gtype
-      if type == GLib::Type::NONE
-        ns = namespace
-        return value unless Object.const_defined?(ns)
-        mod = Object.const_get(ns)
-        return value unless mod.const_defined?(name)
-        klass = mod.const_get(name)
-      else
-        klass = type.to_class
-      end
+      klass = resolve_class
+      return value if klass.nil?
 
       case value
       when klass
@@ -42,8 +34,31 @@ module GLib
       end
     end
 
+    def match?(value)
+      return false if value.nil?
+
+      klass = resolve_class
+      return false if klass.nil?
+
+      value.is_a?(klass)
+    end
+
     def description
       "#{gtype.to_class}(#{gtype.name})"
+    end
+
+    private
+    def resolve_class
+      type = gtype
+      if type == GLib::Type::NONE
+        ns = namespace
+        return nil unless Object.const_defined?(ns)
+        mod = Object.const_get(ns)
+        return nil unless mod.const_defined?(name)
+        mod.const_get(name)
+      else
+        type.to_class
+      end
     end
   end
 end

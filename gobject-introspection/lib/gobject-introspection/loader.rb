@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2025  Ruby-GNOME Project Team
+# Copyright (C) 2012-2026  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -361,6 +361,18 @@ module GObjectIntrospection
       klass.class_eval(<<-DEFINE_METHOD, __FILE__, __LINE__ + 1)
         def initialize(*arguments, &block)
           invokers = INITIALIZE_INVOKERS
+          if invokers.size > 1
+            # Prefer the constructor whose signature matches the given
+            # arguments without any cast.
+            matched_invoker = invokers.values.find do |invoker|
+              invoker.match?(self, arguments, block)
+            end
+            if matched_invoker
+              matched_invoker.invoke(self, arguments.dup, block)
+              LOADER_CLASS.initialize_instance_post(self)
+              return
+            end
+          end
           invokers.values.each do |invoker|
             catch do |tag|
               invoker.invoke(self, arguments.dup, block, abort_tag: tag)
@@ -725,6 +737,25 @@ module GObjectIntrospection
             return_value
           else
             receiver
+          end
+        end
+      end
+
+      def match?(receiver, arguments, block)
+        ensure_prepared
+
+        arguments = arguments.dup
+        if receiver and @info.class == FunctionInfo
+          arguments.unshift(receiver)
+        end
+
+        arguments, _block = build(receiver, arguments, block)
+        return false if wrong_number_of_arguments?(arguments)
+        arguments.each_with_index.all? do |argument, i|
+          if argument.nil?
+            @in_arg_nils[i]
+          else
+            @in_arg_types[i].match?(argument)
           end
         end
       end

@@ -1,4 +1,4 @@
-# Copyright (C) 2012  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2026  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -58,5 +58,51 @@ class TestTypeInfo < Test::Unit::TestCase
   def test_array_type
     assert_equal(GObjectIntrospection::ArrayType::C,
                  @info.array_type)
+  end
+
+  sub_test_case("#match?") do
+    def test_uint8_array_string
+      info = @repository.find("Gio", "content_type_guess").get_arg(1).type
+      assert do
+        info.match?("data")
+      end
+    end
+
+    def test_uint8_array_bytes
+      info = @repository.find("Gio", "content_type_guess").get_arg(1).type
+      assert do
+        not info.match?(GLib::Bytes.new("data"))
+      end
+    end
+
+    def test_utf8_string
+      function_info = @repository.find("Gio", "content_type_get_description")
+      info = function_info.get_arg(0).type
+      assert do
+        info.match?("text/plain")
+      end
+    end
+
+    def test_utf8_symbol
+      function_info = @repository.find("Gio", "content_type_get_description")
+      info = function_info.get_arg(0).type
+      assert do
+        not info.match?(:text)
+      end
+    end
+
+    def test_interface_enum
+      info = @repository.find("Gio", "bus_get_sync").get_arg(0).type
+      assert do
+        info.match?(Gio::BusType::SESSION)
+      end
+    end
+
+    def test_interface_enum_symbol
+      info = @repository.find("Gio", "bus_get_sync").get_arg(0).type
+      assert do
+        not info.match?(:session)
+      end
+    end
   end
 end
