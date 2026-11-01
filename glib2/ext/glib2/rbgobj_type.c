@@ -68,7 +68,13 @@ cinfo_free(void *data)
     RGObjClassInfo *cinfo = data;
     g_hash_table_remove(gtype_to_cinfo, GUINT_TO_POINTER(cinfo->gtype));
     xfree(cinfo->name);
-    xfree(cinfo->data_type);
+    /* Don't free cinfo->data_type here: it is this object's own
+     * rb_data_type_t, and the GC still reads its ->flags after this
+     * free callback returns (RUBY_TYPED_EMBEDDABLE check in
+     * rb_data_free, Ruby >= 3.3). Freeing it would be a use-after-free.
+     * A subclass' rb_data_type_t may also reference it via ->parent.
+     * These per-class type descriptors live for the lifetime of the
+     * registered class, so leaving them allocated is intentional. */
     xfree(cinfo);
 }
 
