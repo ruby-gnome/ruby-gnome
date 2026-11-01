@@ -1,5 +1,17 @@
 # NEWS
 
+## Ruby-GNOME 4.4.0: 2026-11-01
+
+This is a GObject Introspection based constructor improvement release.
+
+### Changes
+
+#### Ruby/GObjectIntrospection
+
+  * Improvements
+
+    * Prefer constructor that matches arguments without cast.
+
 ## Ruby-GNOME 4.3.9: 2026-09-03
 
 This is a GObject Introspection crash on Windows fix release.
