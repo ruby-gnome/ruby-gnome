@@ -14,6 +14,7 @@ RUN \
     cmake \
     g++ \
     gcc \
+    gdb \
     git \
     libboost-filesystem-dev \
     libboost-regex-dev \
