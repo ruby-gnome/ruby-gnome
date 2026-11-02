@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (C) 2020-2025  Ruby-GNOME Project Team
+# Copyright (C) 2020-2026  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -91,5 +91,13 @@ echo "::group::Install Apache Arrow GLib"
 sudo ninja -C arrow.build/c_glib install
 echo "::endgroup::"
 echo "::group::Test Apache Arrow GLib"
-ninja -C arrow.build/c_glib test
+# Show backtraces on crash
+cat > gdb-commands <<GDB_COMMANDS
+set disable-randomization off
+handle SIGPIPE nostop noprint pass
+run
+thread apply all backtrace
+GDB_COMMANDS
+DEBUGGER="gdb -batch -return-child-result -x ${PWD}/gdb-commands --args" \
+  meson test -C arrow.build/c_glib --no-rebuild --verbose
 echo "::endgroup::"
