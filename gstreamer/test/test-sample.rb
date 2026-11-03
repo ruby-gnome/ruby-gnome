@@ -145,6 +145,14 @@ class TestSample < Test::Unit::TestCase
     end
   end
 
+  def test_memory_view_release
+    sample = generate_samples[0]
+    memview = Fiddle::MemoryView::new(sample)
+
+    assert_same(sample, memview.obj)
+    # Shouln't cause segmentation fault after this test ends
+  end
+
   private
 
   def generate_samples(format: "F32LE", layout: "interleaved", rate: 16_000, channels: 1)

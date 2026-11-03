@@ -26,6 +26,7 @@
 #include "rbgst.h"
 
 typedef struct memview_private_data {
+    GstSample *sample;
     GstBuffer *buffer;
     GstMapInfo *map_info;
 } memview_private_data;
@@ -297,6 +298,7 @@ rg_gst_memory_view_init_from_audio(VALUE obj, rb_memory_view_t *view, int flags,
 
     // Uses g_new instead of ALLOC/ALLOC_N for consistency.
     private_data = g_new(memview_private_data, 1);
+    private_data->sample = gst_sample_ref(sample);
     private_data->buffer = buffer;
     private_data->map_info = map_info;
 
@@ -343,7 +345,6 @@ rg_gst_sample_get(VALUE obj, rb_memory_view_t *view, int flags)
     caps = gst_sample_get_caps(sample);
 
     if (rg_gst_memory_view_init_from_audio(obj, view, flags, sample, caps)) {
-        gst_sample_ref(sample);
         return true;
     }
 
@@ -353,7 +354,6 @@ rg_gst_sample_get(VALUE obj, rb_memory_view_t *view, int flags)
 static bool
 rg_gst_sample_release(VALUE obj, rb_memory_view_t *view)
 {
-    GstSample *sample;
     memview_private_data *private_data;
 
     g_free((gpointer)view->shape);
@@ -366,9 +366,8 @@ rg_gst_sample_release(VALUE obj, rb_memory_view_t *view)
     gst_buffer_unmap(private_data->buffer, private_data->map_info);
     gst_buffer_unref(private_data->buffer);
     g_free(private_data->map_info);
+    gst_sample_unref(private_data->sample);
     g_free(private_data);
-    sample = GST_SAMPLE(RVAL2GOBJ(obj));
-    gst_sample_unref(sample);
 
     return true;
 }
