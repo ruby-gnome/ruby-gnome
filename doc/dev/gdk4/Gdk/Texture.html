@@ -156,6 +156,52 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#color_state-instance_method" title="#color_state (instance method)">#<strong>color_state</strong>  &#x21d2; Gdk::ColorState </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The color state of the texture.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#color_state=-instance_method" title="#color_state= (instance method)">#<strong>color_state=</strong>(color_state)  &#x21d2; Gdk::ColorState </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The color state of the texture.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#download-instance_method" title="#download (instance method)">#<strong>download</strong>(data, stride)  &#x21d2; nil </a>
     
 
@@ -428,7 +474,7 @@
   <div class="discussion">
     <p>Creates a new texture by loading an image from a resource.</p>
 <p>The file format is detected automatically. The supported formats<br />
-are PNG and JPEG, though more formats might be available.</p>
+are PNG, JPEG and TIFF, though more formats might be available.</p>
 <p>It is a fatal error if <!-- raw HTML omitted -->resource_path<!-- raw HTML omitted --> does not specify a valid<br />
 image resource and the program will abort if that happens.<br />
 If you are unsure about the validity of a resource, use<br />
@@ -519,7 +565,113 @@ while loading a big image.</p>
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="download-instance_method">
+  <h3 class="signature first" id="color_state-instance_method">
+  
+    #<strong>color_state</strong>  &#x21d2; <tt>Gdk::ColorState</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The color state of the texture.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::ColorState</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>color-state</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="color_state=-instance_method">
+  
+    #<strong>color_state=</strong>(color_state)  &#x21d2; <tt>Gdk::ColorState</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The color state of the texture.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>color_state</span>
+      
+      
+        <span class='type'>(<tt>Gdk::ColorState</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::ColorState</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>color-state</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::ColorState</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>color-state</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="download-instance_method">
   
     #<strong>download</strong>(data, stride)  &#x21d2; <tt>nil</tt> 
   
@@ -769,9 +921,9 @@ downloading the texture.</p>
     <p>Store the given <!-- raw HTML omitted -->texture<!-- raw HTML omitted --> to the <!-- raw HTML omitted -->filename<!-- raw HTML omitted --> as a PNG file.</p>
 <p>This is a utility function intended for debugging and testing.<br />
 If you want more control over formats, proper error handling or<br />
-want to store to a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.File] or other location, you might want to<br />
-use [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Texture.save_to_png_bytes] or look into the<br />
-gdk-pixbuf library.</p>
+want to store to a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.File] or other location, you might<br />
+want to use [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Texture.save_to_png_bytes] or look into<br />
+the libglycin library.</p>
 
 
   </div>
@@ -835,7 +987,7 @@ gdk-pixbuf library.</p>
 portable way to do that.</p>
 <p>If you need more control over the generated image, such as<br />
 attaching metadata, you should look into an image handling<br />
-library such as the gdk-pixbuf library.</p>
+library such as the libglycin library.</p>
 <p>If you are dealing with high dynamic range float data, you<br />
 might also want to consider [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Texture.save_to_tiff_bytes]<br />
 instead.</p>

@@ -1672,8 +1672,8 @@ potentially remove) the option from the options dictionary.</p>
 was to send all of the commandline arguments (options and all) to the<br />
 primary instance for handling.  #GApplication ignored them completely<br />
 on the local side.  Calling this function &quot;opts in&quot; to the new<br />
-behaviour, and in particular, means that unrecognised options will be<br />
-treated as errors.  Unrecognised options have never been ignored when<br />
+behaviour, and in particular, means that unrecognized options will be<br />
+treated as errors.  Unrecognized options have never been ignored when<br />
 %G_APPLICATION_HANDLES_COMMAND_LINE is unset.</p>
 <p>If #GApplication::handle-local-options needs to see the list of<br />
 filenames, then the use of %G_OPTION_REMAINING is recommended.  If<br />
@@ -1766,7 +1766,7 @@ first instance.  Passing options like <code>--display=</code> or <code>--gdk-deb
 on future runs will have no effect on the existing primary instance.</p>
 <p>Calling this function will cause the options in the supplied option<br />
 group to be parsed, but it does not cause you to be &quot;opted in&quot; to the<br />
-new functionality whereby unrecognised options are rejected even if<br />
+new functionality whereby unrecognized options are rejected even if<br />
 %G_APPLICATION_HANDLES_COMMAND_LINE was given.</p>
 
 
@@ -3401,7 +3401,7 @@ commandline then you should implement your own #GApplication subclass<br />
 and override local_command_line(). In this case, you most likely want<br />
 to return true from your local_command_line() implementation to<br />
 suppress the default handling. See<br />
-[gapplication-example-cmdline2.c][https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-cmdline2.c]<br />
+<a href="https://gitlab.gnome.org/GNOME/glib/-/blob/HEAD/gio/tests/gapplication-example-cmdline2.c">gapplication-example-cmdline2.c</a><br />
 for an example.</p>
 <p>If, after the above is done, the use count of the application is zero<br />
 then the exit status is returned immediately.  If the use count is<br />
@@ -3521,10 +3521,10 @@ new messages.</p>
 replaced with <!-- raw HTML omitted -->notification<!-- raw HTML omitted --> and shown again as if it was a new<br />
 notification. This works even for notifications sent from a previous<br />
 execution of the application, as long as <!-- raw HTML omitted -->id<!-- raw HTML omitted --> is the same string.</p>
-<p><!-- raw HTML omitted -->id<!-- raw HTML omitted --> may be nil, but it is impossible to replace or withdraw<br />
+<p><!-- raw HTML omitted -->id<!-- raw HTML omitted --> may be <code>NULL</code>, but it is impossible to replace or withdraw<br />
 notifications without an id.</p>
 <p>If <!-- raw HTML omitted -->notification<!-- raw HTML omitted --> is no longer relevant, it can be withdrawn with<br />
-g_application_withdraw_notification().</p>
+[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Application.withdraw_notification].</p>
 <p>It is an error to call this function if <!-- raw HTML omitted -->application<!-- raw HTML omitted --> has no<br />
 application ID.</p>
 

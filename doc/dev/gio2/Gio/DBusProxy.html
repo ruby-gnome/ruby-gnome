@@ -1070,7 +1070,7 @@ flags aren't set and no name owner currently exists, the message bus<br />
 will be requested to launch a name owner for the name.</p>
 <p>This is a synchronous failable constructor. See g_dbus_proxy_new()<br />
 and g_dbus_proxy_new_finish() for the asynchronous version.</p>
-<p>GDBus::Proxy is used in this [example][gdbus-wellknown-proxy].</p>
+<p>GDBus::Proxy is used in this [example][class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusProxy#a-watch-proxy-example].</p>
 
 
   </div>
@@ -1228,7 +1228,7 @@ will be requested to launch a name owner for the name.</p>
 ready, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked and you can use<br />
 g_dbus_proxy_new_finish() to get the result.</p>
 <p>See g_dbus_proxy_new_sync() and for a synchronous version of this constructor.</p>
-<p>GDBus::Proxy is used in this [example][gdbus-wellknown-proxy].</p>
+<p>GDBus::Proxy is used in this [example][class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusProxy#a-watch-proxy-example].</p>
 
 
   </div>
@@ -1403,7 +1403,7 @@ g_dbus_proxy_new_finish() to get the result.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Like g_dbus_proxy_new() but takes a GBus::Type instead of a #GDBusConnection.</p>
-<p>GDBus::Proxy is used in this [example][gdbus-wellknown-proxy].</p>
+<p>GDBus::Proxy is used in this [example][class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusProxy#a-watch-proxy-example].</p>
 
 
   </div>
@@ -1652,8 +1652,8 @@ convenient 'inline' use of g_variant_new(), e.g.:</p>
 GDBus::Proxy:g-interface-info) and <!-- raw HTML omitted -->method_name<!-- raw HTML omitted --> is referenced by it,<br />
 then the return value is checked against the return type.</p>
 <p>This is an asynchronous method. When the operation is finished,<br />
-<!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked in the<br />
-[thread-default main context][g-main-context-push-thread-default]<br />
+<!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked in the thread-default main context<br />
+(see [method<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.MainContext.push_thread_default])<br />
 of the thread you are calling this method from.<br />
 You can then call g_dbus_proxy_call_finish() to get the result of<br />
 the operation. See g_dbus_proxy_call_sync() for the synchronous<br />

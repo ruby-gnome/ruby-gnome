@@ -184,7 +184,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Gets the known strictness of <!-- raw HTML omitted -->filters<!-- raw HTML omitted -->.</p>
+    <span class="summary_desc"><div class='inline'><p>Gets the known strictness of a filter.</p>
 </div></span>
   
 </li>
@@ -238,7 +238,7 @@ subclasses and should not be called from other functions.</p>
       
       
         &mdash;
-        <div class='inline'><p>How the filter changed</p>
+        <div class='inline'><p>how the filter changed</p>
 </div>
       
     </li>
@@ -310,8 +310,7 @@ subclasses and should not be called from other functions.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the filter matches the item and a filter model should<br />
-keep it, false if not.</p>
+        <div class='inline'><p>true if the filter matches the item</p>
 </div>
       
     </li>
@@ -332,11 +331,11 @@ keep it, false if not.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the known strictness of <!-- raw HTML omitted -->filters<!-- raw HTML omitted -->.</p>
-<p>If the strictness is not known, %GTK_FILTER_MATCH_SOME is returned.</p>
+    <p>Gets the known strictness of a filter.</p>
+<p>If the strictness is not known, [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FilterMatch.some] is returned.</p>
 <p>This value may change after emission of the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Filter::changed]<br />
 signal.</p>
-<p>This function is meant purely for optimization purposes, filters can<br />
+<p>This function is meant purely for optimization purposes. Filters can<br />
 choose to omit implementing it, but <code>GtkFilterListModel</code> uses it.</p>
 
 

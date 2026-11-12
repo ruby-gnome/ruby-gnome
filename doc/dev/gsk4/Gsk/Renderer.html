@@ -140,7 +140,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Creates an appropriate <code>GskRenderer</code> instance for the given <!-- raw HTML omitted -->surface<!-- raw HTML omitted -->.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates an appropriate <code>GskRenderer</code> instance for the given surface.</p>
 </div></span>
   
 </li>
@@ -163,7 +163,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Checks whether the <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> is realized or not.</p>
+    <span class="summary_desc"><div class='inline'><p>Checks whether the renderer is realized or not.</p>
 </div></span>
   
 </li>
@@ -186,7 +186,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Creates the resources needed by the <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> to render the scene graph.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates the resources needed by the renderer.</p>
 </div></span>
   
 </li>
@@ -209,7 +209,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Creates the resources needed by the <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> to render the scene graph.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates the resources needed by the renderer.</p>
 </div></span>
   
 </li>
@@ -278,7 +278,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Renders the scene graph, described by a tree of <code>GskRenderNode</code> instances to the renderer's surface,  ensuring that the given <!-- raw HTML omitted -->region<!-- raw HTML omitted --> gets redrawn.</p>
+    <span class="summary_desc"><div class='inline'><p>Renders the scene graph, described by a tree of <code>GskRenderNode</code> instances to the renderer's surface, ensuring that the given region gets redrawn.</p>
 </div></span>
   
 </li>
@@ -301,7 +301,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Renders the scene graph, described by a tree of <code>GskRenderNode</code> instances, to a <code>GdkTexture</code>.</p>
+    <span class="summary_desc"><div class='inline'><p>Renders a scene graph, described by a tree of <code>GskRenderNode</code> instances, to a texture.</p>
 </div></span>
   
 </li>
@@ -370,7 +370,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Releases all the resources created by gsk_renderer_realize().</p>
+    <span class="summary_desc"><div class='inline'><p>Releases all the resources created by [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.Renderer.realize].</p>
 </div></span>
   
 </li>
@@ -394,7 +394,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates an appropriate <code>GskRenderer</code> instance for the given <!-- raw HTML omitted -->surface<!-- raw HTML omitted -->.</p>
+    <p>Creates an appropriate <code>GskRenderer</code> instance for the given surface.</p>
 <p>If the <code>GSK_RENDERER</code> environment variable is set, GSK will<br />
 try that renderer first, before trying the backend-specific<br />
 default. The ultimate fallback is the cairo renderer.</p>
@@ -417,7 +417,7 @@ default. The ultimate fallback is the cairo renderer.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GdkSurface</code></p>
+        <div class='inline'><p>a surface</p>
 </div>
       
     </li>
@@ -446,7 +446,7 @@ default. The ultimate fallback is the cairo renderer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks whether the <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> is realized or not.</p>
+    <p>Checks whether the renderer is realized or not.</p>
 
 
   </div>
@@ -464,7 +464,7 @@ default. The ultimate fallback is the cairo renderer.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if the <code>GskRenderer</code> was realized, and false otherwise</p>
+        <div class='inline'><p>true if the renderer was realized, false otherwise</p>
 </div>
       
     </li>
@@ -485,14 +485,13 @@ default. The ultimate fallback is the cairo renderer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates the resources needed by the <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> to render the scene<br />
-graph.</p>
+    <p>Creates the resources needed by the renderer.</p>
 <p>Since GTK 4.6, the surface may be <code>NULL</code>, which allows using<br />
-renderers without having to create a surface.<br />
-Since GTK 4.14, it is recommended to use [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.Renderer.realize_for_display]<br />
-instead.</p>
-<p>Note that it is mandatory to call [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.Renderer.unrealize] before<br />
-destroying the renderer.</p>
+renderers without having to create a surface. Since GTK 4.14,<br />
+it is recommended to use [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.Renderer.realize_for_display]<br />
+for this case.</p>
+<p>Note that it is mandatory to call [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.Renderer.unrealize]<br />
+before destroying the renderer.</p>
 
 
   </div>
@@ -511,7 +510,7 @@ destroying the renderer.</p>
       
       
         &mdash;
-        <div class='inline'><p>the <code>GdkSurface</code> renderer will be used on</p>
+        <div class='inline'><p>the surface that renderer will be used on</p>
 </div>
       
     </li>
@@ -529,7 +528,7 @@ destroying the renderer.</p>
       
       
         &mdash;
-        <div class='inline'><p>Whether the renderer was successfully realized</p>
+        <div class='inline'><p>whether the renderer was successfully realized</p>
 </div>
       
     </li>
@@ -550,10 +549,9 @@ destroying the renderer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates the resources needed by the <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> to render the scene<br />
-graph.</p>
-<p>Note that it is mandatory to call [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.Renderer.unrealize] before<br />
-destroying the renderer.</p>
+    <p>Creates the resources needed by the renderer.</p>
+<p>Note that it is mandatory to call [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.Renderer.unrealize]<br />
+before destroying the renderer.</p>
 
 
   </div>
@@ -572,7 +570,7 @@ destroying the renderer.</p>
       
       
         &mdash;
-        <div class='inline'><p>the <code>GdkDisplay</code> renderer will be used on</p>
+        <div class='inline'><p>the display that the renderer will be used on</p>
 </div>
       
     </li>
@@ -590,7 +588,7 @@ destroying the renderer.</p>
       
       
         &mdash;
-        <div class='inline'><p>Whether the renderer was successfully realized</p>
+        <div class='inline'><p>whether the renderer was successfully realized</p>
 </div>
       
     </li>
@@ -718,13 +716,13 @@ destroying the renderer.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Renders the scene graph, described by a tree of <code>GskRenderNode</code> instances<br />
-to the renderer's surface,  ensuring that the given <!-- raw HTML omitted -->region<!-- raw HTML omitted --> gets redrawn.</p>
+to the renderer's surface, ensuring that the given region gets redrawn.</p>
 <p>If the renderer has no associated surface, this function does nothing.</p>
 <p>Renderers must ensure that changes of the contents given by the <!-- raw HTML omitted -->root<!-- raw HTML omitted --><br />
 node as well as the area given by <!-- raw HTML omitted -->region<!-- raw HTML omitted --> are redrawn. They are however<br />
 free to not redraw any pixel outside of <!-- raw HTML omitted -->region<!-- raw HTML omitted --> if they can guarantee that<br />
 it didn't change.</p>
-<p>The <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> will acquire a reference on the <code>GskRenderNode</code> tree while<br />
+<p>The renderer will acquire a reference on the <code>GskRenderNode</code> tree while<br />
 the rendering is in progress.</p>
 
 
@@ -744,7 +742,7 @@ the rendering is in progress.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GskRenderNode</code></p>
+        <div class='inline'><p>the render node to render</p>
 </div>
       
     </li>
@@ -759,8 +757,8 @@ the rendering is in progress.</p>
       
       
         &mdash;
-        <div class='inline'><p>the <code>cairo_region_t</code> that must be redrawn or nil<br />
-for the whole window</p>
+        <div class='inline'><p>the <code>cairo_region_t</code> that must be redrawn or <code>NULL</code><br />
+for the whole surface</p>
 </div>
       
     </li>
@@ -795,9 +793,9 @@ for the whole window</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Renders the scene graph, described by a tree of <code>GskRenderNode</code> instances,<br />
-to a <code>GdkTexture</code>.</p>
-<p>The <!-- raw HTML omitted -->renderer<!-- raw HTML omitted --> will acquire a reference on the <code>GskRenderNode</code> tree while<br />
+    <p>Renders a scene graph, described by a tree of <code>GskRenderNode</code> instances,<br />
+to a texture.</p>
+<p>The renderer will acquire a reference on the <code>GskRenderNode</code> tree while<br />
 the rendering is in progress.</p>
 <p>If you want to apply any transformations to <!-- raw HTML omitted -->root<!-- raw HTML omitted -->, you should put it into a<br />
 transform node and pass that node instead.</p>
@@ -819,7 +817,7 @@ transform node and pass that node instead.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GskRenderNode</code></p>
+        <div class='inline'><p>the render node to render</p>
 </div>
       
     </li>
@@ -834,7 +832,7 @@ transform node and pass that node instead.</p>
       
       
         &mdash;
-        <div class='inline'><p>the section to draw or nil to use <!-- raw HTML omitted -->root<!-- raw HTML omitted -->'s bounds</p>
+        <div class='inline'><p>the section to draw or <code>NULL</code> to use <!-- raw HTML omitted -->root<!-- raw HTML omitted -->'s bounds</p>
 </div>
       
     </li>
@@ -852,7 +850,7 @@ transform node and pass that node instead.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GdkTexture</code> with the rendered contents of <!-- raw HTML omitted -->root<!-- raw HTML omitted -->.</p>
+        <div class='inline'><p>a texture with the rendered contents of <!-- raw HTML omitted -->root<!-- raw HTML omitted --></p>
 </div>
       
     </li>
@@ -979,7 +977,7 @@ transform node and pass that node instead.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Releases all the resources created by gsk_renderer_realize().</p>
+    <p>Releases all the resources created by [method<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.Renderer.realize].</p>
 
 
   </div>

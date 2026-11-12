@@ -364,7 +364,8 @@
   <div class="discussion">
     <p>Creates a new GInet::SocketAddress for <!-- raw HTML omitted -->address<!-- raw HTML omitted --> and <!-- raw HTML omitted -->port<!-- raw HTML omitted -->.</p>
 <p>If <!-- raw HTML omitted -->address<!-- raw HTML omitted --> is an IPv6 address, it can also contain a scope ID<br />
-(separated from the address by a <code>%</code>).<br />
+(separated from the address by a <code>%</code>). Note that currently this<br />
+behavior is platform specific. This may change in a future release.<br />
 or nil if <!-- raw HTML omitted -->address<!-- raw HTML omitted --> cannot be parsed.</p>
 
 
@@ -535,6 +536,7 @@ or nil if <!-- raw HTML omitted -->address<!-- raw HTML omitted --> cannot be pa
 </h3><div class="docstring">
   <div class="discussion">
     <p>The <code>sin6_flowinfo</code> field, for IPv6 addresses.</p>
+<p>If unset this property is inherited from [property<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.InetSocketAddress:address].</p>
 
 
   </div>
@@ -574,6 +576,7 @@ or nil if <!-- raw HTML omitted -->address<!-- raw HTML omitted --> cannot be pa
 </h3><div class="docstring">
   <div class="discussion">
     <p>The <code>sin6_flowinfo</code> field, for IPv6 addresses.</p>
+<p>If unset this property is inherited from [property<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.InetSocketAddress:address].</p>
 
 
   </div>
@@ -747,6 +750,7 @@ or nil if <!-- raw HTML omitted -->address<!-- raw HTML omitted --> cannot be pa
 </h3><div class="docstring">
   <div class="discussion">
     <p>The <code>sin6_scope_id</code> field, for IPv6 addresses.</p>
+<p>If unset this property is inherited from [property<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.InetSocketAddress:address].</p>
 
 
   </div>
@@ -786,6 +790,7 @@ or nil if <!-- raw HTML omitted -->address<!-- raw HTML omitted --> cannot be pa
 </h3><div class="docstring">
   <div class="discussion">
     <p>The <code>sin6_scope_id</code> field, for IPv6 addresses.</p>
+<p>If unset this property is inherited from [property<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.InetSocketAddress:address].</p>
 
 
   </div>

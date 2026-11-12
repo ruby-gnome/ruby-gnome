@@ -134,7 +134,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>This function initiates a font selection operation by presenting a dialog to the user for selecting a font face (i.e. a font family and style, but not a specific font size).</p>
+    <span class="summary_desc"><div class='inline'><p>Presents a font chooser dialog to the user.</p>
 </div></span>
   
 </li>
@@ -157,7 +157,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_face] call and returns the resulting font face.</p>
+    <span class="summary_desc"><div class='inline'><p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_face] call.</p>
 </div></span>
   
 </li>
@@ -180,7 +180,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>This function initiates a font selection operation by presenting a dialog to the user for selecting a font family.</p>
+    <span class="summary_desc"><div class='inline'><p>Presents a font chooser dialog to the user.</p>
 </div></span>
   
 </li>
@@ -203,7 +203,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_family] call and returns the resulting family.</p>
+    <span class="summary_desc"><div class='inline'><p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_family] call.</p>
 </div></span>
   
 </li>
@@ -226,7 +226,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>This function initiates a font selection operation by presenting a dialog to the user for selecting a font.</p>
+    <span class="summary_desc"><div class='inline'><p>Presents a font chooser dialog to the user.</p>
 </div></span>
   
 </li>
@@ -249,7 +249,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>This function initiates a font selection operation by presenting a dialog to the user for selecting a font and font features.</p>
+    <span class="summary_desc"><div class='inline'><p>Presents a font chooser dialog to the user.</p>
 </div></span>
   
 </li>
@@ -272,7 +272,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_font_and_features] call and returns the resulting font description and font features.</p>
+    <span class="summary_desc"><div class='inline'><p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_font_and_features] call.</p>
 </div></span>
   
 </li>
@@ -295,7 +295,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_font] call and returns the resulting font description.</p>
+    <span class="summary_desc"><div class='inline'><p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_font] call.</p>
 </div></span>
   
 </li>
@@ -318,7 +318,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Sets a filter to restrict what fonts are shown in the font chooser dialog.</p>
+    <span class="summary_desc"><div class='inline'><p>A filter to restrict what fonts are shown in the font chooser dialog.</p>
 </div></span>
   
 </li>
@@ -341,7 +341,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Sets a filter to restrict what fonts are shown in the font chooser dialog.</p>
+    <span class="summary_desc"><div class='inline'><p>A filter to restrict what fonts are shown in the font chooser dialog.</p>
 </div></span>
   
 </li>
@@ -364,7 +364,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Sets a custom font map to select fonts from.</p>
+    <span class="summary_desc"><div class='inline'><p>A custom font map to select fonts from.</p>
 </div></span>
   
 </li>
@@ -387,7 +387,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Sets a custom font map to select fonts from.</p>
+    <span class="summary_desc"><div class='inline'><p>A custom font map to select fonts from.</p>
 </div></span>
   
 </li>
@@ -626,12 +626,9 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function initiates a font selection operation by<br />
-presenting a dialog to the user for selecting a font face<br />
-(i.e. a font family and style, but not a specific font size).</p>
-<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is dismissed.<br />
-It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_face_finish]<br />
-to obtain the result.</p>
+    <p>Presents a font chooser dialog to the user.</p>
+<p>The font chooser dialog will be set up for selecting a font face.</p>
+<p>A font face represents a font family and style, but no specific font size.</p>
 
 
   </div>
@@ -650,7 +647,7 @@ to obtain the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>the parent <code>GtkWindow</code></p>
+        <div class='inline'><p>the parent window</p>
 </div>
       
     </li>
@@ -680,7 +677,7 @@ to obtain the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GCancellable</code> to cancel the operation</p>
+        <div class='inline'><p>a cancellable to cancel the operation</p>
 </div>
       
     </li>
@@ -695,7 +692,8 @@ to obtain the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>a callback to call when the operation is complete</p>
+        <div class='inline'><p>a callback to call when the<br />
+operation is complete</p>
 </div>
       
     </li>
@@ -745,8 +743,9 @@ to obtain the result.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_face] call<br />
-and returns the resulting font face.</p>
+    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_face] call.</p>
+<p>Note that this function returns a [error<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DialogError.DISMISSED]<br />
+error if the user cancels the dialog.</p>
 
 
   </div>
@@ -765,7 +764,7 @@ and returns the resulting font face.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GAsyncResult</code></p>
+        <div class='inline'><p>the result</p>
 </div>
       
     </li>
@@ -783,7 +782,7 @@ and returns the resulting font face.</p>
       
       
         &mdash;
-        <div class='inline'><p>the selected font face</p>
+        <div class='inline'><p>the selected [class<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontFace]</p>
 </div>
       
     </li>
@@ -804,11 +803,8 @@ and returns the resulting font face.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function initiates a font selection operation by<br />
-presenting a dialog to the user for selecting a font family.</p>
-<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is dismissed.<br />
-It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_family_finish]<br />
-to obtain the result.</p>
+    <p>Presents a font chooser dialog to the user.</p>
+<p>The font chooser dialog will be set up for selecting a font family.</p>
 
 
   </div>
@@ -827,7 +823,7 @@ to obtain the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>the parent <code>GtkWindow</code></p>
+        <div class='inline'><p>the parent window</p>
 </div>
       
     </li>
@@ -857,7 +853,7 @@ to obtain the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GCancellable</code> to cancel the operation</p>
+        <div class='inline'><p>a cancellable to cancel the operation</p>
 </div>
       
     </li>
@@ -872,7 +868,8 @@ to obtain the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>a callback to call when the operation is complete</p>
+        <div class='inline'><p>a callback to call when the<br />
+operation is complete</p>
 </div>
       
     </li>
@@ -922,11 +919,9 @@ to obtain the result.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_family] call<br />
-and returns the resulting family.</p>
-<p>This function never returns an error. If the operation is<br />
-not finished successfully, the value passed as <!-- raw HTML omitted -->initial_value<!-- raw HTML omitted --><br />
-to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_family] is returned.</p>
+    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_family] call.</p>
+<p>Note that this function returns a [error<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DialogError.DISMISSED]<br />
+error if the user cancels the dialog.</p>
 
 
   </div>
@@ -945,7 +940,7 @@ to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choos
       
       
         &mdash;
-        <div class='inline'><p>a <code>GAsyncResult</code></p>
+        <div class='inline'><p>the result</p>
 </div>
       
     </li>
@@ -963,7 +958,7 @@ to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choos
       
       
         &mdash;
-        <div class='inline'><p>the selected family</p>
+        <div class='inline'><p>the selected [class<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontFamily]</p>
 </div>
       
     </li>
@@ -984,11 +979,8 @@ to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choos
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function initiates a font selection operation by<br />
-presenting a dialog to the user for selecting a font.</p>
-<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is dismissed.<br />
-It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_font_finish]<br />
-to obtain the result.</p>
+    <p>Presents a font chooser dialog to the user.</p>
+<p>The font chooser dialog will be set up for selecting a font.</p>
 <p>If you want to let the user select font features as well,<br />
 use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_font_and_features] instead.</p>
 
@@ -1009,7 +1001,7 @@ use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choo
       
       
         &mdash;
-        <div class='inline'><p>the parent <code>GtkWindow</code></p>
+        <div class='inline'><p>the parent window</p>
 </div>
       
     </li>
@@ -1039,7 +1031,7 @@ use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choo
       
       
         &mdash;
-        <div class='inline'><p>a <code>GCancellable</code> to cancel the operation</p>
+        <div class='inline'><p>a cancellable to cancel the operation</p>
 </div>
       
     </li>
@@ -1054,7 +1046,8 @@ use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choo
       
       
         &mdash;
-        <div class='inline'><p>a callback to call when the operation is complete</p>
+        <div class='inline'><p>a callback to call when the<br />
+operation is complete</p>
 </div>
       
     </li>
@@ -1104,14 +1097,11 @@ use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choo
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function initiates a font selection operation by<br />
-presenting a dialog to the user for selecting a font and<br />
-font features.</p>
+    <p>Presents a font chooser dialog to the user.</p>
+<p>The font chooser dialog will be set up for selecting a font<br />
+and specify features for the selected font.</p>
 <p>Font features affect how the font is rendered, for example<br />
 enabling glyph variants or ligatures.</p>
-<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is dismissed.<br />
-It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_font_and_features_finish]<br />
-to obtain the result.</p>
 
 
   </div>
@@ -1130,7 +1120,7 @@ to obtain the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>the parent <code>GtkWindow</code></p>
+        <div class='inline'><p>the parent window</p>
 </div>
       
     </li>
@@ -1160,7 +1150,7 @@ to obtain the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GCancellable</code> to cancel the operation</p>
+        <div class='inline'><p>a cancellable to cancel the operation</p>
 </div>
       
     </li>
@@ -1175,7 +1165,8 @@ to obtain the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>a callback to call when the operation is complete</p>
+        <div class='inline'><p>a callback to call when the<br />
+operation is complete</p>
 </div>
       
     </li>
@@ -1225,8 +1216,11 @@ to obtain the result.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_font_and_features]<br />
-call and returns the resulting font description and font features.</p>
+    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_font_and_features] call.</p>
+<p>The selected font and features are returned in <!-- raw HTML omitted -->font_desc<!-- raw HTML omitted --> and<br />
+<!-- raw HTML omitted -->font_features<!-- raw HTML omitted -->.</p>
+<p>Note that this function returns a [error<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DialogError.DISMISSED]<br />
+error if the user cancels the dialog.</p>
 
 
   </div>
@@ -1245,7 +1239,7 @@ call and returns the resulting font description and font features.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GAsyncResult</code></p>
+        <div class='inline'><p>the result</p>
 </div>
       
     </li>
@@ -1308,8 +1302,7 @@ call and returns the resulting font description and font features.</p>
       
       
         &mdash;
-        <div class='inline'><p><code>TRUE</code> if a font was selected. Otherwise <code>FALSE</code> is returned<br />
-and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set</p>
+        <div class='inline'><p>true if a font was selected</p>
 </div>
       
     </li>
@@ -1330,8 +1323,9 @@ and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_font] call<br />
-and returns the resulting font description.</p>
+    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontDialog.choose_font] call.</p>
+<p>Note that this function returns a [error<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DialogError.DISMISSED]<br />
+error if the user cancels the dialog.</p>
 
 
   </div>
@@ -1350,7 +1344,7 @@ and returns the resulting font description.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GAsyncResult</code></p>
+        <div class='inline'><p>the result</p>
 </div>
       
     </li>
@@ -1368,7 +1362,8 @@ and returns the resulting font description.</p>
       
       
         &mdash;
-        <div class='inline'><p>the selected font</p>
+        <div class='inline'><p>a [struct<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontDescription] describing<br />
+the selected font</p>
 </div>
       
     </li>
@@ -1389,8 +1384,7 @@ and returns the resulting font description.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets a filter to restrict what fonts are shown<br />
-in the font chooser dialog.</p>
+    <p>A filter to restrict what fonts are shown in the font chooser dialog.</p>
 
 
   </div>
@@ -1429,8 +1423,7 @@ in the font chooser dialog.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets a filter to restrict what fonts are shown<br />
-in the font chooser dialog.</p>
+    <p>A filter to restrict what fonts are shown in the font chooser dialog.</p>
 
 
   </div>
@@ -1497,7 +1490,7 @@ in the font chooser dialog.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets a custom font map to select fonts from.</p>
+    <p>A custom font map to select fonts from.</p>
 <p>A custom font map can be used to present application-specific<br />
 fonts instead of or in addition to the normal system fonts.</p>
 
@@ -1538,7 +1531,7 @@ fonts instead of or in addition to the normal system fonts.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets a custom font map to select fonts from.</p>
+    <p>A custom font map to select fonts from.</p>
 <p>A custom font map can be used to present application-specific<br />
 fonts instead of or in addition to the normal system fonts.</p>
 
@@ -1713,9 +1706,8 @@ fonts instead of or in addition to the normal system fonts.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the font chooser dialog<br />
-blocks interaction with the parent window<br />
-while it is presented.</p>
+    <p>Returns whether the font chooser dialog blocks interaction<br />
+with the parent window while it is presented.</p>
 
 
   </div>
@@ -1733,7 +1725,7 @@ while it is presented.</p>
       
       
         &mdash;
-        <div class='inline'><p><code>TRUE</code> if the font chooser dialog is modal</p>
+        <div class='inline'><p>true if the font chooser dialog is modal</p>
 </div>
       
     </li>

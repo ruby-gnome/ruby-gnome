@@ -409,7 +409,7 @@ For example, an image may be provided by its file and by the image<br />
 contents with a call such as</p>
 <pre class="code c"><code class="c">gdk_content_provider_new_union ((GdkContentProvider *[2]) {
                                   gdk_content_provider_new_typed (G_TYPE_FILE, file),
-                                  gdk_content_provider_new_typed (G_TYPE_TEXTURE, texture)
+                                  gdk_content_provider_new_typed (GDK_TYPE_TEXTURE, texture)
                                 }, 2);
 </code></pre>
 
@@ -868,9 +868,6 @@ the data in.</p>
   <div class="discussion">
     <p>Asynchronously writes the contents of <!-- raw HTML omitted -->provider<!-- raw HTML omitted --> to <!-- raw HTML omitted -->stream<!-- raw HTML omitted --> in the given<br />
 <!-- raw HTML omitted -->mime_type<!-- raw HTML omitted -->.</p>
-<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. You must then call<br />
-[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.ContentProvider.write_mime_type_finish] to get the result<br />
-of the operation.</p>
 <p>The given mime type does not need to be listed in the formats returned by<br />
 [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.ContentProvider.ref_formats]. However, if the given <code>GType</code> is<br />
 not supported, <code>G_IO_ERROR_NOT_SUPPORTED</code> will be reported.</p>

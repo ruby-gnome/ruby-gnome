@@ -175,9 +175,9 @@ file.</li>
 short. Entity tags are somewhat like a more abstract version of the<br />
 traditional mtime, and can be used to quickly determine if the file<br />
 has been modified from the version on the file system. See the<br />
-HTTP 1.1<br />
-<a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html">specification</a><br />
-for HTTP <code>ETag</code> headers, which are a very similar concept.</p>
+description of HTTP ETags in<br />
+<a href="https://www.rfc-editor.org/rfc/rfc9110.html#name-etag">RFC9110</a>.<br />
+<code>GFile</code> Entity Tags are a very similar concept.</p>
 
 
   </div>
@@ -475,6 +475,29 @@ for HTTP <code>ETag</code> headers, which are a very similar concept.</p>
 
   
     <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#copy_async_with_closures-instance_method" title="#copy_async_with_closures (instance method)">#<strong>copy_async_with_closures</strong>(destination, flags, io_priority, cancellable, progress_callback_closure, ready_callback_closure)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Version of [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.File.copy_async] using closures instead of callbacks for easier binding in other languages.</p>
+</div></span>
   
 </li>
 
@@ -2056,6 +2079,29 @@ for HTTP <code>ETag</code> headers, which are a very similar concept.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#move_async_with_closures-instance_method" title="#move_async_with_closures (instance method)">#<strong>move_async_with_closures</strong>(destination, flags, io_priority, cancellable, progress_callback_closure, ready_callback_closure)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Version of [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.File.move_async] using closures instead of callbacks for easier binding in other languages.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#move_finish-instance_method" title="#move_finish (instance method)">#<strong>move_finish</strong>(file, result)  &#x21d2; Boolean </a>
     
 
@@ -2376,7 +2422,7 @@ for HTTP <code>ETag</code> headers, which are a very similar concept.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#query_exists-instance_method" title="#query_exists (instance method)">#<strong>query_exists</strong>(cancellable)  &#x21d2; Boolean </a>
+      <a href="#query_exists-instance_method" title="#query_exists (instance method)">#<strong>query_exists</strong>(file, cancellable)  &#x21d2; Boolean </a>
     
 
     
@@ -2390,7 +2436,7 @@ for HTTP <code>ETag</code> headers, which are a very similar concept.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Utility function to check if a particular file exists.</p>
+    <span class="summary_desc"><div class='inline'><p>True if the file exists (and can be detected without error), false otherwise (or if cancelled).</p>
 </div></span>
   
 </li>
@@ -2504,7 +2550,7 @@ for HTTP <code>ETag</code> headers, which are a very similar concept.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>A GFile::Info for the given <!-- raw HTML omitted -->file<!-- raw HTML omitted -->, or nil on error.</p>
+    <span class="summary_desc"><div class='inline'><p>A [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.FileInfo] for the given <!-- raw HTML omitted -->file<!-- raw HTML omitted -->.</p>
 </div></span>
   
 </li>
@@ -3370,7 +3416,7 @@ for HTTP <code>ETag</code> headers, which are a very similar concept.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Checks if <!-- raw HTML omitted -->file<!-- raw HTML omitted --> supports [thread-default contexts][g-main-context-push-thread-default-context].</p>
+    <span class="summary_desc"><div class='inline'><p>Checks if <!-- raw HTML omitted -->file<!-- raw HTML omitted --> supports thread-default main contexts (see [method<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.MainContext.push_thread_default]) If this returns false, you cannot perform asynchronous operations on <!-- raw HTML omitted -->file<!-- raw HTML omitted --> in a thread that has a thread-default context.</p>
 </div></span>
   
 </li>
@@ -3963,7 +4009,7 @@ Free the returned object with g_object_unref().</p>
       
       
         &mdash;
-        <div class='inline'><p>the [I/O priority][io-priority] of the request</p>
+        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a> of the request</p>
 </div>
       
     </li>
@@ -4452,7 +4498,7 @@ progress information, or nil if progress information is not needed</p>
       
       
         &mdash;
-        <div class='inline'><p>the [I/O priority][io-priority] of the request</p>
+        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a> of the request</p>
 </div>
       
     </li>
@@ -4531,6 +4577,138 @@ to call when the request is satisfied</p>
       
         &mdash;
         <div class='inline'><p>the data to pass to callback</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="copy_async_with_closures-instance_method">
+  
+    #<strong>copy_async_with_closures</strong>(destination, flags, io_priority, cancellable, progress_callback_closure, ready_callback_closure)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Version of [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.File.copy_async] using closures instead of callbacks for<br />
+easier binding in other languages.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>destination</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gio::File (module)">Gio::File</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>destination [type<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.File]</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FileCopyFlags.html" title="Gio::FileCopyFlags (module)">Gio::FileCopyFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>set of [flags<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.FileCopyFlags]</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>io_priority</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a> of the request</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>optional [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Cancellable] object,<br />
+<code>NULL</code> to ignore</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>progress_callback_closure</span>
+      
+      
+        <span class='type'>(<tt>GObject::Closure</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[type<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Closure] to invoke with progress<br />
+information, or <code>NULL</code> if progress information is not needed</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ready_callback_closure</span>
+      
+      
+        <span class='type'>(<tt>GObject::Closure</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[type<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Closure] to invoke when the request is satisfied</p>
 </div>
       
     </li>
@@ -4875,7 +5053,7 @@ Free the returned object with g_object_unref().</p>
       
       
         &mdash;
-        <div class='inline'><p>the [I/O priority][io-priority] of the request</p>
+        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a> of the request</p>
 </div>
       
     </li>
@@ -5173,7 +5351,7 @@ Free the returned object with g_object_unref().</p>
       
       
         &mdash;
-        <div class='inline'><p>the [I/O priority][io-priority] of the request</p>
+        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a> of the request</p>
 </div>
       
     </li>
@@ -5428,7 +5606,7 @@ g_unlink().</p>
       
       
         &mdash;
-        <div class='inline'><p>the [I/O priority][io-priority] of the request</p>
+        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a> of the request</p>
 </div>
       
     </li>
@@ -5617,7 +5795,7 @@ nil to ignore</p>
       
       
         &mdash;
-        <div class='inline'><p>the [I/O priority][io-priority] of the request</p>
+        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a> of the request</p>
 </div>
       
     </li>
@@ -6347,7 +6525,7 @@ false otherwise.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns A GFile::Enumerator if successful,<br />
-nil on error. Free the returned object with g_object_unref().</p>
+nil on error. Free the returned object with [method<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Object.unref].</p>
 
 
   </div>
@@ -6431,7 +6609,7 @@ nil to ignore</p>
       
         &mdash;
         <div class='inline'><p>A GFile::Enumerator if successful,<br />
-nil on error. Free the returned object with g_object_unref().</p>
+nil on error. Free the returned object with [method<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Object.unref].</p>
 </div>
       
     </li>
@@ -6515,7 +6693,7 @@ nil on error. Free the returned object with g_object_unref().</p>
       
       
         &mdash;
-        <div class='inline'><p>the [I/O priority][io-priority] of the request</p>
+        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a> of the request</p>
 </div>
       
     </li>
@@ -6858,7 +7036,7 @@ Free the returned object with g_object_unref().</p>
       
       
         &mdash;
-        <div class='inline'><p>the [I/O priority][io-priority] of the request</p>
+        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a> of the request</p>
 </div>
       
     </li>
@@ -8831,7 +9009,7 @@ nil to ignore</p>
       
       
         &mdash;
-        <div class='inline'><p>the [I/O priority][io-priority] of the request</p>
+        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a> of the request</p>
 </div>
       
     </li>
@@ -9195,7 +9373,7 @@ of the new symlink</p>
       
       
         &mdash;
-        <div class='inline'><p>the [I/O priority][io-priority] of the request</p>
+        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a> of the request</p>
 </div>
       
     </li>
@@ -9563,7 +9741,7 @@ false otherwise, with <!-- raw HTML omitted -->error<!-- raw HTML omitted --> se
       
       
         &mdash;
-        <div class='inline'><p>the [I/O priority][io-priority] of the request</p>
+        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a> of the request</p>
 </div>
       
     </li>
@@ -10754,7 +10932,7 @@ the callback function</p>
       
       
         &mdash;
-        <div class='inline'><p>the [I/O priority][io-priority] of the request</p>
+        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a> of the request</p>
 </div>
       
     </li>
@@ -10832,6 +11010,138 @@ to call when the request is satisfied</p>
       
         &mdash;
         <div class='inline'><p>the data to pass to callback function</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="move_async_with_closures-instance_method">
+  
+    #<strong>move_async_with_closures</strong>(destination, flags, io_priority, cancellable, progress_callback_closure, ready_callback_closure)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Version of [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.File.move_async] using closures instead of callbacks for<br />
+easier binding in other languages.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>destination</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gio::File (module)">Gio::File</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>destination [type<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.File]</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FileCopyFlags.html" title="Gio::FileCopyFlags (module)">Gio::FileCopyFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>set of [flags<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.FileCopyFlags]</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>io_priority</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a> of the request</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cancellable.html" title="Gio::Cancellable (class)">Gio::Cancellable</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>optional [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Cancellable] object,<br />
+<code>NULL</code> to ignore</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>progress_callback_closure</span>
+      
+      
+        <span class='type'>(<tt>GObject::Closure</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[type<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Closure] to invoke with progress<br />
+information, or <code>NULL</code> if progress information is not needed</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ready_callback_closure</span>
+      
+      
+        <span class='type'>(<tt>GObject::Closure</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[type<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Closure] to invoke when the request is satisfied</p>
 </div>
       
     </li>
@@ -11047,7 +11357,7 @@ Free the returned object with g_object_unref().</p>
       
       
         &mdash;
-        <div class='inline'><p>the [I/O priority][io-priority] of the request</p>
+        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a> of the request</p>
 </div>
       
     </li>
@@ -11717,7 +12027,7 @@ When you are done with it, release it with g_object_unref()</p>
       
       
         &mdash;
-        <div class='inline'><p>the [I/O priority][io-priority] of the request</p>
+        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a> of the request</p>
 </div>
       
     </li>
@@ -11849,7 +12159,7 @@ When you are done with it, release it with g_object_unref()</p>
       <div class="method_details ">
   <h3 class="signature " id="query_exists-instance_method">
   
-    #<strong>query_exists</strong>(cancellable)  &#x21d2; <tt>Boolean</tt> 
+    #<strong>query_exists</strong>(file, cancellable)  &#x21d2; <tt>Boolean</tt> 
   
 
   
@@ -11857,25 +12167,8 @@ When you are done with it, release it with g_object_unref()</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Utility function to check if a particular file exists. This is<br />
-implemented using g_file_query_info() and as such does blocking I/O.</p>
-<p>Note that in many cases it is <a href="https://en.wikipedia.org/wiki/Time_of_check_to_time_of_use">racy to first check for file existence</a><br />
-and then execute something based on the outcome of that, because the<br />
-file might have been created or removed in between the operations. The<br />
-general approach to handling that is to not check, but just do the<br />
-operation and handle the errors as they come.</p>
-<p>As an example of race-free checking, take the case of reading a file,<br />
-and if it doesn't exist, creating it. There are two racy versions: read<br />
-it, and on error create it; and: check if it exists, if not create it.<br />
-These can both result in two processes creating the file (with perhaps<br />
-a partially written file as the result). The correct approach is to<br />
-always try to create the file with g_file_create() which will either<br />
-atomically create the file or fail with a %G_IO_ERROR_EXISTS error.</p>
-<p>However, in many cases an existence check is useful in a user interface,<br />
-for instance to make a menu item sensitive/insensitive, so that you don't<br />
-have to fool users that something is possible and then just show an error<br />
-dialog. If you do this, you should make sure to also handle the errors<br />
-that can happen due to races when you execute the operation.</p>
+    <p>Returns true if the file exists (and can be detected without error),<br />
+false otherwise (or if cancelled).</p>
 
 
   </div>
@@ -11883,6 +12176,21 @@ that can happen due to races when you execute the operation.</p>
 <div class="tags">
   <p class="tag_title">Parameters:</p>
 <ul class="param">
+  
+    <li>
+      
+        <span class='name'>file</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Gio::File (module)">Gio::File</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>input #GFile</p>
+</div>
+      
+    </li>
   
     <li>
       
@@ -12152,7 +12460,7 @@ Free the returned object with g_object_unref().</p>
       
       
         &mdash;
-        <div class='inline'><p>the [I/O priority][io-priority] of the request</p>
+        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a> of the request</p>
 </div>
       
     </li>
@@ -12311,8 +12619,7 @@ Free the returned object with g_object_unref().</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a GFile::Info for the given <!-- raw HTML omitted -->file<!-- raw HTML omitted -->, or nil<br />
-on error. Free the returned object with g_object_unref().</p>
+    <p>Returns a [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.FileInfo] for the given <!-- raw HTML omitted -->file<!-- raw HTML omitted -->.</p>
 
 
   </div>
@@ -12331,7 +12638,7 @@ on error. Free the returned object with g_object_unref().</p>
       
       
         &mdash;
-        <div class='inline'><p>input #GFile</p>
+        <div class='inline'><p>input file</p>
 </div>
       
     </li>
@@ -12361,7 +12668,7 @@ on error. Free the returned object with g_object_unref().</p>
       
       
         &mdash;
-        <div class='inline'><p>a set of GFile::QueryInfoFlags</p>
+        <div class='inline'><p>flags to affect the query operation</p>
 </div>
       
     </li>
@@ -12376,8 +12683,7 @@ on error. Free the returned object with g_object_unref().</p>
       
       
         &mdash;
-        <div class='inline'><p>optional #GCancellable object,<br />
-nil to ignore</p>
+        <div class='inline'><p>optional cancellable object</p>
 </div>
       
     </li>
@@ -12395,8 +12701,7 @@ nil to ignore</p>
       
       
         &mdash;
-        <div class='inline'><p>a GFile::Info for the given <!-- raw HTML omitted -->file<!-- raw HTML omitted -->, or nil<br />
-on error. Free the returned object with g_object_unref().</p>
+        <div class='inline'><p>a [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.FileInfo] for the given <!-- raw HTML omitted -->file<!-- raw HTML omitted --></p>
 </div>
       
     </li>
@@ -12480,7 +12785,7 @@ on error. Free the returned object with g_object_unref().</p>
       
       
         &mdash;
-        <div class='inline'><p>the [I/O priority][io-priority] of the request</p>
+        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a> of the request</p>
 </div>
       
     </li>
@@ -12929,7 +13234,7 @@ Free the returned object with g_object_unref().</p>
       
       
         &mdash;
-        <div class='inline'><p>the [I/O priority][io-priority] of the request</p>
+        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a> of the request</p>
 </div>
       
     </li>
@@ -13443,7 +13748,7 @@ or nil to ignore</p>
       
       
         &mdash;
-        <div class='inline'><p>the [I/O priority][io-priority] of the request</p>
+        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a> of the request</p>
 </div>
       
     </li>
@@ -14364,7 +14669,7 @@ or nil to ignore</p>
       
       
         &mdash;
-        <div class='inline'><p>the [I/O priority][io-priority] of the request</p>
+        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a> of the request</p>
 </div>
       
     </li>
@@ -15445,7 +15750,7 @@ in the <!-- raw HTML omitted -->file<!-- raw HTML omitted -->, false otherwise.<
       
       
         &mdash;
-        <div class='inline'><p>the [I/O priority][io-priority] of the request</p>
+        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a> of the request</p>
 </div>
       
     </li>
@@ -15860,7 +16165,7 @@ Free the returned object with g_object_unref().</p>
       
       
         &mdash;
-        <div class='inline'><p>the [I/O priority][io-priority] of the request</p>
+        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a> of the request</p>
 </div>
       
     </li>
@@ -16424,8 +16729,8 @@ false otherwise.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Checks if <!-- raw HTML omitted -->file<!-- raw HTML omitted --> supports<br />
-[thread-default contexts][g-main-context-push-thread-default-context].<br />
+    <p>Checks if <!-- raw HTML omitted -->file<!-- raw HTML omitted --> supports thread-default main contexts<br />
+(see [method<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.MainContext.push_thread_default])<br />
 If this returns false, you cannot perform asynchronous operations on<br />
 <!-- raw HTML omitted -->file<!-- raw HTML omitted --> in a thread that has a thread-default context.</p>
 
@@ -16573,7 +16878,7 @@ nil to ignore</p>
       
       
         &mdash;
-        <div class='inline'><p>the [I/O priority][io-priority] of the request</p>
+        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a> of the request</p>
 </div>
       
     </li>

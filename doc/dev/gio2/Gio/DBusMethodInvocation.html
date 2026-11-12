@@ -608,6 +608,10 @@ it as an argument to the <code>handle_method_call()</code> function in a<br />
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the name of the D-Bus interface the method was invoked on.</p>
+<p>This can be <code>NULL</code> if it was not specified by the sender. See<br />
+[callback<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusInterfaceMethodCallFunc] or the<br />
+<a href="https://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-types-method">D-Bus Specification</a><br />
+for details on when this can happen and how it should be handled.</p>
 <p>If this method call is a property Get, Set or GetAll call that has<br />
 been redirected to the method call handler then<br />
 &quot;org.freedesktop.DBus.Properties&quot; will be returned.  See<br />
@@ -654,7 +658,8 @@ GDBus::InterfaceVTable for more information.</p>
 you need to use low-level protocol features, such as UNIX file<br />
 descriptor passing, that cannot be properly expressed in the<br />
 #GVariant API.</p>
-<p>See this [server][gdbus-server] and [client][gdbus-unix-fd-client]<br />
+<p>See this [server][class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusConnection#an-example-d-bus-server]<br />
+and [client][class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusConnection#an-example-for-file-descriptor-passing]<br />
 for an example of how to use this low-level API to send and receive<br />
 UNIX file descriptors.</p>
 
@@ -1490,6 +1495,8 @@ GDBus::InterfaceVTable for more information about the ownership of<br />
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the bus name that invoked the method.</p>
+<p>This can return nil if not specified by the caller, e.g. on peer-to-peer<br />
+connections.</p>
 
 
   </div>

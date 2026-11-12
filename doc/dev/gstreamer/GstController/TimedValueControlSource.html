@@ -71,16 +71,12 @@
   <dl>
     <dt>Inherits:</dt>
     <dd>
-      <span class="inheritName"><span class='object_link'><a href="../Gst/ControlSource.html" title="Gst::ControlSource (class)">Gst::ControlSource</a></span></span>
+      <span class="inheritName">Gst::ControlSource</span>
       
         <ul class="fullTree">
           <li>Object</li>
           
-            <li class="next">GObject::InitiallyUnowned</li>
-          
-            <li class="next"><span class='object_link'><a href="../Gst/Object.html" title="Gst::Object (class)">Gst::Object</a></span></li>
-          
-            <li class="next"><span class='object_link'><a href="../Gst/ControlSource.html" title="Gst::ControlSource (class)">Gst::ControlSource</a></span></li>
+            <li class="next">Gst::ControlSource</li>
           
             <li class="next">GstController::TimedValueControlSource</li>
           
@@ -130,7 +126,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#all-instance_method" title="#all (instance method)">#<strong>all</strong>  &#x21d2; GLib::List&lt;Gst::TimedValue&gt; </a>
+      <a href="#all-instance_method" title="#all (instance method)">#<strong>all</strong>  &#x21d2; GLib::List&lt;GstController::ControlPoint&gt; </a>
     
 
     
@@ -144,7 +140,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Returns a read-only copy of the list of Gst::TimedValue for the given property.</p>
+    <span class="summary_desc"><div class='inline'><p>Returns a read-only copy of the list of Gst::ControlPoint for the given property.</p>
 </div></span>
   
 </li>
@@ -214,6 +210,29 @@
 
   
     <span class="summary_desc"><div class='inline'><p>Sets multiple timed values at once.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#list_control_points-instance_method" title="#list_control_points (instance method)">#<strong>list_control_points</strong>(n_control_points)  &#x21d2; Array&lt;Gst::TimedValue&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns an array of Gst::TimedValue representing the control points that have been set on this control source.</p>
 </div></span>
   
 </li>
@@ -294,30 +313,6 @@
 
 
   
-  
-  
-  
-  
-  
-  
-  
-  
-  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Gst/ControlSource.html" title="Gst::ControlSource (class)">Gst::ControlSource</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="../Gst/ControlSource.html#control_source_get_value-instance_method" title="Gst::ControlSource#control_source_get_value (method)">#control_source_get_value</a></span>, <span class='object_link'><a href="../Gst/ControlSource.html#control_source_get_value_array-instance_method" title="Gst::ControlSource#control_source_get_value_array (method)">#control_source_get_value_array</a></span></p>
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Gst/Object.html" title="Gst::Object (class)">Gst::Object</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="../Gst/Object.html#add_control_binding-instance_method" title="Gst::Object#add_control_binding (method)">#add_control_binding</a></span>, <span class='object_link'><a href="../Gst/Object.html#check_uniqueness-class_method" title="Gst::Object.check_uniqueness (method)">check_uniqueness</a></span>, <span class='object_link'><a href="../Gst/Object.html#control_bindings_disabled=-instance_method" title="Gst::Object#control_bindings_disabled= (method)">#control_bindings_disabled=</a></span>, <span class='object_link'><a href="../Gst/Object.html#control_rate-instance_method" title="Gst::Object#control_rate (method)">#control_rate</a></span>, <span class='object_link'><a href="../Gst/Object.html#control_rate=-instance_method" title="Gst::Object#control_rate= (method)">#control_rate=</a></span>, <span class='object_link'><a href="../Gst/Object.html#default_deep_notify-class_method" title="Gst::Object.default_deep_notify (method)">default_deep_notify</a></span>, <span class='object_link'><a href="../Gst/Object.html#default_error-instance_method" title="Gst::Object#default_error (method)">#default_error</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_control_binding-instance_method" title="Gst::Object#get_control_binding (method)">#get_control_binding</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_g_value_array-instance_method" title="Gst::Object#get_g_value_array (method)">#get_g_value_array</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_value-instance_method" title="Gst::Object#get_value (method)">#get_value</a></span>, <span class='object_link'><a href="../Gst/Object.html#get_value_array-instance_method" title="Gst::Object#get_value_array (method)">#get_value_array</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_active_control_bindings-instance_method" title="Gst::Object#has_active_control_bindings (method)">#has_active_control_bindings</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_ancestor-instance_method" title="Gst::Object#has_ancestor (method)">#has_ancestor</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_as_ancestor-instance_method" title="Gst::Object#has_as_ancestor (method)">#has_as_ancestor</a></span>, <span class='object_link'><a href="../Gst/Object.html#has_as_parent-instance_method" title="Gst::Object#has_as_parent (method)">#has_as_parent</a></span>, <span class='object_link'><a href="../Gst/Object.html#name-instance_method" title="Gst::Object#name (method)">#name</a></span>, <span class='object_link'><a href="../Gst/Object.html#name=-instance_method" title="Gst::Object#name= (method)">#name=</a></span>, <span class='object_link'><a href="../Gst/Object.html#parent-instance_method" title="Gst::Object#parent (method)">#parent</a></span>, <span class='object_link'><a href="../Gst/Object.html#parent=-instance_method" title="Gst::Object#parent= (method)">#parent=</a></span>, <span class='object_link'><a href="../Gst/Object.html#path_string-instance_method" title="Gst::Object#path_string (method)">#path_string</a></span>, <span class='object_link'><a href="../Gst/Object.html#ref-instance_method" title="Gst::Object#ref (method)">#ref</a></span>, <span class='object_link'><a href="../Gst/Object.html#ref_sink-class_method" title="Gst::Object.ref_sink (method)">ref_sink</a></span>, <span class='object_link'><a href="../Gst/Object.html#remove_control_binding-instance_method" title="Gst::Object#remove_control_binding (method)">#remove_control_binding</a></span>, <span class='object_link'><a href="../Gst/Object.html#replace-class_method" title="Gst::Object.replace (method)">replace</a></span>, <span class='object_link'><a href="../Gst/Object.html#set_control_binding_disabled-instance_method" title="Gst::Object#set_control_binding_disabled (method)">#set_control_binding_disabled</a></span>, <span class='object_link'><a href="../Gst/Object.html#suggest_next_sync-instance_method" title="Gst::Object#suggest_next_sync (method)">#suggest_next_sync</a></span>, <span class='object_link'><a href="../Gst/Object.html#sync_values-instance_method" title="Gst::Object#sync_values (method)">#sync_values</a></span>, <span class='object_link'><a href="../Gst/Object.html#unparent-instance_method" title="Gst::Object#unparent (method)">#unparent</a></span>, <span class='object_link'><a href="../Gst/Object.html#unref-instance_method" title="Gst::Object#unref (method)">#unref</a></span></p>
-
-  
 
   <div id="instance_method_details" class="method_details_list">
     <h2>Instance Method Details</h2>
@@ -326,7 +321,7 @@
       <div class="method_details first">
   <h3 class="signature first" id="all-instance_method">
   
-    #<strong>all</strong>  &#x21d2; <tt>GLib::List&lt;Gst::TimedValue&gt;</tt> 
+    #<strong>all</strong>  &#x21d2; <tt>GLib::List&lt;GstController::ControlPoint&gt;</tt> 
   
 
   
@@ -334,7 +329,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a read-only copy of the list of Gst::TimedValue for the given property.<br />
+    <p>Returns a read-only copy of the list of Gst::ControlPoint for the given property.<br />
 Free the list after done with it.<br />
 of the list, or nil if the property isn't handled by the controller</p>
 
@@ -349,7 +344,7 @@ of the list, or nil if the property isn't handled by the controller</p>
     <li>
       
       
-        <span class='type'>(<tt>GLib::List&lt;Gst::TimedValue&gt;</tt>)</span>
+        <span class='type'>(<tt>GLib::List&lt;GstController::ControlPoint&gt;</tt>)</span>
       
       
       
@@ -514,6 +509,67 @@ with Gst::TimedValue items</p>
       
         &mdash;
         <div class='inline'><p>FALSE if the values couldn't be set, TRUE otherwise.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="list_control_points-instance_method">
+  
+    #<strong>list_control_points</strong>(n_control_points)  &#x21d2; <tt>Array&lt;Gst::TimedValue&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns an array of Gst::TimedValue representing the control points<br />
+that have been set on this control source. To modify the value of a<br />
+control point, use #gst_timed_value_control_source_set.<br />
+control points, or nil if no control points are set.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>n_control_points</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>location to store the number of control points</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;Gst::TimedValue&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an array of</p>
 </div>
       
     </li>

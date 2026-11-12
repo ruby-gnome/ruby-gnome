@@ -133,7 +133,7 @@ stdin is redirected to <code>/dev/null</code>.</p>
     <p>If this flag is given, the child<br />
 process will inherit the parent's stdout. Otherwise, the child's<br />
 stdout will not be visible, but it will be captured to allow<br />
-later tests with g_test_trap_assert_stdout().</p>
+later tests with [func<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.test_trap_assert_stdout].</p>
 
 
   </div>
@@ -151,7 +151,7 @@ later tests with g_test_trap_assert_stdout().</p>
     <p>If this flag is given, the child<br />
 process will inherit the parent's stderr. Otherwise, the child's<br />
 stderr will not be visible, but it will be captured to allow<br />
-later tests with g_test_trap_assert_stderr().</p>
+later tests with [func<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.test_trap_assert_stderr].</p>
 
 
   </div>
@@ -162,6 +162,22 @@ later tests with g_test_trap_assert_stderr().</p>
 </div>
         </dt>
         <dd><pre class="code"><span class='int'>4</span> <span class='kw'>or</span> <span class='symbol'>:inherit_stderr</span></pre></dd>
+      
+        <dt id="INHERIT_DESCRIPTORS-constant" class="">INHERIT_DESCRIPTORS =
+          <div class="docstring">
+  <div class="discussion">
+    <p>If this flag is given, the<br />
+child process will inherit the parent’s open file descriptors.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>8</span> <span class='kw'>or</span> <span class='symbol'>:inherit_descriptors</span></pre></dd>
       
     </dl>
   

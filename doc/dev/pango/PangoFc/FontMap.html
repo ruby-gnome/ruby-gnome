@@ -232,7 +232,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Informs font map that the fontconfig configuration (i.e., FcConfig object) used by this font map has changed.</p>
+    <span class="summary_desc"><div class='inline'><p>Informs font map that the fontconfig configuration (i.e., the <code>FcConfig</code> object) used by this font map has changed.</p>
 </div></span>
   
 </li>
@@ -391,7 +391,7 @@
   
   
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="../Pango/FontMap.html" title="Pango::FontMap (class)">Pango::FontMap</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="../Pango/FontMap.html#changed-instance_method" title="Pango::FontMap#changed (method)">#changed</a></span>, <span class='object_link'><a href="../Pango/FontMap.html#get_family-instance_method" title="Pango::FontMap#get_family (method)">#get_family</a></span>, <span class='object_link'><a href="../Pango/FontMap.html#item_type-instance_method" title="Pango::FontMap#item_type (method)">#item_type</a></span>, <span class='object_link'><a href="../Pango/FontMap.html#item_type=-instance_method" title="Pango::FontMap#item_type= (method)">#item_type=</a></span>, <span class='object_link'><a href="../Pango/FontMap.html#list_families-instance_method" title="Pango::FontMap#list_families (method)">#list_families</a></span>, <span class='object_link'><a href="../Pango/FontMap.html#load_font-instance_method" title="Pango::FontMap#load_font (method)">#load_font</a></span>, <span class='object_link'><a href="../Pango/FontMap.html#load_fontset-instance_method" title="Pango::FontMap#load_fontset (method)">#load_fontset</a></span>, <span class='object_link'><a href="../Pango/FontMap.html#n_items-instance_method" title="Pango::FontMap#n_items (method)">#n_items</a></span>, <span class='object_link'><a href="../Pango/FontMap.html#n_items=-instance_method" title="Pango::FontMap#n_items= (method)">#n_items=</a></span>, <span class='object_link'><a href="../Pango/FontMap.html#reload_font-instance_method" title="Pango::FontMap#reload_font (method)">#reload_font</a></span>, <span class='object_link'><a href="../Pango/FontMap.html#serial-instance_method" title="Pango::FontMap#serial (method)">#serial</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="../Pango/FontMap.html#add_font_file-instance_method" title="Pango::FontMap#add_font_file (method)">#add_font_file</a></span>, <span class='object_link'><a href="../Pango/FontMap.html#changed-instance_method" title="Pango::FontMap#changed (method)">#changed</a></span>, <span class='object_link'><a href="../Pango/FontMap.html#get_family-instance_method" title="Pango::FontMap#get_family (method)">#get_family</a></span>, <span class='object_link'><a href="../Pango/FontMap.html#item_type-instance_method" title="Pango::FontMap#item_type (method)">#item_type</a></span>, <span class='object_link'><a href="../Pango/FontMap.html#item_type=-instance_method" title="Pango::FontMap#item_type= (method)">#item_type=</a></span>, <span class='object_link'><a href="../Pango/FontMap.html#list_families-instance_method" title="Pango::FontMap#list_families (method)">#list_families</a></span>, <span class='object_link'><a href="../Pango/FontMap.html#load_font-instance_method" title="Pango::FontMap#load_font (method)">#load_font</a></span>, <span class='object_link'><a href="../Pango/FontMap.html#load_fontset-instance_method" title="Pango::FontMap#load_fontset (method)">#load_fontset</a></span>, <span class='object_link'><a href="../Pango/FontMap.html#n_items-instance_method" title="Pango::FontMap#n_items (method)">#n_items</a></span>, <span class='object_link'><a href="../Pango/FontMap.html#n_items=-instance_method" title="Pango::FontMap#n_items= (method)">#n_items=</a></span>, <span class='object_link'><a href="../Pango/FontMap.html#reload_font-instance_method" title="Pango::FontMap#reload_font (method)">#reload_font</a></span>, <span class='object_link'><a href="../Pango/FontMap.html#serial-instance_method" title="Pango::FontMap#serial (method)">#serial</a></span></p>
 
 
   <div id="instance_method_details" class="method_details_list">
@@ -581,10 +581,9 @@ owned by Pango and should not be freed.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Set the <code>FcConfig</code> for this font map to use.</p>
-<p>The default value<br />
-is nil, which causes Fontconfig to use its global &quot;current config&quot;.<br />
-You can create a new <code>FcConfig</code> object and use this API to attach it<br />
-to a font map.</p>
+<p>The default value is <code>NULL</code>, which causes Fontconfig to use its global<br />
+&quot;current config&quot;. You can create a new <code>FcConfig</code> object and use this<br />
+API to attach it to a font map.</p>
 <p>This is particularly useful for example, if you want to use application<br />
 fonts with Pango. For that, you would create a fresh <code>FcConfig</code>, add your<br />
 app fonts to it, and attach it to a new Pango font map.</p>
@@ -592,6 +591,8 @@ app fonts to it, and attach it to a new Pango font map.</p>
 [method<!-- raw HTML omitted -->PangoFc<!-- raw HTML omitted -->.FontMap.config_changed] is called.</p>
 <p>This function acquires a reference to the <code>FcConfig</code> object; the caller<br />
 does <strong>not</strong> need to retain a reference.</p>
+<p>See [method<!-- raw HTML omitted -->Pango<!-- raw HTML omitted -->.FontMap.add_font_file] for a backend-independent way<br />
+of using application fonts with Pango.</p>
 
 
   </div>
@@ -645,8 +646,8 @@ does <strong>not</strong> need to retain a reference.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Informs font map that the fontconfig configuration (i.e., FcConfig<br />
-object) used by this font map has changed.</p>
+    <p>Informs font map that the fontconfig configuration (i.e.,<br />
+the <code>FcConfig</code> object) used by this font map has changed.</p>
 <p>This currently calls [method<!-- raw HTML omitted -->PangoFc<!-- raw HTML omitted -->.FontMap.cache_clear] which<br />
 ensures that list of fonts, etc will be regenerated using the<br />
 updated configuration.</p>

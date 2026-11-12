@@ -88,15 +88,14 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The <code>GtkShortcutManager</code> interface is used to implement<br />
-shortcut scopes.</p>
+    <p>An interface that is used to implement shortcut scopes.</p>
 <p>This is important for [iface<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Native] widgets that have their<br />
 own surface, since the event controllers that are used to implement<br />
 managed and global scopes are limited to the same native.</p>
 <p>Examples for widgets implementing <code>GtkShortcutManager</code> are<br />
 [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Window] and [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Popover].</p>
 <p>Every widget that implements <code>GtkShortcutManager</code> will be used as a<br />
-%GTK_SHORTCUT_SCOPE_MANAGED.</p>
+<code>GTK_SHORTCUT_SCOPE_MANAGED</code>.</p>
 
 
   </div>

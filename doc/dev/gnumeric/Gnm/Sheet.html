@@ -5083,7 +5083,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>responsible for freeing.</p>
+    <span class="summary_desc"><div class='inline'><p>Note that when a range is given, the resulting ranges are relative to the input range.</p>
 </div></span>
   
 </li>
@@ -5106,7 +5106,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>responsible for freeing.</p>
+    <span class="summary_desc"><div class='inline'><p>Note that when a range is given, the resulting ranges are relative to the input range.</p>
 </div></span>
   
 </li>
@@ -5290,7 +5290,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>A simple implementation that finds the smallest range containing all visible styles and containing <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
+    <span class="summary_desc"><div class='inline'><p>A simple implementation that finds the smallest range containing all visible styles and containing <!-- raw HTML omitted -->r<!-- raw HTML omitted -->.</p>
 </div></span>
   
 </li>
@@ -5313,7 +5313,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><p>Extends <!-- raw HTML omitted -->extent<!-- raw HTML omitted --> so that it covers any non-default style used.</p>
+</div></span>
   
 </li>
 
@@ -5321,7 +5322,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#style_get_nondefault_rows-instance_method" title="#style_get_nondefault_rows (instance method)">#<strong>style_get_nondefault_rows</strong>(col_defaults)  &#x21d2; Integer </a>
+      <a href="#style_get_nondefault_rows-instance_method" title="#style_get_nondefault_rows (instance method)">#<strong>style_get_nondefault_rows</strong>(col_defaults)  &#x21d2; Array&lt;Integer&gt; </a>
     
 
     
@@ -5335,7 +5336,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><p>element is true if the row uses a non-default style.</p>
+</div></span>
   
 </li>
 
@@ -5447,7 +5449,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><p>True if all styles in the given range are default column styles.</p>
+</div></span>
   
 </li>
 
@@ -5455,7 +5458,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#style_most_common-instance_method" title="#style_most_common (instance method)">#<strong>style_most_common</strong>(is_col)  &#x21d2; Gnm::Style </a>
+      <a href="#style_most_common-instance_method" title="#style_most_common (instance method)">#<strong>style_most_common</strong>(is_col)  &#x21d2; Array&lt;Gnm::Style&gt; </a>
     
 
     
@@ -5469,7 +5472,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>or row.</p>
+    <span class="summary_desc"><div class='inline'><p>rows.</p>
 </div></span>
   
 </li>
@@ -5536,7 +5539,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Utility routine that checks to see if a region contains at least 1 hyper link and returns the 1st one it finds.</p>
+    <span class="summary_desc"><div class='inline'><p>Utility routine that checks to see if a region contains at least ones hyperlink and returns the first one it finds.</p>
 </div></span>
   
 </li>
@@ -19293,7 +19296,7 @@ will make life easier.</p>
       
       
         &mdash;
-        <div class='inline'><p>Column</p>
+        <div class='inline'><p>Column number</p>
 </div>
       
     </li>
@@ -19361,6 +19364,10 @@ will make life easier.</p>
       
       
       
+        &mdash;
+        <div class='inline'><p>Column number</p>
+</div>
+      
     </li>
   
     <li>
@@ -19371,6 +19378,10 @@ will make life easier.</p>
         <span class='type'>(<tt>Integer</tt>)</span>
       
       
+      
+        &mdash;
+        <div class='inline'><p>Row number</p>
+</div>
       
     </li>
   
@@ -19577,6 +19588,10 @@ will make life easier.</p>
       
       
       
+        &mdash;
+        <div class='inline'><p>Row number</p>
+</div>
+      
     </li>
   
     <li>
@@ -19624,7 +19639,8 @@ will make life easier.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>responsible for freeing.</p>
+    <p>Note that when a range is given, the resulting ranges are relative<br />
+to the input range.</p>
 
 
   </div>
@@ -19642,6 +19658,10 @@ will make life easier.</p>
       
       
       
+        &mdash;
+        <div class='inline'><p>Range to scan</p>
+</div>
+      
     </li>
   
 </ul>
@@ -19657,7 +19677,7 @@ will make life easier.</p>
       
       
         &mdash;
-        <div class='inline'><p>a list of areas with conditionals, Caller is</p>
+        <div class='inline'><p>a list of areas with conditionals.</p>
 </div>
       
     </li>
@@ -19678,7 +19698,8 @@ will make life easier.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>responsible for freeing.</p>
+    <p>Note that when a range is given, the resulting ranges are relative<br />
+to the input range.</p>
 
 
   </div>
@@ -19696,6 +19717,10 @@ will make life easier.</p>
       
       
       
+        &mdash;
+        <div class='inline'><p>Range to scan</p>
+</div>
+      
     </li>
   
 </ul>
@@ -19711,7 +19736,7 @@ will make life easier.</p>
       
       
         &mdash;
-        <div class='inline'><p>a list of areas with hyperlinks, Caller is</p>
+        <div class='inline'><p>a list of areas with hyperlinks.</p>
 </div>
       
     </li>
@@ -19732,7 +19757,9 @@ will make life easier.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>message.</p>
+    <p>message.<br />
+Note that when a range is given, the resulting ranges are relative<br />
+to the input range.</p>
 
 
   </div>
@@ -19751,7 +19778,7 @@ will make life easier.</p>
       
       
         &mdash;
-        <div class='inline'><p>range to restrict to</p>
+        <div class='inline'><p>Range to scan</p>
 </div>
       
     </li>
@@ -20055,7 +20082,7 @@ will make life easier.</p>
       
       
         &mdash;
-        <div class='inline'><p>column number</p>
+        <div class='inline'><p>Column number</p>
 </div>
       
     </li>
@@ -20148,8 +20175,8 @@ will make life easier.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A simple implementation that finds the smallest range containing all visible styles<br />
-and containing <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
+    <p>A simple implementation that finds the smallest range containing<br />
+all visible styles and containing <!-- raw HTML omitted -->r<!-- raw HTML omitted -->.</p>
 
 
   </div>
@@ -20203,7 +20230,8 @@ and containing <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    
+    <p>Extends <!-- raw HTML omitted -->extent<!-- raw HTML omitted --> so that it covers any non-default style used.</p>
+
 
   </div>
 </div>
@@ -20220,6 +20248,10 @@ and containing <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
       
       
       
+        &mdash;
+        <div class='inline'><p>extent</p>
+</div>
+      
     </li>
   
     <li>
@@ -20231,6 +20263,10 @@ and containing <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
       
       
       
+        &mdash;
+        <div class='inline'><p>range to inspect</p>
+</div>
+      
     </li>
   
     <li>
@@ -20238,9 +20274,13 @@ and containing <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
         <span class='name'>col_defaults</span>
       
       
-        <span class='type'>(<tt>Gnm::Style</tt>)</span>
+        <span class='type'>(<tt>Array&lt;Gnm::Style&gt;</tt>)</span>
       
       
+      
+        &mdash;
+        <div class='inline'><p>defaults styles</p>
+</div>
       
     </li>
   
@@ -20266,7 +20306,7 @@ and containing <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
       <div class="method_details ">
   <h3 class="signature " id="style_get_nondefault_rows-instance_method">
   
-    #<strong>style_get_nondefault_rows</strong>(col_defaults)  &#x21d2; <tt>Integer</tt> 
+    #<strong>style_get_nondefault_rows</strong>(col_defaults)  &#x21d2; <tt>Array&lt;Integer&gt;</tt> 
   
 
   
@@ -20274,7 +20314,8 @@ and containing <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    
+    <p>element is true if the row uses a non-default style.</p>
+
 
   </div>
 </div>
@@ -20287,9 +20328,13 @@ and containing <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
         <span class='name'>col_defaults</span>
       
       
-        <span class='type'>(<tt>Gnm::Style</tt>)</span>
+        <span class='type'>(<tt>Array&lt;Gnm::Style&gt;</tt>)</span>
       
       
+      
+        &mdash;
+        <div class='inline'><p>defaults styles</p>
+</div>
       
     </li>
   
@@ -20301,9 +20346,13 @@ and containing <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
     <li>
       
       
-        <span class='type'>(<tt>Integer</tt>)</span>
+        <span class='type'>(<tt>Array&lt;Integer&gt;</tt>)</span>
       
       
+      
+        &mdash;
+        <div class='inline'><p>GByteArray with one element per row.  An</p>
+</div>
       
     </li>
   
@@ -20324,8 +20373,8 @@ and containing <!-- raw HTML omitted -->res<!-- raw HTML omitted -->.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Get a list of rectangles and their associated styles.<br />
-Caller is responsible for freeing.  Note that when a range is given,<br />
-the resulting ranges are relative to the input range.</p>
+Note that when a range is given, the resulting ranges are relative<br />
+to the input range.</p>
 
 
   </div>
@@ -20344,7 +20393,7 @@ the resulting ranges are relative to the input range.</p>
       
       
         &mdash;
-        <div class='inline'><p>optional range to scan</p>
+        <div class='inline'><p>Range to scan</p>
 </div>
       
     </li>
@@ -20517,7 +20566,8 @@ It also merges adjacent borders as necessary.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    
+    <p>Returns true if all styles in the given range are default column styles.</p>
+
 
   </div>
 </div>
@@ -20534,6 +20584,10 @@ It also merges adjacent borders as necessary.</p>
       
       
       
+        &mdash;
+        <div class='inline'><p>range to inspect</p>
+</div>
+      
     </li>
   
     <li>
@@ -20541,9 +20595,13 @@ It also merges adjacent borders as necessary.</p>
         <span class='name'>col_defaults</span>
       
       
-        <span class='type'>(<tt>Gnm::Style</tt>)</span>
+        <span class='type'>(<tt>Array&lt;Gnm::Style&gt;</tt>)</span>
       
       
+      
+        &mdash;
+        <div class='inline'><p>defaults styles</p>
+</div>
       
     </li>
   
@@ -20559,6 +20617,10 @@ It also merges adjacent borders as necessary.</p>
       
       
       
+        &mdash;
+        <div class='inline'><p>true if all styles in the given range are default column styles.</p>
+</div>
+      
     </li>
   
 </ul>
@@ -20569,7 +20631,7 @@ It also merges adjacent borders as necessary.</p>
       <div class="method_details ">
   <h3 class="signature " id="style_most_common-instance_method">
   
-    #<strong>style_most_common</strong>(is_col)  &#x21d2; <tt>Gnm::Style</tt> 
+    #<strong>style_most_common</strong>(is_col)  &#x21d2; <tt>Array&lt;Gnm::Style&gt;</tt> 
   
 
   
@@ -20577,7 +20639,8 @@ It also merges adjacent borders as necessary.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>or row.</p>
+    <p>rows.<br />
+styles describing the most common styles, one per column or row.</p>
 
 
   </div>
@@ -20596,7 +20659,7 @@ It also merges adjacent borders as necessary.</p>
       
       
         &mdash;
-        <div class='inline'><p>if true, look for common styles in columns; if FALSE, look in rows.</p>
+        <div class='inline'><p>if true, look for common styles in columns; if false, look in</p>
 </div>
       
     </li>
@@ -20609,12 +20672,12 @@ It also merges adjacent borders as necessary.</p>
     <li>
       
       
-        <span class='type'>(<tt>Gnm::Style</tt>)</span>
+        <span class='type'>(<tt>Array&lt;Gnm::Style&gt;</tt>)</span>
       
       
       
         &mdash;
-        <div class='inline'><p>an array of styles describing the most common styles, one per column</p>
+        <div class='inline'><p>an array of</p>
 </div>
       
     </li>
@@ -20687,7 +20750,7 @@ It also merges adjacent borders as necessary.</p>
       
       
         &mdash;
-        <div class='inline'><p>optional range</p>
+        <div class='inline'><p>range</p>
 </div>
       
     </li>
@@ -20752,8 +20815,8 @@ It also merges adjacent borders as necessary.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Utility routine that checks to see if a region contains at least 1 hyper link<br />
-and returns the 1st one it finds.</p>
+    <p>Utility routine that checks to see if a region contains at least ones<br />
+hyperlink and returns the first one it finds.</p>
 
 
   </div>
@@ -20770,6 +20833,10 @@ and returns the 1st one it finds.</p>
         <span class='type'>(<tt>Gnm::Range</tt>)</span>
       
       
+      
+        &mdash;
+        <div class='inline'><p>Gnm::Range to search for links</p>
+</div>
       
     </li>
   
@@ -21035,6 +21102,10 @@ and returns the 1st one it finds.</p>
       
       
       
+        &mdash;
+        <div class='inline'><p>Column number</p>
+</div>
+      
     </li>
   
     <li>
@@ -21045,6 +21116,10 @@ and returns the 1st one it finds.</p>
         <span class='type'>(<tt>Integer</tt>)</span>
       
       
+      
+        &mdash;
+        <div class='inline'><p>Row number</p>
+</div>
       
     </li>
   

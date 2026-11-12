@@ -134,7 +134,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Returns whether to ask the user to choose an app for opening the file.</p>
+    <span class="summary_desc"><div class='inline'><p>Returns whether to ask the user which app to use.</p>
 </div></span>
   
 </li>
@@ -274,7 +274,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Launch an application to open the file.</p>
+    <span class="summary_desc"><div class='inline'><p>Launches an application to open the file.</p>
 </div></span>
   
 </li>
@@ -320,7 +320,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Launch a file manager to show the file in its parent directory.</p>
+    <span class="summary_desc"><div class='inline'><p>Launches a file manager to show the file in its parent directory.</p>
 </div></span>
   
 </li>
@@ -484,7 +484,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether to ask the user to choose an app for opening the file.</p>
+    <p>Returns whether to ask the user which app to use.</p>
 
 
   </div>
@@ -502,7 +502,7 @@
       
       
         &mdash;
-        <div class='inline'><p><code>TRUE</code> if always asking for app</p>
+        <div class='inline'><p>true if always asking the user</p>
 </div>
       
     </li>
@@ -737,11 +737,8 @@ the file might be opened with a default app or the previous choice.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Launch an application to open the file.</p>
+    <p>Launches an application to open the file.</p>
 <p>This may present an app chooser dialog to the user.</p>
-<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the operation is completed.<br />
-It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileLauncher.launch_finish] to obtain<br />
-the result.</p>
 
 
   </div>
@@ -760,7 +757,7 @@ the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>the parent <code>GtkWindow</code></p>
+        <div class='inline'><p>the parent window</p>
 </div>
       
     </li>
@@ -775,7 +772,7 @@ the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GCancellable</code> to cancel the operation</p>
+        <div class='inline'><p>a cancellable to cancel the operation</p>
 </div>
       
     </li>
@@ -790,7 +787,8 @@ the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>a callback to call when the operation is complete</p>
+        <div class='inline'><p>a callback to call when the<br />
+operation is complete</p>
 </div>
       
     </li>
@@ -860,7 +858,7 @@ returns the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GAsyncResult</code></p>
+        <div class='inline'><p>the result</p>
 </div>
       
     </li>
@@ -878,8 +876,7 @@ returns the result.</p>
       
       
         &mdash;
-        <div class='inline'><p><code>TRUE</code> if an application was launched,<br />
-or <code>FALSE</code> and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set</p>
+        <div class='inline'><p>true if an application was launched</p>
 </div>
       
     </li>
@@ -900,12 +897,9 @@ or <code>FALSE</code> and <!-- raw HTML omitted -->error<!-- raw HTML omitted --
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Launch a file manager to show the file in its parent directory.</p>
-<p>This is only supported native files. It will fail if <!-- raw HTML omitted -->file<!-- raw HTML omitted --><br />
+    <p>Launches a file manager to show the file in its parent directory.</p>
+<p>This is only supported for native files. It will fail if <!-- raw HTML omitted -->file<!-- raw HTML omitted --><br />
 is e.g. a http:// uri.</p>
-<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the operation is completed.<br />
-It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileLauncher.open_containing_folder_finish]<br />
-to obtain the result.</p>
 
 
   </div>
@@ -924,7 +918,7 @@ to obtain the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>the parent <code>GtkWindow</code></p>
+        <div class='inline'><p>the parent window</p>
 </div>
       
     </li>
@@ -939,7 +933,7 @@ to obtain the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GCancellable</code> to cancel the operation</p>
+        <div class='inline'><p>a cancellable to cancel the operation</p>
 </div>
       
     </li>
@@ -954,7 +948,8 @@ to obtain the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>a callback to call when the operation is complete</p>
+        <div class='inline'><p>a callback to call when the<br />
+operation is complete</p>
 </div>
       
     </li>
@@ -1024,7 +1019,7 @@ call and returns the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GAsyncResult</code></p>
+        <div class='inline'><p>the result</p>
 </div>
       
     </li>
@@ -1042,8 +1037,7 @@ call and returns the result.</p>
       
       
         &mdash;
-        <div class='inline'><p><code>TRUE</code> if an application was launched,<br />
-or <code>FALSE</code> and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set</p>
+        <div class='inline'><p>true if an application was launched</p>
 </div>
       
     </li>
@@ -1082,7 +1076,7 @@ or <code>FALSE</code> and <!-- raw HTML omitted -->error<!-- raw HTML omitted --
       
       
         &mdash;
-        <div class='inline'><p><code>TRUE</code> if the file will be made writable</p>
+        <div class='inline'><p>true if the file will be made writable</p>
 </div>
       
     </li>

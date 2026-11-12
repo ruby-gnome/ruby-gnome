@@ -104,7 +104,7 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GtkExpression</code> provides a way to describe references to values.</p>
+    <p>Provides a way to describe references to values.</p>
 <p>An important aspect of expressions is that the value can be obtained<br />
 from a source that is several steps away. For example, an expression<br />
 may describe ‘the value of property A of <code>object1</code>, which is itself the<br />
@@ -180,8 +180,9 @@ a <code>GtkExpression</code> object is needed like in a <code>&lt;property&gt;</
 property, or in a <code>&lt;binding name=&quot;property&quot;&gt;</code> tag to bind a property to an expression.</p>
 <p>To create a property expression, use the <code>&lt;lookup&gt;</code> element. It can have a <code>type</code><br />
 attribute to specify the object type, and a <code>name</code> attribute to specify the property<br />
-to look up. The content of <code>&lt;lookup&gt;</code> can either be an element specifying the expression<br />
-to use the object, or a string that specifies the name of the object to use.</p>
+to look up. The content of <code>&lt;lookup&gt;</code> can either be a string that specifies the name<br />
+of the object to use, an element specifying an expression to provide an object, or<br />
+empty to use the <code>this</code> object.</p>
 <p>Example:</p>
 <pre class="code xml"><code class="xml">  &lt;lookup name=&#39;search&#39;&gt;string_filter&lt;/lookup&gt;
 </code></pre>
@@ -190,10 +191,24 @@ itself be an expression, this means that <code>&lt;lookup&gt;</code> tags can al
 This is a common idiom when dealing with <code>GtkListItem</code>s. See<br />
 [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.BuilderListItemFactory] for an example of this technique.</p>
 <p>To create a constant expression, use the <code>&lt;constant&gt;</code> element. If the type attribute<br />
-is specified, the element content is interpreted as a value of that type. Otherwise,<br />
+is specified, the element content is interpreted as a value of that type, and the<br />
+initial attribute can be specified to get the initial value for that type. Otherwise,<br />
 it is assumed to be an object. For instance:</p>
 <pre class="code xml"><code class="xml">  &lt;constant&gt;string_filter&lt;/constant&gt;
   &lt;constant type=&#39;gchararray&#39;&gt;Hello, world&lt;/constant&gt;
+  &lt;constant type=&#39;gchararray&#39; initial=&#39;true&#39; /&gt; &lt;!-- NULL --&gt;
+</code></pre>
+<p>String (<code>type='gchararray'</code>) constants can be marked for translation with the<br />
+<code>translatable=</code> attribute, and will then be looked up in the<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Builder:translation-domain] when the expression is constructed.</p>
+<pre class="code xml"><code class="xml">  &lt;constant type=&#39;gchararray&#39; translatable=&#39;yes&#39;&gt;I&#39;m translatable!&lt;/constant&gt;
+</code></pre>
+<p>As with other translatable strings in [type<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Builder], constants can<br />
+also have a context and/or translation comment:</p>
+<pre class="code xml"><code class="xml">  &lt;constant type=&#39;gchararray&#39;
+            translatable=&#39;yes&#39;
+            context=&#39;example&#39;
+            comments=&#39;A sample string&#39;&gt;I&#39;m translatable!&lt;/constant&gt;
 </code></pre>
 <p>To create a closure expression, use the <code>&lt;closure&gt;</code> element. The <code>function</code><br />
 attribute specifies what function to use for the closure, and the <code>type</code><br />
@@ -203,6 +218,16 @@ expressions for the parameters. For instance:</p>
     &lt;constant type=&#39;gchararray&#39;&gt;File size:&lt;/constant&gt;
     &lt;lookup type=&#39;GFile&#39; name=&#39;size&#39;&gt;myfile&lt;/lookup&gt;
   &lt;/closure&gt;
+</code></pre>
+<p>If an expression can fail, a <code>&lt;try&gt;</code> element can be used to provide fallbacks.<br />
+The expressions are tried from top to bottom until one of them succeeds.<br />
+If none of the expressions succeed, the expression fails as normal:</p>
+<pre class="code xml"><code class="xml">  &lt;try&gt;
+    &lt;lookup type=&#39;GtkWindow&#39; name=&#39;title&#39;&gt;
+      &lt;lookup type=&#39;GtkLabel&#39; name=&#39;root&#39;&gt;&lt;/lookup&gt;
+    &lt;/lookup&gt;
+    &lt;constant type=&#39;gchararray&#39;&gt;Hello World&lt;/constant&gt;
+  &lt;/try&gt;
 </code></pre>
 <p>To create a property binding, use the <code>&lt;binding&gt;</code> element in place of where a<br />
 <code>&lt;property&gt;</code> tag would ordinarily be used. The <code>name</code> and <code>object</code> attributes are<br />
@@ -226,7 +251,7 @@ object:</p>
 
 </div><div id="subclasses">
   <h2>Direct Known Subclasses</h2>
-  <p class="children"><span class='object_link'><a href="CClosureExpression.html" title="Gtk::CClosureExpression (class)">CClosureExpression</a></span>, <span class='object_link'><a href="ClosureExpression.html" title="Gtk::ClosureExpression (class)">ClosureExpression</a></span>, <span class='object_link'><a href="ConstantExpression.html" title="Gtk::ConstantExpression (class)">ConstantExpression</a></span>, <span class='object_link'><a href="ObjectExpression.html" title="Gtk::ObjectExpression (class)">ObjectExpression</a></span>, <span class='object_link'><a href="PropertyExpression.html" title="Gtk::PropertyExpression (class)">PropertyExpression</a></span></p>
+  <p class="children"><span class='object_link'><a href="CClosureExpression.html" title="Gtk::CClosureExpression (class)">CClosureExpression</a></span>, <span class='object_link'><a href="ClosureExpression.html" title="Gtk::ClosureExpression (class)">ClosureExpression</a></span>, <span class='object_link'><a href="ConstantExpression.html" title="Gtk::ConstantExpression (class)">ConstantExpression</a></span>, <span class='object_link'><a href="ObjectExpression.html" title="Gtk::ObjectExpression (class)">ObjectExpression</a></span>, <span class='object_link'><a href="PropertyExpression.html" title="Gtk::PropertyExpression (class)">PropertyExpression</a></span>, <span class='object_link'><a href="TryExpression.html" title="Gtk::TryExpression (class)">TryExpression</a></span></p>
 </div>
 
 
@@ -430,8 +455,7 @@ object:</p>
 <code>target</code>. This is repeated whenever <code>self</code> changes to ensure that<br />
 the object's property stays synchronized with <code>self</code>.</p>
 <p>If <code>self</code>'s evaluation fails, <code>target</code>'s <code>property</code> is not updated.<br />
-You can ensure that this doesn't happen by using a fallback<br />
-expression.</p>
+Use a [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TryExpression] to provide a fallback for this case.</p>
 <p>Note that this function takes ownership of <code>self</code>. If you want<br />
 to keep it around, you should [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Expression.ref] it beforehand.</p>
 

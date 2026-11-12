@@ -790,7 +790,7 @@ free it with [method<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Ob
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Asynchronously flushes <!-- raw HTML omitted -->connection<!-- raw HTML omitted -->, that is, writes all queued outgoing message to the transport and then flushes the transport (using g_output_stream_flush_async()).</p>
+    <span class="summary_desc"><div class='inline'><p>Asynchronously flushes <!-- raw HTML omitted -->connection<!-- raw HTML omitted -->, that is, writes all queued outgoing messages to the transport and then flushes the transport (using g_output_stream_flush_async()).</p>
 </div></span>
   
 </li>
@@ -1023,6 +1023,29 @@ free it with [method<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Ob
 
   
     <span class="summary_desc"><div class='inline'><p>Version of g_dbus_connection_register_object() using closures instead of a GDBus::InterfaceVTable for easier binding in other languages.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#register_object_with_closures2-instance_method" title="#register_object_with_closures2 (instance method)">#<strong>register_object_with_closures2</strong>(object_path, interface_info, method_call_closure, get_property_closure, set_property_closure)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Version of [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusConnection.register_object] using closures instead of a [type<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusInterfaceVTable] for easier binding in other languages.</p>
 </div></span>
   
 </li>
@@ -1298,7 +1321,7 @@ free it with [method<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Ob
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Reverses the effect of a previous call to g_dbus_connection_export_action_group().</p>
+    <span class="summary_desc"><div class='inline'><p>Reverses the effect of a previous call to [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusConnection.export_action_group].</p>
 </div></span>
   
 </li>
@@ -2118,8 +2141,8 @@ convenient 'inline' use of g_variant_new(), e.g.:</p>
                          NULL);
 </code></pre>
 <p>This is an asynchronous method. When the operation is finished,<br />
-<!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked in the<br />
-[thread-default main context][g-main-context-push-thread-default]<br />
+<!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked in the thread-default main context<br />
+(see [method<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.MainContext.push_thread_default])<br />
 of the thread you are calling this method from. You can then call<br />
 g_dbus_connection_call_finish() to get the result of the operation.<br />
 See g_dbus_connection_call_sync() for the synchronous version of this<br />
@@ -3258,12 +3281,12 @@ be lost. Use g_dbus_connection_flush() if you need such guarantees.</p>
 <p>If <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> is already closed, this method fails with<br />
 %G_IO_ERROR_CLOSED.</p>
 <p>When <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> has been closed, the GDBus::Connection::closed<br />
-signal is emitted in the<br />
-[thread-default main context][g-main-context-push-thread-default]<br />
+signal is emitted in the thread-default main context<br />
+(see [method<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.MainContext.push_thread_default])<br />
 of the thread that <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> was constructed in.</p>
 <p>This is an asynchronous method. When the operation is finished,<br />
-<!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked in the<br />
-[thread-default main context][g-main-context-push-thread-default]<br />
+<!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked in the thread-default main context<br />
+(see [method<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.MainContext.push_thread_default])<br />
 of the thread you are calling this method from. You can<br />
 then call g_dbus_connection_close_finish() to get the result of the<br />
 operation. See g_dbus_connection_close_sync() for the synchronous<br />
@@ -3865,7 +3888,7 @@ subject to change in the future.</p>
 If this constraint is violated, the export will fail and 0 will be<br />
 returned (with <!-- raw HTML omitted -->error<!-- raw HTML omitted --> set accordingly).</p>
 <p>You can unexport the action group using<br />
-g_dbus_connection_unexport_action_group() with the return value of<br />
+[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusConnection.unexport_action_group] with the return value of<br />
 this function.</p>
 <p>The thread default main context is taken at the time of this call.<br />
 All incoming action activations and state change requests are<br />
@@ -3908,7 +3931,7 @@ context.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAction::Group</p>
+        <div class='inline'><p>an action group</p>
 </div>
       
     </li>
@@ -4138,14 +4161,14 @@ this function.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Asynchronously flushes <!-- raw HTML omitted -->connection<!-- raw HTML omitted -->, that is, writes all queued<br />
-outgoing message to the transport and then flushes the transport<br />
+outgoing messages to the transport and then flushes the transport<br />
 (using g_output_stream_flush_async()). This is useful in programs<br />
-that wants to emit a D-Bus signal and then exit immediately. Without<br />
-flushing the connection, there is no guaranteed that the message has<br />
+that want to emit a D-Bus signal and then exit immediately. Without<br />
+flushing the connection, there is no guarantee that the message has<br />
 been sent to the networking buffers in the OS kernel.</p>
 <p>This is an asynchronous method. When the operation is finished,<br />
-<!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked in the<br />
-[thread-default main context][g-main-context-push-thread-default]<br />
+<!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked in the thread-default main context<br />
+(see [method<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.MainContext.push_thread_default])<br />
 of the thread you are calling this method from. You can<br />
 then call g_dbus_connection_flush_finish() to get the result of the<br />
 operation. See g_dbus_connection_flush_sync() for the synchronous<br />
@@ -4627,8 +4650,8 @@ available. Do not free this object, it is owned by <!-- raw HTML omitted -->conn
     <p>Registers callbacks for exported objects at <!-- raw HTML omitted -->object_path<!-- raw HTML omitted --> with the<br />
 D-Bus interface that is described in <!-- raw HTML omitted -->interface_info<!-- raw HTML omitted -->.</p>
 <p>Calls to functions in <!-- raw HTML omitted -->vtable<!-- raw HTML omitted --> (and <!-- raw HTML omitted -->user_data_free_func<!-- raw HTML omitted -->) will happen<br />
-in the<br />
-[thread-default main context][g-main-context-push-thread-default]<br />
+in the thread-default main context<br />
+(see [method<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.MainContext.push_thread_default])<br />
 of the thread you are calling this method from.</p>
 <p>Note that all #GVariant values passed to functions in <!-- raw HTML omitted -->vtable<!-- raw HTML omitted --> will match<br />
 the signature given in <!-- raw HTML omitted -->interface_info<!-- raw HTML omitted --> - if a remote caller passes<br />
@@ -4653,7 +4676,8 @@ yourself, e.g. to handle getting and setting of properties asynchronously.</p>
 incremented by 1 (unless allocated statically, e.g. if the<br />
 reference count is -1, see g_dbus_interface_info_ref()) for as long<br />
 as the object is exported. Also note that <!-- raw HTML omitted -->vtable<!-- raw HTML omitted --> will be copied.</p>
-<p>See this [server][gdbus-server] for an example of how to use this method.</p>
+<p>See this [server][class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusConnection#an-example-d-bus-server]<br />
+for an example of how to use this method.</p>
 
 
   </div>
@@ -4773,7 +4797,11 @@ that can be used with g_dbus_connection_unregister_object()</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Version of g_dbus_connection_register_object() using closures instead of a<br />
-GDBus::InterfaceVTable for easier binding in other languages.<br />
+GDBus::InterfaceVTable for easier binding in other languages.</p>
+<p>Note that the reference counting semantics of the function wrapped by<br />
+<!-- raw HTML omitted -->method_call_closure<!-- raw HTML omitted --> are the same as those of<br />
+[callback<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusInterfaceMethodCallFunc]: ownership of a reference to the<br />
+[class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusMethodInvocation] is transferred to the function.<br />
 that can be used with g_dbus_connection_unregister_object() .</p>
 
 
@@ -4882,6 +4910,135 @@ that can be used with g_dbus_connection_unregister_object() .</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="register_object_with_closures2-instance_method">
+  
+    #<strong>register_object_with_closures2</strong>(object_path, interface_info, method_call_closure, get_property_closure, set_property_closure)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Version of [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusConnection.register_object] using closures instead<br />
+of a [type<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusInterfaceVTable] for easier binding in other languages.</p>
+<p>In contrast to [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusConnection.register_object] and<br />
+[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusConnection.register_object_with_closures], the reference<br />
+counting semantics of the function wrapped by <!-- raw HTML omitted -->method_call_closure<!-- raw HTML omitted --> are <em>not</em><br />
+the same as those of [callback<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusInterfaceMethodCallFunc]. Ownership of<br />
+a reference to the [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusMethodInvocation] is <em>not</em> transferred to<br />
+the function. Bindings must ensure that they add a reference to the<br />
+[class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusMethodInvocation] before calling any<br />
+<code>g_dbus_method_invocation_return_*()</code> methods on it. This should be automatic<br />
+as a result of the introspection annotations on those methods.<br />
+that can be used with [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusConnection.unregister_object].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>object_path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The object path to register at.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>interface_info</span>
+      
+      
+        <span class='type'>(<tt>Gio::DBusInterfaceInfo</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Introspection data for the interface.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>method_call_closure</span>
+      
+      
+        <span class='type'>(<tt>GObject::Closure</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[type<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Closure] for handling incoming method calls.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>get_property_closure</span>
+      
+      
+        <span class='type'>(<tt>GObject::Closure</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[type<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Closure] for getting a property.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>set_property_closure</span>
+      
+      
+        <span class='type'>(<tt>GObject::Closure</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>[type<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Closure] for setting a property.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p><code>0</code> if <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set, otherwise a registration ID (never <code>0</code>)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="register_subtree-instance_method">
   
     #<strong>register_subtree</strong>(object_path, vtable, flags, user_data, user_data_free_func)  &#x21d2; <tt>Integer</tt> 
@@ -4904,8 +5061,8 @@ requested method. If so, the <!-- raw HTML omitted -->dispatch<!-- raw HTML omit
 where to dispatch the call. The collected GDBus::InterfaceVTable and<br />
 #gpointer will be used to call into the interface vtable for processing<br />
 the request.</p>
-<p>All calls into user-provided code will be invoked in the<br />
-[thread-default main context][g-main-context-push-thread-default]<br />
+<p>All calls into user-provided code will be invoked in the thread-default<br />
+main context (see [method<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.MainContext.push_thread_default])<br />
 of the thread you are calling this method from.</p>
 <p>If an existing subtree is already registered at <!-- raw HTML omitted -->object_path<!-- raw HTML omitted --> or<br />
 then <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set to %G_IO_ERROR_EXISTS.</p>
@@ -4917,8 +5074,8 @@ handler is to consider it a fallback handler for object paths not<br />
 registered via g_dbus_connection_register_object() or other bindings.</p>
 <p>Note that <!-- raw HTML omitted -->vtable<!-- raw HTML omitted --> will be copied so you cannot change it after<br />
 registration.</p>
-<p>See this [server][gdbus-subtree-server] for an example of how to use<br />
-this method.<br />
+<p>See this [server][class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusConnection#an-example-for-exporting-a-subtree]<br />
+for an example of how to use this method.<br />
 that can be used with g_dbus_connection_unregister_subtree()</p>
 
 
@@ -5110,7 +5267,8 @@ not be <code>volatile</code>.</p>
 <p>If <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> is closed then the operation will fail with<br />
 %G_IO_ERROR_CLOSED. If <!-- raw HTML omitted -->message<!-- raw HTML omitted --> is not well-formed,<br />
 the operation fails with %G_IO_ERROR_INVALID_ARGUMENT.</p>
-<p>See this [server][gdbus-server] and [client][gdbus-unix-fd-client]<br />
+<p>See this [server][class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusConnection#an-example-d-bus-server]<br />
+and [client][class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusConnection#an-example-for-file-descriptor-passing]<br />
 for an example of how to use this low-level API to send and receive<br />
 UNIX file descriptors.</p>
 <p>Note that <!-- raw HTML omitted -->message<!-- raw HTML omitted --> must be unlocked, unless <!-- raw HTML omitted -->flags<!-- raw HTML omitted --> contain the<br />
@@ -5218,14 +5376,15 @@ not be <code>volatile</code>.</p>
 fail with %G_IO_ERROR_CANCELLED. If <!-- raw HTML omitted -->message<!-- raw HTML omitted --> is not well-formed,<br />
 the operation fails with %G_IO_ERROR_INVALID_ARGUMENT.</p>
 <p>This is an asynchronous method. When the operation is finished, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --><br />
-will be invoked in the<br />
-[thread-default main context][g-main-context-push-thread-default]<br />
+will be invoked in the thread-default main context<br />
+(see [method<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.MainContext.push_thread_default])<br />
 of the thread you are calling this method from. You can then call<br />
 g_dbus_connection_send_message_with_reply_finish() to get the result of the operation.<br />
 See g_dbus_connection_send_message_with_reply_sync() for the synchronous version.</p>
 <p>Note that <!-- raw HTML omitted -->message<!-- raw HTML omitted --> must be unlocked, unless <!-- raw HTML omitted -->flags<!-- raw HTML omitted --> contain the<br />
 %G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL flag.</p>
-<p>See this [server][gdbus-server] and [client][gdbus-unix-fd-client]<br />
+<p>See this [server][class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusConnection#an-example-d-bus-server]<br />
+and [client][class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusConnection#an-example-for-file-descriptor-passing]<br />
 for an example of how to use this low-level API to send and receive<br />
 UNIX file descriptors.</p>
 
@@ -5379,7 +5538,8 @@ is satisfied or nil if you don't care about the result</p>
 occurred. That is to say that the returned GDBus::Message object may<br />
 be of type %G_DBUS_MESSAGE_TYPE_ERROR. Use<br />
 g_dbus_message_to_gerror() to transcode this to a #GError.</p>
-<p>See this [server][gdbus-server] and [client][gdbus-unix-fd-client]<br />
+<p>See this [server][class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusConnection#an-example-d-bus-server]<br />
+and [client][class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusConnection#an-example-for-file-descriptor-passing]<br />
 for an example of how to use this low-level API to send and receive<br />
 UNIX file descriptors.</p>
 
@@ -5460,7 +5620,8 @@ the operation fails with %G_IO_ERROR_INVALID_ARGUMENT.</p>
 occurred. That is to say that the returned GDBus::Message object may<br />
 be of type %G_DBUS_MESSAGE_TYPE_ERROR. Use<br />
 g_dbus_message_to_gerror() to transcode this to a #GError.</p>
-<p>See this [server][gdbus-server] and [client][gdbus-unix-fd-client]<br />
+<p>See this [server][class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusConnection#an-example-d-bus-server]<br />
+and [client][class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusConnection#an-example-for-file-descriptor-passing]<br />
 for an example of how to use this low-level API to send and receive<br />
 UNIX file descriptors.</p>
 <p>Note that <!-- raw HTML omitted -->message<!-- raw HTML omitted --> must be unlocked, unless <!-- raw HTML omitted -->flags<!-- raw HTML omitted --> contain the<br />
@@ -5587,7 +5748,7 @@ to <!-- raw HTML omitted -->message<!-- raw HTML omitted --> or nil if <!-- raw 
   <div class="discussion">
     <p>Subscribes to signals on <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> and invokes <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> whenever<br />
 the signal is received. Note that <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked in the<br />
-[thread-default main context][g-main-context-push-thread-default]<br />
+thread-default main context (see [method<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.MainContext.push_thread_default])<br />
 of the thread you are calling this method from.</p>
 <p>If <!-- raw HTML omitted -->connection<!-- raw HTML omitted --> is not a message bus connection, <!-- raw HTML omitted -->sender<!-- raw HTML omitted --> must be<br />
 nil.</p>
@@ -6030,10 +6191,10 @@ the stream directly.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Reverses the effect of a previous call to<br />
-g_dbus_connection_export_action_group().</p>
-<p>It is an error to call this function with an ID that wasn't returned<br />
-from g_dbus_connection_export_action_group() or to call it with the<br />
-same ID more than once.</p>
+[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusConnection.export_action_group].</p>
+<p>It is an error to call this function with an ID that wasn’t returned from<br />
+[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusConnection.export_action_group] or to call it with the same<br />
+ID more than once.</p>
 
 
   </div>
@@ -6052,7 +6213,7 @@ same ID more than once.</p>
       
       
         &mdash;
-        <div class='inline'><p>the ID from g_dbus_connection_export_action_group()</p>
+        <div class='inline'><p>the ID from [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.DBusConnection.export_action_group]</p>
 </div>
       
     </li>

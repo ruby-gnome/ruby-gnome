@@ -235,6 +235,52 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#get_hsla-instance_method" title="#get_hsla (instance method)">#<strong>get_hsla</strong>(hue, saturation, lightness, alpha, space)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the current set color stored as <!-- raw HTML omitted -->space<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_hsva-instance_method" title="#get_hsva (instance method)">#<strong>get_hsva</strong>(hue, saturation, value, alpha, space)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Retrieves the current set color stored as <!-- raw HTML omitted -->space<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#get_pixel-instance_method" title="#get_pixel (instance method)">#<strong>get_pixel</strong>(format, pixel)  &#x21d2; nil </a>
     
 
@@ -390,6 +436,52 @@
 
   
     <span class="summary_desc"><div class='inline'><p>Set the color using the component values as <!-- raw HTML omitted -->format<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_hsla-instance_method" title="#set_hsla (instance method)">#<strong>set_hsla</strong>(hue, saturation, lightness, alpha, space)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Set color as HSLA data stored as <!-- raw HTML omitted -->space<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_hsva-instance_method" title="#set_hsva (instance method)">#<strong>set_hsva</strong>(hue, saturation, value, alpha, space)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Set color as HSVA data stored as <!-- raw HTML omitted -->space<!-- raw HTML omitted -->.</p>
 </div></span>
   
 </li>
@@ -898,6 +990,238 @@ If value format not supported return NULL and components_length set to 0.</p>
         &mdash;
         <div class='inline'><p>The color components</p>
 </div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_hsla-instance_method">
+  
+    #<strong>get_hsla</strong>(hue, saturation, lightness, alpha, space)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the current set color stored as <!-- raw HTML omitted -->space<!-- raw HTML omitted -->.<br />
+If <!-- raw HTML omitted -->space<!-- raw HTML omitted --> is nil, this is equivalent to requesting color in the default<br />
+sRGB space.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>hue</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>hue return location.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>saturation</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>saturation return location.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>lightness</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>value return location.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>alpha</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>alpha return location.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>space</span>
+      
+      
+        <span class='type'>(<tt>Babl::Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>RGB space.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_hsva-instance_method">
+  
+    #<strong>get_hsva</strong>(hue, saturation, value, alpha, space)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Retrieves the current set color stored as <!-- raw HTML omitted -->space<!-- raw HTML omitted -->.<br />
+If <!-- raw HTML omitted -->space<!-- raw HTML omitted --> is nil, this is equivalent to requesting color in the default<br />
+sRGB space.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>hue</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>hue return location.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>saturation</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>saturation return location.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>value return location.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>alpha</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>alpha return location.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>space</span>
+      
+      
+        <span class='type'>(<tt>Babl::Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>RGB space.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
       
     </li>
   
@@ -1450,6 +1774,236 @@ equivalent to storing with the default naive CMYK space.</p>
       
         &mdash;
         <div class='inline'><p>The length of the components array</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_hsla-instance_method">
+  
+    #<strong>set_hsla</strong>(hue, saturation, lightness, alpha, space)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Set color as HSLA data stored as <!-- raw HTML omitted -->space<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->space<!-- raw HTML omitted --> is nil, this is<br />
+equivalent to storing with the default sRGB space.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>hue</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>hue value.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>saturation</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>saturation value.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>lightness</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>lightness value.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>alpha</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>alpha value.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>space</span>
+      
+      
+        <span class='type'>(<tt>Babl::Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>RGB space.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_hsva-instance_method">
+  
+    #<strong>set_hsva</strong>(hue, saturation, value, alpha, space)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Set color as HSVA data stored as <!-- raw HTML omitted -->space<!-- raw HTML omitted -->. If <!-- raw HTML omitted -->space<!-- raw HTML omitted --> is nil, this is<br />
+equivalent to storing with the default sRGB space.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>hue</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>hue value.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>saturation</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>saturation value.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>value value.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>alpha</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>alpha value.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>space</span>
+      
+      
+        <span class='type'>(<tt>Babl::Object</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>RGB space.</p>
 </div>
       
     </li>

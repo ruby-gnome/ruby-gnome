@@ -157,7 +157,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Obtains a completion for <!-- raw HTML omitted -->initial_text<!-- raw HTML omitted --> from <!-- raw HTML omitted -->completer<!-- raw HTML omitted -->.</p>
+    <span class="summary_desc"><div class='inline'><p>Obtains a suffix completion for <!-- raw HTML omitted -->initial_text<!-- raw HTML omitted --> from <!-- raw HTML omitted -->completer<!-- raw HTML omitted -->.</p>
 </div></span>
   
 </li>
@@ -260,6 +260,8 @@
   <div class="discussion">
     <p>If <!-- raw HTML omitted -->dirs_only<!-- raw HTML omitted --> is true, <!-- raw HTML omitted -->completer<!-- raw HTML omitted --> will only<br />
 complete directory names, and not file names.</p>
+<p>This function needs to be called before waiting for results from the<br />
+completer to be populated.</p>
 
 
   </div>
@@ -313,7 +315,9 @@ complete directory names, and not file names.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Obtains a completion for <!-- raw HTML omitted -->initial_text<!-- raw HTML omitted --> from <!-- raw HTML omitted -->completer<!-- raw HTML omitted -->.</p>
+    <p>Obtains a suffix completion for <!-- raw HTML omitted -->initial_text<!-- raw HTML omitted --> from <!-- raw HTML omitted -->completer<!-- raw HTML omitted -->.</p>
+<p>Suffix will be an empty string if there's no shared suffix among matching<br />
+completions. If there's no matching completions anyway, <code>NULL</code> is returned.</p>
 
 
   </div>
@@ -350,9 +354,8 @@ complete directory names, and not file names.</p>
       
       
         &mdash;
-        <div class='inline'><p>a completed string, or nil if no<br />
-completion exists. This string is not owned by GIO, so remember to g_free()<br />
-it when finished.</p>
+        <div class='inline'><p>a suffix completion string, or <code>NULL</code> if no<br />
+completion exists.</p>
 </div>
       
     </li>

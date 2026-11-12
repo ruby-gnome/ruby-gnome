@@ -104,14 +104,14 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GtkSettings</code> provides a mechanism to share global settings between<br />
-applications.</p>
+    <p>Provides a mechanism to share global settings between applications.</p>
+<p>GTK relies on the platform-specific API for getting desktop-wide<br />
+settings.</p>
+<p>On Wayland, the settings are obtained via a settings portal that<br />
+is part of the Linux desktop APIs for application.</p>
 <p>On the X window system, this sharing is realized by an<br />
 <a href="http://www.freedesktop.org/wiki/Specifications/xsettings-spec">XSettings</a><br />
-manager that is usually part of the desktop environment, along with<br />
-utilities that let the user change these settings.</p>
-<p>On Wayland, the settings are obtained either via a settings portal,<br />
-or by reading desktop settings from [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Settings].</p>
+manager.</p>
 <p>On macOS, the settings are obtained from <code>NSUserDefaults</code>.</p>
 <p>In the absence of these sharing mechanisms, GTK reads default values for<br />
 settings from <code>settings.ini</code> files in <code>/etc/gtk-4.0</code>, <code>$XDG_CONFIG_DIRS/gtk-4.0</code><br />
@@ -1265,6 +1265,52 @@ convenient to use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.W
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#gtk_font_rendering-instance_method" title="#gtk_font_rendering (instance method)">#<strong>gtk_font_rendering</strong>  &#x21d2; Gtk::FontRendering </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>How GTK font rendering is set up.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_font_rendering=-instance_method" title="#gtk_font_rendering= (instance method)">#<strong>gtk_font_rendering=</strong>(gtk_font_rendering)  &#x21d2; Gtk::FontRendering </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>How GTK font rendering is set up.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#gtk_fontconfig_timestamp-instance_method" title="#gtk_fontconfig_timestamp (instance method)">#<strong>gtk_fontconfig_timestamp</strong>  &#x21d2; Integer </a>
     
 
@@ -1441,6 +1487,144 @@ convenient to use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.W
 
   
     <span class="summary_desc"><div class='inline'><p>Which IM (input method) module should be used by default.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_interface_color_scheme-instance_method" title="#gtk_interface_color_scheme (instance method)">#<strong>gtk_interface_color_scheme</strong>  &#x21d2; Gtk::InterfaceColorScheme </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The color scheme used for rendering the user interface.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_interface_color_scheme=-instance_method" title="#gtk_interface_color_scheme= (instance method)">#<strong>gtk_interface_color_scheme=</strong>(gtk_interface_color_scheme)  &#x21d2; Gtk::InterfaceColorScheme </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The color scheme used for rendering the user interface.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_interface_contrast-instance_method" title="#gtk_interface_contrast (instance method)">#<strong>gtk_interface_contrast</strong>  &#x21d2; Gtk::InterfaceContrast </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The level of contrast to use for the user interface.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_interface_contrast=-instance_method" title="#gtk_interface_contrast= (instance method)">#<strong>gtk_interface_contrast=</strong>(gtk_interface_contrast)  &#x21d2; Gtk::InterfaceContrast </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The level of contrast to use for the user interface.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_interface_reduced_motion-instance_method" title="#gtk_interface_reduced_motion (instance method)">#<strong>gtk_interface_reduced_motion</strong>  &#x21d2; Gtk::ReducedMotion </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether animations should be reduced to essential motions.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gtk_interface_reduced_motion=-instance_method" title="#gtk_interface_reduced_motion= (instance method)">#<strong>gtk_interface_reduced_motion=</strong>(gtk_interface_reduced_motion)  &#x21d2; Gtk::ReducedMotion </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Whether animations should be reduced to essential motions.</p>
 </div></span>
   
 </li>
@@ -5246,6 +5430,126 @@ ways, such as flashing the window or similar visual effects.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="gtk_font_rendering-instance_method">
+  
+    #<strong>gtk_font_rendering</strong>  &#x21d2; <tt><span class='object_link'><a href="FontRendering.html" title="Gtk::FontRendering (module)">Gtk::FontRendering</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>How GTK font rendering is set up.</p>
+<p>When set to [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontRendering.MANUAL], GTK respects the low-level<br />
+font-related settings ([property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-hint-font-metrics],<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-xft-antialias], [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-xft-hinting],<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-xft-hintstyle] and [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-xft-rgba])<br />
+as much as practical.</p>
+<p>When set to [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontRendering.AUTOMATIC], GTK will consider factors such<br />
+as screen resolution and scale in deciding how to render fonts.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FontRendering.html" title="Gtk::FontRendering (module)">Gtk::FontRendering</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-font-rendering</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_font_rendering=-instance_method">
+  
+    #<strong>gtk_font_rendering=</strong>(gtk_font_rendering)  &#x21d2; <tt><span class='object_link'><a href="FontRendering.html" title="Gtk::FontRendering (module)">Gtk::FontRendering</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>How GTK font rendering is set up.</p>
+<p>When set to [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontRendering.MANUAL], GTK respects the low-level<br />
+font-related settings ([property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-hint-font-metrics],<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-xft-antialias], [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-xft-hinting],<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-xft-hintstyle] and [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Settings:gtk-xft-rgba])<br />
+as much as practical.</p>
+<p>When set to [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FontRendering.AUTOMATIC], GTK will consider factors such<br />
+as screen resolution and scale in deciding how to render fonts.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_font_rendering</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FontRendering.html" title="Gtk::FontRendering (module)">Gtk::FontRendering</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FontRendering.html" title="Gtk::FontRendering (module)">Gtk::FontRendering</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-font-rendering</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="FontRendering.html" title="Gtk::FontRendering (module)">Gtk::FontRendering</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-font-rendering</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="gtk_fontconfig_timestamp-instance_method">
   
     #<strong>gtk_fontconfig_timestamp</strong>  &#x21d2; <tt>Integer</tt> 
@@ -5678,6 +5982,348 @@ will try in turn until it finds one available on the system.</p>
       
         &mdash;
         <div class='inline'><p>gtk-im-module</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_interface_color_scheme-instance_method">
+  
+    #<strong>gtk_interface_color_scheme</strong>  &#x21d2; <tt><span class='object_link'><a href="InterfaceColorScheme.html" title="Gtk::InterfaceColorScheme (module)">Gtk::InterfaceColorScheme</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The color scheme used for rendering the user interface.</p>
+<p>This setting communicates the system-wide preference.<br />
+The color scheme that is actually used when applying CSS<br />
+styles can be set with the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.CssProvider:prefers-color-scheme]<br />
+property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InterfaceColorScheme.html" title="Gtk::InterfaceColorScheme (module)">Gtk::InterfaceColorScheme</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-interface-color-scheme</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_interface_color_scheme=-instance_method">
+  
+    #<strong>gtk_interface_color_scheme=</strong>(gtk_interface_color_scheme)  &#x21d2; <tt><span class='object_link'><a href="InterfaceColorScheme.html" title="Gtk::InterfaceColorScheme (module)">Gtk::InterfaceColorScheme</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The color scheme used for rendering the user interface.</p>
+<p>This setting communicates the system-wide preference.<br />
+The color scheme that is actually used when applying CSS<br />
+styles can be set with the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.CssProvider:prefers-color-scheme]<br />
+property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_interface_color_scheme</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InterfaceColorScheme.html" title="Gtk::InterfaceColorScheme (module)">Gtk::InterfaceColorScheme</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InterfaceColorScheme.html" title="Gtk::InterfaceColorScheme (module)">Gtk::InterfaceColorScheme</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-interface-color-scheme</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InterfaceColorScheme.html" title="Gtk::InterfaceColorScheme (module)">Gtk::InterfaceColorScheme</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-interface-color-scheme</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_interface_contrast-instance_method">
+  
+    #<strong>gtk_interface_contrast</strong>  &#x21d2; <tt><span class='object_link'><a href="InterfaceContrast.html" title="Gtk::InterfaceContrast (module)">Gtk::InterfaceContrast</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The level of contrast to use for the user interface.</p>
+<p>This setting communicates the system-wide preference.<br />
+The contrast level that is actually used when applying CSS<br />
+styles can be set with the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.CssProvider:prefers-contrast]<br />
+property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InterfaceContrast.html" title="Gtk::InterfaceContrast (module)">Gtk::InterfaceContrast</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-interface-contrast</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_interface_contrast=-instance_method">
+  
+    #<strong>gtk_interface_contrast=</strong>(gtk_interface_contrast)  &#x21d2; <tt><span class='object_link'><a href="InterfaceContrast.html" title="Gtk::InterfaceContrast (module)">Gtk::InterfaceContrast</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The level of contrast to use for the user interface.</p>
+<p>This setting communicates the system-wide preference.<br />
+The contrast level that is actually used when applying CSS<br />
+styles can be set with the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.CssProvider:prefers-contrast]<br />
+property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_interface_contrast</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InterfaceContrast.html" title="Gtk::InterfaceContrast (module)">Gtk::InterfaceContrast</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InterfaceContrast.html" title="Gtk::InterfaceContrast (module)">Gtk::InterfaceContrast</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-interface-contrast</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="InterfaceContrast.html" title="Gtk::InterfaceContrast (module)">Gtk::InterfaceContrast</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-interface-contrast</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_interface_reduced_motion-instance_method">
+  
+    #<strong>gtk_interface_reduced_motion</strong>  &#x21d2; <tt><span class='object_link'><a href="ReducedMotion.html" title="Gtk::ReducedMotion (module)">Gtk::ReducedMotion</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether animations should be reduced to essential motions.</p>
+<p>This setting communicates the system-wide preference.<br />
+The motion level that is actually used when applying CSS<br />
+styles can be set with the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.CssProvider:prefers-reduced-motion]<br />
+property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ReducedMotion.html" title="Gtk::ReducedMotion (module)">Gtk::ReducedMotion</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-interface-reduced-motion</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gtk_interface_reduced_motion=-instance_method">
+  
+    #<strong>gtk_interface_reduced_motion=</strong>(gtk_interface_reduced_motion)  &#x21d2; <tt><span class='object_link'><a href="ReducedMotion.html" title="Gtk::ReducedMotion (module)">Gtk::ReducedMotion</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Whether animations should be reduced to essential motions.</p>
+<p>This setting communicates the system-wide preference.<br />
+The motion level that is actually used when applying CSS<br />
+styles can be set with the [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.CssProvider:prefers-reduced-motion]<br />
+property.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gtk_interface_reduced_motion</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ReducedMotion.html" title="Gtk::ReducedMotion (module)">Gtk::ReducedMotion</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ReducedMotion.html" title="Gtk::ReducedMotion (module)">Gtk::ReducedMotion</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-interface-reduced-motion</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ReducedMotion.html" title="Gtk::ReducedMotion (module)">Gtk::ReducedMotion</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>gtk-interface-reduced-motion</p>
 </div>
       
     </li>

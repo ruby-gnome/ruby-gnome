@@ -104,7 +104,7 @@
 
 <div id="subclasses">
   <h2>Direct Known Subclasses</h2>
-  <p class="children"><span class='object_link'><a href="FileInputStream.html" title="Gio::FileInputStream (class)">FileInputStream</a></span>, <span class='object_link'><a href="FilterInputStream.html" title="Gio::FilterInputStream (class)">FilterInputStream</a></span>, <span class='object_link'><a href="MemoryInputStream.html" title="Gio::MemoryInputStream (class)">MemoryInputStream</a></span>, <span class='object_link'><a href="RubyInputStream.html" title="Gio::RubyInputStream (class)">RubyInputStream</a></span>, <span class='object_link'><a href="UnixInputStream.html" title="Gio::UnixInputStream (class)">UnixInputStream</a></span></p>
+  <p class="children"><span class='object_link'><a href="FileInputStream.html" title="Gio::FileInputStream (class)">FileInputStream</a></span>, <span class='object_link'><a href="FilterInputStream.html" title="Gio::FilterInputStream (class)">FilterInputStream</a></span>, <span class='object_link'><a href="MemoryInputStream.html" title="Gio::MemoryInputStream (class)">MemoryInputStream</a></span>, <span class='object_link'><a href="RubyInputStream.html" title="Gio::RubyInputStream (class)">RubyInputStream</a></span></p>
 </div>
 
 
@@ -377,7 +377,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Finishes an asynchronous stream read operation started with g_input_stream_read_all_async().</p>
+    <span class="summary_desc"><div class='inline'><p>Finishes an asynchronous stream read operation started with [method<!-- raw HTML omitted -->InputStream<!-- raw HTML omitted -->.read_all_async].</p>
 </div></span>
   
 </li>
@@ -843,7 +843,7 @@ override one you must override all.</p>
       
       
         &mdash;
-        <div class='inline'><p>the [I/O priority][io-priority] of the request</p>
+        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a> of the request</p>
 </div>
       
     </li>
@@ -1354,8 +1354,8 @@ write your own loop around g_input_stream_read().</p>
   <div class="discussion">
     <p>Request an asynchronous read of <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from the stream into the<br />
 buffer starting at <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.</p>
-<p>This is the asynchronous equivalent of g_input_stream_read_all().</p>
-<p>Call g_input_stream_read_all_finish() to collect the result.</p>
+<p>This is the asynchronous equivalent of [method<!-- raw HTML omitted -->InputStream<!-- raw HTML omitted -->.read_all].</p>
+<p>Call [method<!-- raw HTML omitted -->InputStream<!-- raw HTML omitted -->.read_all_finish] to collect the result.</p>
 <p>Any outstanding I/O request with higher priority (lower numerical<br />
 value) will be executed before an outstanding request with lower<br />
 priority. Default priority is %G_PRIORITY_DEFAULT.</p>
@@ -1407,7 +1407,7 @@ priority. Default priority is %G_PRIORITY_DEFAULT.</p>
       
       
         &mdash;
-        <div class='inline'><p>the [I/O priority][io-priority] of the request</p>
+        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a> of the request</p>
 </div>
       
     </li>
@@ -1489,7 +1489,7 @@ to call when the request is satisfied</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Finishes an asynchronous stream read operation started with<br />
-g_input_stream_read_all_async().</p>
+[method<!-- raw HTML omitted -->InputStream<!-- raw HTML omitted -->.read_all_async].</p>
 <p>As a special exception to the normal conventions for functions that<br />
 use #GError, if this function returns false (and sets <!-- raw HTML omitted -->error<!-- raw HTML omitted -->) then<br />
 <!-- raw HTML omitted -->bytes_read<!-- raw HTML omitted --> will be set to the number of bytes that were successfully<br />
@@ -1766,7 +1766,7 @@ of the request.</p>
       
       
         &mdash;
-        <div class='inline'><p>the [I/O priority][io-priority]</p>
+        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a></p>
 </div>
       
     </li>
@@ -1988,7 +1988,7 @@ priority. Default priority is %G_PRIORITY_DEFAULT.</p>
       
       
         &mdash;
-        <div class='inline'><p>the [I/O priority][io-priority] of the request</p>
+        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a> of the request</p>
 </div>
       
     </li>
@@ -2477,7 +2477,7 @@ However, if you override one, you must override all.</p>
       
       
         &mdash;
-        <div class='inline'><p>the [I/O priority][io-priority] of the request</p>
+        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a> of the request</p>
 </div>
       
     </li>

@@ -134,7 +134,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>If set to a non-nil GFile::Info object, and #GZlibCompressor:format is %G_ZLIB_COMPRESSOR_FORMAT_GZIP, the compressor will write the file name and modification time from the file info to the GZIP header.</p>
+    <span class="summary_desc"><div class='inline'><p>A [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.FileInfo] containing file information to put into the gzip header.</p>
 </div></span>
   
 </li>
@@ -157,7 +157,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>If set to a non-nil GFile::Info object, and #GZlibCompressor:format is %G_ZLIB_COMPRESSOR_FORMAT_GZIP, the compressor will write the file name and modification time from the file info to the GZIP header.</p>
+    <span class="summary_desc"><div class='inline'><p>A [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.FileInfo] containing file information to put into the gzip header.</p>
 </div></span>
   
 </li>
@@ -228,7 +228,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Creates a new GZlib::Compressor.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates a compressor.</p>
 </div></span>
   
 </li>
@@ -280,6 +280,52 @@
 </li>
 
       
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#os-instance_method" title="#os (instance method)">#<strong>os</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The OS code of the gzip header.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#os=-instance_method" title="#os= (instance method)">#<strong>os=</strong>(os)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The OS code of the gzip header.</p>
+</div></span>
+  
+</li>
+
+      
     </ul>
     
   
@@ -298,7 +344,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new GZlib::Compressor.</p>
+    <p>Creates a compressor.</p>
 
 
   </div>
@@ -317,7 +363,7 @@
       
       
         &mdash;
-        <div class='inline'><p>The format to use for the compressed data</p>
+        <div class='inline'><p>the format to use for the compressed data</p>
 </div>
       
     </li>
@@ -332,7 +378,7 @@
       
       
         &mdash;
-        <div class='inline'><p>compression level (0-9), -1 for default</p>
+        <div class='inline'><p>compression level (<code>0</code>-<code>9</code>), <code>-1</code> for default</p>
 </div>
       
     </li>
@@ -361,9 +407,12 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If set to a non-nil GFile::Info object, and #GZlibCompressor:format is<br />
-%G_ZLIB_COMPRESSOR_FORMAT_GZIP, the compressor will write the file name<br />
-and modification time from the file info to the GZIP header.</p>
+    <p>A [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.FileInfo] containing file information to put into the gzip<br />
+header.</p>
+<p>The file name and modification time from the file info will be used.</p>
+<p>This will only be used if non-<code>NULL</code> and<br />
+[property<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ZlibCompressor:format] is<br />
+[enum<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ZlibCompressorFormat.GZIP].</p>
 
 
   </div>
@@ -402,9 +451,12 @@ and modification time from the file info to the GZIP header.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If set to a non-nil GFile::Info object, and #GZlibCompressor:format is<br />
-%G_ZLIB_COMPRESSOR_FORMAT_GZIP, the compressor will write the file name<br />
-and modification time from the file info to the GZIP header.</p>
+    <p>A [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.FileInfo] containing file information to put into the gzip<br />
+header.</p>
+<p>The file name and modification time from the file info will be used.</p>
+<p>This will only be used if non-<code>NULL</code> and<br />
+[property<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ZlibCompressor:format] is<br />
+[enum<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ZlibCompressorFormat.GZIP].</p>
 
 
   </div>
@@ -578,7 +630,8 @@ and modification time from the file info to the GZIP header.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The level of compression from <code>0</code> (no compression) to <code>9</code> (most<br />
-compression). <code>-1</code> for the default level.</p>
+compression).</p>
+<p><code>-1</code> for the default level.</p>
 
 
   </div>
@@ -618,7 +671,8 @@ compression). <code>-1</code> for the default level.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The level of compression from <code>0</code> (no compression) to <code>9</code> (most<br />
-compression). <code>-1</code> for the default level.</p>
+compression).</p>
+<p><code>-1</code> for the default level.</p>
 
 
   </div>
@@ -665,6 +719,126 @@ compression). <code>-1</code> for the default level.</p>
       
         &mdash;
         <div class='inline'><p>level</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="os-instance_method">
+  
+    #<strong>os</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The OS code of the gzip header.</p>
+<p>This will be used if set to a non-negative value, and if<br />
+[property<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ZlibCompressor:format] is<br />
+[enum<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ZlibCompressorFormat.GZIP], the compressor will set the OS code of<br />
+the gzip header to this value.</p>
+<p>If the value is unset, zlib will set the OS code depending on the platform.<br />
+This may be undesirable when reproducible output is desired. In that case setting<br />
+the OS code to <code>3</code> (for Unix) is recommended.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>os</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="os=-instance_method">
+  
+    #<strong>os=</strong>(os)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The OS code of the gzip header.</p>
+<p>This will be used if set to a non-negative value, and if<br />
+[property<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ZlibCompressor:format] is<br />
+[enum<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ZlibCompressorFormat.GZIP], the compressor will set the OS code of<br />
+the gzip header to this value.</p>
+<p>If the value is unset, zlib will set the OS code depending on the platform.<br />
+This may be undesirable when reproducible output is desired. In that case setting<br />
+the OS code to <code>3</code> (for Unix) is recommended.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>os</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>os</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>os</p>
 </div>
       
     </li>

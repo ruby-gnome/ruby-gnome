@@ -228,8 +228,8 @@ provide additional information related to the object. Value type: reference</p>
         <dt id="ERROR_MESSAGE-constant" class="">ERROR_MESSAGE =
           <div class="docstring">
   <div class="discussion">
-    <p>Identifies the element that provides<br />
-an error message for an object. Value type: reference</p>
+    <p>Identifies the element (or elements) that<br />
+provide an error message for an object. Value type: reference</p>
 
 
   </div>
@@ -346,7 +346,7 @@ Value type: integer</p>
           <div class="docstring">
   <div class="discussion">
     <p>Defines a human readable text<br />
-alternative of aria-rowindex. Value type: string</p>
+alternative of [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AccessibleRelation.ROW_INDEX]. Value type: string</p>
 
 
   </div>
@@ -389,6 +389,110 @@ set of listitems or treeitems. Value type: integer</p>
 </div>
         </dt>
         <dd><pre class="code"><span class='int'>17</span> <span class='kw'>or</span> <span class='symbol'>:set_size</span></pre></dd>
+      
+        <dt id="LABEL_FOR-constant" class="">LABEL_FOR =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Identifies the element (or elements) that are labeled by the<br />
+current element. Value type: reference</p>
+<p>This relation is managed by GTK and should not be set from application code.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>18</span> <span class='kw'>or</span> <span class='symbol'>:label_for</span></pre></dd>
+      
+        <dt id="DESCRIPTION_FOR-constant" class="">DESCRIPTION_FOR =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Identifies the element (or elements) that are described by<br />
+the current element. Value type: reference</p>
+<p>This relation is managed by GTK and should not be set from application code.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>19</span> <span class='kw'>or</span> <span class='symbol'>:description_for</span></pre></dd>
+      
+        <dt id="CONTROLLED_BY-constant" class="">CONTROLLED_BY =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Identifies the element (or elements) that the current<br />
+element is controlled by. Value type: reference</p>
+<p>This relation is managed by GTK and should not be set from application code.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>20</span> <span class='kw'>or</span> <span class='symbol'>:controlled_by</span></pre></dd>
+      
+        <dt id="DETAILS_FOR-constant" class="">DETAILS_FOR =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Identifies the element (or elements) for which the current<br />
+element provides additional information. Value type: reference</p>
+<p>This relation is managed by GTK and should not be set from application code.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>21</span> <span class='kw'>or</span> <span class='symbol'>:details_for</span></pre></dd>
+      
+        <dt id="ERROR_MESSAGE_FOR-constant" class="">ERROR_MESSAGE_FOR =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Identifies the element (or elements) for which the current<br />
+element provides an error message. Value type: reference</p>
+<p>This relation is managed by GTK and should not be set from application code.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>22</span> <span class='kw'>or</span> <span class='symbol'>:error_message_for</span></pre></dd>
+      
+        <dt id="FLOW_FROM-constant" class="">FLOW_FROM =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Identifies the previous element (or elements) in an alternate<br />
+reading order of content which, at the user's discretion, allows<br />
+assistive technology to override the general default of reading in<br />
+document source order. Value type: reference</p>
+<p>This relation is managed by GTK and should not be set from application code.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>23</span> <span class='kw'>or</span> <span class='symbol'>:flow_from</span></pre></dd>
       
     </dl>
   

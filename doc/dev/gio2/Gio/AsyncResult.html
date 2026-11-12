@@ -204,7 +204,7 @@ as a default.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>A new reference to the source object for the <!-- raw HTML omitted -->res<!-- raw HTML omitted -->, or nil if there is none.</p>
+    <span class="summary_desc"><div class='inline'><p>A new reference to the source object for the <!-- raw HTML omitted -->res<!-- raw HTML omitted -->, or <code>NULL</code> if there is none.</p>
 </div></span>
   
 </li>
@@ -250,7 +250,7 @@ as a default.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>True if <!-- raw HTML omitted -->res<!-- raw HTML omitted --> has the indicated <!-- raw HTML omitted -->source_tag<!-- raw HTML omitted -->, false if not.</p>
+    <span class="summary_desc"><div class='inline'><p><code>TRUE</code> if <!-- raw HTML omitted -->res<!-- raw HTML omitted --> has the indicated <!-- raw HTML omitted -->source_tag<!-- raw HTML omitted -->, <code>FALSE</code> if not.</p>
 </div></span>
   
 </li>
@@ -273,7 +273,7 @@ as a default.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>If <!-- raw HTML omitted -->res<!-- raw HTML omitted --> is a GSimple::AsyncResult, this is equivalent to g_simple_async_result_propagate_error().</p>
+    <span class="summary_desc"><div class='inline'><p>If <!-- raw HTML omitted -->res<!-- raw HTML omitted --> is a [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.SimpleAsyncResult], this is equivalent to [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.SimpleAsyncResult.propagate_error].</p>
 </div></span>
   
 </li>
@@ -296,7 +296,7 @@ as a default.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Gets the source object from a GAsync::Result.</p>
+    <span class="summary_desc"><div class='inline'><p>Gets the source object from a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AsyncResult].</p>
 </div></span>
   
 </li>
@@ -319,7 +319,7 @@ as a default.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Gets the user data from a GAsync::Result.</p>
+    <span class="summary_desc"><div class='inline'><p>Gets the user data from a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AsyncResult].</p>
 </div></span>
   
 </li>
@@ -347,7 +347,7 @@ as a default.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Returns a new reference to the source<br />
-object for the <!-- raw HTML omitted -->res<!-- raw HTML omitted -->, or nil if there is none.</p>
+object for the <!-- raw HTML omitted -->res<!-- raw HTML omitted -->, or <code>NULL</code> if there is none.</p>
 
 
   </div>
@@ -366,7 +366,7 @@ object for the <!-- raw HTML omitted -->res<!-- raw HTML omitted -->, or nil if 
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::Result</p>
+        <div class='inline'><p>a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AsyncResult]</p>
 </div>
       
     </li>
@@ -385,7 +385,7 @@ object for the <!-- raw HTML omitted -->res<!-- raw HTML omitted -->, or nil if 
       
         &mdash;
         <div class='inline'><p>a new reference to the source<br />
-object for the <!-- raw HTML omitted -->res<!-- raw HTML omitted -->, or nil if there is none.</p>
+object for the <!-- raw HTML omitted -->res<!-- raw HTML omitted -->, or <code>NULL</code> if there is none.</p>
 </div>
       
     </li>
@@ -425,7 +425,7 @@ object for the <!-- raw HTML omitted -->res<!-- raw HTML omitted -->, or nil if 
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::Result.</p>
+        <div class='inline'><p>a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AsyncResult].</p>
 </div>
       
     </li>
@@ -464,7 +464,7 @@ object for the <!-- raw HTML omitted -->res<!-- raw HTML omitted -->, or nil if 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns true if <!-- raw HTML omitted -->res<!-- raw HTML omitted --> has the indicated <!-- raw HTML omitted -->source_tag<!-- raw HTML omitted -->, false if<br />
+    <p>Returns <code>TRUE</code> if <!-- raw HTML omitted -->res<!-- raw HTML omitted --> has the indicated <!-- raw HTML omitted -->source_tag<!-- raw HTML omitted -->, <code>FALSE</code> if<br />
 not.</p>
 
 
@@ -484,7 +484,7 @@ not.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::Result</p>
+        <div class='inline'><p>a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AsyncResult]</p>
 </div>
       
     </li>
@@ -517,7 +517,7 @@ not.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if <!-- raw HTML omitted -->res<!-- raw HTML omitted --> has the indicated <!-- raw HTML omitted -->source_tag<!-- raw HTML omitted -->, false if<br />
+        <div class='inline'><p><code>TRUE</code> if <!-- raw HTML omitted -->res<!-- raw HTML omitted --> has the indicated <!-- raw HTML omitted -->source_tag<!-- raw HTML omitted -->, <code>FALSE</code> if<br />
 not.</p>
 </div>
       
@@ -539,13 +539,13 @@ not.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>If <!-- raw HTML omitted -->res<!-- raw HTML omitted --> is a GSimple::AsyncResult, this is equivalent to<br />
-g_simple_async_result_propagate_error(). Otherwise it returns<br />
-false.</p>
-<p>This can be used for legacy error handling in async *_finish()<br />
-wrapper functions that traditionally handled GSimple::AsyncResult<br />
+    <p>If <!-- raw HTML omitted -->res<!-- raw HTML omitted --> is a [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.SimpleAsyncResult], this is equivalent to<br />
+[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.SimpleAsyncResult.propagate_error]. Otherwise it returns<br />
+<code>FALSE</code>.</p>
+<p>This can be used for legacy error handling in async <code>*_finish()</code><br />
+wrapper functions that traditionally handled [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.SimpleAsyncResult]<br />
 error returns themselves rather than calling into the virtual method.<br />
-This should not be used in new code; GAsync::Result errors that are<br />
+This should not be used in new code; [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AsyncResult] errors that are<br />
 set by virtual methods should also be extracted by virtual methods,<br />
 to enable subclasses to chain up correctly.</p>
 
@@ -565,8 +565,8 @@ to enable subclasses to chain up correctly.</p>
       
       
         &mdash;
-        <div class='inline'><p>true if <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is has been filled in with an error from<br />
-<!-- raw HTML omitted -->res<!-- raw HTML omitted -->, false if not.</p>
+        <div class='inline'><p><code>TRUE</code> if <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is has been filled in with an error from<br />
+<!-- raw HTML omitted -->res<!-- raw HTML omitted -->, <code>FALSE</code> if not.</p>
 </div>
       
     </li>
@@ -587,7 +587,7 @@ to enable subclasses to chain up correctly.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the source object from a GAsync::Result.</p>
+    <p>Gets the source object from a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AsyncResult].</p>
 
 
   </div>
@@ -606,7 +606,7 @@ to enable subclasses to chain up correctly.</p>
       
         &mdash;
         <div class='inline'><p>a new reference to the source<br />
-object for the <!-- raw HTML omitted -->res<!-- raw HTML omitted -->, or nil if there is none.</p>
+object for the <!-- raw HTML omitted -->res<!-- raw HTML omitted -->, or <code>NULL</code> if there is none.</p>
 </div>
       
     </li>
@@ -627,7 +627,7 @@ object for the <!-- raw HTML omitted -->res<!-- raw HTML omitted -->, or nil if 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the user data from a GAsync::Result.</p>
+    <p>Gets the user data from a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AsyncResult].</p>
 
 
   </div>

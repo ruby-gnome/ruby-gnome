@@ -599,6 +599,736 @@ the alpha value.</p>
         </dt>
         <dd><pre class="code"><span class='int'>32</span> <span class='kw'>or</span> <span class='symbol'>:x8b8g8r8</span></pre></dd>
       
+        <dt id="G8_B8R8_420-constant" class="">G8_B8R8_420 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Multiplane format with 2 planes.</p>
+<p>The first plane contains the first channel, usually containing<br />
+luma values.<br />
+The second plane with interleaved chroma values, Cb followed by Cr.<br />
+Subsampled in both the X and Y direction.</p>
+<p>Commonly known by the fourcc &quot;NV12&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>33</span> <span class='kw'>or</span> <span class='symbol'>:g8_b8r8_420</span></pre></dd>
+      
+        <dt id="G8_R8B8_420-constant" class="">G8_R8B8_420 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Multiplane format with 2 planes.</p>
+<p>The first plane contains the first channel, usually containing<br />
+luma values.<br />
+The second plane with interleaved chroma values, Cr followed by Cb.<br />
+Subsampled in both the X and Y direction.</p>
+<p>Commonly known by the fourcc &quot;NV21&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>34</span> <span class='kw'>or</span> <span class='symbol'>:g8_r8b8_420</span></pre></dd>
+      
+        <dt id="G8_B8R8_422-constant" class="">G8_B8R8_422 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Multiplane format with 2 planes.</p>
+<p>The first plane contains the first channel, usually containing<br />
+luma values.<br />
+The second plane with interleaved chroma values, Cb followed by Cr.<br />
+Subsampled in the X direction.</p>
+<p>Commonly known by the fourcc &quot;NV16&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>35</span> <span class='kw'>or</span> <span class='symbol'>:g8_b8r8_422</span></pre></dd>
+      
+        <dt id="G8_R8B8_422-constant" class="">G8_R8B8_422 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Multiplane format with 2 planes.</p>
+<p>The first plane contains the first channel, usually containing<br />
+luma values.<br />
+The second plane with interleaved chroma values, Cr followed by Cb.<br />
+Subsampled in the X direction.</p>
+<p>Commonly known by the fourcc &quot;NV61&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>36</span> <span class='kw'>or</span> <span class='symbol'>:g8_r8b8_422</span></pre></dd>
+      
+        <dt id="G8_B8R8_444-constant" class="">G8_B8R8_444 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Multiplane format with 2 planes.</p>
+<p>The first plane contains the first channel, usually containing<br />
+luma values.<br />
+The second plane with interleaved chroma values, Cb followed by Cr.<br />
+This format is not subsampled.</p>
+<p>Commonly known by the fourcc &quot;NV24&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>37</span> <span class='kw'>or</span> <span class='symbol'>:g8_b8r8_444</span></pre></dd>
+      
+        <dt id="G8_R8B8_444-constant" class="">G8_R8B8_444 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Multiplane format with 2 planes.</p>
+<p>The first plane contains the first channel, usually containing<br />
+luma values.<br />
+The second plane with interleaved chroma values, Cr followed by Cb.<br />
+This format is not subsampled.</p>
+<p>Commonly known by the fourcc &quot;NV42&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>38</span> <span class='kw'>or</span> <span class='symbol'>:g8_r8b8_444</span></pre></dd>
+      
+        <dt id="G10X6_B10X6R10X6_420-constant" class="">G10X6_B10X6R10X6_420 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Multiplane format with 2 planes.</p>
+<p>Each channel is a 16 bit integer, but only the highest 10 bits are used.</p>
+<p>The first plane contains the first channel, usually containing<br />
+luma values.<br />
+The second plane with interleaved chroma values, Cr followed by Cb.<br />
+This format is not subsampled.</p>
+<p>Commonly known by the fourcc &quot;P010&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>39</span> <span class='kw'>or</span> <span class='symbol'>:g10x6_b10x6r10x6_420</span></pre></dd>
+      
+        <dt id="G12X4_B12X4R12X4_420-constant" class="">G12X4_B12X4R12X4_420 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Multiplane format with 2 planes.</p>
+<p>Each channel is a 16 bit integer, but only the highest 10 bits are used.</p>
+<p>The first plane contains the first channel, usually containing<br />
+luma values.<br />
+The second plane with interleaved chroma values, Cr followed by Cb.<br />
+This format is not subsampled.</p>
+<p>Commonly known by the fourcc &quot;P012&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>40</span> <span class='kw'>or</span> <span class='symbol'>:g12x4_b12x4r12x4_420</span></pre></dd>
+      
+        <dt id="G16_B16R16_420-constant" class="">G16_B16R16_420 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Multiplane format with 2 planes.</p>
+<p>Each channel is a 16 bit integer.</p>
+<p>The first plane contains the first channel, usually containing<br />
+luma values.<br />
+The second plane with interleaved chroma values, Cr followed by Cb.<br />
+This format is not subsampled.</p>
+<p>Commonly known by the fourcc &quot;P016&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>41</span> <span class='kw'>or</span> <span class='symbol'>:g16_b16r16_420</span></pre></dd>
+      
+        <dt id="G8_B8_R8_410-constant" class="">G8_B8_R8_410 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Multiplane format with 3 planes.</p>
+<p>Each channel is a 8 bit integer.</p>
+<p>The first plane usually contains the luma channel. It is mapped<br />
+into the 2nd channel.</p>
+<p>The second plane usually contains the first chroma chanel.<br />
+Subsampled in both the X and Y direction with 4:1 ratio. It is<br />
+mapped into the 3rd channel.</p>
+<p>The third plane usually contains the second chroma channel.<br />
+Subsampled in both the X and Y direction with 4:1 ratio. It is<br />
+mapped into the 1st channel.</p>
+<p>Commonly known by the fourcc &quot;YUV410&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>42</span> <span class='kw'>or</span> <span class='symbol'>:g8_b8_r8_410</span></pre></dd>
+      
+        <dt id="G8_R8_B8_410-constant" class="">G8_R8_B8_410 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Multiplane format with 3 planes.</p>
+<p>Each channel is a 8 bit integer.</p>
+<p>The first plane usually contains the luma channel. It is mapped<br />
+into the 2nd channel.</p>
+<p>The second plane usually contains the second chroma chanel.<br />
+Subsampled in both the X and Y direction with 4:1 ratio. It is<br />
+mapped into the 1st channel.</p>
+<p>The third plane usually contains the first chroma channel.<br />
+Subsampled in both the X and Y direction with 4:1 ratio. It is<br />
+mapped into the 3rd channel.</p>
+<p>Commonly known by the fourcc &quot;YVU410&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>43</span> <span class='kw'>or</span> <span class='symbol'>:g8_r8_b8_410</span></pre></dd>
+      
+        <dt id="G8_B8_R8_411-constant" class="">G8_B8_R8_411 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Multiplane format with 3 planes.</p>
+<p>Each channel is a 8 bit integer.</p>
+<p>The first plane usually contains the luma channel. It is mapped<br />
+into the 2nd channel.</p>
+<p>The second plane usually contains the first chroma chanel.<br />
+Subsampled in the X direction with 4:1 ratio. It is<br />
+mapped into the 3rd channel.</p>
+<p>The third plane usually contains the second chroma channel.<br />
+Subsampled in the X direction with 4:1 ratio. It is<br />
+mapped into the 1st channel.</p>
+<p>Commonly known by the fourcc &quot;YUV411&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>44</span> <span class='kw'>or</span> <span class='symbol'>:g8_b8_r8_411</span></pre></dd>
+      
+        <dt id="G8_R8_B8_411-constant" class="">G8_R8_B8_411 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Multiplane format with 3 planes.</p>
+<p>Each channel is a 8 bit integer.</p>
+<p>The first plane usually contains the luma channel. It is mapped<br />
+into the 2nd channel.</p>
+<p>The second plane usually contains the second chroma chanel.<br />
+Subsampled in the X direction with 4:1 ratio. It is<br />
+mapped into the 1st channel.</p>
+<p>The third plane usually contains the first chroma channel.<br />
+Subsampled in the X direction with 4:1 ratio. It is<br />
+mapped into the 3rd channel.</p>
+<p>Commonly known by the fourcc &quot;YVU411&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>45</span> <span class='kw'>or</span> <span class='symbol'>:g8_r8_b8_411</span></pre></dd>
+      
+        <dt id="G8_B8_R8_420-constant" class="">G8_B8_R8_420 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Multiplane format with 3 planes.</p>
+<p>Each channel is a 8 bit integer.</p>
+<p>The first plane usually contains the luma channel. It is mapped<br />
+into the 2nd channel.</p>
+<p>The second plane usually contains the first chroma chanel.<br />
+Subsampled in both the X and Y direction. It is mapped into the<br />
+3rd channel.</p>
+<p>The third plane usually contains the second chroma channel.<br />
+Subsampled in both the X and Y direction. It is mapped into the<br />
+1st channel.</p>
+<p>Commonly known by the fourcc &quot;YUV420&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>46</span> <span class='kw'>or</span> <span class='symbol'>:g8_b8_r8_420</span></pre></dd>
+      
+        <dt id="G8_R8_B8_420-constant" class="">G8_R8_B8_420 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Multiplane format with 3 planes.</p>
+<p>Each channel is a 8 bit integer.</p>
+<p>The first plane usually contains the luma channel. It is mapped<br />
+into the 2nd channel.</p>
+<p>The second plane usually contains the second chroma chanel.<br />
+Subsampled in both the X and Y direction. It is mapped into the<br />
+1st channel.</p>
+<p>The third plane usually contains the first chroma channel.<br />
+Subsampled in both the X and Y direction. It is mapped into the<br />
+3rd channel.</p>
+<p>Commonly known by the fourcc &quot;YVU420&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>47</span> <span class='kw'>or</span> <span class='symbol'>:g8_r8_b8_420</span></pre></dd>
+      
+        <dt id="G8_B8_R8_422-constant" class="">G8_B8_R8_422 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Multiplane format with 3 planes.</p>
+<p>Each channel is a 8 bit integer.</p>
+<p>The first plane usually contains the luma channel. It is mapped<br />
+into the 2nd channel.</p>
+<p>The second plane usually contains the first chroma chanel.<br />
+Subsampled in the X direction. It is mapped into the 3rd channel.</p>
+<p>The third plane usually contains the second chroma channel.<br />
+Subsampled in the X direction. It is mapped into the 1st channel.</p>
+<p>Commonly known by the fourcc &quot;YUV422&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>48</span> <span class='kw'>or</span> <span class='symbol'>:g8_b8_r8_422</span></pre></dd>
+      
+        <dt id="G8_R8_B8_422-constant" class="">G8_R8_B8_422 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Multiplane format with 3 planes.</p>
+<p>Each channel is a 8 bit integer.</p>
+<p>The first plane usually contains the luma channel. It is mapped<br />
+into the 2nd channel.</p>
+<p>The second plane usually contains the second chroma chanel.<br />
+Subsampled in the X direction. It is mapped into the 1st channel.</p>
+<p>The third plane usually contains the first chroma channel.<br />
+Subsampled in the X direction. It is mapped into the 3rd channel.</p>
+<p>Commonly known by the fourcc &quot;YVU422&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>49</span> <span class='kw'>or</span> <span class='symbol'>:g8_r8_b8_422</span></pre></dd>
+      
+        <dt id="G8_B8_R8_444-constant" class="">G8_B8_R8_444 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Multiplane format with 3 planes.</p>
+<p>Each channel is a 8 bit integer.</p>
+<p>The first plane usually contains the luma channel. It is mapped<br />
+into the 2nd channel.</p>
+<p>The second plane usually contains the first chroma chanel. It is<br />
+mapped into the 3rd channel.</p>
+<p>The third plane usually contains the second chroma channel. It is<br />
+mapped into the 1st channel.</p>
+<p>Commonly known by the fourcc &quot;YUV444&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>50</span> <span class='kw'>or</span> <span class='symbol'>:g8_b8_r8_444</span></pre></dd>
+      
+        <dt id="G8_R8_B8_444-constant" class="">G8_R8_B8_444 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Multiplane format with 3 planes.</p>
+<p>Each channel is a 8 bit integer.</p>
+<p>The first plane usually contains the luma channel. It is mapped<br />
+into the 2nd channel.</p>
+<p>The second plane usually contains the second chroma chanel.<br />
+Subsampled in the X direction. It is mapped into the 1st channel.</p>
+<p>The third plane usually contains the first chroma channel.<br />
+Subsampled in the X direction. It is mapped into the 3rd channel.</p>
+<p>Commonly known by the fourcc &quot;YVU444&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>51</span> <span class='kw'>or</span> <span class='symbol'>:g8_r8_b8_444</span></pre></dd>
+      
+        <dt id="G8B8G8R8_422-constant" class="">G8B8G8R8_422 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Packed format with subsampled channels.</p>
+<p>Each channel is a 8 bit integer. The red and blue/chroma channels<br />
+are subsampled and interleaved with the green/luma channel.</p>
+<p>Each block contains 2 pixels, so the width must be a multiple of<br />
+2.</p>
+<p>Commonly known by the fourcc &quot;YUYV&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>52</span> <span class='kw'>or</span> <span class='symbol'>:g8b8g8r8_422</span></pre></dd>
+      
+        <dt id="G8R8G8B8_422-constant" class="">G8R8G8B8_422 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Packed format with subsampled channels.</p>
+<p>Each channel is a 8 bit integer. The red and blue/chroma channels<br />
+are subsampled and interleaved with the green/luma channel.</p>
+<p>Each block contains 2 pixels, so the width must be a multiple of<br />
+2.</p>
+<p>Commonly known by the fourcc &quot;YVYU&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>53</span> <span class='kw'>or</span> <span class='symbol'>:g8r8g8b8_422</span></pre></dd>
+      
+        <dt id="R8G8B8G8_422-constant" class="">R8G8B8G8_422 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Packed format with subsampled channels.</p>
+<p>Each channel is a 8 bit integer. The red and blue/chroma channels<br />
+are subsampled and interleaved with the green/luma channel.</p>
+<p>Each block contains 2 pixels, so the width must be a multiple of<br />
+2.</p>
+<p>Commonly known by the fourcc &quot;VYUY&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>54</span> <span class='kw'>or</span> <span class='symbol'>:r8g8b8g8_422</span></pre></dd>
+      
+        <dt id="B8G8R8G8_422-constant" class="">B8G8R8G8_422 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Packed format with subsampled channels.</p>
+<p>Each channel is a 8 bit integer. The red and blue/chroma channels<br />
+are subsampled and interleaved with the green/luma channel.</p>
+<p>Each block contains 2 pixels, so the width must be a multiple of<br />
+2.</p>
+<p>Commonly known by the fourcc &quot;UYVY&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>55</span> <span class='kw'>or</span> <span class='symbol'>:b8g8r8g8_422</span></pre></dd>
+      
+        <dt id="X6G10_X6B10_X6R10_420-constant" class="">X6G10_X6B10_X6R10_420 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Multiplane format with 3 planes.</p>
+<p>Each channel is a 16 bit integer.</p>
+<p>Only the 10 lower bits are used. The remaining ones must be set to 0 by the<br />
+producer.</p>
+<p>The first plane usually contains the luma channel. It is mapped<br />
+into the 2nd channel.</p>
+<p>The second plane usually contains the first chroma chanel.<br />
+Subsampled in both the X and Y direction. It is mapped into the<br />
+3rd channel.</p>
+<p>The third plane usually contains the second chroma channel.<br />
+Subsampled in both the X and Y direction. It is mapped into the<br />
+1st channel.</p>
+<p>Commonly known by the fourcc &quot;S010&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>56</span> <span class='kw'>or</span> <span class='symbol'>:x6g10_x6b10_x6r10_420</span></pre></dd>
+      
+        <dt id="X6G10_X6B10_X6R10_422-constant" class="">X6G10_X6B10_X6R10_422 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Multiplane format with 3 planes.</p>
+<p>Each channel is a 16 bit integer.</p>
+<p>Only the 10 lower bits are used. The remaining ones must be set to 0 by the<br />
+producer.</p>
+<p>The first plane usually contains the luma channel. It is mapped<br />
+into the 2nd channel.</p>
+<p>The second plane usually contains the first chroma chanel.<br />
+Subsampled in the X direction. It is mapped into the 3rd channel.</p>
+<p>The third plane usually contains the second chroma channel.<br />
+Subsampled in the X direction. It is mapped into the 1st channel.</p>
+<p>Commonly known by the fourcc &quot;S210&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>57</span> <span class='kw'>or</span> <span class='symbol'>:x6g10_x6b10_x6r10_422</span></pre></dd>
+      
+        <dt id="X6G10_X6B10_X6R10_444-constant" class="">X6G10_X6B10_X6R10_444 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Multiplane format with 3 planes.</p>
+<p>Each channel is a 16 bit integer.</p>
+<p>Only the 10 lower bits are used. The remaining ones must be set to 0 by the<br />
+producer.</p>
+<p>The first plane usually contains the luma channel. It is mapped<br />
+into the 2nd channel.</p>
+<p>The second plane usually contains the first chroma chanel. It is<br />
+mapped into the 3rd channel.</p>
+<p>The third plane usually contains the second chroma channel. It is<br />
+mapped into the 1st channel.</p>
+<p>Commonly known by the fourcc &quot;S410&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>58</span> <span class='kw'>or</span> <span class='symbol'>:x6g10_x6b10_x6r10_444</span></pre></dd>
+      
+        <dt id="X4G12_X4B12_X4R12_420-constant" class="">X4G12_X4B12_X4R12_420 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Multiplane format with 3 planes.</p>
+<p>Each channel is a 16 bit integer.</p>
+<p>Only the 12 lower bits are used. The remaining ones must be set to 0 by the<br />
+producer.</p>
+<p>The first plane usually contains the luma channel. It is mapped<br />
+into the 2nd channel.</p>
+<p>The second plane usually contains the first chroma chanel.<br />
+Subsampled in both the X and Y direction. It is mapped into the<br />
+3rd channel.</p>
+<p>The third plane usually contains the second chroma channel.<br />
+Subsampled in both the X and Y direction. It is mapped into the<br />
+1st channel.</p>
+<p>Commonly known by the fourcc &quot;S012&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>59</span> <span class='kw'>or</span> <span class='symbol'>:x4g12_x4b12_x4r12_420</span></pre></dd>
+      
+        <dt id="X4G12_X4B12_X4R12_422-constant" class="">X4G12_X4B12_X4R12_422 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Multiplane format with 3 planes.</p>
+<p>Each channel is a 16 bit integer.</p>
+<p>Only the 12 lower bits are used. The remaining ones must be set to 0 by the<br />
+producer.</p>
+<p>The first plane usually contains the luma channel. It is mapped<br />
+into the 2nd channel.</p>
+<p>The second plane usually contains the first chroma chanel.<br />
+Subsampled in the X direction. It is mapped into the 3rd channel.</p>
+<p>The third plane usually contains the second chroma channel.<br />
+Subsampled in the X direction. It is mapped into the 1st channel.</p>
+<p>Commonly known by the fourcc &quot;S212&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>60</span> <span class='kw'>or</span> <span class='symbol'>:x4g12_x4b12_x4r12_422</span></pre></dd>
+      
+        <dt id="X4G12_X4B12_X4R12_444-constant" class="">X4G12_X4B12_X4R12_444 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Multiplane format with 3 planes.</p>
+<p>Each channel is a 16 bit integer.</p>
+<p>Only the 12 lower bits are used. The remaining ones must be set to 0 by the<br />
+producer.</p>
+<p>The first plane usually contains the luma channel. It is mapped<br />
+into the 2nd channel.</p>
+<p>The second plane usually contains the first chroma chanel. It is<br />
+mapped into the 3rd channel.</p>
+<p>The third plane usually contains the second chroma channel. It is<br />
+mapped into the 1st channel.</p>
+<p>Commonly known by the fourcc &quot;S412&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>61</span> <span class='kw'>or</span> <span class='symbol'>:x4g12_x4b12_x4r12_444</span></pre></dd>
+      
+        <dt id="G16_B16_R16_420-constant" class="">G16_B16_R16_420 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Multiplane format with 3 planes.</p>
+<p>Each channel is a 16 bit integer.</p>
+<p>The first plane usually contains the luma channel. It is mapped<br />
+into the 2nd channel.</p>
+<p>The second plane usually contains the first chroma chanel.<br />
+Subsampled in both the X and Y direction. It is mapped into the<br />
+3rd channel.</p>
+<p>The third plane usually contains the second chroma channel.<br />
+Subsampled in both the X and Y direction. It is mapped into the<br />
+1st channel.</p>
+<p>Commonly known by the fourcc &quot;S016&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>62</span> <span class='kw'>or</span> <span class='symbol'>:g16_b16_r16_420</span></pre></dd>
+      
+        <dt id="G16_B16_R16_422-constant" class="">G16_B16_R16_422 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Multiplane format with 3 planes.</p>
+<p>Each channel is a 16 bit integer.</p>
+<p>The first plane usually contains the luma channel. It is mapped<br />
+into the 2nd channel.</p>
+<p>The second plane usually contains the first chroma chanel.<br />
+Subsampled in the X direction. It is mapped into the 3rd channel.</p>
+<p>The third plane usually contains the second chroma channel.<br />
+Subsampled in the X direction. It is mapped into the 1st channel.</p>
+<p>Commonly known by the fourcc &quot;S216&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>63</span> <span class='kw'>or</span> <span class='symbol'>:g16_b16_r16_422</span></pre></dd>
+      
+        <dt id="G16_B16_R16_444-constant" class="">G16_B16_R16_444 =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Multiplane format with 3 planes.</p>
+<p>Each channel is a 16 bit integer.</p>
+<p>The first plane usually contains the luma channel. It is mapped<br />
+into the 2nd channel.</p>
+<p>The second plane usually contains the first chroma chanel. It is<br />
+mapped into the 3rd channel.</p>
+<p>The third plane usually contains the second chroma channel. It is<br />
+mapped into the 1st channel.</p>
+<p>Commonly known by the fourcc &quot;S416&quot;.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>64</span> <span class='kw'>or</span> <span class='symbol'>:g16_b16_r16_444</span></pre></dd>
+      
         <dt id="N_FORMATS-constant" class="">N_FORMATS =
           <div class="docstring">
   <div class="discussion">
@@ -613,7 +1343,7 @@ more formats get added, so do not rely on its concrete integer.</p>
 
 </div>
         </dt>
-        <dd><pre class="code"><span class='int'>33</span> <span class='kw'>or</span> <span class='symbol'>:n_formats</span></pre></dd>
+        <dd><pre class="code"><span class='int'>65</span> <span class='kw'>or</span> <span class='symbol'>:n_formats</span></pre></dd>
       
     </dl>
   

@@ -104,10 +104,10 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The <code>GdkDrop</code> object represents the target of an ongoing DND operation.</p>
+    <p>Represents the target of an ongoing DND operation.</p>
 <p>Possible drop sites get informed about the status of the ongoing drag<br />
-operation with events of type %GDK_DRAG_ENTER, %GDK_DRAG_LEAVE,<br />
-%GDK_DRAG_MOTION and %GDK_DROP_START. The <code>GdkDrop</code> object can be obtained<br />
+operation with events of type <code>GDK_DRAG_ENTER</code>, <code>GDK_DRAG_LEAVE</code>,<br />
+<code>GDK_DRAG_MOTION</code> and <code>GDK_DROP_START</code>. The <code>GdkDrop</code> object can be obtained<br />
 from these [class<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Event] types using [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.DNDEvent.get_drop].</p>
 <p>The actual data transfer is initiated from the target side via an async<br />
 read, using one of the <code>GdkDrop</code> methods for this purpose:<br />
@@ -1017,7 +1017,8 @@ available via [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Drop.
       
       
         &mdash;
-        <div class='inline'><p>the action performed by the destination or 0 if the drop failed</p>
+        <div class='inline'><p>the action performed by the destination or <code>GDK_ACTION_NONE</code> if the<br />
+drop failed</p>
 </div>
       
     </li>
@@ -1354,9 +1355,6 @@ g_input_stream_read_bytes_async().</p>
   <div class="discussion">
     <p>Asynchronously request the drag operation's contents converted<br />
 to the given <!-- raw HTML omitted -->type<!-- raw HTML omitted -->.</p>
-<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. You must<br />
-then call [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Drop.read_value_finish] to get the resulting<br />
-<code>GValue</code>.</p>
 <p>For local drag-and-drop operations that are available in the given<br />
 <code>GType</code>, the value will be copied directly. Otherwise, GDK will<br />
 try to use [func<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.content_deserialize_async] to convert the data.</p>
@@ -1539,7 +1537,7 @@ change in the future, even depending on the actions you provide here.</p>
 <p>The <!-- raw HTML omitted -->preferred<!-- raw HTML omitted --> action is a hint to the drag-and-drop mechanism about which<br />
 action to use when multiple actions are possible.</p>
 <p>This function should be called by drag destinations in response to<br />
-%GDK_DRAG_ENTER or %GDK_DRAG_MOTION events. If the destination does<br />
+<code>GDK_DRAG_ENTER</code> or <code>GDK_DRAG_MOTION</code> events. If the destination does<br />
 not yet know the exact actions it supports, it should set any possible<br />
 actions first and then later call this function again.</p>
 
@@ -1560,8 +1558,8 @@ actions first and then later call this function again.</p>
       
       
         &mdash;
-        <div class='inline'><p>Supported actions of the destination, or 0 to indicate<br />
-that a drop will not be accepted</p>
+        <div class='inline'><p>Supported actions of the destination, or <code>GDK_ACTION_NONE</code> to<br />
+indicate that a drop will not be accepted</p>
 </div>
       
     </li>

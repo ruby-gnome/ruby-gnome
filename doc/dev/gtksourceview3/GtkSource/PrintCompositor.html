@@ -1399,6 +1399,15 @@ draw_page (GtkPrintOperation *operation,
                                            page_nr);
 }
 </code></pre>
+<pre class="code python"><code class="python">def on_draw_page(
+    operation: Gtk.PrintOperation,
+    context: Gtk.PrintContext,
+    page_nr: int,
+    compositor: GtkSource.PrintCompositor,
+) -&gt; None:
+    &quot;&quot;&quot;Signal handler for draw-page that renders a single page.&quot;&quot;&quot;
+    compositor.draw_page(context=context, page_nr=page_nr)
+</code></pre>
 
 
   </div>
@@ -2400,6 +2409,17 @@ paginate (GtkPrintOperation *operation,
     return FALSE;
 }
 </code></pre>
+<pre class="code python"><code class="python">def on_paginate(
+    operation: Gtk.PrintOperation,
+    context: Gtk.PrintContext,
+    compositor: GtkSource.PrintCompositor,
+) -&gt; bool:
+    if compositor.paginate(context=context):
+        n_pages = compositor.get_n_pages()
+        operation.set_n_pages(n_pages=n_pages)
+        return True
+    return False
+</code></pre>
 <p>If you don't need to do pagination in chunks, you can simply do it all in the<br />
 [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.PrintOperation::begin-print] handler, and set the number of pages from there, like<br />
 in the following example:</p>
@@ -2420,6 +2440,18 @@ begin_print (GtkPrintOperation *operation,
     n_pages = gtk_source_print_compositor_get_n_pages (compositor);
     gtk_print_operation_set_n_pages (operation, n_pages);
 }
+</code></pre>
+<pre class="code python"><code class="python">def on_begin_print(
+    operation: Gtk.PrintOperation,
+    context: Gtk.PrintContext,
+    compositor: GtkSource.PrintCompositor,
+) -&gt; None:
+    # Paginate until complete
+    while not compositor.paginate(context=context):
+        pass
+
+    n_pages = compositor.get_n_pages()
+    operation.set_n_pages(n_pages=n_pages)
 </code></pre>
 <p>are used by the the <!-- raw HTML omitted -->compositor<!-- raw HTML omitted --> to paginate the document.</p>
 

@@ -135,6 +135,29 @@ a particular <code>PangoFontMap</code> implementation.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#add_font_file-instance_method" title="#add_font_file (instance method)">#<strong>add_font_file</strong>(filename)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Loads a font file with one or more fonts into the <code>PangoFontMap</code>.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#changed-instance_method" title="#changed (instance method)">#<strong>changed</strong>  &#x21d2; nil </a>
     
 
@@ -149,7 +172,7 @@ a particular <code>PangoFontMap</code> implementation.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Forces a change in the context, which will cause any <code>PangoContext</code> using this fontmap to change.</p>
+    <span class="summary_desc"><div class='inline'><p>Forces a change in the fontmap, which will cause any <code>PangoContext</code> using this fontmap to change.</p>
 </div></span>
   
 </li>
@@ -379,7 +402,7 @@ a particular <code>PangoFontMap</code> implementation.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Returns a new font that is like <!-- raw HTML omitted -->font<!-- raw HTML omitted -->, except that its size is multiplied by <!-- raw HTML omitted -->scale<!-- raw HTML omitted -->, its backend-dependent configuration (e.g. cairo font options) is replaced by the one in <!-- raw HTML omitted -->context<!-- raw HTML omitted -->, and its variations are replaced by <!-- raw HTML omitted -->variations<!-- raw HTML omitted -->.</p>
+    <span class="summary_desc"><div class='inline'><p>Returns a new font that is like <!-- raw HTML omitted -->font<!-- raw HTML omitted -->, except that it is scaled by <!-- raw HTML omitted -->scale<!-- raw HTML omitted -->, its backend-dependent configuration (e.g. cairo font options) is replaced by the one in <!-- raw HTML omitted -->context<!-- raw HTML omitted -->, and its variations are replaced by <!-- raw HTML omitted -->variations<!-- raw HTML omitted -->.</p>
 </div></span>
   
 </li>
@@ -419,7 +442,68 @@ a particular <code>PangoFontMap</code> implementation.</p>
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="changed-instance_method">
+  <h3 class="signature first" id="add_font_file-instance_method">
+  
+    #<strong>add_font_file</strong>(filename)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Loads a font file with one or more fonts into the <code>PangoFontMap</code>.</p>
+<p>The added fonts will take precedence over preexisting<br />
+fonts with the same name.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>filename</span>
+      
+      
+        <span class='type'>(<tt>Pango::filename</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>Path to the font file</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>True if the font file is successfully loaded<br />
+into the fontmap, false if an error occurred.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="changed-instance_method">
   
     #<strong>changed</strong>  &#x21d2; <tt>nil</tt> 
   
@@ -429,12 +513,12 @@ a particular <code>PangoFontMap</code> implementation.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Forces a change in the context, which will cause any <code>PangoContext</code><br />
+    <p>Forces a change in the fontmap, which will cause any <code>PangoContext</code><br />
 using this fontmap to change.</p>
 <p>This function is only useful when implementing a new backend<br />
 for Pango, something applications won't do. Backends should<br />
 call this function if they have attached extra data to the<br />
-context and such data is changed.</p>
+fontmap and such data is changed.</p>
 
 
   </div>
@@ -1023,10 +1107,13 @@ a font matching <!-- raw HTML omitted -->desc<!-- raw HTML omitted -->.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns a new font that is like <!-- raw HTML omitted -->font<!-- raw HTML omitted -->, except that its size<br />
-is multiplied by <!-- raw HTML omitted -->scale<!-- raw HTML omitted -->, its backend-dependent configuration<br />
-(e.g. cairo font options) is replaced by the one in <!-- raw HTML omitted -->context<!-- raw HTML omitted -->,<br />
-and its variations are replaced by <!-- raw HTML omitted -->variations<!-- raw HTML omitted -->.</p>
+    <p>Returns a new font that is like <!-- raw HTML omitted -->font<!-- raw HTML omitted -->, except that it is scaled<br />
+by <!-- raw HTML omitted -->scale<!-- raw HTML omitted -->, its backend-dependent configuration (e.g. cairo font options)<br />
+is replaced by the one in <!-- raw HTML omitted -->context<!-- raw HTML omitted -->, and its variations are replaced<br />
+by <!-- raw HTML omitted -->variations<!-- raw HTML omitted -->.</p>
+<p>Note that the scaling here is meant to be linear, so this<br />
+scaling can be used to render a font on a hi-dpi display<br />
+without changing its optical size.</p>
 
 
   </div>

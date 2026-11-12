@@ -133,8 +133,6 @@ equivalent to allocating a data buffer using <code>malloc()</code> and then<br /
 wrapping it with <code>gdk_pixbuf_new_from_data()</code>. The <code>gdk_pixbuf_new()</code><br />
 function will compute an optimal rowstride so that rendering can be<br />
 performed with an efficient algorithm.</p>
-<p>As a special case, you can use the [<code>ctor&lt;b&gt;GdkPixbuf&lt;/b&gt;.Pixbuf.new_from_xpm_data</code>]<br />
-function to create a pixbuf from inline XPM image data.</p>
 <p>You can also copy an existing pixbuf with the [method<!-- raw HTML omitted -->Pixbuf<!-- raw HTML omitted -->.copy]<br />
 function. This is not the same as just acquiring a reference to<br />
 the old pixbuf instance: the copy function will actually duplicate<br />
@@ -7097,8 +7095,8 @@ the save routine generates.</p>
       
       
         &mdash;
-        <div class='inline'><p>a function that is called to save each block of data that<br />
-the save routine generates.</p>
+        <div class='inline'><p>a function that is called to<br />
+save each block of data that the save routine generates</p>
 </div>
       
     </li>
@@ -7113,7 +7111,7 @@ the save routine generates.</p>
       
       
         &mdash;
-        <div class='inline'><p>user data to pass to the save function.</p>
+        <div class='inline'><p>user data to pass to the save function</p>
 </div>
       
     </li>
@@ -7128,7 +7126,7 @@ the save routine generates.</p>
       
       
         &mdash;
-        <div class='inline'><p>name of file format.</p>
+        <div class='inline'><p>name of file format</p>
 </div>
       
     </li>

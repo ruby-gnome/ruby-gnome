@@ -282,7 +282,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Creates a new GBuffered::InputStream from the given <!-- raw HTML omitted -->base_stream<!-- raw HTML omitted -->, with a buffer set to <!-- raw HTML omitted -->size<!-- raw HTML omitted -->.</p>
+    <span class="summary_desc"><div class='inline'><p>Creates a new [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.BufferedInputStream] from the given <!-- raw HTML omitted -->base_stream<!-- raw HTML omitted -->, with a buffer set to <!-- raw HTML omitted -->size<!-- raw HTML omitted -->.</p>
 </div></span>
   
 </li>
@@ -305,7 +305,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Peeks in the buffer, copying data of size <!-- raw HTML omitted -->count<!-- raw HTML omitted --> into <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->, offset <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> bytes.</p>
+    <span class="summary_desc"><div class='inline'><p>Peeks in the buffered input, copying <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes of data from <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> bytes in the buffered input into <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.</p>
 </div></span>
   
 </li>
@@ -399,7 +399,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Creates a new GBuffered::InputStream from the given <!-- raw HTML omitted -->base_stream<!-- raw HTML omitted -->,<br />
+    <p>Creates a new [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.BufferedInputStream] from the given <!-- raw HTML omitted -->base_stream<!-- raw HTML omitted -->,<br />
 with a buffer set to <!-- raw HTML omitted -->size<!-- raw HTML omitted -->.</p>
 
 
@@ -419,7 +419,7 @@ with a buffer set to <!-- raw HTML omitted -->size<!-- raw HTML omitted -->.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GInput::Stream</p>
+        <div class='inline'><p>a [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.InputStream]</p>
 </div>
       
     </li>
@@ -611,21 +611,22 @@ with a buffer set to <!-- raw HTML omitted -->size<!-- raw HTML omitted -->.</p>
     <p>Tries to read <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes from the stream into the buffer.<br />
 Will block during this read.</p>
 <p>If <!-- raw HTML omitted -->count<!-- raw HTML omitted --> is zero, returns zero and does nothing. A value of <!-- raw HTML omitted -->count<!-- raw HTML omitted --><br />
-larger than %G_MAXSSIZE will cause a %G_IO_ERROR_INVALID_ARGUMENT error.</p>
+larger than <code>G_MAXSSIZE</code> will cause a<br />
+[error<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.IOErrorEnum.INVALID_ARGUMENT] error.</p>
 <p>On success, the number of bytes read into the buffer is returned.<br />
 It is not an error if this is not the same as the requested size, as it<br />
 can happen e.g. near the end of a file. Zero is returned on end of file<br />
 (or if <!-- raw HTML omitted -->count<!-- raw HTML omitted --> is zero),  but never otherwise.</p>
 <p>If <!-- raw HTML omitted -->count<!-- raw HTML omitted --> is -1 then the attempted read size is equal to the number of<br />
 bytes that are required to fill the buffer.</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by<br />
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not <code>NULL</code>, then the operation can be cancelled by<br />
 triggering the cancellable object from another thread. If the operation<br />
-was cancelled, the error %G_IO_ERROR_CANCELLED will be returned. If an<br />
-operation was partially finished when the operation was cancelled the<br />
+was cancelled, the error [error<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.IOErrorEnum.CANCELLED] will be returned.<br />
+If an operation was partially finished when the operation was cancelled the<br />
 partial result will be returned, without an error.</p>
-<p>On error -1 is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set accordingly.</p>
+<p>On error <code>-1</code> is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set accordingly.</p>
 <p>For the asynchronous, non-blocking, version of this function, see<br />
-g_buffered_input_stream_fill_async().</p>
+[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.BufferedInputStream.fill_async].</p>
 
 
   </div>
@@ -659,7 +660,7 @@ g_buffered_input_stream_fill_async().</p>
       
       
         &mdash;
-        <div class='inline'><p>optional #GCancellable object, nil to ignore</p>
+        <div class='inline'><p>optional [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Cancellable] object, <code>NULL</code> to ignore</p>
 </div>
       
     </li>
@@ -678,7 +679,7 @@ g_buffered_input_stream_fill_async().</p>
       
         &mdash;
         <div class='inline'><p>the number of bytes read into <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->'s buffer, up to <!-- raw HTML omitted -->count<!-- raw HTML omitted -->,<br />
-or -1 on error.</p>
+or <code>-1</code> on error.</p>
 </div>
       
     </li>
@@ -701,8 +702,8 @@ or -1 on error.</p>
   <div class="discussion">
     <p>Reads data into <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->'s buffer asynchronously, up to <!-- raw HTML omitted -->count<!-- raw HTML omitted --> size.<br />
 <!-- raw HTML omitted -->io_priority<!-- raw HTML omitted --> can be used to prioritize reads. For the synchronous<br />
-version of this function, see g_buffered_input_stream_fill().</p>
-<p>If <!-- raw HTML omitted -->count<!-- raw HTML omitted --> is -1 then the attempted read size is equal to the number<br />
+version of this function, see [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.BufferedInputStream.fill].</p>
+<p>If <!-- raw HTML omitted -->count<!-- raw HTML omitted --> is <code>-1</code> then the attempted read size is equal to the number<br />
 of bytes that are required to fill the buffer.</p>
 
 
@@ -737,7 +738,7 @@ of bytes that are required to fill the buffer.</p>
       
       
         &mdash;
-        <div class='inline'><p>the [I/O priority][io-priority] of the request</p>
+        <div class='inline'><p>the <a href="iface.AsyncResult.html#io-priority">I/O priority</a> of the request</p>
 </div>
       
     </li>
@@ -752,7 +753,7 @@ of bytes that are required to fill the buffer.</p>
       
       
         &mdash;
-        <div class='inline'><p>optional #GCancellable object</p>
+        <div class='inline'><p>optional [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Cancellable] object</p>
 </div>
       
     </li>
@@ -767,7 +768,7 @@ of bytes that are required to fill the buffer.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::ReadyCallback</p>
+        <div class='inline'><p>a [callback<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AsyncReadyCallback]</p>
 </div>
       
     </li>
@@ -836,7 +837,7 @@ of bytes that are required to fill the buffer.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GAsync::Result</p>
+        <div class='inline'><p>a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AsyncResult]</p>
 </div>
       
     </li>
@@ -875,8 +876,8 @@ of bytes that are required to fill the buffer.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Peeks in the buffer, copying data of size <!-- raw HTML omitted -->count<!-- raw HTML omitted --> into <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->,<br />
-offset <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> bytes.</p>
+    <p>Peeks in the buffered input, copying <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes of data from <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> bytes<br />
+in the buffered input into <!-- raw HTML omitted -->buffer<!-- raw HTML omitted -->.</p>
 
 
   </div>
@@ -896,7 +897,7 @@ offset <!-- raw HTML omitted -->offset<!-- raw HTML omitted --> bytes.</p>
       
         &mdash;
         <div class='inline'><p>a pointer to<br />
-an allocated chunk of memory</p>
+an allocated chunk of memory, which must be at least <!-- raw HTML omitted -->count<!-- raw HTML omitted --> bytes long</p>
 </div>
       
     </li>
@@ -911,7 +912,8 @@ an allocated chunk of memory</p>
       
       
         &mdash;
-        <div class='inline'><p>a #gsize</p>
+        <div class='inline'><p>offset into the buffered input to peek from, or zero to peek from<br />
+the next byte in the buffered input onwards</p>
 </div>
       
     </li>
@@ -926,7 +928,7 @@ an allocated chunk of memory</p>
       
       
         &mdash;
-        <div class='inline'><p>a #gsize</p>
+        <div class='inline'><p>number of bytes to peek</p>
 </div>
       
     </li>
@@ -944,7 +946,7 @@ an allocated chunk of memory</p>
       
       
         &mdash;
-        <div class='inline'><p>a #gsize of the number of bytes peeked, or -1 on error.</p>
+        <div class='inline'><p>the number of bytes copied, which may be zero</p>
 </div>
       
     </li>
@@ -1028,13 +1030,13 @@ the stream or filling the buffer.</p>
     <p>Tries to read a single byte from the stream or the buffer. Will block<br />
 during this read.</p>
 <p>On success, the byte read from the stream is returned. On end of stream<br />
--1 is returned but it's not an exceptional error and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is not set.</p>
-<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not nil, then the operation can be cancelled by<br />
+<code>-1</code> is returned but it's not an exceptional error and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is not set.</p>
+<p>If <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not <code>NULL</code>, then the operation can be cancelled by<br />
 triggering the cancellable object from another thread. If the operation<br />
-was cancelled, the error %G_IO_ERROR_CANCELLED will be returned. If an<br />
-operation was partially finished when the operation was cancelled the<br />
+was cancelled, the error [error<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.IOErrorEnum.CANCELLED] will be returned.<br />
+If an operation was partially finished when the operation was cancelled the<br />
 partial result will be returned, without an error.</p>
-<p>On error -1 is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set accordingly.</p>
+<p>On error <code>-1</code> is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set accordingly.</p>
 
 
   </div>
@@ -1053,7 +1055,7 @@ partial result will be returned, without an error.</p>
       
       
         &mdash;
-        <div class='inline'><p>optional #GCancellable object, nil to ignore</p>
+        <div class='inline'><p>optional [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Cancellable] object, <code>NULL</code> to ignore</p>
 </div>
       
     </li>
@@ -1071,7 +1073,7 @@ partial result will be returned, without an error.</p>
       
       
         &mdash;
-        <div class='inline'><p>the byte read from the <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->, or -1 on end of stream or error.</p>
+        <div class='inline'><p>the byte read from the <!-- raw HTML omitted -->stream<!-- raw HTML omitted -->, or <code>-1</code> on end of stream or error.</p>
 </div>
       
     </li>

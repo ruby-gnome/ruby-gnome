@@ -775,10 +775,10 @@ for the asynchronous version.</p>
   <div class="discussion">
     <p>Asynchronously creates a new GDBus::ObjectManagerClient object.</p>
 <p>This is an asynchronous failable constructor. When the result is<br />
-ready, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked in the<br />
-[thread-default main context][g-main-context-push-thread-default]<br />
-of the thread you are calling this method from. You can<br />
-then call g_dbus_object_manager_client_new_finish() to get the result. See<br />
+ready, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked in the thread-default main context<br />
+(see [method<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.MainContext.push_thread_default])<br />
+of the thread you are calling this method from. You can then call<br />
+g_dbus_object_manager_client_new_finish() to get the result. See<br />
 g_dbus_object_manager_client_new_sync() for the synchronous version.</p>
 
 
@@ -971,8 +971,8 @@ g_dbus_object_manager_client_new_sync() for the synchronous version.</p>
     <p>Like g_dbus_object_manager_client_new() but takes a GBus::Type instead of a<br />
 GDBus::Connection.</p>
 <p>This is an asynchronous failable constructor. When the result is<br />
-ready, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked in the<br />
-[thread-default main loop][g-main-context-push-thread-default]<br />
+ready, <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be invoked in the thread-default main context<br />
+(see [method<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.MainContext.push_thread_default])<br />
 of the thread you are calling this method from. You can<br />
 then call g_dbus_object_manager_client_new_for_bus_finish() to get the result. See<br />
 g_dbus_object_manager_client_new_for_bus_sync() for the synchronous version.</p>

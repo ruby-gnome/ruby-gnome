@@ -2272,7 +2272,7 @@ is a #guchar. Free with g_free().</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Checks whether <!-- raw HTML omitted -->message<!-- raw HTML omitted --> is locked. To monitor changes to this<br />
-value, conncet to the #GObject::notify signal to listen for changes<br />
+value, connect to the #GObject::notify signal to listen for changes<br />
 on the GDBus::Message:locked property.</p>
 
 
@@ -3389,6 +3389,8 @@ UNIX File Descriptors:
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the serial for <!-- raw HTML omitted -->message<!-- raw HTML omitted -->.</p>
+<p>The <a href="https://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-messages">D-Bus specification</a><br />
+does not allow the <!-- raw HTML omitted -->serial<!-- raw HTML omitted --> to be zero.</p>
 
 
   </div>
@@ -3407,7 +3409,7 @@ UNIX File Descriptors:
       
       
         &mdash;
-        <div class='inline'><p>A #guint32.</p>
+        <div class='inline'><p>A #guint32, which must not be zero.</p>
 </div>
       
     </li>

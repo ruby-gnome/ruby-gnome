@@ -104,7 +104,7 @@
 
 <div id="subclasses">
   <h2>Direct Known Subclasses</h2>
-  <p class="children"><span class='object_link'><a href="AnnotMarkup.html" title="Poppler::AnnotMarkup (class)">AnnotMarkup</a></span>, <span class='object_link'><a href="AnnotMovie.html" title="Poppler::AnnotMovie (class)">AnnotMovie</a></span>, <span class='object_link'><a href="AnnotScreen.html" title="Poppler::AnnotScreen (class)">AnnotScreen</a></span>, <span class='object_link'><a href="AnnotStamp.html" title="Poppler::AnnotStamp (class)">AnnotStamp</a></span></p>
+  <p class="children"><span class='object_link'><a href="AnnotMarkup.html" title="Poppler::AnnotMarkup (class)">AnnotMarkup</a></span>, <span class='object_link'><a href="AnnotMovie.html" title="Poppler::AnnotMovie (class)">AnnotMovie</a></span>, <span class='object_link'><a href="AnnotScreen.html" title="Poppler::AnnotScreen (class)">AnnotScreen</a></span></p>
 </div>
 
 
@@ -139,6 +139,29 @@
 
   
     <span class="summary_desc"><div class='inline'><p>Gets the type of <!-- raw HTML omitted -->poppler_annot<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#border_width=-instance_method" title="#border_width= (instance method)">#<strong>border_width=</strong>(width)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the border width of the annotation.</p>
 </div></span>
   
 </li>
@@ -277,6 +300,29 @@
 
   
     <span class="summary_desc"><div class='inline'><p>Sets the flag field specifying various characteristics of the <!-- raw HTML omitted -->poppler_annot<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_border_width-instance_method" title="#get_border_width (instance method)">#<strong>get_border_width</strong>(width)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the border width of the annotation.</p>
 </div></span>
   
 </li>
@@ -438,6 +484,63 @@
         &mdash;
         <div class='inline'><p>Poppler::AnnotType of <!-- raw HTML omitted -->poppler_annot<!-- raw HTML omitted -->.</p>
 </div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="border_width=-instance_method">
+  
+    #<strong>border_width=</strong>(width)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the border width of the annotation. Since there is currently no<br />
+mechanism in the GLib binding to control the appearance of the border width,<br />
+this should generally only be used to disable the border, although the<br />
+API might be completed in the future.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the new border width</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
       
     </li>
   
@@ -722,6 +825,66 @@ replacing the current contents.</p>
         <span class='type'>(<tt>nil</tt>)</span>
       
       
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_border_width-instance_method">
+  
+    #<strong>get_border_width</strong>(width)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the border width of the annotation. Some PDF editors set a border<br />
+width even if the border is not actually drawn.<br />
+is defined, otherwise returns false and sets <!-- raw HTML omitted -->border_width<!-- raw HTML omitted --> to 0.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>width</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a valid pointer to a double</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true and sets <!-- raw HTML omitted -->border_width<!-- raw HTML omitted --> to the actual border width if a border</p>
+</div>
       
     </li>
   

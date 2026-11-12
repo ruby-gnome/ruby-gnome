@@ -106,9 +106,9 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GtkFileFilter</code> filters files by name or mime type.</p>
+    <p>Filters files by name or mime type.</p>
 <p><code>GtkFileFilter</code> can be used to restrict the files being shown in a<br />
-<code>GtkFileChooser</code>. Files can be filtered based on their name (with<br />
+file chooser. Files can be filtered based on their name (with<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileFilter.add_pattern] or [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileFilter.add_suffix])<br />
 or on their mime type (with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileFilter.add_mime_type]).</p>
 <p>Filtering by mime types handles aliasing and subclassing of mime<br />
@@ -116,8 +116,8 @@ types; e.g. a filter for text/plain also matches a file with mime<br />
 type application/rtf, since application/rtf is a subclass of<br />
 text/plain. Note that <code>GtkFileFilter</code> allows wildcards for the<br />
 subtype of a mime type, so you can e.g. filter for image/<span data-escaped-char>*</span>.</p>
-<p>Normally, file filters are used by adding them to a <code>GtkFileChooser</code><br />
-(see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileChooser.add_filter]), but it is also possible to<br />
+<p>Normally, file filters are used by adding them to a file chooser<br />
+(see [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.set_filters]), but it is also possible to<br />
 manually use a file filter on any [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FilterListModel] containing<br />
 <code>GFileInfo</code> objects.</p>
 <h1 id="gtkfilefilter-as-gtkbuildable">GtkFileFilter as GtkBuildable<a href="#gtkfilefilter-as-gtkbuildable" aria-label="Link to heading 'GtkFileFilter as GtkBuildable'" data-heading-content="GtkFileFilter as GtkBuildable" class="anchor"></a></h1>
@@ -184,7 +184,30 @@ rules:</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Adds a rule allowing a given mime type to <!-- raw HTML omitted -->filter<!-- raw HTML omitted -->.</p>
+    <span class="summary_desc"><div class='inline'><p>Adds a rule allowing a given mime type.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_mime_types-instance_method" title="#add_mime_types (instance method)">#<strong>add_mime_types</strong>(mime_types)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds a rule allowing a given array of mime types.</p>
 </div></span>
   
 </li>
@@ -207,7 +230,7 @@ rules:</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Adds a rule allowing a shell style glob to a filter.</p>
+    <span class="summary_desc"><div class='inline'><p>Adds a rule allowing a shell style glob pattern.</p>
 </div></span>
   
 </li>
@@ -230,7 +253,7 @@ rules:</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Adds a rule allowing image files in the formats supported by GdkPixbuf.</p>
+    <span class="summary_desc"><div class='inline'><p>Adds a rule allowing image files in the formats supported by <code>GdkPixbuf</code>.</p>
 </div></span>
   
 </li>
@@ -525,7 +548,7 @@ rules:</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a rule allowing a given mime type to <!-- raw HTML omitted -->filter<!-- raw HTML omitted -->.</p>
+    <p>Adds a rule allowing a given mime type.</p>
 
 
   </div>
@@ -569,6 +592,64 @@ rules:</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="add_mime_types-instance_method">
+  
+    #<strong>add_mime_types</strong>(mime_types)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds a rule allowing a given array of mime types.<br />
+It can for example be used with<br />
+<a href="https://gnome.pages.gitlab.gnome.org/glycin/libglycin/type_func.Loader.get_mime_types.html">Gly.Loader.get_mime_types</a>.</p>
+<p>This is equivalent to calling [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileFilter.add_mime_type]<br />
+for all the supported mime types.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>mime_types</span>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an array of mime types</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="add_pattern-instance_method">
   
     #<strong>add_pattern</strong>(pattern)  &#x21d2; <tt>nil</tt> 
@@ -579,7 +660,7 @@ rules:</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a rule allowing a shell style glob to a filter.</p>
+    <p>Adds a rule allowing a shell style glob pattern.</p>
 <p>Note that it depends on the platform whether pattern<br />
 matching ignores case or not. On Windows, it does, on<br />
 other platforms, it doesn't.</p>
@@ -601,7 +682,7 @@ other platforms, it doesn't.</p>
       
       
         &mdash;
-        <div class='inline'><p>a shell style glob</p>
+        <div class='inline'><p>a shell style glob pattern</p>
 </div>
       
     </li>
@@ -636,8 +717,7 @@ other platforms, it doesn't.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Adds a rule allowing image files in the formats supported<br />
-by GdkPixbuf.</p>
+    <p>Adds a rule allowing image files in the formats supported by <code>GdkPixbuf</code>.</p>
 <p>This is equivalent to calling [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileFilter.add_mime_type]<br />
 for all the supported mime types.</p>
 
@@ -675,8 +755,11 @@ for all the supported mime types.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Adds a suffix match rule to a filter.</p>
-<p>This is similar to adding a match for the pattern<br />
-&quot;*.<!-- raw HTML omitted -->suffix<!-- raw HTML omitted -->&quot;.</p>
+<p>This is similar to adding a match for the pattern &quot;*.<!-- raw HTML omitted -->suffix<!-- raw HTML omitted -->&quot;</p>
+<p>An exaple to filter files with the suffix &quot;.sub&quot;:</p>
+<pre class="code c"><code class="c">gtk_file_filter_add_suffix (filter, &quot;sub&quot;);
+</code></pre>
+<p>Filters with multiple dots are allowed.</p>
 <p>In contrast to pattern matches, suffix matches<br />
 are <em>always</em> case-insensitive.</p>
 
@@ -735,8 +818,7 @@ are <em>always</em> case-insensitive.</p>
     <p>Gets the attributes that need to be filled in for the <code>GFileInfo</code><br />
 passed to this filter.</p>
 <p>This function will not typically be used by applications;<br />
-it is intended principally for use in the implementation<br />
-of <code>GtkFileChooser</code>.</p>
+it is intended for use in file chooser implementation.</p>
 
 
   </div>
@@ -830,8 +912,8 @@ of <code>GtkFileChooser</code>.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The human-readable name of the filter.</p>
-<p>This is the string that will be displayed in the file chooser<br />
-user interface if there is a selectable list of filters.</p>
+<p>This is the string that will be displayed in the user interface<br />
+if there is a selectable list of filters.</p>
 
 
   </div>
@@ -871,8 +953,8 @@ user interface if there is a selectable list of filters.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The human-readable name of the filter.</p>
-<p>This is the string that will be displayed in the file chooser<br />
-user interface if there is a selectable list of filters.</p>
+<p>This is the string that will be displayed in the user interface<br />
+if there is a selectable list of filters.</p>
 
 
   </div>

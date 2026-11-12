@@ -120,6 +120,29 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#can_launch-instance_method" title="#can_launch (instance method)">#<strong>can_launch</strong>(parent)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns whether the launcher is likely to succeed in launching an application for its uri.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(uri)  &#x21d2; Gtk::UriLauncher </a>
     
 
@@ -159,7 +182,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Launch an application to open the uri.</p>
+    <span class="summary_desc"><div class='inline'><p>Launches an application to open the uri.</p>
 </div></span>
   
 </li>
@@ -290,9 +313,9 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="launch-instance_method">
+  <h3 class="signature first" id="can_launch-instance_method">
   
-    #<strong>launch</strong>(parent, cancellable, callback, user_data)  &#x21d2; <tt>nil</tt> 
+    #<strong>can_launch</strong>(parent)  &#x21d2; <tt>Boolean</tt> 
   
 
   
@@ -300,11 +323,10 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Launch an application to open the uri.</p>
-<p>This may present an app chooser dialog to the user.</p>
-<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the operation is completed.<br />
-It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.UriLauncher.launch_finish] to obtain<br />
-the result.</p>
+    <p>Returns whether the launcher is likely to succeed<br />
+in launching an application for its uri.</p>
+<p>This can be used to disable controls that trigger<br />
+the launcher when they are known not to work.</p>
 
 
   </div>
@@ -323,7 +345,67 @@ the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>the parent <code>GtkWindow</code></p>
+        <div class='inline'><p>the parent window</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>false if the launcher is known not to support<br />
+the uri, true otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="launch-instance_method">
+  
+    #<strong>launch</strong>(parent, cancellable, callback, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Launches an application to open the uri.</p>
+<p>This may present an app chooser dialog to the user.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>parent</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Window.html" title="Gtk::Window (class)">Gtk::Window</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the parent window</p>
 </div>
       
     </li>
@@ -338,7 +420,7 @@ the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GCancellable</code> to cancel the operation</p>
+        <div class='inline'><p>a cancellable to cancel the operation</p>
 </div>
       
     </li>
@@ -353,7 +435,8 @@ the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>a callback to call when the operation is complete</p>
+        <div class='inline'><p>a callback to call when the<br />
+operation is complete</p>
 </div>
       
     </li>
@@ -423,7 +506,7 @@ returns the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GAsyncResult</code></p>
+        <div class='inline'><p>the result</p>
 </div>
       
     </li>
@@ -441,8 +524,7 @@ returns the result.</p>
       
       
         &mdash;
-        <div class='inline'><p><code>TRUE</code> if an application was launched,<br />
-or <code>FALSE</code> and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set</p>
+        <div class='inline'><p>true if an application was launched</p>
 </div>
       
     </li>

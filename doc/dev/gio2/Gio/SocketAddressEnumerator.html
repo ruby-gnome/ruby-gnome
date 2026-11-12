@@ -229,7 +229,7 @@ blocking.</p>
 <p>If <!-- raw HTML omitted -->enumerator<!-- raw HTML omitted --> is expected to yield addresses, but for some reason<br />
 is unable to (eg, because of a DNS error), then the first call to<br />
 g_socket_address_enumerator_next() will return an appropriate error<br />
-in *<!-- raw HTML omitted -->error<!-- raw HTML omitted -->. However, if the first call to<br />
+in <code>*error</code>. However, if the first call to<br />
 g_socket_address_enumerator_next() succeeds, then any further<br />
 internal errors (other than <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> being triggered) will be<br />
 ignored.</p>
@@ -270,7 +270,7 @@ ignored.</p>
       
         &mdash;
         <div class='inline'><p>a GSocket::Address (owned by the caller), or nil on<br />
-error (in which case *<!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set) or if there are no<br />
+error (in which case <code>*error</code> will be set) or if there are no<br />
 more addresses.</p>
 </div>
       
@@ -421,7 +421,7 @@ error handling.</p>
       
         &mdash;
         <div class='inline'><p>a GSocket::Address (owned by the caller), or nil on<br />
-error (in which case *<!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set) or if there are no<br />
+error (in which case <code>*error</code> will be set) or if there are no<br />
 more addresses.</p>
 </div>
       

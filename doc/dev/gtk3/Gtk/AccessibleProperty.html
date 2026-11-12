@@ -132,9 +132,11 @@ or annotates the current element. Value type: string</p>
         <dt id="HAS_POPUP-constant" class="">HAS_POPUP =
           <div class="docstring">
   <div class="discussion">
-    <p>Indicates the availability and type of<br />
-interactive popup element, such as menu or dialog, that can be triggered<br />
-by an element.</p>
+    <p>Indicates the availability of interactive<br />
+popup element, such as menu or popover, that can be triggered by an<br />
+element. Contrary to “aria-haspopup”, it doesn't indicate the type of the<br />
+element, as such it cannot be used to indicate the availability of more<br />
+complex elements such as dialog. Value type: boolean</p>
 
 
   </div>
@@ -151,7 +153,16 @@ by an element.</p>
   <div class="discussion">
     <p>Indicates keyboard shortcuts that an<br />
 author has implemented to activate or give focus to an element. Value type:<br />
-string</p>
+string. The format of the value is a space-separated list of shortcuts, with<br />
+each shortcut consisting of one or more modifiers (<code>Control</code>, <code>Alt</code> or <code>Shift</code>),<br />
+followed by a non-modifier key, all separated by <code>+</code>. The<br />
+<a href="https://www.w3.org/TR/wai-aria/#aria-keyshortcuts">WAI-ARIA</a> reference<br />
+specifies how to build keyboard shortcuts strings, with specific values<br />
+for each key which are the same regardless of the language, so these<br />
+strings can't be built from localized key names. You can convert an<br />
+accelerator into the matching key shortcuts label with<br />
+[func<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.accelerator_get_accessible_label].<br />
+Examples: <code>F2</code>, <code>Alt+F</code>, <code>Control+Shift+N</code></p>
 
 
   </div>
@@ -395,7 +406,7 @@ Value type: double</p>
           <div class="docstring">
   <div class="discussion">
     <p>Defines the human readable text alternative<br />
-of aria-valuenow for a range widget. Value type: string</p>
+of [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.AccessibleProperty.VALUE_NOW] for a range widget. Value type: string</p>
 
 
   </div>
@@ -406,6 +417,22 @@ of aria-valuenow for a range widget. Value type: string</p>
 </div>
         </dt>
         <dd><pre class="code"><span class='int'>18</span> <span class='kw'>or</span> <span class='symbol'>:value_text</span></pre></dd>
+      
+        <dt id="HELP_TEXT-constant" class="">HELP_TEXT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Defines a string value that provides a description of non-standard keyboard<br />
+interactions of the current element. Value type: string</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>19</span> <span class='kw'>or</span> <span class='symbol'>:help_text</span></pre></dd>
       
     </dl>
   

@@ -578,6 +578,10 @@ lm = gtk_source_language_manager_get_default ();
 lang = gtk_source_language_manager_guess_language (manager, filename, NULL);
 gtk_source_buffer_set_language (buffer, lang);
 </code></pre>
+<pre class="code python"><code class="python">manager = GtkSource.LanguageManager.get_default()
+language = manager.guess_language(filename=filename, content_type=None)
+buffer.set_language(language=language)
+</code></pre>
 <p>or</p>
 <pre class="code c"><code class="c">GtkSourceLanguage *lang = NULL;
 GtkSourceLanguageManager *manager;
@@ -596,6 +600,14 @@ lang = gtk_source_language_manager_guess_language (manager, filename, content_ty
 gtk_source_buffer_set_language (buffer, lang);
 
 g_free (content_type);
+</code></pre>
+<pre class="code python"><code class="python">content_type, uncertain = Gio.content_type_guess(filename=filename, data=None)
+if uncertain:
+    content_type = None
+
+manager = GtkSource.LanguageManager.get_default()
+language = manager.guess_language(filename=filename, content_type=content_type)
+buffer.set_language(language=language)
 </code></pre>
 <p>etc. Use [method<!-- raw HTML omitted -->Language<!-- raw HTML omitted -->.get_mime_types] and [method<!-- raw HTML omitted -->Language<!-- raw HTML omitted -->.get_globs]<br />
 if you need full control over file -&gt; language mapping.<br />

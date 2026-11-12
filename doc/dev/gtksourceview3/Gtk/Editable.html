@@ -88,7 +88,7 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GtkEditable</code> is an interface for text editing widgets.</p>
+    <p>Interface for single-line text editing widgets.</p>
 <p>Typical examples of editable widgets are [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Entry] and<br />
 [class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.SpinButton]. It contains functions for generically manipulating<br />
 an editable widget, a large number of action signals used for key bindings,<br />
@@ -1068,6 +1068,13 @@ your_editable_get_accessible_platform_state (GtkAccessible *accessible,
   return gtk_editable_delegate_get_accessible_platform_state (GTK_EDITABLE (accessible), state);
 }
 </code></pre>
+<p>Note that the widget which is the delegate <em>must</em> be a direct child of<br />
+this widget, otherwise your implementation of [vfunc<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Accessible.get_platform_state]<br />
+might not even be called, as the platform change will originate from<br />
+the parent of the delegate, and, as a result, will not work properly.</p>
+<p>So, if you can't ensure the direct child condition, you should give the<br />
+delegate the %GTK_ACCESSIBLE_ROLE_TEXT_BOX role, or you can<br />
+change your tree to allow this function to work.</p>
 
 
   </div>
@@ -1102,6 +1109,10 @@ your_editable_get_accessible_platform_state (GtkAccessible *accessible,
         <span class='type'>(<tt>Boolean</tt>)</span>
       
       
+      
+        &mdash;
+        <div class='inline'><p>the accessible platform state of the delegate</p>
+</div>
       
     </li>
   

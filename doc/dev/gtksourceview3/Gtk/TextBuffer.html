@@ -134,6 +134,29 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#add_commit_notify-instance_method" title="#add_commit_notify (instance method)">#<strong>add_commit_notify</strong>(flags, commit_notify, user_data, destroy)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Adds a [callback<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBufferCommitNotify] to be called when a change is to be made to the [type<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer].</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#add_mark-instance_method" title="#add_mark (instance method)">#<strong>add_mark</strong>(mark, where)  &#x21d2; nil </a>
     
 
@@ -1746,6 +1769,29 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#remove_commit_notify-instance_method" title="#remove_commit_notify (instance method)">#<strong>remove_commit_notify</strong>(commit_notify_handler)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Removes the <code>GtkTextBufferCommitNotify</code> handler previously registered with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.add_commit_notify].</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#remove_selection_clipboard-instance_method" title="#remove_selection_clipboard (instance method)">#<strong>remove_selection_clipboard</strong>(clipboard)  &#x21d2; nil </a>
     
 
@@ -2075,7 +2121,120 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="add_mark-instance_method">
+  <h3 class="signature first" id="add_commit_notify-instance_method">
+  
+    #<strong>add_commit_notify</strong>(flags, commit_notify, user_data, destroy)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Adds a [callback<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBufferCommitNotify] to be called when a change<br />
+is to be made to the [type<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer].</p>
+<p>Functions are explicitly forbidden from making changes to the<br />
+[type<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer] from this callback. It is intended for tracking<br />
+changes to the buffer only.</p>
+<p>It may be advantageous to use [callback<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBufferCommitNotify] over<br />
+connecting to the [signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer::insert-text] or<br />
+[signal<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer::delete-range] signals to avoid ordering issues with<br />
+other signal handlers which may further modify the [type<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="TextBufferNotifyFlags.html" title="Gtk::TextBufferNotifyFlags (module)">Gtk::TextBufferNotifyFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>which notifications should be dispatched to <!-- raw HTML omitted -->callback<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>commit_notify</span>
+      
+      
+        <span class='type'>(<tt>Gtk::TextBufferCommitNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a<br />
+[callback<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBufferCommitNotify] to call for commit notifications</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>closure data for <!-- raw HTML omitted -->commit_notify<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>destroy</span>
+      
+      
+        <span class='type'>(<tt>GLib::DestroyNotify</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a callback to free <!-- raw HTML omitted -->user_data<!-- raw HTML omitted --> when <!-- raw HTML omitted -->commit_notify<!-- raw HTML omitted --> is removed</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a handler id which may be used to remove the commit notify<br />
+callback using [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.remove_commit_notify].</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_mark-instance_method">
   
     #<strong>add_mark</strong>(mark, where)  &#x21d2; <tt>nil</tt> 
   
@@ -6779,6 +6938,64 @@ code sections that add tags.</p>
       
         &mdash;
         <div class='inline'><p>other bound of range to be untagged</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="remove_commit_notify-instance_method">
+  
+    #<strong>remove_commit_notify</strong>(commit_notify_handler)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Removes the <code>GtkTextBufferCommitNotify</code> handler previously registered<br />
+with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.add_commit_notify].</p>
+<p>This may result in the <code>user_data_destroy</code> being called that was passed when registering<br />
+the commit notify functions.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>commit_notify_handler</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the notify handler identifier returned from<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.add_commit_notify].</p>
 </div>
       
     </li>

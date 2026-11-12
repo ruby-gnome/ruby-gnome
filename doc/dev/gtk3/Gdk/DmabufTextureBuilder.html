@@ -143,6 +143,52 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#color_state-instance_method" title="#color_state (instance method)">#<strong>color_state</strong>  &#x21d2; Gdk::ColorState </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The color state of the texture.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#color_state=-instance_method" title="#color_state= (instance method)">#<strong>color_state=</strong>(color_state)  &#x21d2; Gdk::ColorState </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The color state of the texture.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#display-instance_method" title="#display (instance method)">#<strong>display</strong>  &#x21d2; Gdk::Display </a>
     
 
@@ -249,7 +295,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Gets the file descriptor for a plane.</p>
+    <span class="summary_desc"><div class='inline'><p>Gets the file descriptor for a plane or -1 if none.</p>
 </div></span>
   
 </li>
@@ -550,7 +596,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Sets the file descriptor for a plane.</p>
+    <span class="summary_desc"><div class='inline'><p>Sets the file descriptor for a plane or to -1 to unset it.</p>
 </div></span>
   
 </li>
@@ -619,7 +665,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The update region for [property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLTextureBuilder:update-texture].</p>
+    <span class="summary_desc"><div class='inline'><p>The update region for [property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.DmabufTextureBuilder:update-texture].</p>
 </div></span>
   
 </li>
@@ -642,7 +688,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The update region for [property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLTextureBuilder:update-texture].</p>
+    <span class="summary_desc"><div class='inline'><p>The update region for [property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.DmabufTextureBuilder:update-texture].</p>
 </div></span>
   
 </li>
@@ -788,17 +834,16 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Builds a new <code>GdkTexture</code> with the values set up in the builder.</p>
-<p>It is a programming error to call this function if any mandatory<br />
-property has not been set.</p>
-<p>If the dmabuf is not supported by GTK, nil will be returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set.</p>
+<p>It is a programming error to call this function if any mandatory property has not been set.</p>
+<p>Not all formats defined in the <code>drm_fourcc.h</code> header are supported. You can use<br />
+[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display.get_dmabuf_formats] to get a list of supported formats. If the<br />
+format is not supported by GTK, nil will be returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> will be set.</p>
 <p>The <code>destroy</code> function gets called when the returned texture gets released.</p>
-<p>It is possible to call this function multiple times to create multiple textures,<br />
-possibly with changing properties in between.</p>
 <p>It is the responsibility of the caller to keep the file descriptors for the planes<br />
 open until the created texture is no longer used, and close them afterwards (possibly<br />
 using the <!-- raw HTML omitted -->destroy<!-- raw HTML omitted --> notify).</p>
-<p>Not all formats defined in the <code>drm_fourcc.h</code> header are supported. You can use<br />
-[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display.get_dmabuf_formats] to get a list of supported formats.</p>
+<p>It is possible to call this function multiple times to create multiple textures,<br />
+possibly with changing properties in between.</p>
 
 
   </div>
@@ -853,6 +898,112 @@ released</p>
         &mdash;
         <div class='inline'><p>a newly built <code>GdkTexture</code> or <code>NULL</code><br />
 if the format is not supported</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="color_state-instance_method">
+  
+    #<strong>color_state</strong>  &#x21d2; <tt>Gdk::ColorState</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The color state of the texture.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::ColorState</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>color-state</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="color_state=-instance_method">
+  
+    #<strong>color_state=</strong>(color_state)  &#x21d2; <tt>Gdk::ColorState</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The color state of the texture.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>color_state</span>
+      
+      
+        <span class='type'>(<tt>Gdk::ColorState</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::ColorState</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>color-state</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gdk::ColorState</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>color-state</p>
 </div>
       
     </li>
@@ -1085,7 +1236,7 @@ if the format is not supported</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the file descriptor for a plane.</p>
+    <p>Gets the file descriptor for a plane or -1 if none.</p>
 
 
   </div>
@@ -1728,7 +1879,7 @@ but they will be ignored when constructing the texture.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Sets the file descriptor for a plane.</p>
+    <p>Sets the file descriptor for a plane or to -1 to unset it.</p>
 
 
   </div>
@@ -1867,7 +2018,7 @@ but they will be ignored when constructing the texture.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Sets the stride for a plane.</p>
-<p>The stride must be set for all planes before calling [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLTextureBuilder.build].</p>
+<p>The stride must be set for all planes before calling [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.DmabufTextureBuilder.build].</p>
 
 
   </div>
@@ -1936,7 +2087,7 @@ but they will be ignored when constructing the texture.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The update region for [property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLTextureBuilder:update-texture].</p>
+    <p>The update region for [property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.DmabufTextureBuilder:update-texture].</p>
 
 
   </div>
@@ -1975,7 +2126,7 @@ but they will be ignored when constructing the texture.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The update region for [property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.GLTextureBuilder:update-texture].</p>
+    <p>The update region for [property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.DmabufTextureBuilder:update-texture].</p>
 
 
   </div>

@@ -143,6 +143,29 @@ replace.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#convert_bytes-instance_method" title="#convert_bytes (instance method)">#<strong>convert_bytes</strong>(bytes)  &#x21d2; GLib::Bytes </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Applies <!-- raw HTML omitted -->converter<!-- raw HTML omitted --> to the data in <!-- raw HTML omitted -->bytes<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#reset-instance_method" title="#reset (instance method)">#<strong>reset</strong>(converter)  &#x21d2; nil </a>
     
 
@@ -330,6 +353,66 @@ written to <!-- raw HTML omitted -->outbuf<!-- raw HTML omitted --> on success</
       
         &mdash;
         <div class='inline'><p>a GConverter::Result, %G_CONVERTER_ERROR on error.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="convert_bytes-instance_method">
+  
+    #<strong>convert_bytes</strong>(bytes)  &#x21d2; <tt>GLib::Bytes</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Applies <!-- raw HTML omitted -->converter<!-- raw HTML omitted --> to the data in <!-- raw HTML omitted -->bytes<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>bytes</span>
+      
+      
+        <span class='type'>(<tt>GLib::Bytes</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the data to convert</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GLib::Bytes</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A newly-allocated<br />
+<code>GBytes</code> with the converted data, or <code>NULL</code> if an error<br />
+occurred</p>
 </div>
       
     </li>

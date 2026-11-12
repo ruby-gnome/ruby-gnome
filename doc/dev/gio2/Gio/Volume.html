@@ -89,8 +89,10 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>The <code>GVolume</code> interface represents user-visible objects that can be<br />
-mounted. Note, when <a href="migrating-gnome-vfs.html">porting from GnomeVFS</a>,<br />
-<code>GVolume</code> is the moral equivalent of <code>GnomeVFSDrive</code>.</p>
+mounted. For example, a file system partition on a USB flash drive, or an<br />
+optical disc inserted into a disc drive.</p>
+<p>If a <code>GVolume</code> is currently mounted, the corresponding [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Mount] can<br />
+be retrieved using [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Volume.get_mount].</p>
 <p>Mounting a <code>GVolume</code> instance is an asynchronous operation. For more<br />
 information about asynchronous operations, see [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AsyncResult] and<br />
 [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Task]. To mount a <code>GVolume</code>, first call [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Volume.mount]<br />
@@ -108,6 +110,8 @@ passed to the callback.  That callback should then call<br />
 successfully.  If a [type<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Error] is present when<br />
 [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Volume.mount_finish] is called, then it will be filled with any<br />
 error information.</p>
+<p>Note, when <a href="migrating-gnome-vfs.html">porting from GnomeVFS</a>,<br />
+<code>GVolume</code> is the moral equivalent of <code>GnomeVFSDrive</code>.</p>
 <h2 id="volume-identifiers">Volume Identifiers<a href="#volume-identifiers" aria-label="Link to heading 'Volume Identifiers'" data-heading-content="Volume Identifiers" class="anchor"></a></h2>
 <p>It is sometimes necessary to directly access the underlying<br />
 operating system object behind a volume (e.g. for passing a volume<br />

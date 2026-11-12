@@ -142,6 +142,29 @@ objects containing simple, unformatted text.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#caret_position=-instance_method" title="#caret_position= (instance method)">#<strong>caret_position=</strong>(offset)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the caret position.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#get_attributes-instance_method" title="#get_attributes (instance method)">#<strong>get_attributes</strong>(offset, n_ranges, ranges, attribute_names, attribute_values)  &#x21d2; Boolean </a>
     
 
@@ -234,6 +257,52 @@ objects containing simple, unformatted text.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#get_extents-instance_method" title="#get_extents (instance method)">#<strong>get_extents</strong>(start, end, extents)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Obtains the extents of a range of text, in widget coordinates.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_offset-instance_method" title="#get_offset (instance method)">#<strong>get_offset</strong>(point, offset)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the text offset at a given point.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#get_selection-instance_method" title="#get_selection (instance method)">#<strong>get_selection</strong>(n_ranges, ranges)  &#x21d2; Boolean </a>
     
 
@@ -249,6 +318,29 @@ objects containing simple, unformatted text.</p>
 
   
     <span class="summary_desc"><div class='inline'><p>Retrieves the selection ranges in the accessible object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_selection-instance_method" title="#set_selection (instance method)">#<strong>set_selection</strong>(i, range)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the caret position.</p>
 </div></span>
   
 </li>
@@ -363,6 +455,64 @@ objects containing simple, unformatted text.</p>
       
         &mdash;
         <div class='inline'><p>the position of the caret, in characters</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="caret_position=-instance_method">
+  
+    #<strong>caret_position=</strong>(offset)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the caret position.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the text offset in characters</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the caret position was updated</p>
 </div>
       
     </li>
@@ -773,6 +923,164 @@ values of the default attributes inside the accessible object</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="get_extents-instance_method">
+  
+    #<strong>get_extents</strong>(start, end, extents)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Obtains the extents of a range of text, in widget coordinates.<br />
+<!-- raw HTML omitted -->extents<!-- raw HTML omitted --> (out caller-allocates): return location for the extents</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>start</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the start offset, in characters</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>end</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the end offset, in characters,</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>extents</span>
+      
+      
+        <span class='type'>(<tt>Graphene::Rect</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the extents were filled in, false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_offset-instance_method">
+  
+    #<strong>get_offset</strong>(point, offset)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the text offset at a given point.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>point</span>
+      
+      
+        <span class='type'>(<tt>Graphene::Point</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a point in widget coordinates of <!-- raw HTML omitted -->self<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>offset</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the text offset at <!-- raw HTML omitted -->point<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the offset was set, false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="get_selection-instance_method">
   
     #<strong>get_selection</strong>(n_ranges, ranges)  &#x21d2; <tt>Boolean</tt> 
@@ -840,6 +1148,79 @@ allocated array of [struct#Gtk.AccessibleTextRange].</p>
         &mdash;
         <div class='inline'><p>true if there is at least a selection inside the<br />
 accessible object, and false otherwise</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="set_selection-instance_method">
+  
+    #<strong>set_selection</strong>(i, range)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the caret position.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>i</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the selection to set</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>range</span>
+      
+      
+        <span class='type'>(<tt>Gtk::AccessibleTextRange</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the range to set the selection to</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true if the selection was updated</p>
 </div>
       
     </li>

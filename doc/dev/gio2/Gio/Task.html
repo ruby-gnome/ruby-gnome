@@ -374,7 +374,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Gets the GMain::Context that <!-- raw HTML omitted -->task<!-- raw HTML omitted --> will return its result in (that is, the context that was the [thread-default main context][g-main-context-push-thread-default] at the point when <!-- raw HTML omitted -->task<!-- raw HTML omitted --> was created).</p>
+    <span class="summary_desc"><div class='inline'><p>Gets the GMain::Context that <!-- raw HTML omitted -->task<!-- raw HTML omitted --> will return its result in (that is, the context that was the thread-default main context (see [method<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.MainContext.push_thread_default]) at the point when <!-- raw HTML omitted -->task<!-- raw HTML omitted --> was created).</p>
 </div></span>
   
 </li>
@@ -422,7 +422,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Creates a #GTask acting on <!-- raw HTML omitted -->source_object<!-- raw HTML omitted -->, which will eventually be used to invoke <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> in the current [thread-default main context][g-main-context-push-thread-default].</p>
+    <span class="summary_desc"><div class='inline'><p>Creates a #GTask acting on <!-- raw HTML omitted -->source_object<!-- raw HTML omitted -->, which will eventually be used to invoke <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> in the current thread-default main context (see [method<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.MainContext.push_thread_default]).</p>
 </div></span>
   
 </li>
@@ -1068,8 +1068,8 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a #GTask acting on <!-- raw HTML omitted -->source_object<!-- raw HTML omitted -->, which will eventually be<br />
-used to invoke <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> in the current<br />
-[thread-default main context][g-main-context-push-thread-default].</p>
+used to invoke <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> in the current thread-default main context<br />
+(see [method<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.MainContext.push_thread_default]).</p>
 <p>Call this in the &quot;start&quot; method of your asynchronous method, and<br />
 pass the #GTask around throughout the asynchronous operation. You<br />
 can use g_task_set_task_data() to attach task-specific data to the<br />
@@ -1937,8 +1937,8 @@ context as the task’s callback, immediately after that callback is invoked.</p
 </h3><div class="docstring">
   <div class="discussion">
     <p>Gets the GMain::Context that <!-- raw HTML omitted -->task<!-- raw HTML omitted --> will return its result in (that<br />
-is, the context that was the<br />
-[thread-default main context][g-main-context-push-thread-default]<br />
+is, the context that was the thread-default main context<br />
+(see [method<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.MainContext.push_thread_default])<br />
 at the point when <!-- raw HTML omitted -->task<!-- raw HTML omitted --> was created).</p>
 <p>This will always return a non-nil value, even if the task's<br />
 context is the default GMain::Context.</p>
@@ -2064,8 +2064,7 @@ nil.</p>
 For example, ‘Open file’ or ‘Connect to network host’. It is used to set the<br />
 name of the #GSource used for idle completion of the task.</p>
 <p>This function may only be called before the <!-- raw HTML omitted -->task<!-- raw HTML omitted --> is first used in a thread<br />
-other than the one it was constructed in. It is called automatically by<br />
-g_task_set_source_tag() if not called already.</p>
+other than the one it was constructed in.</p>
 
 
   </div>
@@ -3525,6 +3524,8 @@ set, for convenience.</p>
   <div class="discussion">
     <p>Sets <!-- raw HTML omitted -->task<!-- raw HTML omitted -->’s name, used in debugging and profiling.</p>
 <p>This is a variant of g_task_set_name() that avoids copying <!-- raw HTML omitted -->name<!-- raw HTML omitted -->.</p>
+<p>This function is called automatically by [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Task.set_source_tag]<br />
+unless a name is set.</p>
 
 
   </div>

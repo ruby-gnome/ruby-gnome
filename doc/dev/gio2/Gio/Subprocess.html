@@ -152,6 +152,11 @@ change of working directory, child setup functions, etc).</p>
 [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Subprocess.wait].  After the process exits, the status can be<br />
 checked using functions such as [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Subprocess.get_if_exited] (which<br />
 are similar to the familiar <code>WIFEXITED</code>-style POSIX macros).</p>
+<p>Note that as of GLib 2.82, creating a <code>GSubprocess</code> causes the signal<br />
+<code>SIGPIPE</code> to be ignored for the remainder of the program. If you are writing<br />
+a command-line utility that uses <code>GSubprocess</code>, you may need to take into<br />
+account the fact that your program will not automatically be killed<br />
+if it tries to write to <code>stdout</code> after it has been closed.</p>
 
 
   </div>

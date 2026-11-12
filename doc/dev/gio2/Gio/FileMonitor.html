@@ -448,8 +448,8 @@
 has taken place. Should be called from file monitor<br />
 implementations only.</p>
 <p>Implementations are responsible to call this method from the<br />
-[thread-default main context][g-main-context-push-thread-default] of the<br />
-thread that the monitor was created in.</p>
+thread-default main context (see [method<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.MainContext.push_thread_default])<br />
+of the thread that the monitor was created in.</p>
 
 
   </div>
@@ -483,7 +483,7 @@ thread that the monitor was created in.</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GFile.</p>
+        <div class='inline'><p>a #GFile, or nil.</p>
 </div>
       
     </li>

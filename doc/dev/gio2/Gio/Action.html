@@ -95,7 +95,7 @@ emitted. An activation has a <code>GVariant</code> parameter (which may be<br />
 <code>NULL</code>). The correct type for the parameter is determined by a static<br />
 parameter type (which is given at construction time).</p>
 <p>An action may optionally have a state, in which case the state may be<br />
-set with [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Action.change_state]. This call takes a #GVariant. The<br />
+set with [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Action.change_state]. This call takes a [type<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Variant]. The<br />
 correct type for the state is determined by a static state type<br />
 (which is given at construction time).</p>
 <p>The state may have a hint associated with it, specifying its valid<br />
@@ -387,8 +387,8 @@ inside of a [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.SimpleAc
     <p>Activates the action.</p>
 <p><!-- raw HTML omitted -->parameter<!-- raw HTML omitted --> must be the correct type of parameter for the action (ie:<br />
 the parameter type given at construction time).  If the parameter<br />
-type was nil then <!-- raw HTML omitted -->parameter<!-- raw HTML omitted --> must also be nil.</p>
-<p>If the <!-- raw HTML omitted -->parameter<!-- raw HTML omitted --> GVariant is floating, it is consumed.</p>
+type was <code>NULL</code> then <!-- raw HTML omitted -->parameter<!-- raw HTML omitted --> must also be <code>NULL</code>.</p>
+<p>If the <!-- raw HTML omitted -->parameter<!-- raw HTML omitted --> [type<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Variant] is floating, it is consumed.</p>
 
 
   </div>
@@ -477,8 +477,8 @@ type was nil then <!-- raw HTML omitted -->parameter<!-- raw HTML omitted --> mu
     <p>Activates the action.</p>
 <p><!-- raw HTML omitted -->parameter<!-- raw HTML omitted --> must be the correct type of parameter for the action (ie:<br />
 the parameter type given at construction time).  If the parameter<br />
-type was nil then <!-- raw HTML omitted -->parameter<!-- raw HTML omitted --> must also be nil.</p>
-<p>If the <!-- raw HTML omitted -->parameter<!-- raw HTML omitted --> GVariant is floating, it is consumed.</p>
+type was <code>NULL</code> then <!-- raw HTML omitted -->parameter<!-- raw HTML omitted --> must also be <code>NULL</code>.</p>
+<p>If the <!-- raw HTML omitted -->parameter<!-- raw HTML omitted --> [type<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Variant] is floating, it is consumed.</p>
 
 
   </div>
@@ -548,11 +548,11 @@ type was nil then <!-- raw HTML omitted -->parameter<!-- raw HTML omitted --> mu
   <div class="discussion">
     <p>Request for the state of <!-- raw HTML omitted -->action<!-- raw HTML omitted --> to be changed to <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
 <p>The action must be stateful and <!-- raw HTML omitted -->value<!-- raw HTML omitted --> must be of the correct type.<br />
-See g_action_get_state_type().</p>
+See [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Action.get_state_type].</p>
 <p>This call merely requests a change.  The action may refuse to change<br />
 its state or may change its state to something other than <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.<br />
-See g_action_get_state_hint().</p>
-<p>If the <!-- raw HTML omitted -->value<!-- raw HTML omitted --> GVariant is floating, it is consumed.</p>
+See [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Action.get_state_hint].</p>
+<p>If the <!-- raw HTML omitted -->value<!-- raw HTML omitted --> [type<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Variant] is floating, it is consumed.</p>
 
 
   </div>
@@ -638,11 +638,11 @@ See g_action_get_state_hint().</p>
   <div class="discussion">
     <p>Request for the state of <!-- raw HTML omitted -->action<!-- raw HTML omitted --> to be changed to <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.</p>
 <p>The action must be stateful and <!-- raw HTML omitted -->value<!-- raw HTML omitted --> must be of the correct type.<br />
-See g_action_get_state_type().</p>
+See [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Action.get_state_type].</p>
 <p>This call merely requests a change.  The action may refuse to change<br />
 its state or may change its state to something other than <!-- raw HTML omitted -->value<!-- raw HTML omitted -->.<br />
-See g_action_get_state_hint().</p>
-<p>If the <!-- raw HTML omitted -->value<!-- raw HTML omitted --> GVariant is floating, it is consumed.</p>
+See [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Action.get_state_hint].</p>
+<p>If the <!-- raw HTML omitted -->value<!-- raw HTML omitted --> [type<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Variant] is floating, it is consumed.</p>
 
 
   </div>
@@ -792,10 +792,11 @@ have its state changed from outside callers.</p>
   <div class="discussion">
     <p>Queries the type of the parameter that must be given when activating<br />
 <!-- raw HTML omitted -->action<!-- raw HTML omitted -->.</p>
-<p>When activating the action using g_action_activate(), the #GVariant<br />
-given to that function must be of the type returned by this function.</p>
-<p>In the case that this function returns nil, you must not give any<br />
-#GVariant, but nil instead.</p>
+<p>When activating the action using [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Action.activate], the<br />
+[type<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Variant] given to that function must be of the type returned by<br />
+this function.</p>
+<p>In the case that this function returns <code>NULL</code>, you must not give any<br />
+[type<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Variant], but <code>NULL</code> instead.</p>
 
 
   </div>
@@ -835,11 +836,11 @@ given to that function must be of the type returned by this function.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Queries the current state of <!-- raw HTML omitted -->action<!-- raw HTML omitted -->.</p>
-<p>If the action is not stateful then nil will be returned.  If the<br />
+<p>If the action is not stateful then <code>NULL</code> will be returned.  If the<br />
 action is stateful then the type of the return value is the type<br />
-given by g_action_get_state_type().</p>
-<p>The return value (if non-nil) should be freed with<br />
-g_variant_unref() when it is no longer required.</p>
+given by [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Action.get_state_type].</p>
+<p>The return value (if non-<code>NULL</code>) should be freed with<br />
+[method<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Variant.unref] when it is no longer required.</p>
 
 
   </div>
@@ -880,18 +881,18 @@ g_variant_unref() when it is no longer required.</p>
   <div class="discussion">
     <p>Requests a hint about the valid range of values for the state of<br />
 <!-- raw HTML omitted -->action<!-- raw HTML omitted -->.</p>
-<p>If nil is returned it either means that the action is not stateful<br />
+<p>If <code>NULL</code> is returned it either means that the action is not stateful<br />
 or that there is no hint about the valid range of values for the<br />
 state of the action.</p>
-<p>If a #GVariant array is returned then each item in the array is a<br />
-possible value for the state.  If a #GVariant pair (ie: two-tuple) is<br />
+<p>If a [type<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Variant] array is returned then each item in the array is a<br />
+possible value for the state.  If a [type<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Variant] pair (ie: two-tuple) is<br />
 returned then the tuple specifies the inclusive lower and upper bound<br />
 of valid values for the state.</p>
 <p>In any case, the information is merely a hint.  It may be possible to<br />
 have a state value outside of the hinted range and setting a value<br />
 within the range may fail.</p>
-<p>The return value (if non-nil) should be freed with<br />
-g_variant_unref() when it is no longer required.</p>
+<p>The return value (if non-<code>NULL</code>) should be freed with<br />
+[method<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Variant.unref] when it is no longer required.</p>
 
 
   </div>
@@ -932,14 +933,14 @@ g_variant_unref() when it is no longer required.</p>
   <div class="discussion">
     <p>Queries the type of the state of <!-- raw HTML omitted -->action<!-- raw HTML omitted -->.</p>
 <p>If the action is stateful (e.g. created with<br />
-g_simple_action_new_stateful()) then this function returns the<br />
-GVariant::Type of the state.  This is the type of the initial value<br />
-given as the state. All calls to g_action_change_state() must give a<br />
-#GVariant of this type and g_action_get_state() will return a<br />
-#GVariant of the same type.</p>
-<p>If the action is not stateful (e.g. created with g_simple_action_new())<br />
-then this function will return nil. In that case, g_action_get_state()<br />
-will return nil and you must not call g_action_change_state().</p>
+[ctor<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.SimpleAction.new_stateful]) then this function returns the<br />
+[type<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.VariantType] of the state.  This is the type of the initial value<br />
+given as the state. All calls to [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Action.change_state] must give a<br />
+[type<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Variant] of this type and [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Action.get_state] will return a<br />
+[type<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.Variant] of the same type.</p>
+<p>If the action is not stateful (e.g. created with [ctor<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.SimpleAction.new])<br />
+then this function will return <code>NULL</code>. In that case, [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Action.get_state]<br />
+will return <code>NULL</code> and you must not call [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Action.change_state].</p>
 
 
   </div>

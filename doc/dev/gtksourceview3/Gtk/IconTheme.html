@@ -104,7 +104,7 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p><code>GtkIconTheme</code> provides a facility for loading themed icons.</p>
+    <p>Loads themed icons.</p>
 <p>The main reason for using a name rather than simply providing a filename<br />
 is to allow different icons to be used depending on what “icon theme” is<br />
 selected by the user. The operation of icon themes on Linux and Unix<br />
@@ -1270,7 +1270,7 @@ or you can get information such as the filename and size.</p>
       
       
         &mdash;
-        <div class='inline'><p>desired icon size</p>
+        <div class='inline'><p>desired icon size, in application pixels</p>
 </div>
       
     </li>
@@ -1399,6 +1399,10 @@ GtkWidgetClass.css-changed() function.</p>
       
       
       
+        &mdash;
+        <div class='inline'><p>fallback names</p>
+</div>
+      
     </li>
   
     <li>
@@ -1411,7 +1415,7 @@ GtkWidgetClass.css-changed() function.</p>
       
       
         &mdash;
-        <div class='inline'><p>desired icon size.</p>
+        <div class='inline'><p>desired icon size, in application pixels</p>
 </div>
       
     </li>

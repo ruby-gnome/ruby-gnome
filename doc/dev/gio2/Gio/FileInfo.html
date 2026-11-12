@@ -272,7 +272,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>First clears all of the [GFileAttribute][gio-GFileAttribute] of <!-- raw HTML omitted -->dest_info<!-- raw HTML omitted -->, and then copies all of the file attributes from <!-- raw HTML omitted -->src_info<!-- raw HTML omitted --> to <!-- raw HTML omitted -->dest_info<!-- raw HTML omitted -->.</p>
+    <span class="summary_desc"><div class='inline'><p>First clears all of the <a href="file-attributes.html#file-attributes">GFileAttribute</a> of <!-- raw HTML omitted -->dest_info<!-- raw HTML omitted -->, and then copies all of the file attributes from <!-- raw HTML omitted -->src_info<!-- raw HTML omitted --> to <!-- raw HTML omitted -->dest_info<!-- raw HTML omitted -->.</p>
 </div></span>
   
 </li>
@@ -479,7 +479,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Gets the <a href="iface.File.html#entity-tags">entity tag</a> for a given GFile::Info.</p>
+    <span class="summary_desc"><div class='inline'><p>Gets the [entity tag][iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.File#entity-tags] for a given GFile::Info.</p>
 </div></span>
   
 </li>
@@ -548,7 +548,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Gets the value of an attribute, formatted as a string.</p>
+    <span class="summary_desc"><div class='inline'><p>Gets the value of an attribute, formatted as a human readable string.</p>
 </div></span>
   
 </li>
@@ -2053,7 +2053,7 @@ See %G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE.</p>
       
       
         &mdash;
-        <div class='inline'><p>a content type. See [GContentType][gio-GContentType]</p>
+        <div class='inline'><p>a <a href="content-types.html#content-types">content type</a>.</p>
 </div>
       
     </li>
@@ -2088,8 +2088,8 @@ See %G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>First clears all of the [GFileAttribute][gio-GFileAttribute] of <!-- raw HTML omitted -->dest_info<!-- raw HTML omitted -->,<br />
-and then copies all of the file attributes from <!-- raw HTML omitted -->src_info<!-- raw HTML omitted --> to <!-- raw HTML omitted -->dest_info<!-- raw HTML omitted -->.</p>
+    <p>First clears all of the <a href="file-attributes.html#file-attributes">GFileAttribute</a> of<br />
+<!-- raw HTML omitted -->dest_info<!-- raw HTML omitted -->, and then copies all of the file attributes from <!-- raw HTML omitted -->src_info<!-- raw HTML omitted --> to <!-- raw HTML omitted -->dest_info<!-- raw HTML omitted -->.</p>
 
 
   </div>
@@ -2518,7 +2518,7 @@ See %G_FILE_ATTRIBUTE_STANDARD_EDIT_NAME.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the <a href="iface.File.html#entity-tags">entity tag</a> for a given<br />
+    <p>Gets the [entity tag][iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.File#entity-tags] for a given<br />
 GFile::Info. See %G_FILE_ATTRIBUTE_ETAG_VALUE.</p>
 <p>It is an error to call this if the GFile::Info does not contain<br />
 %G_FILE_ATTRIBUTE_ETAG_VALUE.</p>
@@ -2657,9 +2657,21 @@ See %G_FILE_ATTRIBUTE_STANDARD_TYPE.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the value of an attribute, formatted as a string.<br />
-This escapes things as needed to make the string valid<br />
-UTF-8.</p>
+    <p>Gets the value of an attribute, formatted as a human readable string.</p>
+<p>This escapes things as needed to make the string valid UTF-8 and readable by<br />
+humans. It’s not meant to be a machine readable or reversible escaping<br />
+format.</p>
+<p>To format file name attributes of type<br />
+[enum<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.FileAttributeType.BYTE_STRING] for output as UTF-8, use<br />
+[func<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.filename_to_utf8] instead:</p>
+<pre class="code c"><code class="c">const char *trash_orig_path_byte_string;
+g_autofree char *trash_orig_path_utf8 = NULL;
+
+trash_orig_path_byte_string = g_file_info_get_attribute_byte_string (info, G_FILE_ATTRIBUTE_TRASH_ORIG_PATH);
+trash_orig_path_utf8 = g_filename_to_utf8 (trash_orig_path_byte_string, -1, NULL, NULL, NULL);
+if (trash_orig_path_utf8 != NULL)
+  g_message (&quot;Some larger UTF-8 string with filename embedded as %s&quot;, trash_orig_path_utf8);
+</code></pre>
 
 
   </div>
@@ -3817,6 +3829,10 @@ See %G_FILE_ATTRIBUTE_STANDARD_ICON.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Checks if a file is a backup file.</p>
+<p>The exact semantics of what constitutes a backup file are<br />
+backend-specific. For local files, a file is considered a backup<br />
+if its name ends with <code>~</code> and it is a regular file. This follows<br />
+the POSIX convention used by text editors such as Emacs.</p>
 <p>It is an error to call this if the GFile::Info does not contain<br />
 %G_FILE_ATTRIBUTE_STANDARD_IS_BACKUP.</p>
 

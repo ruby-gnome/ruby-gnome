@@ -102,7 +102,18 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>Interface for getting the Fonts of a poppler_document</p>
+<p>Since 24.10 this type supports g_autoptr</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
 
 
 
@@ -293,7 +304,10 @@ point to the first font scanned.</p>
 <p>Here is a simple example of code to scan fonts in a document</p>
 <p><!-- raw HTML omitted --><!-- raw HTML omitted --><br />
 font_info = poppler_font_info_new (document);<br />
-while (poppler_font_info_scan (font_info, 20, &amp;fonts_iter)) {<br />
+scanned_pages = 0;<br />
+while (scanned_pages &lt;= poppler_document_get_n_pages(document)) {<br />
+poppler_font_info_scan (font_info, 20, &amp;fonts_iter);<br />
+scanned_pages += 20;<br />
 if (!fonts_iter)<br />
 continue; /<!-- raw HTML omitted -->* No fonts found in these 20 pages <em><!-- raw HTML omitted -->/<br />
 do {<br />
@@ -354,7 +368,7 @@ poppler_fonts_iter_free (fonts_iter);<br />
       
       
         &mdash;
-        <div class='inline'><p>true, if there are more fonts left to scan</p>
+        <div class='inline'><p>true, if fonts were found</p>
 </div>
       
     </li>

@@ -134,7 +134,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>if name is NULL or a name not currently in use by another group then a new group is created and returned.</p>
+    <span class="summary_desc"><div class='inline'><p>if name is nil or a name not currently in use by another group then a new group is created and returned.</p>
 </div></span>
   
 </li>
@@ -157,7 +157,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>No reference is added if it is found.</p>
+    <span class="summary_desc"><div class='inline'><p>color-group.</p>
 </div></span>
   
 </li>
@@ -217,7 +217,7 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>if name is NULL or a name not currently in use by another group<br />
+    <p>if name is nil or a name not currently in use by another group<br />
 then a new group is created and returned. If name was NULL<br />
 then the new group is given a unique name prefixed by &quot;<strong>cg_autogen_name</strong>&quot;<br />
 (thereby insuring namespace separation).<br />
@@ -295,7 +295,7 @@ incremented and a pointer to the group is returned.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>No reference is added if it is found.</p>
+    <p>color-group.  nil if it is not found.</p>
 
 
   </div>
@@ -347,8 +347,7 @@ incremented and a pointer to the group is returned.</p>
       
       
         &mdash;
-        <div class='inline'><p>Look up the name/context specific color-group.<br />
-nil if it is not found.</p>
+        <div class='inline'><p>Look up the name/context specific</p>
 </div>
       
     </li>

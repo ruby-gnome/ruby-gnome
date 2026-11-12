@@ -473,6 +473,10 @@ reference belongs to <!-- raw HTML omitted -->interface_<!-- raw HTML omitted --
   <div class="discussion">
     <p>Gets D-Bus introspection information for the D-Bus interface<br />
 implemented by <!-- raw HTML omitted -->interface_<!-- raw HTML omitted -->.</p>
+<p>This can return nil if no GDBus::InterfaceInfo was provided during<br />
+construction of <!-- raw HTML omitted -->interface_<!-- raw HTML omitted --> and is also not made available otherwise.<br />
+For example, GDBus::Proxy implements #GDBusInterface but allows for a nil<br />
+GDBus::InterfaceInfo.</p>
 
 
   </div>

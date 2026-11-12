@@ -118,7 +118,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
 <p class="children">
   
     
-      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Vte/Align.html" title="Vte::Align (module)">Align</a></span>, <span class='object_link'><a href="Vte/CursorBlinkMode.html" title="Vte::CursorBlinkMode (module)">CursorBlinkMode</a></span>, <span class='object_link'><a href="Vte/CursorShape.html" title="Vte::CursorShape (module)">CursorShape</a></span>, <span class='object_link'><a href="Vte/EraseBinding.html" title="Vte::EraseBinding (module)">EraseBinding</a></span>, <span class='object_link'><a href="Vte/FeatureFlags.html" title="Vte::FeatureFlags (module)">FeatureFlags</a></span>, <span class='object_link'><a href="Vte/Format.html" title="Vte::Format (module)">Format</a></span>, <span class='object_link'><a href="Vte/PtyError.html" title="Vte::PtyError (module)">PtyError</a></span>, <span class='object_link'><a href="Vte/PtyFlags.html" title="Vte::PtyFlags (module)">PtyFlags</a></span>, <span class='object_link'><a href="Vte/RegexError.html" title="Vte::RegexError (module)">RegexError</a></span>, <span class='object_link'><a href="Vte/TextBlinkMode.html" title="Vte::TextBlinkMode (module)">TextBlinkMode</a></span>, <span class='object_link'><a href="Vte/Version.html" title="Vte::Version (module)">Version</a></span>, <span class='object_link'><a href="Vte/WriteFlags.html" title="Vte::WriteFlags (module)">WriteFlags</a></span>
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="Vte/Align.html" title="Vte::Align (module)">Align</a></span>, <span class='object_link'><a href="Vte/CursorBlinkMode.html" title="Vte::CursorBlinkMode (module)">CursorBlinkMode</a></span>, <span class='object_link'><a href="Vte/CursorShape.html" title="Vte::CursorShape (module)">CursorShape</a></span>, <span class='object_link'><a href="Vte/EraseBinding.html" title="Vte::EraseBinding (module)">EraseBinding</a></span>, <span class='object_link'><a href="Vte/FeatureFlags.html" title="Vte::FeatureFlags (module)">FeatureFlags</a></span>, <span class='object_link'><a href="Vte/Format.html" title="Vte::Format (module)">Format</a></span>, <span class='object_link'><a href="Vte/ProgressHint.html" title="Vte::ProgressHint (module)">ProgressHint</a></span>, <span class='object_link'><a href="Vte/PropertyFlags.html" title="Vte::PropertyFlags (module)">PropertyFlags</a></span>, <span class='object_link'><a href="Vte/PropertyId.html" title="Vte::PropertyId (module)">PropertyId</a></span>, <span class='object_link'><a href="Vte/PropertyType.html" title="Vte::PropertyType (module)">PropertyType</a></span>, <span class='object_link'><a href="Vte/PtyError.html" title="Vte::PtyError (module)">PtyError</a></span>, <span class='object_link'><a href="Vte/PtyFlags.html" title="Vte::PtyFlags (module)">PtyFlags</a></span>, <span class='object_link'><a href="Vte/RegexError.html" title="Vte::RegexError (module)">RegexError</a></span>, <span class='object_link'><a href="Vte/TextBlinkMode.html" title="Vte::TextBlinkMode (module)">TextBlinkMode</a></span>, <span class='object_link'><a href="Vte/UuidFormat.html" title="Vte::UuidFormat (module)">UuidFormat</a></span>, <span class='object_link'><a href="Vte/Version.html" title="Vte::Version (module)">Version</a></span>, <span class='object_link'><a href="Vte/WriteFlags.html" title="Vte::WriteFlags (module)">WriteFlags</a></span>
     
   
     
@@ -181,7 +181,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA</
 
 </div>
         </dt>
-        <dd><pre class="code"><span class='int'>76</span></pre></dd>
+        <dd><pre class="code"><span class='int'>84</span></pre></dd>
       
         <dt id="REGEX_FLAGS_DEFAULT-constant" class="">REGEX_FLAGS_DEFAULT =
           
@@ -244,6 +244,244 @@ process to a systemd user scope; if that fails, the whole spawn fails.</p>
         </dt>
         <dd><pre class="code"><span class='int'>134217728</span></pre></dd>
       
+        <dt id="TERMPROP_CONTAINER_NAME-constant" class="">TERMPROP_CONTAINER_NAME =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A %VTE_PROPERTY_STRING termprop that stores the name of the<br />
+container.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_vte'>vte</span><span class='period'>.</span><span class='id identifier rubyid_container'>container</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span></pre></dd>
+      
+        <dt id="TERMPROP_CONTAINER_RUNTIME-constant" class="">TERMPROP_CONTAINER_RUNTIME =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A %VTE_PROPERTY_STRING termprop that stores the runtime of the<br />
+container.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_vte'>vte</span><span class='period'>.</span><span class='id identifier rubyid_container'>container</span><span class='period'>.</span><span class='id identifier rubyid_runtime'>runtime</span></pre></dd>
+      
+        <dt id="TERMPROP_CONTAINER_UID-constant" class="">TERMPROP_CONTAINER_UID =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A %VTE_PROPERTY_UINT termprop that stores the user ID of the<br />
+container.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_vte'>vte</span><span class='period'>.</span><span class='id identifier rubyid_container'>container</span><span class='period'>.</span><span class='id identifier rubyid_uid'>uid</span></pre></dd>
+      
+        <dt id="TERMPROP_CURRENT_DIRECTORY_URI-constant" class="">TERMPROP_CURRENT_DIRECTORY_URI =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A %VTE_PROPERTY_URI termprop that stores the current directory<br />
+URI as set by OSC 7.<br />
+Use this with vte_terminal_ref_termprop_uri() instead of using<br />
+vte_terminal_get_current_directory_uri().</p>
+<p>Note that this termprop is not settable via the termprop OSC.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_vte'>vte</span><span class='period'>.</span><span class='id identifier rubyid_cwd'>cwd</span></pre></dd>
+      
+        <dt id="TERMPROP_CURRENT_FILE_URI-constant" class="">TERMPROP_CURRENT_FILE_URI =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A %VTE_PROPERTY_URI termprop that stores the current file URI<br />
+as set by OSC 6.<br />
+Use this with vte_terminal_ref_termprop_uri() instead of using<br />
+vte_terminal_get_current_file_uri().</p>
+<p>Note that this termprop is not settable via the termprop OSC.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_vte'>vte</span><span class='period'>.</span><span class='id identifier rubyid_cwf'>cwf</span></pre></dd>
+      
+        <dt id="TERMPROP_ICON_COLOR-constant" class="">TERMPROP_ICON_COLOR =
+          
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_vte'>vte</span><span class='period'>.</span><span class='id identifier rubyid_icon'>icon</span><span class='period'>.</span><span class='id identifier rubyid_color'>color</span></pre></dd>
+      
+        <dt id="TERMPROP_ICON_IMAGE-constant" class="">TERMPROP_ICON_IMAGE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A %VTE_PROPERTY_IMAGE termprop to specify an image for use<br />
+as a favicon.</p>
+<p>Applications should prefer to use this termprop, if set, over<br />
+the %VTE_TERMPROP_ICON_COLOR color.</p>
+<p>Note that in this vte version, this termprop is always unset.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_vte'>vte</span><span class='period'>.</span><span class='id identifier rubyid_icon'>icon</span><span class='period'>.</span><span class='id identifier rubyid_image'>image</span></pre></dd>
+      
+        <dt id="TERMPROP_NAME_PREFIX-constant" class="">TERMPROP_NAME_PREFIX =
+          <div class="docstring">
+  <div class="discussion">
+    <p>The string prefix that any termprop's name must start with to be installed<br />
+by vte_install_termprop().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code">vte.ext.</pre></dd>
+      
+        <dt id="TERMPROP_PROGRESS_HINT-constant" class="">TERMPROP_PROGRESS_HINT =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A %VTE_PROPERTY_INT termprop that stores a hint how to interpret<br />
+the %VTE_TERMPROP_PROGRESS_VALUE termprop value. If set, this<br />
+termprop's value will be from the Vte::ProgressHint enumeration.<br />
+An unset termprop should be treated as if it had value<br />
+%VTE_PROGRESS_HINT_ACTIVE if the %VTE_TERMPROP_PROGRESS_VALUE<br />
+termprop has a value</p>
+<p>Note that this termprop never will have the value<br />
+%VTE_PROGRESS_HINT_INACTIVE.</p>
+<p>The value of this termprop should be ignored unless the<br />
+%VTE_TERMPROP_PROGRESS_VALUE termprop has a value.</p>
+<p>Note that before version 0.82, this termprop could not be set by<br />
+the termprop OSC, but instead only by OSC 9 ; 4 (ConEmu progress).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_vte'>vte</span><span class='period'>.</span><span class='id identifier rubyid_progress'>progress</span><span class='period'>.</span><span class='id identifier rubyid_hint'>hint</span></pre></dd>
+      
+        <dt id="TERMPROP_PROGRESS_VALUE-constant" class="">TERMPROP_PROGRESS_VALUE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A %VTE_PROPERTY_UINT termprop that stores the progress of the running<br />
+command as a value between 0 and 100.</p>
+<p>Note that before version 0.82, this termprop could not be set by<br />
+the termprop OSC, but instead only by OSC 9 ; 4 (ConEmu progress).</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_vte'>vte</span><span class='period'>.</span><span class='id identifier rubyid_progress'>progress</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span></pre></dd>
+      
+        <dt id="TERMPROP_SHELL_POSTEXEC-constant" class="">TERMPROP_SHELL_POSTEXEC =
+          <div class="docstring">
+  <div class="discussion">
+    <p>An ephemeral %VTE_PROPERTY_UINT termprop that signals that the shell<br />
+has executed the commands entered at the prompt and these commands<br />
+have returned. The termprop value is the exit code.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_vte'>vte</span><span class='period'>.</span><span class='id identifier rubyid_shell'>shell</span><span class='period'>.</span><span class='id identifier rubyid_postexec'>postexec</span></pre></dd>
+      
+        <dt id="TERMPROP_SHELL_PRECMD-constant" class="">TERMPROP_SHELL_PRECMD =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A %VTE_PROPERTY_VALUELESS termprop that signals that the shell<br />
+is going to prompt.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_vte'>vte</span><span class='period'>.</span><span class='id identifier rubyid_shell'>shell</span><span class='period'>.</span><span class='id identifier rubyid_precmd'>precmd</span></pre></dd>
+      
+        <dt id="TERMPROP_SHELL_PREEXEC-constant" class="">TERMPROP_SHELL_PREEXEC =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A %VTE_PROPERTY_VALUELESS termprop that signals that the shell<br />
+is preparing to execute the command entered at the prompt.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_vte'>vte</span><span class='period'>.</span><span class='id identifier rubyid_shell'>shell</span><span class='period'>.</span><span class='id identifier rubyid_preexec'>preexec</span></pre></dd>
+      
+        <dt id="TERMPROP_XTERM_TITLE-constant" class="">TERMPROP_XTERM_TITLE =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A %VTE_PROPERTY_STRING termprop that stores the xterm window title<br />
+as set by OSC 0 and OSC 2.<br />
+Use this with vte_terminal_get_termprop_string() instead of using<br />
+vte_terminal_get_window_title().</p>
+<p>Note that this termprop is not settable via the termprop OSC.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='id identifier rubyid_xterm'>xterm</span><span class='period'>.</span><span class='id identifier rubyid_title'>title</span></pre></dd>
+      
         <dt id="TEST_FLAGS_ALL-constant" class="">TEST_FLAGS_ALL =
           
         </dt>
@@ -275,28 +513,6 @@ process to a systemd user scope; if that fails, the whole spawn fails.</p>
     </h2>
 
     <ul class="summary">
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#event_context_get_type-instance_method" title="#event_context_get_type (instance method)">#<strong>event_context_get_type</strong>  &#x21d2; GLib::Type </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
       
         <li class="public ">
   <span class="summary_signature">
@@ -385,6 +601,75 @@ process to a systemd user scope; if that fails, the whole spawn fails.</p>
 
   
     <span class="summary_desc"><div class='inline'><p>Gets the list of supported legacy encodings.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_termprops-instance_method" title="#get_termprops (instance method)">#<strong>get_termprops</strong>(length)  &#x21d2; Array&lt;String&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the names of the installed termprops in an unspecified order.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#install_termprop-instance_method" title="#install_termprop (instance method)">#<strong>install_termprop</strong>(name, type, flags)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Installs a new terminal property that can be set by the application.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#install_termprop_alias-instance_method" title="#install_termprop_alias (instance method)">#<strong>install_termprop_alias</strong>(name, target_name)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Installs a new terminal property <!-- raw HTML omitted -->name<!-- raw HTML omitted --> as an alias for the terminal property <!-- raw HTML omitted -->target_name<!-- raw HTML omitted -->.</p>
 </div></span>
   
 </li>
@@ -485,6 +770,52 @@ process to a systemd user scope; if that fails, the whole spawn fails.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#query_termprop-instance_method" title="#query_termprop (instance method)">#<strong>query_termprop</strong>(name, resolved_name, prop, type, flags)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the property type of the termprop.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#query_termprop_by_id-instance_method" title="#query_termprop_by_id (instance method)">#<strong>query_termprop_by_id</strong>(prop, name, type, flags)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Like vte_query_termprop() except that it takes the termprop by ID.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#regex_error_quark-instance_method" title="#regex_error_quark (instance method)">#<strong>regex_error_quark</strong>  &#x21d2; GLib::Quark </a>
     
 
@@ -500,6 +831,29 @@ process to a systemd user scope; if that fails, the whole spawn fails.</p>
 
   
     <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#test_flags-instance_method" title="#test_flags (instance method)">#<strong>test_flags</strong>  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Gets the test flags; see vte_set_test_flags() for more information.</p>
+</div></span>
   
 </li>
 
@@ -550,6 +904,29 @@ process to a systemd user scope; if that fails, the whole spawn fails.</p>
 </li>
 
       
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#uuid_validate_string-instance_method" title="#uuid_validate_string (instance method)">#<strong>uuid_validate_string</strong>(str, len, fmt)  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Checks whether <!-- raw HTML omitted -->str<!-- raw HTML omitted --> is a valid string representation of an UUID.</p>
+</div></span>
+  
+</li>
+
+      
     </ul>
     
   
@@ -562,41 +939,7 @@ process to a systemd user scope; if that fails, the whole spawn fails.</p>
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="event_context_get_type-instance_method">
-  
-    #<strong>event_context_get_type</strong>  &#x21d2; <tt>GLib::Type</tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-
-  </div>
-</div>
-<div class="tags">
-  
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>GLib::Type</tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
-
-</div>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="feature_flags-instance_method">
+  <h3 class="signature first" id="feature_flags-instance_method">
   
     #<strong>feature_flags</strong>  &#x21d2; <tt><span class='object_link'><a href="Vte/FeatureFlags.html" title="Vte::FeatureFlags (module)">Vte::FeatureFlags</a></span></tt> 
   
@@ -797,6 +1140,239 @@ g_strfreev()</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="get_termprops-instance_method">
+  
+    #<strong>get_termprops</strong>(length)  &#x21d2; <tt>Array&lt;String&gt;</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the names of the installed termprops in an unspecified order.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>length</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a location to store the length of the returned array</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array&lt;String&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the names of the installed<br />
+termprops, or nil if there are no termprops</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="install_termprop-instance_method">
+  
+    #<strong>install_termprop</strong>(name, type, flags)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Installs a new terminal property that can be set by the application.</p>
+<p><!-- raw HTML omitted -->name<!-- raw HTML omitted --> must follow the rules for termprop names as laid out above; it<br />
+must have at least 4 components, the first two of which must be &quot;vte&quot;,<br />
+and &quot;ext&quot;. Use the %VTE_TERMPROP_NAME_PREFIX macro which defines this<br />
+name prefix.</p>
+<p>You should use an identifier for your terminal as the first component<br />
+after the prefix, as a namespace marker.</p>
+<p>It is a programming error to call this function with a <!-- raw HTML omitted -->name<!-- raw HTML omitted --> that does<br />
+not meet these requirements.</p>
+<p>It is a programming error to call this function after any Vte::Terminal<br />
+instances have been created.</p>
+<p>It is a programming error to call this function if the named termprop<br />
+is already installed with a different type or flags.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a namespaced property name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Vte/PropertyType.html" title="Vte::PropertyType (module)">Vte::PropertyType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Vte::PropertyType to use for the property</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Vte/PropertyFlags.html" title="Vte::PropertyFlags (module)">Vte::PropertyFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>flags from Vte::PropertyFlags</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>an ID for the termprop</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="install_termprop_alias-instance_method">
+  
+    #<strong>install_termprop_alias</strong>(name, target_name)  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Installs a new terminal property <!-- raw HTML omitted -->name<!-- raw HTML omitted --> as an alias for the terminal<br />
+property <!-- raw HTML omitted -->target_name<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a namespaced property name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>target_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the target property name</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the ID for the termprop <!-- raw HTML omitted -->target_name<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="major_version-instance_method">
   
     #<strong>major_version</strong>  &#x21d2; <tt>Integer</tt> 
@@ -963,6 +1539,235 @@ enumeration. See #GError for more information on error domains.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="query_termprop-instance_method">
+  
+    #<strong>query_termprop</strong>(name, resolved_name, prop, type, flags)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the property type of the termprop. For properties installed by<br />
+vte_install_termprop(), the name starts with &quot;vte.ext.&quot;.</p>
+<p>For an alias termprop (see vte_install_termprop_alias()), <!-- raw HTML omitted -->resolved_name<!-- raw HTML omitted --><br />
+will be name of the alias' target termprop; otherwise it will be <!-- raw HTML omitted -->name<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a termprop name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>resolved_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a location to store the termprop's name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>prop</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a location to store the termprop's ID</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Vte/PropertyType.html" title="Vte::PropertyType (module)">Vte::PropertyType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a location to store the termprop's type as a Vte::PropertyType</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Vte/PropertyFlags.html" title="Vte::PropertyFlags (module)">Vte::PropertyFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a location to store the termprop's flags as a Vte::PropertyFlags</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true iff the termprop exists, and then <!-- raw HTML omitted -->prop<!-- raw HTML omitted -->, <!-- raw HTML omitted -->type<!-- raw HTML omitted --> and<br />
+<!-- raw HTML omitted -->flags<!-- raw HTML omitted --> will be filled in</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="query_termprop_by_id-instance_method">
+  
+    #<strong>query_termprop_by_id</strong>(prop, name, type, flags)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Like vte_query_termprop() except that it takes the termprop by ID.<br />
+See that function for more information.</p>
+<p>For an alias termprop (see vte_install_termprop_alias()), <!-- raw HTML omitted -->resolved_name<!-- raw HTML omitted --><br />
+will be name of the alias' target termprop; otherwise it will be <!-- raw HTML omitted -->name<!-- raw HTML omitted -->.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>prop</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a termprop ID</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a location to store the termprop's name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>type</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Vte/PropertyType.html" title="Vte::PropertyType (module)">Vte::PropertyType</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a location to store the termprop's type as a Vte::PropertyType</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Vte/PropertyFlags.html" title="Vte::PropertyFlags (module)">Vte::PropertyFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a location to store the termprop's flags as a Vte::PropertyFlags</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true iff the termprop exists, and then <!-- raw HTML omitted -->name<!-- raw HTML omitted -->, <!-- raw HTML omitted -->type<!-- raw HTML omitted --> and<br />
+<!-- raw HTML omitted -->flags<!-- raw HTML omitted --> will be filled in</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="regex_error_quark-instance_method">
   
     #<strong>regex_error_quark</strong>  &#x21d2; <tt>GLib::Quark</tt> 
@@ -988,6 +1793,46 @@ enumeration. See #GError for more information on error domains.</p>
         <span class='type'>(<tt>GLib::Quark</tt>)</span>
       
       
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="test_flags-instance_method">
+  
+    #<strong>test_flags</strong>  &#x21d2; <tt>Integer</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Gets the test flags; see vte_set_test_flags() for more information.<br />
+Note that on non-debug builds, this always returns 0.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the test flags</p>
+</div>
       
     </li>
   
@@ -1083,6 +1928,94 @@ system default (usually &quot;/bin/sh&quot;) should be used.</p>
         &mdash;
         <div class='inline'><p>a newly allocated string with the<br />
 user's shell, or nil</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="uuid_validate_string-instance_method">
+  
+    #<strong>uuid_validate_string</strong>(str, len, fmt)  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Checks whether <!-- raw HTML omitted -->str<!-- raw HTML omitted --> is a valid string representation of an UUID.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>str</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a string</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>len</span>
+      
+      
+        <span class='type'>(<tt>Vte::gssize</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the length of <!-- raw HTML omitted -->str<!-- raw HTML omitted -->, or -1 is <!-- raw HTML omitted -->str<!-- raw HTML omitted --> is NUL terminated</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>fmt</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Vte/UuidFormat.html" title="Vte::UuidFormat (module)">Vte::UuidFormat</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Vte::UuidFormat</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>true iff <!-- raw HTML omitted -->str<!-- raw HTML omitted --> is a valid string representation</p>
 </div>
       
     </li>

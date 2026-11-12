@@ -99,7 +99,7 @@
           <div class="docstring">
   <div class="discussion">
     <p>The filter change cannot be<br />
-described with any of the other enumeration values.</p>
+described with any of the other enumeration values</p>
 
 
   </div>
@@ -115,7 +115,7 @@ described with any of the other enumeration values.</p>
           <div class="docstring">
   <div class="discussion">
     <p>The filter is less strict than<br />
-it was before: All items that it used to return true for<br />
+it was before: All items that it used to return true<br />
 still return true, others now may, too.</p>
 
 
@@ -132,7 +132,7 @@ still return true, others now may, too.</p>
           <div class="docstring">
   <div class="discussion">
     <p>The filter is more strict than<br />
-it was before: All items that it used to return false for<br />
+it was before: All items that it used to return false<br />
 still return false, others now may, too.</p>
 
 
@@ -144,6 +144,60 @@ still return false, others now may, too.</p>
 </div>
         </dt>
         <dd><pre class="code"><span class='int'>2</span> <span class='kw'>or</span> <span class='symbol'>:more_strict</span></pre></dd>
+      
+        <dt id="DIFFERENT_REWATCH-constant" class="">DIFFERENT_REWATCH =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Similar to [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FilterChange.DIFFERENT],<br />
+but signs that item watches should be recreated. This is used by<br />
+[class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FilterListModel] to keep the list up-to-date when items<br />
+change.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>3</span> <span class='kw'>or</span> <span class='symbol'>:different_rewatch</span></pre></dd>
+      
+        <dt id="LESS_STRICT_REWATCH-constant" class="">LESS_STRICT_REWATCH =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Similar to [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FilterChange.LESS_STRICT],<br />
+but signs that item watches should be recreated. This is used by<br />
+[class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FilterListModel] to keep the list up-to-date when items<br />
+change.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>4</span> <span class='kw'>or</span> <span class='symbol'>:less_strict_rewatch</span></pre></dd>
+      
+        <dt id="MORE_STRICT_REWATCH-constant" class="">MORE_STRICT_REWATCH =
+          <div class="docstring">
+  <div class="discussion">
+    <p>Similar to [enum<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FilterChange.MORE_STRICT],<br />
+but signs that item watches should be recreated. This is used by<br />
+[class<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FilterListModel] to keep the list up-to-date when items<br />
+change.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>5</span> <span class='kw'>or</span> <span class='symbol'>:more_strict_rewatch</span></pre></dd>
       
     </dl>
   

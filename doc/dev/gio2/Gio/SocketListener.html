@@ -1151,6 +1151,12 @@ references may be held internally.</p>
 IPv6 and IPv4 (if each is available).</p>
 <p>This is useful if you need to have a socket for incoming connections<br />
 but don't care about the specific port number.</p>
+<p>If possible, the [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.SocketListener] will listen on both IPv4 and<br />
+IPv6 (listening on the same port on both). If listening on one of the socket<br />
+families fails, the [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.SocketListener] will only listen on the other.<br />
+If listening on both fails, an error will be returned.</p>
+<p>If you need to distinguish whether listening on IPv4 or IPv6 or both was<br />
+successful, connect to [signal<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.SocketListener::event].</p>
 <p><!-- raw HTML omitted -->source_object<!-- raw HTML omitted --> will be passed out in the various calls<br />
 to accept to identify this particular source, which is<br />
 useful if you're listening on multiple addresses and do<br />
@@ -1215,6 +1221,12 @@ different things depending on what address is connected to.</p>
     <p>Helper function for g_socket_listener_add_address() that<br />
 creates a TCP/IP socket listening on IPv4 and IPv6 (if<br />
 supported) on the specified port on all interfaces.</p>
+<p>If possible, the [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.SocketListener] will listen on both IPv4 and<br />
+IPv6 (listening on the same port on both). If listening on one of the socket<br />
+families fails, the [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.SocketListener] will only listen on the other.<br />
+If listening on both fails, an error will be returned.</p>
+<p>If you need to distinguish whether listening on IPv4 or IPv6 or both was<br />
+successful, connect to [signal<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.SocketListener::event].</p>
 <p><!-- raw HTML omitted -->source_object<!-- raw HTML omitted --> will be passed out in the various calls<br />
 to accept to identify this particular source, which is<br />
 useful if you're listening on multiple addresses and do<br />
@@ -1297,6 +1309,8 @@ references may be held internally.</p>
     <p>Adds <!-- raw HTML omitted -->socket<!-- raw HTML omitted --> to the set of sockets that we try to accept<br />
 new clients from. The socket must be bound to a local<br />
 address and listened to.</p>
+<p>For parallel calls to [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.SocketListener] methods to work, the socket<br />
+must be in non-blocking mode. (See [property<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Socket:blocking].)</p>
 <p><!-- raw HTML omitted -->source_object<!-- raw HTML omitted --> will be passed out in the various calls<br />
 to accept to identify this particular source, which is<br />
 useful if you're listening on multiple addresses and do<br />

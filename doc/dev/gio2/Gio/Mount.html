@@ -88,13 +88,13 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The <code>GMount</code> interface represents user-visible mounts. Note, when<br />
-<a href="migrating-gnome-vfs.html">porting from GnomeVFS</a>, <code>GMount</code> is the moral<br />
-equivalent of <code>GnomeVFSVolume</code>.</p>
+    <p>The <code>GMount</code> interface represents a user-visible mount, such as a mounted<br />
+file system.</p>
 <p><code>GMount</code> is a ‘mounted’ filesystem that you can access. Mounted is in<br />
 quotes because it’s not the same as a UNIX mount, it might be a GVFS<br />
-mount, but you can still access the files on it if you use GIO. Might or<br />
-might not be related to a volume object.</p>
+mount, but you can still access the files on it if you use GIO.</p>
+<p>A <code>GMount</code> might be associated with a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Volume] (such as a USB flash<br />
+drive) which hosts it.</p>
 <p>Unmounting a <code>GMount</code> instance is an asynchronous operation. For<br />
 more information about asynchronous operations, see [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AsyncResult]<br />
 and [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Task]. To unmount a <code>GMount</code> instance, first call<br />
@@ -107,6 +107,8 @@ with the <code>GMount</code> and the [iface<!-- raw HTML omitted -->Gio<!-- raw 
 operation was completed successfully.  If an <code>error</code> is present when<br />
 [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Mount.unmount_with_operation_finish] is called, then it will be<br />
 filled with any error information.</p>
+<p>Note, when <a href="migrating-gnome-vfs.html">porting from GnomeVFS</a>, <code>GMount</code> is the<br />
+moral equivalent of <code>GnomeVFSVolume</code>.</p>
 
 
   </div>

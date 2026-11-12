@@ -274,7 +274,8 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><p>Creates render nodes for rendering <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> in the given foregound <!-- raw HTML omitted -->color<!-- raw HTML omitted --> and appends them to the current node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted --> without changing the current node.</p>
+</div></span>
   
 </li>
 
@@ -343,6 +344,29 @@
 
   
     <span class="summary_desc"><div class='inline'><p>Appends an outset shadow node around the box given by <!-- raw HTML omitted -->outline<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#append_paste-instance_method" title="#append_paste (instance method)">#<strong>append_paste</strong>(bounds, nth)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Creates a new render node that pastes the contents copied by a previous call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.push_copy].</p>
 </div></span>
   
 </li>
@@ -721,6 +745,75 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#push_component_transfer-instance_method" title="#push_component_transfer (instance method)">#<strong>push_component_transfer</strong>(red, green, blue, alpha)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Modifies the colors of an image by applying a transfer function for each component.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#push_composite-instance_method" title="#push_composite (instance method)">#<strong>push_composite</strong>(op)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Until the first call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop], the mask image for the mask operation will be recorded.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#push_copy-instance_method" title="#push_copy (instance method)">#<strong>push_copy</strong>  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Stores the current rendering state for later pasting via [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.append_paste].</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#push_cross_fade-instance_method" title="#push_cross_fade (instance method)">#<strong>push_cross_fade</strong>(progress)  &#x21d2; nil </a>
     
 
@@ -805,6 +898,29 @@
 
   
     <span class="summary_desc"><div class='inline'><p>Push a [class<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.GLShaderNode].</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#push_isolation-instance_method" title="#push_isolation (instance method)">#<strong>push_isolation</strong>(features)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Isolates the following drawing operations from previous ones.</p>
 </div></span>
   
 </li>
@@ -1967,7 +2083,13 @@ a color.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    
+    <p>Creates render nodes for rendering <!-- raw HTML omitted -->layout<!-- raw HTML omitted --> in the given foregound <!-- raw HTML omitted -->color<!-- raw HTML omitted --><br />
+and appends them to the current node of <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted --> without changing the<br />
+current node. The current theme's foreground color for a widget can be<br />
+obtained with [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Widget.get_color].</p>
+<p>Note that if the layout does not produce any visible output, then nodes<br />
+may not be added to the <!-- raw HTML omitted -->snapshot<!-- raw HTML omitted -->.</p>
+
 
   </div>
 </div>
@@ -1984,6 +2106,10 @@ a color.</p>
       
       
       
+        &mdash;
+        <div class='inline'><p>the <code>PangoLayout</code> to render</p>
+</div>
+      
     </li>
   
     <li>
@@ -1994,6 +2120,10 @@ a color.</p>
         <span class='type'>(<tt>Gdk::RGBA</tt>)</span>
       
       
+      
+        &mdash;
+        <div class='inline'><p>the foreground color to render the layout in</p>
+</div>
       
     </li>
   
@@ -2293,6 +2423,77 @@ will become the initial node.</p>
       
         &mdash;
         <div class='inline'><p>how much blur to apply to the shadow</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="append_paste-instance_method">
+  
+    #<strong>append_paste</strong>(bounds, nth)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Creates a new render node that pastes the contents<br />
+copied by a previous call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.push_copy]</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>bounds</span>
+      
+      
+        <span class='type'>(<tt>Graphene::Rect</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the bounds for the new node</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>nth</span>
+      
+      
+        <span class='type'>(<tt>Integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the index of the copy, with 0 being the latest<br />
+copy, 1 being the copy before that, and so on.</p>
 </div>
       
     </li>
@@ -3476,6 +3677,203 @@ colors, with color components ordered R, G, B, A.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="push_component_transfer-instance_method">
+  
+    #<strong>push_component_transfer</strong>(red, green, blue, alpha)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Modifies the colors of an image by applying a transfer<br />
+function for each component.</p>
+<p>The transfer functions operate on unpremultiplied colors.</p>
+<p>The image is recorded until the next call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>red</span>
+      
+      
+        <span class='type'>(<tt>Gsk::ComponentTransfer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the transfer for the red component</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>green</span>
+      
+      
+        <span class='type'>(<tt>Gsk::ComponentTransfer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the transfer for the green component</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>blue</span>
+      
+      
+        <span class='type'>(<tt>Gsk::ComponentTransfer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the transfer for the blue component</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>alpha</span>
+      
+      
+        <span class='type'>(<tt>Gsk::ComponentTransfer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the transfer for the alpha component</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="push_composite-instance_method">
+  
+    #<strong>push_composite</strong>(op)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Until the first call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop], the<br />
+mask image for the mask operation will be recorded.</p>
+<p>After that call, the child image will be recorded until<br />
+the second call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop].</p>
+<p>Calling this function requires 2 subsequent calls to gtk_snapshot_pop().</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>op</span>
+      
+      
+        <span class='type'>(<tt>Gsk::PorterDuff</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>The Porter/Duff compositing operator to use</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="push_copy-instance_method">
+  
+    #<strong>push_copy</strong>  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Stores the current rendering state for later pasting via<br />
+[method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.append_paste].</p>
+<p>Pasting is possible until the matching call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="push_cross_fade-instance_method">
   
     #<strong>push_cross_fade</strong>(progress)  &#x21d2; <tt>nil</tt> 
@@ -3622,6 +4020,7 @@ for example in the GTK inspector.</p>
 outside of it.</p>
 <p>The image is recorded until the next call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop].</p>
 <p>If you want to fill the path with a color, [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.append_fill]<br />
+than rendering new ones, use [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.append_fill]<br />
 may be more convenient.</p>
 
 
@@ -3766,6 +4165,66 @@ re-rendered.</p>
       
         &mdash;
         <div class='inline'><p>Data block with arguments for the shader.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="push_isolation-instance_method">
+  
+    #<strong>push_isolation</strong>(features)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Isolates the following drawing operations from previous ones.</p>
+<p>You can express &quot;everything but these flags&quot; in a forward compatible<br />
+way by using bit math:<br />
+<code>GSK_ISOLATION_ALL &amp; ~(GSK_ISOLATION_BACKGROUND | GSK_ISOLATION_COPY_PASTE)</code><br />
+will isolate everything but background and copy/paste.</p>
+<p>For what isolation features exist, see [flags<!-- raw HTML omitted -->Gsk<!-- raw HTML omitted -->.Isolation].</p>
+<p>Content is isolated until the next call to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.Snapshot.pop].</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>features</span>
+      
+      
+        <span class='type'>(<tt>Gsk::Isolation</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>features that are isolated</p>
 </div>
       
     </li>

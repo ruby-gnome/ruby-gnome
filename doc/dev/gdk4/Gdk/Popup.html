@@ -88,7 +88,7 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>A <code>GdkPopup</code> is a surface that is attached to another surface.</p>
+    <p>A surface that is attached to another surface.</p>
 <p>The <code>GdkPopup</code> is positioned relative to its parent surface.</p>
 <p><code>GdkPopup</code>s are typically used to implement menus and similar popups.<br />
 They can be modal, which is indicated by the [property<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Popup:autohide]<br />
@@ -454,7 +454,7 @@ property.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Present <!-- raw HTML omitted -->popup<!-- raw HTML omitted --> after having processed the <code>GdkPopupLayout</code> rules.</p>
-<p>If the popup was previously now showing, it will be showed,<br />
+<p>If the popup was previously not showing, it will be shown,<br />
 otherwise it will change position according to <!-- raw HTML omitted -->layout<!-- raw HTML omitted -->.</p>
 <p>After calling this function, the result should be handled in response<br />
 to the [signal<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Surface::layout] signal being emitted. The resulting<br />

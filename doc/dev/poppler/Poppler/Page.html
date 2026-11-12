@@ -109,7 +109,18 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>A Poppler::Document page.</p>
+<p>Since 25.06 this type supports g_autoptr</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
 
 
 
@@ -963,6 +974,29 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#render_full-instance_method" title="#render_full (instance method)">#<strong>render_full</strong>(cairo, printing, flags)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Render the page to the given cairo context, manually selecting which annotations should be displayed.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#render_selection-instance_method" title="#render_selection (instance method)">#<strong>render_selection</strong>(cairo, selection, old_selection, style, glyph_color, background_color)  &#x21d2; nil </a>
     
 
@@ -1001,6 +1035,29 @@
 
   
     <span class="summary_desc"><div class='inline'><p>Render the page on a postscript file.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#render_transparent_selection-instance_method" title="#render_transparent_selection (instance method)">#<strong>render_transparent_selection</strong>(cairo, selection, old_selection, style, background_color, background_opacity)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Render the selection specified by <!-- raw HTML omitted -->selection<!-- raw HTML omitted --> for <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to the given cairo context.</p>
 </div></span>
   
 </li>
@@ -2227,7 +2284,8 @@ The returned region must be freed with cairo_region_destroy()</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Retrieves the contents of the specified <!-- raw HTML omitted -->selection<!-- raw HTML omitted --> as text.</p>
+    <p>Retrieves the contents of the specified <!-- raw HTML omitted -->selection<!-- raw HTML omitted --> as text.<br />
+<!-- raw HTML omitted -->selection<!-- raw HTML omitted --> as a string</p>
 
 
   </div>
@@ -2279,8 +2337,7 @@ The returned region must be freed with cairo_region_destroy()</p>
       
       
         &mdash;
-        <div class='inline'><p>a pointer to the contents of the <!-- raw HTML omitted -->selection<!-- raw HTML omitted --><br />
-as a string</p>
+        <div class='inline'><p>a pointer to the contents of the</p>
 </div>
       
     </li>
@@ -3298,7 +3355,8 @@ rendering to a printer.</p>
   <div class="discussion">
     <p>Render the page to the given cairo context for printing with<br />
 #POPPLER_PRINT_ALL flags selected.  If you want a different set of flags,<br />
-use poppler_page_render_for_printing_with_options().</p>
+use poppler_page_render_full() with printing #TRUE and the corresponding<br />
+flags.</p>
 <p>The difference between poppler_page_render() and this function is that some<br />
 things get rendered differently between screens and printers:</p>
 <!-- raw HTML omitted -->
@@ -3393,6 +3451,95 @@ differences between rendering to the screen and rendering to a printer.</p>
       
         &mdash;
         <div class='inline'><p>print options</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="render_full-instance_method">
+  
+    #<strong>render_full</strong>(cairo, printing, flags)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Render the page to the given cairo context, manually selecting which<br />
+annotations should be displayed.</p>
+<p>The <!-- raw HTML omitted -->printing<!-- raw HTML omitted --> parameter determines whether a page is rendered for printing<br />
+or for displaying it on a screen. See the documentation for<br />
+poppler_page_render_for_printing() for the differences between rendering to<br />
+the screen and rendering to a printer.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cairo</span>
+      
+      
+        <span class='type'>(<tt>cairo::Context</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>cairo context to render to</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>printing</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>cairo context to render to</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flags</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="RenderAnnotsFlags.html" title="Poppler::RenderAnnotsFlags (module)">Poppler::RenderAnnotsFlags</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>flags which allow to select which annotations to render</p>
 </div>
       
     </li>
@@ -3582,6 +3729,141 @@ only render the changed part of the selection.</p>
       
         &mdash;
         <div class='inline'><p>the PopplerPSFile to render to</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="render_transparent_selection-instance_method">
+  
+    #<strong>render_transparent_selection</strong>(cairo, selection, old_selection, style, background_color, background_opacity)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Render the selection specified by <!-- raw HTML omitted -->selection<!-- raw HTML omitted --> for <!-- raw HTML omitted -->page<!-- raw HTML omitted --> to<br />
+the given cairo context.  The selection will be rendered using<br />
+<!-- raw HTML omitted -->background_color<!-- raw HTML omitted --> and <!-- raw HTML omitted -->background_opacity<!-- raw HTML omitted --> for the selection<br />
+background. Glyphs will not be drawn.</p>
+<p>If non-NULL, <!-- raw HTML omitted -->old_selection<!-- raw HTML omitted --> specifies the selection that is already<br />
+rendered to <!-- raw HTML omitted -->cairo<!-- raw HTML omitted -->, in which case this function will (some day)<br />
+only render the changed part of the selection.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cairo</span>
+      
+      
+        <span class='type'>(<tt>cairo::Context</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>cairo context to render to</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>selection</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Rectangle.html" title="Poppler::Rectangle (class)">Poppler::Rectangle</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>start and end point of selection as a rectangle</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>old_selection</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Rectangle.html" title="Poppler::Rectangle (class)">Poppler::Rectangle</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>previous selection</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>style</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SelectionStyle.html" title="Poppler::SelectionStyle (module)">Poppler::SelectionStyle</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a Poppler::SelectionStyle</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>background_color</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Color.html" title="Poppler::Color (class)">Poppler::Color</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>color to use for the selection background</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>background_opacity</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>opacity to use for the selection background</p>
 </div>
       
     </li>

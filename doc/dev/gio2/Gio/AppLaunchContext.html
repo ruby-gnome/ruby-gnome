@@ -228,7 +228,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Called when an application has failed to launch, so that it can cancel the application startup notification started in g_app_launch_context_get_startup_notify_id().</p>
+    <span class="summary_desc"><div class='inline'><p>Called when an application has failed to launch, so that it can cancel the application startup notification started in [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AppLaunchContext.get_startup_notify_id].</p>
 </div></span>
   
 </li>
@@ -251,7 +251,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Arranges for <!-- raw HTML omitted -->variable<!-- raw HTML omitted --> to be set to <!-- raw HTML omitted -->value<!-- raw HTML omitted --> in the child's environment when <!-- raw HTML omitted -->context<!-- raw HTML omitted --> is used to launch an application.</p>
+    <span class="summary_desc"><div class='inline'><p>Arranges for <!-- raw HTML omitted -->variable<!-- raw HTML omitted --> to be set to <!-- raw HTML omitted -->value<!-- raw HTML omitted --> in the child’s environment when <!-- raw HTML omitted -->context<!-- raw HTML omitted --> is used to launch an application.</p>
 </div></span>
   
 </li>
@@ -274,7 +274,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Arranges for <!-- raw HTML omitted -->variable<!-- raw HTML omitted --> to be unset in the child's environment when <!-- raw HTML omitted -->context<!-- raw HTML omitted --> is used to launch an application.</p>
+    <span class="summary_desc"><div class='inline'><p>Arranges for <!-- raw HTML omitted -->variable<!-- raw HTML omitted --> to be unset in the child’s environment when <!-- raw HTML omitted -->context<!-- raw HTML omitted --> is used to launch an application.</p>
 </div></span>
   
 </li>
@@ -299,7 +299,8 @@
 </h3><div class="docstring">
   <div class="discussion">
     <p>Creates a new application launch context. This is not normally used,<br />
-instead you instantiate a subclass of this, such as Gdk::AppLaunchContext.</p>
+instead you instantiate a subclass of this, such as<br />
+<a href="https://docs.gtk.org/gdk4/class.AppLaunchContext.html"><code>GdkAppLaunchContext</code></a>.</p>
 
 
   </div>
@@ -330,7 +331,7 @@ instead you instantiate a subclass of this, such as Gdk::AppLaunchContext.</p>
   <div class="discussion">
     <p>Gets the complete environment variable list to be passed to<br />
 the child process when <!-- raw HTML omitted -->context<!-- raw HTML omitted --> is used to launch an application.<br />
-This is an array of strings, where each string has<br />
+This is a <code>NULL</code>-terminated array of strings, where each string has<br />
 the form <code>KEY=VALUE</code>.</p>
 
 
@@ -349,7 +350,7 @@ the form <code>KEY=VALUE</code>.</p>
       
       
         &mdash;
-        <div class='inline'><p>the child's environment</p>
+        <div class='inline'><p>the child’s environment</p>
 </div>
       
     </li>
@@ -391,7 +392,7 @@ application, by setting the <code>DISPLAY</code> environment variable.</p>
       
       
         &mdash;
-        <div class='inline'><p>a GApp::Info</p>
+        <div class='inline'><p>the app info</p>
 </div>
       
     </li>
@@ -406,7 +407,7 @@ application, by setting the <code>DISPLAY</code> environment variable.</p>
       
       
         &mdash;
-        <div class='inline'><p>a #GList of #GFile objects</p>
+        <div class='inline'><p>a list of [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.File] objects</p>
 </div>
       
     </li>
@@ -454,7 +455,9 @@ The two <a href="https://gitlab.freedesktop.org/wayland/wayland-protocols/-/blob
 <p>Activation tokens are defined in the <a href="https://wayland.app/protocols/xdg-activation-v1">XDG Activation Protocol</a>,<br />
 and startup notification IDs are defined in the<br />
 <a href="http://standards.freedesktop.org/startup-notification-spec/startup-notification-latest.txt">freedesktop.org Startup Notification Protocol</a>.</p>
-<p>Support for the XDG Activation Protocol was added in GLib 2.76.</p>
+<p>Support for the XDG Activation Protocol was added in GLib 2.76.<br />
+Since GLib 2.82 <!-- raw HTML omitted -->info<!-- raw HTML omitted --> and <!-- raw HTML omitted -->files<!-- raw HTML omitted --> can be <code>NULL</code>. If that’s not supported by the backend,<br />
+the returned token will be <code>NULL</code>.</p>
 
 
   </div>
@@ -473,7 +476,7 @@ and startup notification IDs are defined in the<br />
       
       
         &mdash;
-        <div class='inline'><p>a GApp::Info</p>
+        <div class='inline'><p>the app info</p>
 </div>
       
     </li>
@@ -488,7 +491,7 @@ and startup notification IDs are defined in the<br />
       
       
         &mdash;
-        <div class='inline'><p>a #GList of #GFile objects</p>
+        <div class='inline'><p>a list of [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.File] objects</p>
 </div>
       
     </li>
@@ -506,7 +509,7 @@ and startup notification IDs are defined in the<br />
       
       
         &mdash;
-        <div class='inline'><p>a startup notification ID for the application, or nil if<br />
+        <div class='inline'><p>a startup notification ID for the application, or <code>NULL</code> if<br />
 not supported.</p>
 </div>
       
@@ -529,7 +532,8 @@ not supported.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Called when an application has failed to launch, so that it can cancel<br />
-the application startup notification started in g_app_launch_context_get_startup_notify_id().</p>
+the application startup notification started in<br />
+[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AppLaunchContext.get_startup_notify_id].</p>
 
 
   </div>
@@ -548,7 +552,8 @@ the application startup notification started in g_app_launch_context_get_startup
       
       
         &mdash;
-        <div class='inline'><p>the startup notification id that was returned by g_app_launch_context_get_startup_notify_id().</p>
+        <div class='inline'><p>the startup notification id that was returned by<br />
+[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.AppLaunchContext.get_startup_notify_id].</p>
 </div>
       
     </li>
@@ -583,8 +588,8 @@ the application startup notification started in g_app_launch_context_get_startup
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Arranges for <!-- raw HTML omitted -->variable<!-- raw HTML omitted --> to be set to <!-- raw HTML omitted -->value<!-- raw HTML omitted --> in the child's<br />
-environment when <!-- raw HTML omitted -->context<!-- raw HTML omitted --> is used to launch an application.</p>
+    <p>Arranges for <!-- raw HTML omitted -->variable<!-- raw HTML omitted --> to be set to <!-- raw HTML omitted -->value<!-- raw HTML omitted --> in the child’s environment when<br />
+<!-- raw HTML omitted -->context<!-- raw HTML omitted --> is used to launch an application.</p>
 
 
   </div>
@@ -653,8 +658,8 @@ environment when <!-- raw HTML omitted -->context<!-- raw HTML omitted --> is us
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Arranges for <!-- raw HTML omitted -->variable<!-- raw HTML omitted --> to be unset in the child's environment<br />
-when <!-- raw HTML omitted -->context<!-- raw HTML omitted --> is used to launch an application.</p>
+    <p>Arranges for <!-- raw HTML omitted -->variable<!-- raw HTML omitted --> to be unset in the child’s environment when <!-- raw HTML omitted -->context<!-- raw HTML omitted --><br />
+is used to launch an application.</p>
 
 
   </div>

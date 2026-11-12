@@ -213,7 +213,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Completes an asynchronous function in an idle handler in the [thread-default main context][g-main-context-push-thread-default] of the thread that <!-- raw HTML omitted -->simple<!-- raw HTML omitted --> was initially created in (and re-pushes that context around the invocation of the callback).</p>
+    <span class="summary_desc"><div class='inline'><p>Completes an asynchronous function in an idle handler in the thread-default main context (see [method<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.MainContext.push_thread_default]) of the thread that <!-- raw HTML omitted -->simple<!-- raw HTML omitted --> was initially created in (and re-pushes that context around the invocation of the callback).</p>
 </div></span>
   
 </li>
@@ -888,7 +888,7 @@ is needed to complete the call.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Completes an asynchronous function in an idle handler in the<br />
-[thread-default main context][g-main-context-push-thread-default]<br />
+thread-default main context (see [method<!-- raw HTML omitted -->GLib<!-- raw HTML omitted -->.MainContext.push_thread_default])<br />
 of the thread that <!-- raw HTML omitted -->simple<!-- raw HTML omitted --> was initially created in<br />
 (and re-pushes that context around the invocation of the callback).</p>
 <p>Calling this function takes a reference to <!-- raw HTML omitted -->simple<!-- raw HTML omitted --> for as long as<br />

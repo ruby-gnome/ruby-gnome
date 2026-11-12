@@ -157,7 +157,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Gets the maximum number of bytes that are immediately available without requiring any expensive operations (like copying the data into a temporary buffer).</p>
+    <span class="summary_desc"><div class='inline'><p>Gets the maximum number of bytes that can be retrieved in a single map operation without merging buffers.</p>
 </div></span>
   
 </li>
@@ -859,6 +859,9 @@
     <p>Gets the maximum amount of bytes available, that is it returns the maximum<br />
 value that can be supplied to gst_adapter_map() without that function<br />
 returning nil.</p>
+<p>Calling gst_adapter_map() with the amount of bytes returned by this function<br />
+may require expensive operations (like copying the data into a temporary<br />
+buffer) in some cases.</p>
 
 
   </div>
@@ -897,8 +900,10 @@ returning nil.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Gets the maximum number of bytes that are immediately available without<br />
-requiring any expensive operations (like copying the data into a<br />
+    <p>Gets the maximum number of bytes that can be retrieved in a single map<br />
+operation without merging buffers.</p>
+<p>Calling gst_adapter_map() with the amount of bytes returned by this function<br />
+will never require any expensive operations (like copying the data into a<br />
 temporary buffer).<br />
 operations</p>
 
@@ -1904,7 +1909,7 @@ flag, or GST_BUFFER_OFFSET_NONE.</p>
 position is returned.</p>
 <p>The dts is reset to GST_CLOCK_TIME_NONE and the distance is set to 0 when<br />
 the adapter is first created or when it is cleared. This also means that before<br />
-the first byte with a dts is removed from the adapter, the dts<br />
+the first byte with a dts is added to the adapter, the dts<br />
 and distance returned are GST_CLOCK_TIME_NONE and 0 respectively.</p>
 
 
@@ -1968,7 +1973,7 @@ and distance returned are GST_CLOCK_TIME_NONE and 0 respectively.</p>
 position is returned.</p>
 <p>The dts is reset to GST_CLOCK_TIME_NONE and the distance is set to 0 when<br />
 the adapter is first created or when it is cleared. This also means that before<br />
-the first byte with a dts is removed from the adapter, the dts<br />
+the first byte with a dts is added to the adapter, the dts<br />
 and distance returned are GST_CLOCK_TIME_NONE and 0 respectively.</p>
 
 
@@ -2047,7 +2052,7 @@ and distance returned are GST_CLOCK_TIME_NONE and 0 respectively.</p>
 position is returned.</p>
 <p>The offset is reset to GST_BUFFER_OFFSET_NONE and the distance is set to 0<br />
 when the adapter is first created or when it is cleared. This also means that<br />
-before the first byte with an offset is removed from the adapter, the offset<br />
+before the first byte with an offset is added to the adapter, the offset<br />
 and distance returned are GST_BUFFER_OFFSET_NONE and 0 respectively.</p>
 
 
@@ -2111,7 +2116,7 @@ and distance returned are GST_BUFFER_OFFSET_NONE and 0 respectively.</p>
 position is returned.</p>
 <p>The pts is reset to GST_CLOCK_TIME_NONE and the distance is set to 0 when<br />
 the adapter is first created or when it is cleared. This also means that before<br />
-the first byte with a pts is removed from the adapter, the pts<br />
+the first byte with a pts is added to the adapter, the pts<br />
 and distance returned are GST_CLOCK_TIME_NONE and 0 respectively.</p>
 
 
@@ -2175,7 +2180,7 @@ and distance returned are GST_CLOCK_TIME_NONE and 0 respectively.</p>
 position is returned.</p>
 <p>The pts is reset to GST_CLOCK_TIME_NONE and the distance is set to 0 when<br />
 the adapter is first created or when it is cleared. This also means that before<br />
-the first byte with a pts is removed from the adapter, the pts<br />
+the first byte with a pts is added to the adapter, the pts<br />
 and distance returned are GST_CLOCK_TIME_NONE and 0 respectively.</p>
 
 
@@ -2415,6 +2420,12 @@ buffer with a single memory region.</p>
 flags such as the DISCONT flag are set on the returned buffer, or not.<br />
 The caller needs to explicitly set or unset flags that should be set or<br />
 unset.</p>
+<p>Likewise, no assumptions should be made about timestamps and offset of the<br />
+returned buffer. The caller should use gst_adapter_prev_pts(),<br />
+gst_adapter_prev_dts(), and gst_adapter_prev_offset() to obtain the relevant<br />
+information.</p>
+<p>The returned buffer might not be writable, use gst_buffer_make_writable()<br />
+if you need to change e.g. flags or timestamps.</p>
 <p>Since 1.6 this will also copy over all GstMeta of the input buffers except<br />
 for meta with the %GST_META_FLAG_POOLED flag or with the &quot;memory&quot; tag.</p>
 <p>Caller owns a reference to the returned buffer. gst_buffer_unref() after<br />

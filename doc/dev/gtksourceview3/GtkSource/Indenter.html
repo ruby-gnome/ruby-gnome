@@ -95,14 +95,14 @@ previous lines indentation.</p>
 <p>This can be changed by implementing <code>GtkSourceIndenter</code> and setting the<br />
 [property<!-- raw HTML omitted -->View<!-- raw HTML omitted -->:indenter] property.</p>
 <p>Implementors of this interface should implement both<br />
-[vfunc<!-- raw HTML omitted -->Indenter<!-- raw HTML omitted -->.is_trigger] and [vfunc<!-- raw HTML omitted -->Indenter<!-- raw HTML omitted -->.indent].</p>
-<p>[vfunc<!-- raw HTML omitted -->Indenter<!-- raw HTML omitted -->.is_trigger] is called upon key-press to<br />
+[vfunc<!-- raw HTML omitted -->GtkSource<!-- raw HTML omitted -->.Indenter.is_trigger] and [vfunc<!-- raw HTML omitted -->GtkSource<!-- raw HTML omitted -->.Indenter.indent].</p>
+<p>[vfunc<!-- raw HTML omitted -->GtkSource<!-- raw HTML omitted -->.Indenter.is_trigger] is called upon key-press to<br />
 determine of the key press should trigger an indentation.  The default<br />
 implementation of the interface checks to see if the key was<br />
 [const<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.KEY_Return] or [const<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.KEY_KP_Enter] without %GDK_SHIFT_MASK set.</p>
-<p>[vfunc<!-- raw HTML omitted -->Indenter<!-- raw HTML omitted -->.indent] is called after text has been<br />
+<p>[vfunc<!-- raw HTML omitted -->GtkSource<!-- raw HTML omitted -->.Indenter.indent] is called after text has been<br />
 inserted into [class<!-- raw HTML omitted -->Buffer<!-- raw HTML omitted -->] when<br />
-[vfunc<!-- raw HTML omitted -->Indenter<!-- raw HTML omitted -->.is_trigger] returned true. The [struct<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextIter]<br />
+[vfunc<!-- raw HTML omitted -->GtkSource<!-- raw HTML omitted -->.Indenter.is_trigger] returned true. The [struct<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextIter]<br />
 is placed directly after the inserted character or characters.</p>
 <p>It may be beneficial to move the insertion mark using<br />
 [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.TextBuffer.select_range] depending on how the indenter changes<br />
@@ -204,7 +204,7 @@ within the view.</p>
 <p><!-- raw HTML omitted -->iter<!-- raw HTML omitted --> is the location where the indentation was requested. This typically<br />
 is after having just inserted a newline (\n) character but can be other<br />
 situations such as a manually requested indentation or reformatting.</p>
-<p>See [iface<!-- raw HTML omitted -->Indenter<!-- raw HTML omitted -->.is_trigger] for how to trigger indentation on<br />
+<p>See [vfunc<!-- raw HTML omitted -->GtkSource<!-- raw HTML omitted -->.Indenter.is_trigger] for how to trigger indentation on<br />
 various characters inserted into the buffer.</p>
 <p>The implementor of this function is expected to keep <!-- raw HTML omitted -->iter<!-- raw HTML omitted --> valid across<br />
 calls to the function and should contain the location of the insert mark<br />

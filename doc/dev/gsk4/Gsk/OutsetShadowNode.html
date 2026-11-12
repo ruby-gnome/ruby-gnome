@@ -307,7 +307,7 @@
   
   
   <h3 class="inherited">Methods inherited from <span class='object_link'><a href="RenderNode.html" title="Gsk::RenderNode (class)">RenderNode</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="RenderNode.html#deserialize-class_method" title="Gsk::RenderNode.deserialize (method)">deserialize</a></span>, <span class='object_link'><a href="RenderNode.html#draw-instance_method" title="Gsk::RenderNode#draw (method)">#draw</a></span>, <span class='object_link'><a href="RenderNode.html#get_bounds-instance_method" title="Gsk::RenderNode#get_bounds (method)">#get_bounds</a></span>, <span class='object_link'><a href="RenderNode.html#node_type-instance_method" title="Gsk::RenderNode#node_type (method)">#node_type</a></span>, <span class='object_link'><a href="RenderNode.html#ref-instance_method" title="Gsk::RenderNode#ref (method)">#ref</a></span>, <span class='object_link'><a href="RenderNode.html#serialize-instance_method" title="Gsk::RenderNode#serialize (method)">#serialize</a></span>, <span class='object_link'><a href="RenderNode.html#unref-instance_method" title="Gsk::RenderNode#unref (method)">#unref</a></span>, <span class='object_link'><a href="RenderNode.html#write_to_file-instance_method" title="Gsk::RenderNode#write_to_file (method)">#write_to_file</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="RenderNode.html#deserialize-class_method" title="Gsk::RenderNode.deserialize (method)">deserialize</a></span>, <span class='object_link'><a href="RenderNode.html#draw-instance_method" title="Gsk::RenderNode#draw (method)">#draw</a></span>, <span class='object_link'><a href="RenderNode.html#get_bounds-instance_method" title="Gsk::RenderNode#get_bounds (method)">#get_bounds</a></span>, <span class='object_link'><a href="RenderNode.html#get_children-instance_method" title="Gsk::RenderNode#get_children (method)">#get_children</a></span>, <span class='object_link'><a href="RenderNode.html#get_opaque_rect-instance_method" title="Gsk::RenderNode#get_opaque_rect (method)">#get_opaque_rect</a></span>, <span class='object_link'><a href="RenderNode.html#node_type-instance_method" title="Gsk::RenderNode#node_type (method)">#node_type</a></span>, <span class='object_link'><a href="RenderNode.html#ref-instance_method" title="Gsk::RenderNode#ref (method)">#ref</a></span>, <span class='object_link'><a href="RenderNode.html#serialize-instance_method" title="Gsk::RenderNode#serialize (method)">#serialize</a></span>, <span class='object_link'><a href="RenderNode.html#unref-instance_method" title="Gsk::RenderNode#unref (method)">#unref</a></span>, <span class='object_link'><a href="RenderNode.html#write_to_file-instance_method" title="Gsk::RenderNode#write_to_file (method)">#write_to_file</a></span></p>
 <div id="constructor_details" class="method_details_list">
   <h2>Constructor Details</h2>
   
@@ -486,6 +486,8 @@ around the box given by <!-- raw HTML omitted -->outline<!-- raw HTML omitted --
 </h3><div class="docstring">
   <div class="discussion">
     <p>Retrieves the color of the outset shadow.</p>
+<p>The value returned by this function will not be correct<br />
+if the render node was created for a non-sRGB color.</p>
 
 
   </div>

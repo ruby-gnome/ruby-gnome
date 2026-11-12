@@ -104,8 +104,7 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>The <code>GdkClipboard</code> object represents data shared between applications or<br />
-inside an application.</p>
+    <p>Represents data shared between applications or inside an application.</p>
 <p>To get a <code>GdkClipboard</code> object, use [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display.get_clipboard] or<br />
 [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Display.get_primary_clipboard]. You can find out about the data<br />
 that is currently available in a clipboard using<br />
@@ -1184,8 +1183,6 @@ even on a local clipboard. In this case the clipboard is empty.</p>
   <div class="discussion">
     <p>Asynchronously requests an input stream to read the <!-- raw HTML omitted -->clipboard<!-- raw HTML omitted -->'s<br />
 contents from.</p>
-<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. You must then<br />
-call [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.read_finish] to get the result of the operation.</p>
 <p>The clipboard will choose the most suitable mime type from the given list<br />
 to fulfill the request, preferring the ones listed first.</p>
 
@@ -1377,8 +1374,6 @@ the chosen mime type</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Asynchronously request the <!-- raw HTML omitted -->clipboard<!-- raw HTML omitted --> contents converted to a string.</p>
-<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. You must then<br />
-call [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.read_text_finish] to get the result.</p>
 <p>This is a simple wrapper around [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.read_value_async].<br />
 Use that function or [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.read_async] directly if you<br />
 need more control over the operation.</p>
@@ -1525,8 +1520,6 @@ need more control over the operation.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Asynchronously request the <!-- raw HTML omitted -->clipboard<!-- raw HTML omitted --> contents converted to a <code>GdkPixbuf</code>.</p>
-<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. You must then<br />
-call [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.read_texture_finish] to get the result.</p>
 <p>This is a simple wrapper around [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.read_value_async].<br />
 Use that function or [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.read_async] directly if you<br />
 need more control over the operation.</p>
@@ -1674,8 +1667,6 @@ need more control over the operation.</p>
   <div class="discussion">
     <p>Asynchronously request the <!-- raw HTML omitted -->clipboard<!-- raw HTML omitted --> contents converted to the given<br />
 <!-- raw HTML omitted -->type<!-- raw HTML omitted -->.</p>
-<p>When the operation is finished <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called. You must then call<br />
-[method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.read_value_finish] to get the resulting <code>GValue</code>.</p>
 <p>For local clipboard contents that are available in the given <code>GType</code>,<br />
 the value will be copied directly. Otherwise, GDK will try to use<br />
 [func<!-- raw HTML omitted -->content_deserialize_async<!-- raw HTML omitted -->] to convert the clipboard's data.</p>
@@ -1855,7 +1846,7 @@ the value will be copied directly. Otherwise, GDK will try to use<br />
 <p>Values should be passed the same way they are passed to other value<br />
 collecting APIs, such as [method<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Object.set] or<br />
 [func<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.signal_emit].</p>
-<pre class="code c"><code class="c">gdk_clipboard_set (clipboard, GTK_TYPE_STRING, &quot;Hello World&quot;);
+<pre class="code c"><code class="c">gdk_clipboard_set (clipboard, G_TYPE_STRING, &quot;Hello World&quot;);
 
 gdk_clipboard_set (clipboard, GDK_TYPE_TEXTURE, some_texture);
 </code></pre>
@@ -1998,7 +1989,6 @@ gdk_clipboard_set (clipboard, GDK_TYPE_TEXTURE, some_texture);
   <div class="discussion">
     <p>Asynchronously instructs the <!-- raw HTML omitted -->clipboard<!-- raw HTML omitted --> to store its contents remotely.</p>
 <p>If the clipboard is not local, this function does nothing but report success.</p>
-<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> must call [method<!-- raw HTML omitted -->Gdk<!-- raw HTML omitted -->.Clipboard.store_finish].</p>
 <p>The purpose of this call is to preserve clipboard contents beyond the<br />
 lifetime of an application, so this function is typically called on<br />
 exit. Depending on the platform, the functionality may not be available<br />

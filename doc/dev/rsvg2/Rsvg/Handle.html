@@ -255,6 +255,29 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#cancellable_for_rendering=-instance_method" title="#cancellable_for_rendering= (instance method)">#<strong>cancellable_for_rendering=</strong>(cancellable)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets a cancellable object that can be used to interrupt rendering while the handle is being rendered in another thread.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#close-instance_method" title="#close (instance method)">#<strong>close</strong>  &#x21d2; Boolean </a>
     
 
@@ -993,6 +1016,29 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#pixbuf_and_error-instance_method" title="#pixbuf_and_error (instance method)">#<strong>pixbuf_and_error</strong>  &#x21d2; GdkPixbuf::Pixbuf </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the pixbuf loaded by <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#read_stream_sync-instance_method" title="#read_stream_sync (instance method)">#<strong>read_stream_sync</strong>(stream, cancellable)  &#x21d2; Boolean </a>
     
 
@@ -1670,6 +1716,68 @@ you can feed the resulting handle with SVG data by using<br />
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="cancellable_for_rendering=-instance_method">
+  
+    #<strong>cancellable_for_rendering=</strong>(cancellable)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets a cancellable object that can be used to interrupt rendering<br />
+while the handle is being rendered in another thread.  For example,<br />
+you can set a cancellable from your main thread, spawn a thread to<br />
+do the rendering, and interrupt the rendering from the main thread<br />
+by calling g_cancellable_cancel().</p>
+<p>If rendering is interrupted, the corresponding call to<br />
+rsvg_handle_render_document() (or any of the other rendering<br />
+functions) will return an error with domain <code>G_IO_ERROR</code>, and code<br />
+<code>G_IO_ERROR_CANCELLED</code>.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt>Gio::Cancellable</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Cancellable] or <code>NULL</code>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="close-instance_method">
   
     #<strong>close</strong>  &#x21d2; <tt>Boolean</tt> 
@@ -1891,6 +1999,8 @@ do not pass values &lt;= 0 to this function.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Horizontal resolution in dots per inch.</p>
+<p>The default is 90.  Note that current CSS assumes a default of 96,<br />
+so you may want to set it to <code>96.0</code> before rendering the handle.</p>
 
 
   </div>
@@ -1930,6 +2040,8 @@ do not pass values &lt;= 0 to this function.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Horizontal resolution in dots per inch.</p>
+<p>The default is 90.  Note that current CSS assumes a default of 96,<br />
+so you may want to set it to <code>96.0</code> before rendering the handle.</p>
 
 
   </div>
@@ -1997,6 +2109,8 @@ do not pass values &lt;= 0 to this function.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Horizontal resolution in dots per inch.</p>
+<p>The default is 90.  Note that current CSS assumes a default of 96,<br />
+so you may want to set it to <code>96.0</code> before rendering the handle.</p>
 
 
   </div>
@@ -2036,6 +2150,8 @@ do not pass values &lt;= 0 to this function.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Horizontal resolution in dots per inch.</p>
+<p>The default is 90.  Note that current CSS assumes a default of 96,<br />
+so you may want to set it to <code>96.0</code> before rendering the handle.</p>
 
 
   </div>
@@ -3003,6 +3119,9 @@ physical units, the dimensions are normalized to pixels using the dots-per-inch 
 value set previously with [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_dpi].  For font-based units, this function<br />
 uses the computed value of the <code>font-size</code> property for the toplevel<br />
 <code>&lt;svg&gt;</code> element.  In those cases, this function returns <code>TRUE</code>.</p>
+<p>For historical reasons, the default DPI is 90.  Current CSS assumes a default DPI of 96, so<br />
+you may want to set the DPI of a [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle] immediately after creating it with<br />
+[method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_dpi].</p>
 <p>This function is not able to extract the size in pixels directly from the intrinsic<br />
 dimensions of the SVG document if the <code>width</code> or<br />
 <code>height</code> are in percentage units (or if they do not exist, in which<br />
@@ -3692,7 +3811,53 @@ during rendering.</p>
       
       
         &mdash;
-        <div class='inline'><p>A pixbuf, or nil on error.</p>
+        <div class='inline'><p>A pixbuf, or nil on error</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pixbuf_and_error-instance_method">
+  
+    #<strong>pixbuf_and_error</strong>  &#x21d2; <tt>GdkPixbuf::Pixbuf</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the pixbuf loaded by <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.  The pixbuf returned will be reffed, so<br />
+the caller of this function must assume that ref.</p>
+<p>API ordering: This function must be called on a fully-loaded <!-- raw HTML omitted -->handle<!-- raw HTML omitted -->.  See<br />
+the section &quot;<a href="class.Handle.html#api-ordering">API ordering</a>&quot; for details.</p>
+<p>This function depends on the [class<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle]'s dots-per-inch value (DPI) to compute the<br />
+&quot;natural size&quot; of the document in pixels, so you should call [method<!-- raw HTML omitted -->Rsvg<!-- raw HTML omitted -->.Handle.set_dpi]<br />
+beforehand.<br />
+during rendering.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>GdkPixbuf::Pixbuf</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>A pixbuf, or nil on error</p>
 </div>
       
     </li>

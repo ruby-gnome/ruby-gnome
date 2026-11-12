@@ -725,7 +725,7 @@
         </dt>
         <dd><pre class="code"><span class='int'>41</span> <span class='kw'>or</span> <span class='symbol'>:progress_bar</span></pre></dd>
       
-        <dt id="PUSH_BUTTON-constant" class="">PUSH_BUTTON =
+        <dt id="BUTTON-constant" class="">BUTTON =
           <div class="docstring">
   <div class="discussion">
     <p>An object the user can manipulate to tell the application to do something</p>
@@ -738,7 +738,7 @@
 
 </div>
         </dt>
-        <dd><pre class="code"><span class='int'>42</span> <span class='kw'>or</span> <span class='symbol'>:push_button</span></pre></dd>
+        <dd><pre class="code"><span class='int'>42</span> <span class='kw'>or</span> <span class='symbol'>:button</span></pre></dd>
       
         <dt id="RADIO_BUTTON-constant" class="">RADIO_BUTTON =
           <div class="docstring">
@@ -983,7 +983,7 @@
         <dt id="TERMINAL-constant" class="">TERMINAL =
           <div class="docstring">
   <div class="discussion">
-    <p>An object that represents an accessible terminal.  (Since: 0.6)</p>
+    <p>An object that represents an accessible terminal.</p>
 
 
   </div>
@@ -1079,7 +1079,8 @@ textual information, see ATK_ROLE_STATIC.</p>
         <dt id="TREE_TABLE-constant" class="">TREE_TABLE =
           <div class="docstring">
   <div class="discussion">
-    <p>An object capable of expanding and collapsing rows as well as showing multiple columns of data.   (Since: 0.7)</p>
+    <p>An object capable of expanding and collapsing rows as well as showing<br />
+multiple columns of data.</p>
 
 
   </div>
@@ -1139,7 +1140,7 @@ textual information, see ATK_ROLE_STATIC.</p>
         <dt id="HEADER-constant" class="">HEADER =
           <div class="docstring">
   <div class="discussion">
-    <p>An object that serves as a document header. (Since: 1.1.1)</p>
+    <p>An object that serves as a document header.</p>
 
 
   </div>
@@ -1154,7 +1155,7 @@ textual information, see ATK_ROLE_STATIC.</p>
         <dt id="FOOTER-constant" class="">FOOTER =
           <div class="docstring">
   <div class="discussion">
-    <p>An object that serves as a document footer.  (Since: 1.1.1)</p>
+    <p>An object that serves as a document footer.</p>
 
 
   </div>
@@ -1169,7 +1170,7 @@ textual information, see ATK_ROLE_STATIC.</p>
         <dt id="PARAGRAPH-constant" class="">PARAGRAPH =
           <div class="docstring">
   <div class="discussion">
-    <p>An object which is contains a paragraph of text content.   (Since: 1.1.1)</p>
+    <p>An object which contains a paragraph of text content.</p>
 
 
   </div>
@@ -1184,7 +1185,8 @@ textual information, see ATK_ROLE_STATIC.</p>
         <dt id="RULER-constant" class="">RULER =
           <div class="docstring">
   <div class="discussion">
-    <p>An object which describes margins and tab stops, etc. for text objects which it controls (should have CONTROLLER_FOR relation to such).   (Since: 1.1.1)</p>
+    <p>An object which describes margins and tab stops, etc. for text objects<br />
+which it controls (should have CONTROLLER_FOR relation to such).</p>
 
 
   </div>
@@ -1199,7 +1201,9 @@ textual information, see ATK_ROLE_STATIC.</p>
         <dt id="APPLICATION-constant" class="">APPLICATION =
           <div class="docstring">
   <div class="discussion">
-    <p>The object is an application object, which may contain <!-- raw HTML omitted -->ATK_ROLE_FRAME<!-- raw HTML omitted --> objects or other types of accessibles.  The root accessible of any application's ATK hierarchy should have ATK_ROLE_APPLICATION.   (Since: 1.1.4)</p>
+    <p>The object is an application object, which may contain <!-- raw HTML omitted -->ATK_ROLE_FRAME<!-- raw HTML omitted --><br />
+objects or other types of accessibles.  The root accessible of any<br />
+application's ATK hierarchy should have ATK_ROLE_APPLICATION.</p>
 
 
   </div>
@@ -1214,7 +1218,8 @@ textual information, see ATK_ROLE_STATIC.</p>
         <dt id="AUTOCOMPLETE-constant" class="">AUTOCOMPLETE =
           <div class="docstring">
   <div class="discussion">
-    <p>The object is a dialog or list containing items for insertion into an entry widget, for instance a list of words for completion of a text entry.   (Since: 1.3)</p>
+    <p>The object is a dialog or list containing items for insertion into an entry<br />
+widget, for instance a list of words for completion of a text entry.</p>
 
 
   </div>
@@ -1229,7 +1234,7 @@ textual information, see ATK_ROLE_STATIC.</p>
         <dt id="EDIT_BAR-constant" class="">EDIT_BAR =
           <div class="docstring">
   <div class="discussion">
-    <p>The object is an editable text object in a toolbar.  (Since: 1.5)</p>
+    <p>The object is an editable text object in a toolbar.</p>
 
 
   </div>
@@ -1244,7 +1249,8 @@ textual information, see ATK_ROLE_STATIC.</p>
         <dt id="EMBEDDED-constant" class="">EMBEDDED =
           <div class="docstring">
   <div class="discussion">
-    <p>The object is an embedded container within a document or panel.  This role is a grouping &quot;hint&quot; indicating that the contained objects share a context.  (Since: 1.7.2)</p>
+    <p>The object is an embedded container within a document or panel.  This role<br />
+is a grouping &quot;hint&quot; indicating that the contained objects share a context.</p>
 
 
   </div>
@@ -1259,7 +1265,8 @@ textual information, see ATK_ROLE_STATIC.</p>
         <dt id="ENTRY-constant" class="">ENTRY =
           <div class="docstring">
   <div class="discussion">
-    <p>The object is a component whose textual content may be entered or modified by the user, provided <!-- raw HTML omitted -->ATK_STATE_EDITABLE<!-- raw HTML omitted --> is present.   (Since: 1.11)</p>
+    <p>The object is a component whose textual content may be entered or modified<br />
+by the user, provided <!-- raw HTML omitted -->ATK_STATE_EDITABLE<!-- raw HTML omitted --> is present.</p>
 
 
   </div>
@@ -1274,7 +1281,12 @@ textual information, see ATK_ROLE_STATIC.</p>
         <dt id="CHART-constant" class="">CHART =
           <div class="docstring">
   <div class="discussion">
-    <p>The object is a graphical depiction of quantitative data. It may contain multiple subelements whose attributes and/or description may be queried to obtain both the quantitative data and information about how the data is being presented. The LABELLED_BY relation is particularly important in interpreting objects of this type, as is the accessible-description property.  (Since: 1.11)</p>
+    <p>The object is a graphical depiction of quantitative data. It may contain<br />
+multiple subelements whose attributes and/or description may be queried to<br />
+obtain both the quantitative data and information about how the data is<br />
+being presented. The LABELLED_BY relation is particularly important in<br />
+interpreting objects of this type, as is the accessible-description<br />
+property.</p>
 
 
   </div>
@@ -1289,7 +1301,8 @@ textual information, see ATK_ROLE_STATIC.</p>
         <dt id="CAPTION-constant" class="">CAPTION =
           <div class="docstring">
   <div class="discussion">
-    <p>The object contains descriptive information, usually textual, about another user interface element such as a table, chart, or image.  (Since: 1.11)</p>
+    <p>The object contains descriptive information, usually textual, about another<br />
+user interface element such as a table, chart, or image.</p>
 
 
   </div>
@@ -1304,7 +1317,11 @@ textual information, see ATK_ROLE_STATIC.</p>
         <dt id="DOCUMENT_FRAME-constant" class="">DOCUMENT_FRAME =
           <div class="docstring">
   <div class="discussion">
-    <p>The object is a visual frame or container which contains a view of document content. Document frames may occur within another Document instance, in which case the second document may be said to be embedded in the containing instance. HTML frames are often ROLE_DOCUMENT_FRAME. Either this object, or a singleton descendant, should implement the Document interface.  (Since: 1.11)</p>
+    <p>The object is a visual frame or container which contains a view of document<br />
+content. Document frames may occur within another Document instance, in<br />
+which case the second document may be said to be embedded in the containing<br />
+instance. HTML frames are often ROLE_DOCUMENT_FRAME. Either this object, or<br />
+a singleton descendant, should implement the Document interface.</p>
 
 
   </div>
@@ -1319,7 +1336,7 @@ textual information, see ATK_ROLE_STATIC.</p>
         <dt id="HEADING-constant" class="">HEADING =
           <div class="docstring">
   <div class="discussion">
-    <p>The object serves as a heading for content which follows it in a document. The 'heading level' of the heading, if availabe, may be obtained by querying the object's attributes.</p>
+    <p>The object serves as a heading for content which follows it in a document. The 'heading level' of the heading, if available, may be obtained by querying the object's attributes.</p>
 
 
   </div>
@@ -1334,7 +1351,9 @@ textual information, see ATK_ROLE_STATIC.</p>
         <dt id="PAGE-constant" class="">PAGE =
           <div class="docstring">
   <div class="discussion">
-    <p>The object is a containing instance which encapsulates a page of information. <!-- raw HTML omitted -->ATK_ROLE_PAGE<!-- raw HTML omitted --> is used in documents and content which support a paginated navigation model.  (Since: 1.11)</p>
+    <p>The object is a containing instance which encapsulates a page of<br />
+information. <!-- raw HTML omitted -->ATK_ROLE_PAGE<!-- raw HTML omitted --> is used in documents and content which support a<br />
+paginated navigation model.</p>
 
 
   </div>
@@ -1349,7 +1368,10 @@ textual information, see ATK_ROLE_STATIC.</p>
         <dt id="SECTION-constant" class="">SECTION =
           <div class="docstring">
   <div class="discussion">
-    <p>The object is a containing instance of document content which constitutes a particular 'logical' section of the document. The type of content within a section, and the nature of the section division itself, may be obtained by querying the object's attributes. Sections may be nested. (Since: 1.11)</p>
+    <p>The object is a containing instance of document content which constitutes a<br />
+particular 'logical' section of the document. The type of content within a<br />
+section, and the nature of the section division itself, may be obtained by<br />
+querying the object's attributes. Sections may be nested.</p>
 
 
   </div>
@@ -1364,7 +1386,9 @@ textual information, see ATK_ROLE_STATIC.</p>
         <dt id="REDUNDANT_OBJECT-constant" class="">REDUNDANT_OBJECT =
           <div class="docstring">
   <div class="discussion">
-    <p>The object is redundant with another object in the hierarchy, and is exposed for purely technical reasons.  Objects of this role should normally be ignored by clients. (Since: 1.11)</p>
+    <p>The object is redundant with another object in the hierarchy, and is<br />
+exposed for purely technical reasons.  Objects of this role should normally<br />
+be ignored by clients.</p>
 
 
   </div>
@@ -1379,10 +1403,10 @@ textual information, see ATK_ROLE_STATIC.</p>
         <dt id="FORM-constant" class="">FORM =
           <div class="docstring">
   <div class="discussion">
-    <p>The object is a container for form controls, for instance as part of a<br />
-web form or user-input form within a document.  This role is primarily a tag/convenience for<br />
-clients when navigating complex documents, it is not expected that ordinary GUI containers will<br />
-always have ATK_ROLE_FORM. (Since: 1.12.0)</p>
+    <p>The object is a container for form controls, for instance as part of a web<br />
+form or user-input form within a document.  This role is primarily a<br />
+tag/convenience for clients when navigating complex documents, it is not<br />
+expected that ordinary GUI containers will always have ATK_ROLE_FORM.</p>
 
 
   </div>
@@ -1397,11 +1421,10 @@ always have ATK_ROLE_FORM. (Since: 1.12.0)</p>
         <dt id="LINK-constant" class="">LINK =
           <div class="docstring">
   <div class="discussion">
-    <p>The object is a hypertext anchor, i.e. a &quot;link&quot; in a<br />
-hypertext document.  Such objects are distinct from 'inline'<br />
-content which may also use the Hypertext/Hyperlink interfaces<br />
-to indicate the range/location within a text object where<br />
-an inline or embedded object lies.  (Since: 1.12.1)</p>
+    <p>The object is a hypertext anchor, i.e. a &quot;link&quot; in a hypertext document.<br />
+Such objects are distinct from 'inline' content which may also use the<br />
+Hypertext/Hyperlink interfaces to indicate the range/location within a text<br />
+object where an inline or embedded object lies.</p>
 
 
   </div>
@@ -1416,9 +1439,9 @@ an inline or embedded object lies.  (Since: 1.12.1)</p>
         <dt id="INPUT_METHOD_WINDOW-constant" class="">INPUT_METHOD_WINDOW =
           <div class="docstring">
   <div class="discussion">
-    <p>The object is a window or similar viewport<br />
-which is used to allow composition or input of a 'complex character',<br />
-in other words it is an &quot;input method window.&quot; (Since: 1.12.1)</p>
+    <p>The object is a window or similar viewport which is used to allow<br />
+composition or input of a 'complex character', in other words it is an<br />
+&quot;input method window.&quot;</p>
 
 
   </div>
@@ -1433,7 +1456,7 @@ in other words it is an &quot;input method window.&quot; (Since: 1.12.1)</p>
         <dt id="TABLE_ROW-constant" class="">TABLE_ROW =
           <div class="docstring">
   <div class="discussion">
-    <p>A row in a table.  (Since: 2.1.0)</p>
+    <p>A row in a table.</p>
 
 
   </div>
@@ -1448,7 +1471,7 @@ in other words it is an &quot;input method window.&quot; (Since: 1.12.1)</p>
         <dt id="TREE_ITEM-constant" class="">TREE_ITEM =
           <div class="docstring">
   <div class="discussion">
-    <p>An object that represents an element of a tree.  (Since: 2.1.0)</p>
+    <p>An object that represents an element of a tree.</p>
 
 
   </div>
@@ -1463,7 +1486,7 @@ in other words it is an &quot;input method window.&quot; (Since: 1.12.1)</p>
         <dt id="DOCUMENT_SPREADSHEET-constant" class="">DOCUMENT_SPREADSHEET =
           <div class="docstring">
   <div class="discussion">
-    <p>A document frame which contains a spreadsheet.  (Since: 2.1.0)</p>
+    <p>A document frame which contains a spreadsheet.</p>
 
 
   </div>
@@ -1478,7 +1501,7 @@ in other words it is an &quot;input method window.&quot; (Since: 1.12.1)</p>
         <dt id="DOCUMENT_PRESENTATION-constant" class="">DOCUMENT_PRESENTATION =
           <div class="docstring">
   <div class="discussion">
-    <p>A document frame which contains a presentation or slide content.  (Since: 2.1.0)</p>
+    <p>A document frame which contains a presentation or slide content.</p>
 
 
   </div>
@@ -1493,7 +1516,8 @@ in other words it is an &quot;input method window.&quot; (Since: 1.12.1)</p>
         <dt id="DOCUMENT_TEXT-constant" class="">DOCUMENT_TEXT =
           <div class="docstring">
   <div class="discussion">
-    <p>A document frame which contains textual content, such as found in a word processing application.  (Since: 2.1.0)</p>
+    <p>A document frame which contains textual content, such as found in a word<br />
+processing application.</p>
 
 
   </div>
@@ -1508,7 +1532,8 @@ in other words it is an &quot;input method window.&quot; (Since: 1.12.1)</p>
         <dt id="DOCUMENT_WEB-constant" class="">DOCUMENT_WEB =
           <div class="docstring">
   <div class="discussion">
-    <p>A document frame which contains HTML or other markup suitable for display in a web browser.  (Since: 2.1.0)</p>
+    <p>A document frame which contains HTML or other markup suitable for display<br />
+in a web browser.</p>
 
 
   </div>
@@ -1523,7 +1548,8 @@ in other words it is an &quot;input method window.&quot; (Since: 1.12.1)</p>
         <dt id="DOCUMENT_EMAIL-constant" class="">DOCUMENT_EMAIL =
           <div class="docstring">
   <div class="discussion">
-    <p>A document frame which contains email content to be displayed or composed either in plain text or HTML.  (Since: 2.1.0)</p>
+    <p>A document frame which contains email content to be displayed or composed<br />
+either in plain text or HTML.</p>
 
 
   </div>
@@ -1538,7 +1564,9 @@ in other words it is an &quot;input method window.&quot; (Since: 1.12.1)</p>
         <dt id="COMMENT-constant" class="">COMMENT =
           <div class="docstring">
   <div class="discussion">
-    <p>An object found within a document and designed to present a comment, note, or other annotation. In some cases, this object might not be visible until activated.  (Since: 2.1.0)</p>
+    <p>An object found within a document and designed to present a comment, note,<br />
+or other annotation. In some cases, this object might not be visible until<br />
+activated.</p>
 
 
   </div>
@@ -1553,7 +1581,7 @@ in other words it is an &quot;input method window.&quot; (Since: 1.12.1)</p>
         <dt id="LIST_BOX-constant" class="">LIST_BOX =
           <div class="docstring">
   <div class="discussion">
-    <p>A non-collapsible list of choices the user can select from. (Since: 2.1.0)</p>
+    <p>A non-collapsible list of choices the user can select from.</p>
 
 
   </div>
@@ -1568,7 +1596,7 @@ in other words it is an &quot;input method window.&quot; (Since: 1.12.1)</p>
         <dt id="GROUPING-constant" class="">GROUPING =
           <div class="docstring">
   <div class="discussion">
-    <p>A group of related widgets. This group typically has a label. (Since: 2.1.0)</p>
+    <p>A group of related widgets. This group typically has a label.</p>
 
 
   </div>
@@ -1583,7 +1611,9 @@ in other words it is an &quot;input method window.&quot; (Since: 1.12.1)</p>
         <dt id="IMAGE_MAP-constant" class="">IMAGE_MAP =
           <div class="docstring">
   <div class="discussion">
-    <p>An image map object. Usually a graphic with multiple hotspots, where each hotspot can be activated resulting in the loading of another document or section of a document. (Since: 2.1.0)</p>
+    <p>An image map object. Usually a graphic with multiple hotspots, where<br />
+each hotspot can be activated resulting in the loading of another<br />
+document or section of a document.</p>
 
 
   </div>
@@ -1598,7 +1628,8 @@ in other words it is an &quot;input method window.&quot; (Since: 1.12.1)</p>
         <dt id="NOTIFICATION-constant" class="">NOTIFICATION =
           <div class="docstring">
   <div class="discussion">
-    <p>A transitory object designed to present a message to the user, typically at the desktop level rather than inside a particular application.  (Since: 2.1.0)</p>
+    <p>A transitory object designed to present a message to the user, typically<br />
+at the desktop level rather than inside a particular application.</p>
 
 
   </div>
@@ -1613,7 +1644,8 @@ in other words it is an &quot;input method window.&quot; (Since: 1.12.1)</p>
         <dt id="INFO_BAR-constant" class="">INFO_BAR =
           <div class="docstring">
   <div class="discussion">
-    <p>An object designed to present a message to the user within an existing window. (Since: 2.1.0)</p>
+    <p>An object designed to present a message to the user within an existing<br />
+window.</p>
 
 
   </div>
@@ -1628,7 +1660,8 @@ in other words it is an &quot;input method window.&quot; (Since: 1.12.1)</p>
         <dt id="LEVEL_BAR-constant" class="">LEVEL_BAR =
           <div class="docstring">
   <div class="discussion">
-    <p>A bar that serves as a level indicator to, for instance, show the strength of a password or the state of a battery.  (Since: 2.7.3)</p>
+    <p>A bar that serves as a level indicator to, for instance, show the strength of a<br />
+password or the state of a battery.</p>
 
 
   </div>
@@ -1643,8 +1676,7 @@ in other words it is an &quot;input method window.&quot; (Since: 1.12.1)</p>
         <dt id="TITLE_BAR-constant" class="">TITLE_BAR =
           <div class="docstring">
   <div class="discussion">
-    <p>A bar that serves as the title of a window or a<br />
-dialog. (Since: 2.12)</p>
+    <p>A bar that serves as the title of a window or a dialog.</p>
 
 
   </div>
@@ -1659,8 +1691,7 @@ dialog. (Since: 2.12)</p>
         <dt id="BLOCK_QUOTE-constant" class="">BLOCK_QUOTE =
           <div class="docstring">
   <div class="discussion">
-    <p>An object which contains a text section<br />
-that is quoted from another source. (Since: 2.12)</p>
+    <p>An object which contains a text section that is quoted from another source.</p>
 
 
   </div>
@@ -1675,7 +1706,7 @@ that is quoted from another source. (Since: 2.12)</p>
         <dt id="AUDIO-constant" class="">AUDIO =
           <div class="docstring">
   <div class="discussion">
-    <p>An object which represents an audio element. (Since: 2.12)</p>
+    <p>An object which represents an audio element.</p>
 
 
   </div>
@@ -1690,7 +1721,7 @@ that is quoted from another source. (Since: 2.12)</p>
         <dt id="VIDEO-constant" class="">VIDEO =
           <div class="docstring">
   <div class="discussion">
-    <p>An object which represents a video element. (Since: 2.12)</p>
+    <p>An object which represents a video element.</p>
 
 
   </div>
@@ -1705,7 +1736,7 @@ that is quoted from another source. (Since: 2.12)</p>
         <dt id="DEFINITION-constant" class="">DEFINITION =
           <div class="docstring">
   <div class="discussion">
-    <p>A definition of a term or concept. (Since: 2.12)</p>
+    <p>A definition of a term or concept.</p>
 
 
   </div>
@@ -1720,9 +1751,9 @@ that is quoted from another source. (Since: 2.12)</p>
         <dt id="ARTICLE-constant" class="">ARTICLE =
           <div class="docstring">
   <div class="discussion">
-    <p>A section of a page that consists of a<br />
-composition that forms an independent part of a document, page, or<br />
-site. Examples: A blog entry, a news story, a forum post. (Since: 2.12)</p>
+    <p>A section of a page that consists of a composition that forms an independent<br />
+part of a document, page, or site. Examples: A blog entry, a news story,<br />
+a forum post.</p>
 
 
   </div>
@@ -1737,10 +1768,9 @@ site. Examples: A blog entry, a news story, a forum post. (Since: 2.12)</p>
         <dt id="LANDMARK-constant" class="">LANDMARK =
           <div class="docstring">
   <div class="discussion">
-    <p>A region of a web page intended as a<br />
-navigational landmark. This is designed to allow Assistive<br />
-Technologies to provide quick navigation among key regions within a<br />
-document. (Since: 2.12)</p>
+    <p>A region of a web page intended as a * navigational landmark. This is<br />
+designed to allow Assistive Technologies to provide quick navigation<br />
+among key regions within a * document.</p>
 
 
   </div>
@@ -1755,12 +1785,11 @@ document. (Since: 2.12)</p>
         <dt id="LOG-constant" class="">LOG =
           <div class="docstring">
   <div class="discussion">
-    <p>A text widget or container holding log content, such<br />
-as chat history and error logs. In this role there is a<br />
-relationship between the arrival of new items in the log and the<br />
-reading order. The log contains a meaningful sequence and new<br />
-information is added only to the end of the log, not at arbitrary<br />
-points. (Since: 2.12)</p>
+    <p>A text widget or container holding log content, such as chat history<br />
+and error logs. In this role there is a relationship between the arrival<br />
+of new items in the log and the reading order. The log contains a<br />
+meaningful sequence and new information is added only to the end of<br />
+the log, not at arbitrary points.</p>
 
 
   </div>
@@ -1775,11 +1804,10 @@ points. (Since: 2.12)</p>
         <dt id="MARQUEE-constant" class="">MARQUEE =
           <div class="docstring">
   <div class="discussion">
-    <p>A container where non-essential information<br />
-changes frequently. Common usages of marquee include stock tickers<br />
-and ad banners. The primary difference between a marquee and a log<br />
-is that logs usually have a meaningful order or sequence of<br />
-important content changes. (Since: 2.12)</p>
+    <p>A container where non-essential information changes frequently. Common<br />
+usages of marquee include stock tickers * and ad banners. The primary<br />
+difference between a marquee and a log is that logs usually have a<br />
+meaningful order or sequence of important content changes.</p>
 
 
   </div>
@@ -1794,8 +1822,7 @@ important content changes. (Since: 2.12)</p>
         <dt id="MATH-constant" class="">MATH =
           <div class="docstring">
   <div class="discussion">
-    <p>A text widget or container that holds a mathematical<br />
-expression. (Since: 2.12)</p>
+    <p>A text widget or container that holds a mathematical expression.</p>
 
 
   </div>
@@ -1810,10 +1837,9 @@ expression. (Since: 2.12)</p>
         <dt id="RATING-constant" class="">RATING =
           <div class="docstring">
   <div class="discussion">
-    <p>A widget whose purpose is to display a rating,<br />
-such as the number of stars associated with a song in a media<br />
-player. Objects of this role should also implement<br />
-AtkValue. (Since: 2.12)</p>
+    <p>A widget whose purpose is to display a rating, such as the number of<br />
+stars associated with a song in a media player. Objects of this role should<br />
+also implement AtkValue.</p>
 
 
   </div>
@@ -1828,9 +1854,8 @@ AtkValue. (Since: 2.12)</p>
         <dt id="TIMER-constant" class="">TIMER =
           <div class="docstring">
   <div class="discussion">
-    <p>An object containing a numerical counter which<br />
-indicates an amount of elapsed time from a start point, or the time<br />
-remaining until an end point. (Since: 2.12)</p>
+    <p>An object containing a numerical counter which indicates an amount of<br />
+elapsed time from a start point, or the time remaining until an end point.</p>
 
 
   </div>
@@ -1845,12 +1870,11 @@ remaining until an end point. (Since: 2.12)</p>
         <dt id="DESCRIPTION_LIST-constant" class="">DESCRIPTION_LIST =
           <div class="docstring">
   <div class="discussion">
-    <p>An object that represents a list of<br />
-term-value groups. A term-value group represents a individual<br />
-description and consist of one or more names<br />
+    <p>An object that represents a list of term-value groups. A term-value group<br />
+represents an individual description and consist of one or more names<br />
 (ATK_ROLE_DESCRIPTION_TERM) followed by one or more values<br />
 (ATK_ROLE_DESCRIPTION_VALUE). For each list, there should not be<br />
-more than one group with the same term name. (Since: 2.12)</p>
+more than one group with the same term name.</p>
 
 
   </div>
@@ -1865,8 +1889,7 @@ more than one group with the same term name. (Since: 2.12)</p>
         <dt id="DESCRIPTION_TERM-constant" class="">DESCRIPTION_TERM =
           <div class="docstring">
   <div class="discussion">
-    <p>An object that represents a term or phrase<br />
-with a corresponding definition. (Since: 2.12)</p>
+    <p>An object that represents a term or phrase with a corresponding definition.</p>
 
 
   </div>
@@ -1881,8 +1904,7 @@ with a corresponding definition. (Since: 2.12)</p>
         <dt id="DESCRIPTION_VALUE-constant" class="">DESCRIPTION_VALUE =
           <div class="docstring">
   <div class="discussion">
-    <p>An object that represents the<br />
-description, definition or value of a term. (Since: 2.12)</p>
+    <p>An object that represents the description, definition or value of a term.</p>
 
 
   </div>
@@ -1897,8 +1919,8 @@ description, definition or value of a term. (Since: 2.12)</p>
         <dt id="STATIC-constant" class="">STATIC =
           <div class="docstring">
   <div class="discussion">
-    <p>A generic non-container object whose purpose is to display a<br />
-brief amount of information to the user and whose role is known by the<br />
+    <p>A generic non-container object whose purpose is to display a brief<br />
+amount of information to the user and whose role is known by the<br />
 implementor but lacks semantic value for the user. Examples in which<br />
 %ATK_ROLE_STATIC is appropriate include the message displayed in a message box<br />
 and an image used as an alternative means to display text. %ATK_ROLE_STATIC<br />
@@ -1909,7 +1931,7 @@ displayed information through the accessible name of the object. If doing so see
 inappropriate, it may indicate that a different role should be used. For<br />
 labels which describe another widget, see %ATK_ROLE_LABEL. For text views, see<br />
 %ATK_ROLE_TEXT. For generic containers, see %ATK_ROLE_PANEL. For objects whose<br />
-role is not known by the implementor, see %ATK_ROLE_UNKNOWN. (Since: 2.16)</p>
+role is not known by the implementor, see %ATK_ROLE_UNKNOWN.</p>
 
 
   </div>
@@ -1924,8 +1946,7 @@ role is not known by the implementor, see %ATK_ROLE_UNKNOWN. (Since: 2.16)</p>
         <dt id="MATH_FRACTION-constant" class="">MATH_FRACTION =
           <div class="docstring">
   <div class="discussion">
-    <p>An object that represents a mathematical fraction.<br />
-(Since: 2.16)</p>
+    <p>An object that represents a mathematical fraction.</p>
 
 
   </div>
@@ -1940,8 +1961,8 @@ role is not known by the implementor, see %ATK_ROLE_UNKNOWN. (Since: 2.16)</p>
         <dt id="MATH_ROOT-constant" class="">MATH_ROOT =
           <div class="docstring">
   <div class="discussion">
-    <p>An object that represents a mathematical expression<br />
-displayed with a radical. (Since: 2.16)</p>
+    <p>An object that represents a mathematical expression displayed with a<br />
+radical.</p>
 
 
   </div>
@@ -1956,8 +1977,7 @@ displayed with a radical. (Since: 2.16)</p>
         <dt id="SUBSCRIPT-constant" class="">SUBSCRIPT =
           <div class="docstring">
   <div class="discussion">
-    <p>An object that contains text that is displayed as a<br />
-subscript. (Since: 2.16)</p>
+    <p>An object that contains text that is displayed as a subscript.</p>
 
 
   </div>
@@ -1972,8 +1992,7 @@ subscript. (Since: 2.16)</p>
         <dt id="SUPERSCRIPT-constant" class="">SUPERSCRIPT =
           <div class="docstring">
   <div class="discussion">
-    <p>An object that contains text that is displayed as a<br />
-superscript. (Since: 2.16)</p>
+    <p>An object that contains text that is displayed as a superscript.</p>
 
 
   </div>
@@ -1988,7 +2007,7 @@ superscript. (Since: 2.16)</p>
         <dt id="FOOTNOTE-constant" class="">FOOTNOTE =
           <div class="docstring">
   <div class="discussion">
-    <p>An object that contains the text of a footnote. (Since: 2.26)</p>
+    <p>An object that contains the text of a footnote.</p>
 
 
   </div>
@@ -2003,9 +2022,8 @@ superscript. (Since: 2.16)</p>
         <dt id="CONTENT_DELETION-constant" class="">CONTENT_DELETION =
           <div class="docstring">
   <div class="discussion">
-    <p>Content previously deleted or proposed to be<br />
-deleted, e.g. in revision history or a content view providing suggestions<br />
-from reviewers. (Since: 2.34)</p>
+    <p>Content previously deleted or proposed to be deleted, e.g. in revision<br />
+history or a content view providing suggestions from reviewers.</p>
 
 
   </div>
@@ -2020,9 +2038,8 @@ from reviewers. (Since: 2.34)</p>
         <dt id="CONTENT_INSERTION-constant" class="">CONTENT_INSERTION =
           <div class="docstring">
   <div class="discussion">
-    <p>Content previously inserted or proposed to be<br />
-inserted, e.g. in revision history or a content view providing suggestions<br />
-from reviewers. (Since: 2.34)</p>
+    <p>Content previously inserted or proposed to be inserted, e.g. in revision<br />
+history or a content view providing suggestions from reviewers.</p>
 
 
   </div>
@@ -2037,13 +2054,13 @@ from reviewers. (Since: 2.34)</p>
         <dt id="MARK-constant" class="">MARK =
           <div class="docstring">
   <div class="discussion">
-    <p>A run of content that is marked or highlighted, such as for<br />
-reference purposes, or to call it out as having a special purpose. If the<br />
-marked content has an associated section in the document elaborating on the<br />
+    <p>A run of content that is marked or highlighted, such as for reference<br />
+purposes, or to call it out as having a special purpose. If the marked<br />
+content has an associated section in the document elaborating on the<br />
 reason for the mark, then %ATK_RELATION_DETAILS should be used on the mark<br />
 to point to that associated section. In addition, the reciprocal relation<br />
 %ATK_RELATION_DETAILS_FOR should be used on the associated content section<br />
-to point back to the mark. (Since: 2.36)</p>
+to point back to the mark.</p>
 
 
   </div>
@@ -2058,11 +2075,11 @@ to point back to the mark. (Since: 2.36)</p>
         <dt id="SUGGESTION-constant" class="">SUGGESTION =
           <div class="docstring">
   <div class="discussion">
-    <p>A container for content that is called out as a proposed<br />
-change from the current version of the document, such as by a reviewer of the<br />
+    <p>A container for content that is called out as a proposed change from<br />
+the current version of the document, such as by a reviewer of the<br />
 content. This role should include either %ATK_ROLE_CONTENT_DELETION and/or<br />
 %ATK_ROLE_CONTENT_INSERTION children, in any order, to indicate what the<br />
-actual change is. (Since: 2.36)</p>
+actual change is.</p>
 
 
   </div>
@@ -2077,8 +2094,7 @@ actual change is. (Since: 2.36)</p>
         <dt id="PUSH_BUTTON_MENU-constant" class="">PUSH_BUTTON_MENU =
           <div class="docstring">
   <div class="discussion">
-    <p>A specialized push button to open a menu.<br />
-(Since: 2.46)</p>
+    <p>A specialized push button to open a menu.</p>
 
 
   </div>
@@ -2089,6 +2105,21 @@ actual change is. (Since: 2.36)</p>
 </div>
         </dt>
         <dd><pre class="code"><span class='int'>127</span> <span class='kw'>or</span> <span class='symbol'>:push_button_menu</span></pre></dd>
+      
+        <dt id="SWITCH-constant" class="">SWITCH =
+          <div class="docstring">
+  <div class="discussion">
+    <p>A switch that can be toggled on/off.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+        </dt>
+        <dd><pre class="code"><span class='int'>128</span> <span class='kw'>or</span> <span class='symbol'>:switch</span></pre></dd>
       
         <dt id="LAST_DEFINED-constant" class="">LAST_DEFINED =
           <div class="docstring">
@@ -2103,7 +2134,12 @@ actual change is. (Since: 2.36)</p>
 
 </div>
         </dt>
-        <dd><pre class="code"><span class='int'>128</span> <span class='kw'>or</span> <span class='symbol'>:last_defined</span></pre></dd>
+        <dd><pre class="code"><span class='int'>129</span> <span class='kw'>or</span> <span class='symbol'>:last_defined</span></pre></dd>
+      
+        <dt id="PUSH_BUTTON-constant" class="">PUSH_BUTTON =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>42</span> <span class='kw'>or</span> <span class='symbol'>:push_button</span></pre></dd>
       
     </dl>
   

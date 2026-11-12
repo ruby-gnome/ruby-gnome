@@ -180,7 +180,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The default filter, that is, the filter that is initially active in the file chooser dialog.</p>
+    <span class="summary_desc"><div class='inline'><p>The default filter.</p>
 </div></span>
   
 </li>
@@ -203,7 +203,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The default filter, that is, the filter that is initially active in the file chooser dialog.</p>
+    <span class="summary_desc"><div class='inline'><p>The default filter.</p>
 </div></span>
   
 </li>
@@ -272,7 +272,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The initial file, that is, the file that is initially selected in the file chooser dialog.</p>
+    <span class="summary_desc"><div class='inline'><p>The initial file.</p>
 </div></span>
   
 </li>
@@ -295,7 +295,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The initial file, that is, the file that is initially selected in the file chooser dialog.</p>
+    <span class="summary_desc"><div class='inline'><p>The initial file.</p>
 </div></span>
   
 </li>
@@ -318,7 +318,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The initial folder, that is, the directory that is initially opened in the file chooser dialog.</p>
+    <span class="summary_desc"><div class='inline'><p>The initial folder.</p>
 </div></span>
   
 </li>
@@ -341,7 +341,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The initial folder, that is, the directory that is initially opened in the file chooser dialog.</p>
+    <span class="summary_desc"><div class='inline'><p>The initial folder.</p>
 </div></span>
   
 </li>
@@ -364,7 +364,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The initial name, that is, the filename that is initially selected in the file chooser dialog.</p>
+    <span class="summary_desc"><div class='inline'><p>The initial name.</p>
 </div></span>
   
 </li>
@@ -387,7 +387,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>The initial name, that is, the filename that is initially selected in the file chooser dialog.</p>
+    <span class="summary_desc"><div class='inline'><p>The initial name.</p>
 </div></span>
   
 </li>
@@ -504,7 +504,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>This function initiates a file selection operation by presenting a file chooser dialog to the user.</p>
+    <span class="summary_desc"><div class='inline'><p>Presents a file chooser dialog to the user.</p>
 </div></span>
   
 </li>
@@ -527,7 +527,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.open] call and returns the resulting file.</p>
+    <span class="summary_desc"><div class='inline'><p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.open] call.</p>
 </div></span>
   
 </li>
@@ -550,7 +550,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>This function initiates a multi-file selection operation by presenting a file chooser dialog to the user.</p>
+    <span class="summary_desc"><div class='inline'><p>Presents a file chooser dialog to the user.</p>
 </div></span>
   
 </li>
@@ -573,7 +573,99 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.open] call and returns the resulting files in a <code>GListModel</code>.</p>
+    <span class="summary_desc"><div class='inline'><p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.open] call.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#open_multiple_text_files-instance_method" title="#open_multiple_text_files (instance method)">#<strong>open_multiple_text_files</strong>(parent, cancellable, callback, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Presents a file chooser dialog to the user.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#open_multiple_text_files_finish-instance_method" title="#open_multiple_text_files_finish (instance method)">#<strong>open_multiple_text_files_finish</strong>(result, encoding)  &#x21d2; Gio::ListModel </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.open] call.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#open_text_file-instance_method" title="#open_text_file (instance method)">#<strong>open_text_file</strong>(parent, cancellable, callback, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Initiates a file selection operation by presenting a file chooser dialog to the user.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#open_text_file_finish-instance_method" title="#open_text_file_finish (instance method)">#<strong>open_text_file_finish</strong>(result, encoding)  &#x21d2; Gio::File </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.open_text_file] call and returns the resulting file and text encoding.</p>
 </div></span>
   
 </li>
@@ -596,7 +688,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>This function initiates a file save operation by presenting a file chooser dialog to the user.</p>
+    <span class="summary_desc"><div class='inline'><p>Presents a file chooser dialog to the user.</p>
 </div></span>
   
 </li>
@@ -619,7 +711,53 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.save] call and returns the resulting file.</p>
+    <span class="summary_desc"><div class='inline'><p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.save] call.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#save_text_file-instance_method" title="#save_text_file (instance method)">#<strong>save_text_file</strong>(parent, cancellable, callback, user_data)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Initiates a file save operation by presenting a file chooser dialog to the user.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#save_text_file_finish-instance_method" title="#save_text_file_finish (instance method)">#<strong>save_text_file_finish</strong>(result, encoding, line_ending)  &#x21d2; Gio::File </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.save_text_file] call and returns the resulting file, text encoding and line endings.</p>
 </div></span>
   
 </li>
@@ -642,7 +780,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>This function initiates a directory selection operation by presenting a file chooser dialog to the user.</p>
+    <span class="summary_desc"><div class='inline'><p>Presents a file chooser dialog to the user.</p>
 </div></span>
   
 </li>
@@ -665,7 +803,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.select_folder] call and returns the resulting file.</p>
+    <span class="summary_desc"><div class='inline'><p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.select_folder] call.</p>
 </div></span>
   
 </li>
@@ -688,7 +826,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>This function initiates a multi-directory selection operation by presenting a file chooser dialog to the user.</p>
+    <span class="summary_desc"><div class='inline'><p>Presents a file chooser dialog to the user.</p>
 </div></span>
   
 </li>
@@ -711,7 +849,7 @@
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.select_multiple_folders] call and returns the resulting files in a <code>GListModel</code>.</p>
+    <span class="summary_desc"><div class='inline'><p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.select_multiple_folders] call.</p>
 </div></span>
   
 </li>
@@ -916,13 +1054,13 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The default filter, that is, the filter that is initially<br />
-active in the file chooser dialog.</p>
-<p>If the default filter is nil, the first filter of [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:filters]<br />
+    <p>The default filter.</p>
+<p>This filter is initially active in the file chooser dialog.</p>
+<p>If the default filter is <code>NULL</code>, the first filter of [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:filters]<br />
 is used as the default filter. If that property contains no filter, the dialog will<br />
 be unfiltered.</p>
-<p>If [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:filters] is not nil, the default filter should be part<br />
-of the list. If it is not, the dialog may choose to not make it available.</p>
+<p>If [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:filters] is not <code>NULL</code>, the default filter should be<br />
+part of the list. If it is not, the dialog may choose to not make it available.</p>
 
 
   </div>
@@ -961,13 +1099,13 @@ of the list. If it is not, the dialog may choose to not make it available.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The default filter, that is, the filter that is initially<br />
-active in the file chooser dialog.</p>
-<p>If the default filter is nil, the first filter of [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:filters]<br />
+    <p>The default filter.</p>
+<p>This filter is initially active in the file chooser dialog.</p>
+<p>If the default filter is <code>NULL</code>, the first filter of [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:filters]<br />
 is used as the default filter. If that property contains no filter, the dialog will<br />
 be unfiltered.</p>
-<p>If [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:filters] is not nil, the default filter should be part<br />
-of the list. If it is not, the dialog may choose to not make it available.</p>
+<p>If [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:filters] is not <code>NULL</code>, the default filter should be<br />
+part of the list. If it is not, the dialog may choose to not make it available.</p>
 
 
   </div>
@@ -1035,7 +1173,8 @@ of the list. If it is not, the dialog may choose to not make it available.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The list of filters.</p>
-<p>See [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:default-filter] about how those two properties interact.</p>
+<p>See [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:default-filter] about how these<br />
+two properties interact.</p>
 
 
   </div>
@@ -1075,7 +1214,8 @@ of the list. If it is not, the dialog may choose to not make it available.</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>The list of filters.</p>
-<p>See [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:default-filter] about how those two properties interact.</p>
+<p>See [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:default-filter] about how these<br />
+two properties interact.</p>
 
 
   </div>
@@ -1142,10 +1282,10 @@ of the list. If it is not, the dialog may choose to not make it available.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The initial file, that is, the file that is initially selected<br />
-in the file chooser dialog</p>
-<p>This is a utility property that sets both [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:initial-folder] and<br />
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:initial-name].</p>
+    <p>The initial file.</p>
+<p>This file is initially selected in the file chooser dialog</p>
+<p>This is a utility property that sets both [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:initial-folder]<br />
+and [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:initial-name].</p>
 
 
   </div>
@@ -1184,10 +1324,10 @@ in the file chooser dialog</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The initial file, that is, the file that is initially selected<br />
-in the file chooser dialog</p>
-<p>This is a utility property that sets both [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:initial-folder] and<br />
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:initial-name].</p>
+    <p>The initial file.</p>
+<p>This file is initially selected in the file chooser dialog</p>
+<p>This is a utility property that sets both [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:initial-folder]<br />
+and [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:initial-name].</p>
 
 
   </div>
@@ -1254,8 +1394,8 @@ in the file chooser dialog</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The initial folder, that is, the directory that is initially<br />
-opened in the file chooser dialog</p>
+    <p>The initial folder.</p>
+<p>This is the directory that is initially opened in the file chooser dialog.</p>
 
 
   </div>
@@ -1294,8 +1434,8 @@ opened in the file chooser dialog</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The initial folder, that is, the directory that is initially<br />
-opened in the file chooser dialog</p>
+    <p>The initial folder.</p>
+<p>This is the directory that is initially opened in the file chooser dialog.</p>
 
 
   </div>
@@ -1362,8 +1502,8 @@ opened in the file chooser dialog</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The initial name, that is, the filename that is initially<br />
-selected in the file chooser dialog.</p>
+    <p>The initial name.</p>
+<p>This is the name of the file that is initially selected in the file chooser dialog.</p>
 
 
   </div>
@@ -1402,8 +1542,8 @@ selected in the file chooser dialog.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>The initial name, that is, the filename that is initially<br />
-selected in the file chooser dialog.</p>
+    <p>The initial name.</p>
+<p>This is the name of the file that is initially selected in the file chooser dialog.</p>
 
 
   </div>
@@ -1470,9 +1610,8 @@ selected in the file chooser dialog.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Returns whether the file chooser dialog<br />
-blocks interaction with the parent window<br />
-while it is presented.</p>
+    <p>Returns whether the file chooser dialog blocks interaction<br />
+with the parent window while it is presented.</p>
 
 
   </div>
@@ -1490,7 +1629,7 @@ while it is presented.</p>
       
       
         &mdash;
-        <div class='inline'><p><code>TRUE</code> if the file chooser dialog is modal</p>
+        <div class='inline'><p>true if the file chooser dialog is modal</p>
 </div>
       
     </li>
@@ -1617,11 +1756,9 @@ while it is presented.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function initiates a file selection operation by<br />
-presenting a file chooser dialog to the user.</p>
-<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is dismissed.<br />
-It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.open_finish]<br />
-to obtain the result.</p>
+    <p>Presents a file chooser dialog to the user.</p>
+<p>The file chooser dialog will be set up to select a single file.</p>
+<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is closed.</p>
 
 
   </div>
@@ -1640,7 +1777,7 @@ to obtain the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>the parent <code>GtkWindow</code></p>
+        <div class='inline'><p>the parent window</p>
 </div>
       
     </li>
@@ -1655,7 +1792,7 @@ to obtain the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GCancellable</code> to cancel the operation</p>
+        <div class='inline'><p>a cancellable to cancel the operation</p>
 </div>
       
     </li>
@@ -1670,7 +1807,8 @@ to obtain the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>a callback to call when the operation is complete</p>
+        <div class='inline'><p>a callback to call when the<br />
+operation is complete</p>
 </div>
       
     </li>
@@ -1720,8 +1858,9 @@ to obtain the result.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.open] call and<br />
-returns the resulting file.</p>
+    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.open] call.</p>
+<p>Note that this function returns a [error<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DialogError.DISMISSED]<br />
+error if the user cancels the dialog.</p>
 
 
   </div>
@@ -1740,7 +1879,7 @@ returns the resulting file.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GAsyncResult</code></p>
+        <div class='inline'><p>the result</p>
 </div>
       
     </li>
@@ -1758,8 +1897,7 @@ returns the resulting file.</p>
       
       
         &mdash;
-        <div class='inline'><p>the file that was selected.<br />
-Otherwise, <code>NULL</code> is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set</p>
+        <div class='inline'><p>the file that was selected</p>
 </div>
       
     </li>
@@ -1780,13 +1918,11 @@ Otherwise, <code>NULL</code> is returned and <!-- raw HTML omitted -->error<!-- 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function initiates a multi-file selection operation by<br />
-presenting a file chooser dialog to the user.</p>
-<p>The file chooser will initially be opened in the directory<br />
+    <p>Presents a file chooser dialog to the user.</p>
+<p>The file chooser dialog will be set up to select multiple files.</p>
+<p>The file chooser dialog will initially be opened in the directory<br />
 [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:initial-folder].</p>
-<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is dismissed.<br />
-It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.open_multiple_finish]<br />
-to obtain the result.</p>
+<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is closed.</p>
 
 
   </div>
@@ -1805,7 +1941,7 @@ to obtain the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>the parent <code>GtkWindow</code></p>
+        <div class='inline'><p>the parent window</p>
 </div>
       
     </li>
@@ -1820,7 +1956,7 @@ to obtain the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GCancellable</code> to cancel the operation</p>
+        <div class='inline'><p>a cancellable to cancel the operation</p>
 </div>
       
     </li>
@@ -1835,7 +1971,8 @@ to obtain the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>a callback to call when the operation is complete</p>
+        <div class='inline'><p>a callback to call when the<br />
+operation is complete</p>
 </div>
       
     </li>
@@ -1885,8 +2022,9 @@ to obtain the result.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.open] call and<br />
-returns the resulting files in a <code>GListModel</code>.</p>
+    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.open] call.</p>
+<p>Note that this function returns a [error<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DialogError.DISMISSED]<br />
+error if the user cancels the dialog.</p>
 
 
   </div>
@@ -1905,7 +2043,7 @@ returns the resulting files in a <code>GListModel</code>.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GAsyncResult</code></p>
+        <div class='inline'><p>the result</p>
 </div>
       
     </li>
@@ -1923,9 +2061,8 @@ returns the resulting files in a <code>GListModel</code>.</p>
       
       
         &mdash;
-        <div class='inline'><p>the file that was selected,<br />
-as a <code>GListModel</code> of <code>GFiles</code>. Otherwise, <code>NULL</code> is returned<br />
-and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set</p>
+        <div class='inline'><p>the files that were selected,<br />
+as a list model of [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.File]</p>
 </div>
       
     </li>
@@ -1936,9 +2073,9 @@ and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set</p>
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="save-instance_method">
+  <h3 class="signature " id="open_multiple_text_files-instance_method">
   
-    #<strong>save</strong>(parent, cancellable, callback, user_data)  &#x21d2; <tt>nil</tt> 
+    #<strong>open_multiple_text_files</strong>(parent, cancellable, callback, user_data)  &#x21d2; <tt>nil</tt> 
   
 
   
@@ -1946,11 +2083,193 @@ and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function initiates a file save operation by<br />
-presenting a file chooser dialog to the user.</p>
-<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is dismissed.<br />
-It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.save_finish]<br />
-to obtain the result.</p>
+    <p>Presents a file chooser dialog to the user.</p>
+<p>The file chooser dialog will be set up to select multiple files.</p>
+<p>The file chooser dialog will initially be opened in the directory<br />
+[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:initial-folder].</p>
+<p>In contrast to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.open], this function<br />
+lets the user select the text encoding for the files, if possible.</p>
+<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is closed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>parent</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Window.html" title="Gtk::Window (class)">Gtk::Window</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the parent window</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt>Gio::Cancellable</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a cancellable to cancel the operation</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gio::AsyncReadyCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a callback to call when the<br />
+operation is complete</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>data to pass to <!-- raw HTML omitted -->callback<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="open_multiple_text_files_finish-instance_method">
+  
+    #<strong>open_multiple_text_files_finish</strong>(result, encoding)  &#x21d2; <tt>Gio::ListModel</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.open] call.</p>
+<p>Note that this function returns a [error<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DialogError.DISMISSED]<br />
+error if the user cancels the dialog.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt>Gio::AsyncResult</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the result</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>encoding</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the text encoding to use</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gio::ListModel</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the files that were selected,<br />
+as a list model of [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.File]</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="open_text_file-instance_method">
+  
+    #<strong>open_text_file</strong>(parent, cancellable, callback, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Initiates a file selection operation by presenting a file chooser<br />
+dialog to the user.</p>
+<p>In contrast to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.open], this function<br />
+lets the user select the text encoding for the file, if possible.</p>
+<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is closed.</p>
 
 
   </div>
@@ -1999,7 +2318,190 @@ to obtain the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>a callback to call when the operation is complete</p>
+        <div class='inline'><p>a callback to call when the<br />
+operation is complete</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>data to pass to <!-- raw HTML omitted -->callback<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="open_text_file_finish-instance_method">
+  
+    #<strong>open_text_file_finish</strong>(result, encoding)  &#x21d2; <tt>Gio::File</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.open_text_file] call<br />
+and returns the resulting file and text encoding.</p>
+<p>If the user has explicitly selected a text encoding to use<br />
+for the file, then <!-- raw HTML omitted -->encoding<!-- raw HTML omitted --> will be set to a codeset name that<br />
+is suitable for passing to iconv_open(). Otherwise, it will<br />
+be <code>NULL</code>.</p>
+<p>Note that this function returns a [error<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DialogError.DISMISSED]<br />
+error if the user cancels the dialog.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt>Gio::AsyncResult</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GAsyncResult</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>encoding</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the text encoding to use</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gio::File</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the file that was selected</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="save-instance_method">
+  
+    #<strong>save</strong>(parent, cancellable, callback, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Presents a file chooser dialog to the user.</p>
+<p>The file chooser dialog will be save mode.</p>
+<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is closed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>parent</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Window.html" title="Gtk::Window (class)">Gtk::Window</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the parent window</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt>Gio::Cancellable</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a cancellable to cancel the operation</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gio::AsyncReadyCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a callback to call when the<br />
+operation is complete</p>
 </div>
       
     </li>
@@ -2049,8 +2551,9 @@ to obtain the result.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.save] call and<br />
-returns the resulting file.</p>
+    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.save] call.</p>
+<p>Note that this function returns a [error<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DialogError.DISMISSED]<br />
+error if the user cancels the dialog.</p>
 
 
   </div>
@@ -2069,7 +2572,7 @@ returns the resulting file.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GAsyncResult</code></p>
+        <div class='inline'><p>the result</p>
 </div>
       
     </li>
@@ -2087,8 +2590,7 @@ returns the resulting file.</p>
       
       
         &mdash;
-        <div class='inline'><p>the file that was selected.<br />
-Otherwise, <code>NULL</code> is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set</p>
+        <div class='inline'><p>the file that was selected</p>
 </div>
       
     </li>
@@ -2099,9 +2601,9 @@ Otherwise, <code>NULL</code> is returned and <!-- raw HTML omitted -->error<!-- 
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="select_folder-instance_method">
+  <h3 class="signature " id="save_text_file-instance_method">
   
-    #<strong>select_folder</strong>(parent, cancellable, callback, user_data)  &#x21d2; <tt>nil</tt> 
+    #<strong>save_text_file</strong>(parent, cancellable, callback, user_data)  &#x21d2; <tt>nil</tt> 
   
 
   
@@ -2109,14 +2611,12 @@ Otherwise, <code>NULL</code> is returned and <!-- raw HTML omitted -->error<!-- 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function initiates a directory selection operation by<br />
-presenting a file chooser dialog to the user.</p>
-<p>If you pass <!-- raw HTML omitted -->initial_folder<!-- raw HTML omitted -->, the file chooser will initially be<br />
-opened in the parent directory of that folder, otherwise, it<br />
-will be in the directory [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:initial-folder].</p>
-<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is dismissed.<br />
-It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.select_folder_finish]<br />
-to obtain the result.</p>
+    <p>Initiates a file save operation by presenting a file chooser<br />
+dialog to the user.</p>
+<p>In contrast to [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.save], this function<br />
+lets the user select the text encoding and line endings for<br />
+the text file, if possible.</p>
+<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is closed.</p>
 
 
   </div>
@@ -2165,7 +2665,210 @@ to obtain the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>a callback to call when the operation is complete</p>
+        <div class='inline'><p>a callback to call when the<br />
+operation is complete</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_data</span>
+      
+      
+        <span class='type'>(<tt>GObject</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>data to pass to <!-- raw HTML omitted -->callback<!-- raw HTML omitted --></p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="save_text_file_finish-instance_method">
+  
+    #<strong>save_text_file_finish</strong>(result, encoding, line_ending)  &#x21d2; <tt>Gio::File</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.save_text_file] call<br />
+and returns the resulting file, text encoding and line endings.</p>
+<p>If the user has explicitly selected a text encoding to use<br />
+for the file, then <!-- raw HTML omitted -->encoding<!-- raw HTML omitted --> will be set to a codeset name that<br />
+is suitable for passing to iconv_open(). Otherwise, it will<br />
+be <code>NULL</code>.</p>
+<p>The <!-- raw HTML omitted -->line_ending<!-- raw HTML omitted --> will be set to one of &quot;\n&quot;, &quot;\r\n&quot;, &quot;\r&quot; or &quot;&quot;,<br />
+where the latter means to preserve existing line endings.</p>
+<p>Note that this function returns a [error<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DialogError.DISMISSED]<br />
+error if the user cancels the dialog.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>result</span>
+      
+      
+        <span class='type'>(<tt>Gio::AsyncResult</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a <code>GAsyncResult</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>encoding</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the text encoding to use</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>line_ending</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>return location for the line endings to use</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Gio::File</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the file that was selected.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="select_folder-instance_method">
+  
+    #<strong>select_folder</strong>(parent, cancellable, callback, user_data)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Presents a file chooser dialog to the user.</p>
+<p>The file chooser dialog will be set up to select a single folder.</p>
+<p>If you pass <!-- raw HTML omitted -->initial_folder<!-- raw HTML omitted -->, the file chooser dialog will initially<br />
+be opened in the parent directory of that folder, otherwise, it<br />
+will be in the directory [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:initial-folder].</p>
+<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is closed.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>parent</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Window.html" title="Gtk::Window (class)">Gtk::Window</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the parent window</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>cancellable</span>
+      
+      
+        <span class='type'>(<tt>Gio::Cancellable</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a cancellable to cancel the operation</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>callback</span>
+      
+      
+        <span class='type'>(<tt>Gio::AsyncReadyCallback</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>a callback to call when the<br />
+operation is complete</p>
 </div>
       
     </li>
@@ -2215,8 +2918,9 @@ to obtain the result.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.select_folder] call and<br />
-returns the resulting file.</p>
+    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.select_folder] call.</p>
+<p>Note that this function returns a [error<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DialogError.DISMISSED]<br />
+error if the user cancels the dialog.</p>
 
 
   </div>
@@ -2235,7 +2939,7 @@ returns the resulting file.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GAsyncResult</code></p>
+        <div class='inline'><p>the result</p>
 </div>
       
     </li>
@@ -2253,8 +2957,7 @@ returns the resulting file.</p>
       
       
         &mdash;
-        <div class='inline'><p>the file that was selected.<br />
-Otherwise, <code>NULL</code> is returned and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set</p>
+        <div class='inline'><p>the folder that was selected</p>
 </div>
       
     </li>
@@ -2275,13 +2978,12 @@ Otherwise, <code>NULL</code> is returned and <!-- raw HTML omitted -->error<!-- 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>This function initiates a multi-directory selection operation by<br />
-presenting a file chooser dialog to the user.</p>
-<p>The file chooser will initially be opened in the directory<br />
-[property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:initial-folder].</p>
-<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is dismissed.<br />
-It should call [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.select_multiple_folders_finish]<br />
-to obtain the result.</p>
+    <p>Presents a file chooser dialog to the user.</p>
+<p>The file chooser dialog will be set up to allow selecting<br />
+multiple folders.</p>
+<p>The file chooser dialog will initially be opened in the<br />
+directory [property<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog:initial-folder].</p>
+<p>The <!-- raw HTML omitted -->callback<!-- raw HTML omitted --> will be called when the dialog is closed.</p>
 
 
   </div>
@@ -2300,7 +3002,7 @@ to obtain the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>the parent <code>GtkWindow</code></p>
+        <div class='inline'><p>the parent window</p>
 </div>
       
     </li>
@@ -2315,7 +3017,7 @@ to obtain the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GCancellable</code> to cancel the operation</p>
+        <div class='inline'><p>a cancellable to cancel the operation</p>
 </div>
       
     </li>
@@ -2330,7 +3032,8 @@ to obtain the result.</p>
       
       
         &mdash;
-        <div class='inline'><p>a callback to call when the operation is complete</p>
+        <div class='inline'><p>a callback to call when the<br />
+operation is complete</p>
 </div>
       
     </li>
@@ -2380,8 +3083,9 @@ to obtain the result.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.select_multiple_folders]<br />
-call and returns the resulting files in a <code>GListModel</code>.</p>
+    <p>Finishes the [method<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.FileDialog.select_multiple_folders] call.</p>
+<p>Note that this function returns a [error<!-- raw HTML omitted -->Gtk<!-- raw HTML omitted -->.DialogError.DISMISSED]<br />
+error if the user cancels the dialog.</p>
 
 
   </div>
@@ -2400,7 +3104,7 @@ call and returns the resulting files in a <code>GListModel</code>.</p>
       
       
         &mdash;
-        <div class='inline'><p>a <code>GAsyncResult</code></p>
+        <div class='inline'><p>the result</p>
 </div>
       
     </li>
@@ -2418,9 +3122,8 @@ call and returns the resulting files in a <code>GListModel</code>.</p>
       
       
         &mdash;
-        <div class='inline'><p>the file that was selected,<br />
-as a <code>GListModel</code> of <code>GFiles</code>. Otherwise, <code>NULL</code> is returned<br />
-and <!-- raw HTML omitted -->error<!-- raw HTML omitted --> is set</p>
+        <div class='inline'><p>the folders that were selected,<br />
+as a list model of [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.File]</p>
 </div>
       
     </li>

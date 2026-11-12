@@ -88,7 +88,7 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>A <code>GdkToplevel</code> is a freestanding toplevel surface.</p>
+    <p>A freestanding toplevel surface.</p>
 <p>The <code>GdkToplevel</code> interface provides useful APIs for interacting with<br />
 the windowing system, such as controlling maximization and size of the<br />
 surface, setting icons and transient parents for dialogs.</p>
@@ -163,6 +163,29 @@ surface, setting icons and transient parents for dialogs.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#capabilities-instance_method" title="#capabilities (instance method)">#<strong>capabilities</strong>  &#x21d2; Gdk::ToplevelCapabilities </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The capabilities that are available for this toplevel.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#decorated=-instance_method" title="#decorated= (instance method)">#<strong>decorated=</strong>(decorated)  &#x21d2; nil </a>
     
 
@@ -224,6 +247,52 @@ surface, setting icons and transient parents for dialogs.</p>
 
   
     <span class="summary_desc"><div class='inline'><p>Sets keyboard focus to <!-- raw HTML omitted -->surface<!-- raw HTML omitted -->.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gravity-instance_method" title="#gravity (instance method)">#<strong>gravity</strong>  &#x21d2; Gdk::Gravity </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Returns the gravity that is used when changing the toplevel size programmatically.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#gravity=-instance_method" title="#gravity= (instance method)">#<strong>gravity=</strong>(gravity)  &#x21d2; nil </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>Sets the gravity that is used when changing the toplevel size programmatically.</p>
 </div></span>
   
 </li>
@@ -522,7 +591,8 @@ surface, setting icons and transient parents for dialogs.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><p>Performs a title bar gesture.</p>
+</div></span>
   
 </li>
 
@@ -808,6 +878,45 @@ surface, setting icons and transient parents for dialogs.</p>
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="capabilities-instance_method">
+  
+    #<strong>capabilities</strong>  &#x21d2; <tt><span class='object_link'><a href="ToplevelCapabilities.html" title="Gdk::ToplevelCapabilities (module)">Gdk::ToplevelCapabilities</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>The capabilities that are available for this toplevel.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ToplevelCapabilities.html" title="Gdk::ToplevelCapabilities (module)">Gdk::ToplevelCapabilities</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the capabilities of the <code>GdkToplevel</code>.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="decorated=-instance_method">
   
     #<strong>decorated=</strong>(decorated)  &#x21d2; <tt>nil</tt> 
@@ -954,6 +1063,101 @@ calling this function.</p>
       
         &mdash;
         <div class='inline'><p>timestamp of the event triggering the surface focus</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gravity-instance_method">
+  
+    #<strong>gravity</strong>  &#x21d2; <tt><span class='object_link'><a href="Gravity.html" title="Gdk::Gravity (module)">Gdk::Gravity</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the gravity that is used when changing the toplevel<br />
+size programmatically.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gravity.html" title="Gdk::Gravity (module)">Gdk::Gravity</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the gravity</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="gravity=-instance_method">
+  
+    #<strong>gravity=</strong>(gravity)  &#x21d2; <tt>nil</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Sets the gravity that is used when changing the toplevel<br />
+size programmatically.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>gravity</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Gravity.html" title="Gdk::Gravity (module)">Gdk::Gravity</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the new gravity</p>
 </div>
       
     </li>
@@ -1611,7 +1815,8 @@ in lists of windows, etc.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    
+    <p>Performs a title bar gesture.</p>
+
 
   </div>
 </div>
@@ -1645,6 +1850,10 @@ in lists of windows, etc.</p>
         <span class='type'>(<tt>Boolean</tt>)</span>
       
       
+      
+        &mdash;
+        <div class='inline'><p>whether the gesture was performed</p>
+</div>
       
     </li>
   

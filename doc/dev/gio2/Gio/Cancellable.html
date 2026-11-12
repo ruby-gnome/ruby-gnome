@@ -562,6 +562,8 @@ operation causes it to complete asynchronously. That is, if you<br />
 cancel the operation from the same thread in which it is running,<br />
 then the operation's GAsync::ReadyCallback will not be invoked until<br />
 the application returns to the main loop.</p>
+<p>It is safe (although useless, since it will be a no-op) to call<br />
+this function from a [signal<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Cancellable::cancelled] signal handler.</p>
 
 
   </div>
@@ -599,17 +601,35 @@ the application returns to the main loop.</p>
     <p>Convenience function to connect to the #GCancellable::cancelled<br />
 signal. Also handles the race condition that may happen<br />
 if the cancellable is cancelled right before connecting.</p>
-<p><!-- raw HTML omitted -->callback<!-- raw HTML omitted --> is called at most once, either directly at the<br />
-time of the connect if <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is already cancelled,<br />
-or when <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is cancelled in some thread.</p>
+<p><!-- raw HTML omitted -->callback<!-- raw HTML omitted --> is called exactly once each time <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is cancelled,<br />
+either directly at the time of the connect if <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is already<br />
+cancelled, or when <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is cancelled in some thread.<br />
+In case the cancellable is reset via [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Cancellable.reset]<br />
+then the callback can be called again if the <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is cancelled and<br />
+if it had not been previously cancelled at the time<br />
+[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Cancellable.connect] was called (e.g. if the connection actually<br />
+took place, returning a non-zero value).</p>
 <p><!-- raw HTML omitted -->data_destroy_func<!-- raw HTML omitted --> will be called when the handler is<br />
 disconnected, or immediately if the cancellable is already<br />
 cancelled.</p>
 <p>See #GCancellable::cancelled for details on how to use this.</p>
 <p>Since GLib 2.40, the lock protecting <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is not held when<br />
-<!-- raw HTML omitted -->callback<!-- raw HTML omitted --> is invoked.  This lifts a restriction in place for<br />
+<!-- raw HTML omitted -->callback<!-- raw HTML omitted --> is invoked. This lifts a restriction in place for<br />
 earlier GLib versions which now makes it easier to write cleanup<br />
-code that unconditionally invokes e.g. g_cancellable_cancel().</p>
+code that unconditionally invokes e.g. [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Cancellable.cancel].<br />
+Note that since 2.82 GLib still holds a lock during the callback but it’s<br />
+designed in a way that most of the [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Cancellable] methods can be<br />
+called, including [method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Cancellable.cancel] or<br />
+[method<!-- raw HTML omitted -->GObject<!-- raw HTML omitted -->.Object.unref].</p>
+<p>There are still some methods that will deadlock (by design) when<br />
+called from the [signal<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Cancellable::cancelled] callbacks:</p>
+<ul>
+<li>[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Cancellable.connect]</li>
+<li>[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Cancellable.disconnect]</li>
+<li>[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Cancellable.reset]</li>
+<li>[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Cancellable.make_pollfd]</li>
+<li>[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Cancellable.release_fd]</li>
+</ul>
 
 
   </div>
@@ -867,6 +887,10 @@ these cases is to ignore the <!-- raw HTML omitted -->cancellable<!-- raw HTML o
 <p>You are not supposed to read from the fd yourself, just check for<br />
 readable status. Reading to unset the readable status is done<br />
 with g_cancellable_reset().</p>
+<p>Note that in the event that a [signal<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Cancellable::cancelled] signal handler is<br />
+currently running, this call will block until the handler has finished.<br />
+Calling this function from a signal handler will therefore result in a<br />
+deadlock.</p>
 
 
   </div>
@@ -1009,6 +1033,10 @@ when the <!-- raw HTML omitted -->cancellable<!-- raw HTML omitted --> is finali
 block scarce file descriptors until it is finalized if this function<br />
 is not called. This can cause the application to run out of file<br />
 descriptors when many #GCancellables are used at the same time.</p>
+<p>Note that in the event that a [signal<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Cancellable::cancelled] signal handler is<br />
+currently running, this call will block until the handler has finished.<br />
+Calling this function from a signal handler will therefore result in a<br />
+deadlock.</p>
 
 
   </div>
@@ -1052,6 +1080,10 @@ as this function might tempt you to do. The recommended practice<br />
 is to drop the reference to a cancellable after cancelling it,<br />
 and let it die with the outstanding async operations. You should<br />
 create a fresh cancellable for further async operations.</p>
+<p>In the event that a [signal<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Cancellable::cancelled] signal handler is currently<br />
+running, this call will block until the handler has finished.<br />
+Calling this function from a signal handler will therefore result in a<br />
+deadlock.</p>
 
 
   </div>

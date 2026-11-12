@@ -95,7 +95,7 @@ implementations that operate by containing a number of named<br />
 <p>One useful application of this interface is to map the<br />
 names of actions from various action groups to unique,<br />
 prefixed names (e.g. by prepending &quot;app.&quot; or &quot;win.&quot;).<br />
-This is the motivation for the 'Map' part of the interface<br />
+This is the motivation for the ‘Map’ part of the interface<br />
 name.</p>
 
 
@@ -159,7 +159,7 @@ name.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>A convenience function for creating multiple GSimple::Action instances and adding them to a GAction::Map.</p>
+    <span class="summary_desc"><div class='inline'><p>A convenience function for creating multiple [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.SimpleAction] instances and adding them to a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionMap].</p>
 </div></span>
   
 </li>
@@ -273,7 +273,7 @@ name.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'><p>Remove actions from a GAction::Map.</p>
+    <span class="summary_desc"><div class='inline'><p>Remove actions from a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionMap].</p>
 </div></span>
   
 </li>
@@ -345,7 +345,7 @@ as <!-- raw HTML omitted -->action<!-- raw HTML omitted --> then the old action 
       
       
         &mdash;
-        <div class='inline'><p>a #GAction</p>
+        <div class='inline'><p>a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Action]</p>
 </div>
       
     </li>
@@ -402,10 +402,10 @@ as <!-- raw HTML omitted -->action<!-- raw HTML omitted --> then the old action 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>A convenience function for creating multiple GSimple::Action instances<br />
-and adding them to a GAction::Map.</p>
-<p>Each action is constructed as per one GAction::Entry.</p>
-<pre class="code ruby"><code class="ruby">static void
+    <p>A convenience function for creating multiple [class<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.SimpleAction]<br />
+instances and adding them to a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionMap].</p>
+<p>Each action is constructed as per one [struct<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionEntry].</p>
+<pre class="code c"><code class="c">static void
 activate_quit (GSimpleAction *simple,
                GVariant      *parameter,
                gpointer       user_data)
@@ -455,7 +455,7 @@ create_action_group (void)
       
         &mdash;
         <div class='inline'><p>a pointer to<br />
-the first item in an array of GAction::Entry structs</p>
+the first item in an array of [struct<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionEntry] structs</p>
 </div>
       
     </li>
@@ -470,7 +470,7 @@ the first item in an array of GAction::Entry structs</p>
       
       
         &mdash;
-        <div class='inline'><p>the length of <!-- raw HTML omitted -->entries<!-- raw HTML omitted -->, or -1 if <!-- raw HTML omitted -->entries<!-- raw HTML omitted --> is nil-terminated</p>
+        <div class='inline'><p>the length of <!-- raw HTML omitted -->entries<!-- raw HTML omitted -->, or -1 if <!-- raw HTML omitted -->entries<!-- raw HTML omitted --> is <code>NULL</code>-terminated</p>
 </div>
       
     </li>
@@ -542,7 +542,7 @@ as <!-- raw HTML omitted -->action<!-- raw HTML omitted --> then the old action 
       
       
         &mdash;
-        <div class='inline'><p>a #GAction</p>
+        <div class='inline'><p>a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Action]</p>
 </div>
       
     </li>
@@ -626,7 +626,7 @@ as <!-- raw HTML omitted -->action<!-- raw HTML omitted --> then the old action 
 </h3><div class="docstring">
   <div class="discussion">
     <p>Looks up the action with the name <!-- raw HTML omitted -->action_name<!-- raw HTML omitted --> in <!-- raw HTML omitted -->action_map<!-- raw HTML omitted -->.</p>
-<p>If no such action exists, returns nil.</p>
+<p>If no such action exists, returns <code>NULL</code>.</p>
 
 
   </div>
@@ -663,7 +663,7 @@ as <!-- raw HTML omitted -->action<!-- raw HTML omitted --> then the old action 
       
       
         &mdash;
-        <div class='inline'><p>a #GAction, or nil</p>
+        <div class='inline'><p>a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.Action]</p>
 </div>
       
     </li>
@@ -759,9 +759,9 @@ as <!-- raw HTML omitted -->action<!-- raw HTML omitted --> then the old action 
   
 </h3><div class="docstring">
   <div class="discussion">
-    <p>Remove actions from a GAction::Map. This is meant as the reverse of<br />
-g_action_map_add_action_entries().</p>
-<pre class="code ruby"><code class="ruby">static const GActionEntry entries[] = {
+    <p>Remove actions from a [iface<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionMap]. This is meant as the reverse of<br />
+[method<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionMap.add_action_entries].</p>
+<pre class="code c"><code class="c">static const GActionEntry entries[] = {
     { &quot;quit&quot;,         activate_quit              },
     { &quot;print-string&quot;, activate_print_string, &quot;s&quot; }
 };
@@ -797,7 +797,7 @@ remove_actions (GActionMap *map)
       
         &mdash;
         <div class='inline'><p>a pointer to<br />
-the first item in an array of GAction::Entry structs</p>
+the first item in an array of [struct<!-- raw HTML omitted -->Gio<!-- raw HTML omitted -->.ActionEntry] structs</p>
 </div>
       
     </li>
@@ -812,7 +812,7 @@ the first item in an array of GAction::Entry structs</p>
       
       
         &mdash;
-        <div class='inline'><p>the length of <!-- raw HTML omitted -->entries<!-- raw HTML omitted -->, or -1 if <!-- raw HTML omitted -->entries<!-- raw HTML omitted --> is nil-terminated</p>
+        <div class='inline'><p>the length of <!-- raw HTML omitted -->entries<!-- raw HTML omitted -->, or -1 if <!-- raw HTML omitted -->entries<!-- raw HTML omitted --> is <code>NULL</code>-terminated</p>
 </div>
       
     </li>
