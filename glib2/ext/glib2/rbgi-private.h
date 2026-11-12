@@ -37,6 +37,7 @@ G_GNUC_INTERNAL void rbgi_interface_info_init(VALUE mGLib);
 G_GNUC_INTERNAL void rbgi_registered_type_info_init(VALUE mGLib);
 G_GNUC_INTERNAL void rbgi_repository_init(VALUE mGLib);
 G_GNUC_INTERNAL void rbgi_type_info_init(VALUE mGLib);
+G_GNUC_INTERNAL void rbgi_value_info_init(VALUE mGLib);
 
 G_GNUC_INTERNAL gboolean
 rbgi_arg_info_is_input_buffer(GIArgInfo *info);
