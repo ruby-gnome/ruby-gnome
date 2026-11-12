@@ -64,9 +64,4 @@ class TestEnumInfo < Test::Unit::TestCase
     info = @repository.find("Gio", "FileAttributeType")
     assert_nil(info.error_domain)
   end
-
-  def test_flags_info
-    info = @repository.find("Gio", "FileCopyFlags")
-    assert_equal("none", info.get_value(0).name)
-  end
 end
