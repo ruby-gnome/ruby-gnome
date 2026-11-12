@@ -12,7 +12,4 @@ install-headers:
 
 install: install-pc
 install-pc:
-	if test -n "$(pkgconfigdir)"; then			\
-	  $(MAKEDIRS) $(pkgconfigdir);				\
-	  $(INSTALL_DATA) ruby-glib2.pc $(pkgconfigdir);	\
-	fi
+	$(RUBY) -rfileutils -e "d, f = ARGV; exit if d.to_s.empty?; FileUtils.mkdir_p(d); FileUtils.install(f, d, mode: 0644)" "$(pkgconfigdir)" ruby-glib2.pc

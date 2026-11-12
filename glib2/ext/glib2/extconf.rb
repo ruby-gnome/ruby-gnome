@@ -82,13 +82,13 @@ if PKGConfig.check_version?(package_id, 2, 60, 0)
   ignore_headers << "gunicode.h"
 end
 headers = include_paths.split.inject([]) do |result, path|
-  result + Dir.glob(File.join(path.sub(/^-I/, ""), "glib", "*.h"))
+  result + Dir.glob(File.join(path.sub(%r{\A[-/]I}, ""), "glib", "*.h"))
 end.reject do |file|
   ignore_headers.include?(File.basename(file))
 end
 include_paths = PKGConfig.cflags_only_I(package_id)
 headers = include_paths.split.inject(headers) do |result, path|
-  result + Dir.glob(File.join(path.sub(/^-I/, ""), "gobject", "gsignal.h"))
+  result + Dir.glob(File.join(path.sub(%r{\A[-/]I}, ""), "gobject", "gsignal.h"))
 end
 glib_mkenums(enum_types_prefix,
              headers,
@@ -98,7 +98,7 @@ glib_mkenums(enum_types_prefix,
 
 if have_girepository
   girepository_headers = include_paths.split.inject([]) do |result, path|
-    result + Dir.glob(File.join(path.sub(/^-I/, ""), "girepository", "*.h"))
+    result + Dir.glob(File.join(path.sub(%r{\A[-/]I}, ""), "girepository", "*.h"))
   end
   glib_mkenums("gi-enum-types",
                girepository_headers,
