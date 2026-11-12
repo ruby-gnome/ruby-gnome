@@ -36,6 +36,7 @@ G_GNUC_INTERNAL void rbgi_constant_info_init(VALUE mGLib);
 G_GNUC_INTERNAL void rbgi_enum_info_init(VALUE mGLib);
 G_GNUC_INTERNAL void rbgi_flags_info_init(VALUE mGLib);
 G_GNUC_INTERNAL void rbgi_interface_info_init(VALUE mGLib);
+G_GNUC_INTERNAL void rbgi_property_info_init(VALUE mGLib);
 G_GNUC_INTERNAL void rbgi_registered_type_info_init(VALUE mGLib);
 G_GNUC_INTERNAL void rbgi_repository_init(VALUE mGLib);
 G_GNUC_INTERNAL void rbgi_type_info_init(VALUE mGLib);
