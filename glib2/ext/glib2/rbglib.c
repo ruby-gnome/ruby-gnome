@@ -1305,9 +1305,7 @@ union       GDoubleIEEE754;
 
     rbgi_arg_info_init(rbg_mGLib());
     rbgi_callable_info_init(rbg_mGLib());
-    /* TODO */
-    /* rbgi_constant_info_init(rbg_mGLib()); */
-    G_DEF_CLASS(GI_TYPE_CONSTANT_INFO, "ConstantInfo", rbg_mGLib());
+    rbgi_constant_info_init(rbg_mGLib());
     rbgi_enum_info_init(rbg_mGLib());
     rbgi_flags_info_init(rbg_mGLib());
     /* TODO */

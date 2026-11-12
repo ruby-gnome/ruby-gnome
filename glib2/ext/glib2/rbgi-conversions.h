@@ -26,6 +26,7 @@
 #define RVAL2GI_ARG_INFO(rb_info)             GI_ARG_INFO(RVAL2GOBJ(rb_info))
 #define RVAL2GI_BASE_INFO(rb_info)            GI_BASE_INFO(RVAL2GOBJ(rb_info))
 #define RVAL2GI_CALLABLE_INFO(rb_info)        GI_CALLABLE_INFO(RVAL2GOBJ(rb_info))
+#define RVAL2GI_CONSTANT_INFO(rb_info)        GI_CONSTANT_INFO(RVAL2GOBJ(rb_info))
 #define RVAL2GI_ENUM_INFO(rb_info)            GI_ENUM_INFO(RVAL2GOBJ(rb_info))
 #define RVAL2GI_INTERFACE_INFO(rb_info)       GI_INTERFACE_INFO(RVAL2GOBJ(rb_info))
 #define RVAL2GI_REGISTERED_TYPE_INFO(rb_info) \
