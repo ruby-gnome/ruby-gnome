@@ -1308,9 +1308,7 @@ union       GDoubleIEEE754;
     /* TODO */
     /* rbgi_constant_info_init(rbg_mGLib()); */
     G_DEF_CLASS(GI_TYPE_CONSTANT_INFO, "ConstantInfo", rbg_mGLib());
-    /* TODO */
-    /* rbgi_enum_info_init(rbg_mGLib()); */
-    G_DEF_CLASS(GI_TYPE_ENUM_INFO, "EnumInfo", rbg_mGLib());
+    rbgi_enum_info_init(rbg_mGLib());
     /* TODO */
     /* rbgi_flags_info_init(rbg_mGLib()); */
     G_DEF_CLASS(GI_TYPE_FLAGS_INFO, "FlagsInfo", rbg_mGLib());
@@ -1334,6 +1332,9 @@ union       GDoubleIEEE754;
     /* TODO */
     /* rbgi_union_info_init(rbg_mGLib()); */
     G_DEF_CLASS(GI_TYPE_UNION_INFO, "UnionInfo", rbg_mGLib());
+    /* TODO */
+    /* rbgi_value_info_init(rbg_mGLib()); */
+    G_DEF_CLASS(GI_TYPE_VALUE_INFO, "ValueInfo", rbg_mGLib());
     /* TODO */
     /* rbgi_vfunc_info_init(rbg_mGLib()); */
     G_DEF_CLASS(GI_TYPE_VFUNC_INFO, "VFuncInfo", rbg_mGLib());

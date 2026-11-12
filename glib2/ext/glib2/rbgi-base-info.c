@@ -128,6 +128,10 @@ rbgi_base_info_instance2robj(gpointer instance, gpointer user_data)
         ID id_UnionInfo;
         RUBY_CONST_ID(id_UnionInfo, "UnionInfo");
         klass = rb_const_get(rbg_mGLib(), id_UnionInfo);
+    } else if (type == GI_TYPE_VALUE_INFO) {
+        ID id_ValueInfo;
+        RUBY_CONST_ID(id_ValueInfo, "ValueInfo");
+        klass = rb_const_get(rbg_mGLib(), id_ValueInfo);
     } else if (type == GI_TYPE_VFUNC_INFO) {
         ID id_VFuncInfo;
         RUBY_CONST_ID(id_VFuncInfo, "VFuncInfo");
