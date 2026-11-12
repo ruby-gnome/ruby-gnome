@@ -1309,9 +1309,7 @@ union       GDoubleIEEE754;
     /* rbgi_constant_info_init(rbg_mGLib()); */
     G_DEF_CLASS(GI_TYPE_CONSTANT_INFO, "ConstantInfo", rbg_mGLib());
     rbgi_enum_info_init(rbg_mGLib());
-    /* TODO */
-    /* rbgi_flags_info_init(rbg_mGLib()); */
-    G_DEF_CLASS(GI_TYPE_FLAGS_INFO, "FlagsInfo", rbg_mGLib());
+    rbgi_flags_info_init(rbg_mGLib());
     /* TODO */
     /* rbgi_function_info_init(rbg_mGLib()); */
     G_DEF_CLASS(GI_TYPE_FUNCTION_INFO, "FunctionInfo", rbg_mGLib());
