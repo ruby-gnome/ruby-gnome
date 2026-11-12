@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2002-2025  Ruby-GNOME Project Team
+ *  Copyright (C) 2002-2026  Ruby-GNOME Project Team
  *  Copyright (C) 2002-2003  Masahiro Sakai
  *  Copyright (C) 1998-2000  Yukihiro Matsumoto,
  *                           Daisuke Kanda,
@@ -113,7 +113,10 @@ static const rb_data_type_t rg_glib_object_type = {
     },
     &rbg_glib_instantiatable_type,
     NULL,
-    RUBY_TYPED_FREE_IMMEDIATELY | RUBY_TYPED_FROZEN_SHAREABLE,
+    /* We must not use RUBY_TYPED_FREE_IMMEDIATELY. holder_free() may
+     * call g_object_unref() and it may emit signals that have Ruby
+     * handlers. Ruby handlers can't be called during GC. */
+    RUBY_TYPED_FROZEN_SHAREABLE,
 };
 
 void
