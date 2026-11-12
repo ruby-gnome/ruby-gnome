@@ -31,6 +31,7 @@
 #define RVAL2GI_REGISTERED_TYPE_INFO(rb_info) \
     GI_REGISTERED_TYPE_INFO(RVAL2GOBJ(rb_info))
 #define RVAL2GI_TYPE_INFO(rb_info)            GI_TYPE_INFO(RVAL2GOBJ(rb_info))
+#define RVAL2GI_VALUE_INFO(rb_info)           GI_VALUE_INFO(RVAL2GOBJ(rb_info))
 
 #define GI_ARRAY_TYPE2RVAL(type)     (GENUM2RVAL(type, GI_TYPE_ARRAY_TYPE))
 #define GI_DIRECTION2RVAL(direction) (GENUM2RVAL(direction, GI_TYPE_DIRECTION))

@@ -1332,9 +1332,7 @@ union       GDoubleIEEE754;
     /* TODO */
     /* rbgi_union_info_init(rbg_mGLib()); */
     G_DEF_CLASS(GI_TYPE_UNION_INFO, "UnionInfo", rbg_mGLib());
-    /* TODO */
-    /* rbgi_value_info_init(rbg_mGLib()); */
-    G_DEF_CLASS(GI_TYPE_VALUE_INFO, "ValueInfo", rbg_mGLib());
+    rbgi_value_info_init(rbg_mGLib());
     /* TODO */
     /* rbgi_vfunc_info_init(rbg_mGLib()); */
     G_DEF_CLASS(GI_TYPE_VFUNC_INFO, "VFuncInfo", rbg_mGLib());
