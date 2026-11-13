@@ -1,4 +1,4 @@
-# Copyright (C) 2015-2024  Ruby-GNOME Project Team
+# Copyright (C) 2015-2026  Ruby-GNOME Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -173,6 +173,11 @@ class TestGLibUnicode < Test::Unit::TestCase
                 unichar("e"), 0x0323, 0x0304, 0x0301].pack("U*")
     assert_equal(utf8_to_utf32(expected),
                  GLib::Unicode.canonical_ordering(utf8_to_utf32(original)))
+  end
+
+  def test_unicode_canonical_ordering_empty
+    assert_equal(utf8_to_utf32(""),
+                 GLib::Unicode.canonical_ordering(utf8_to_utf32("")))
   end
 
   def test_unichar_compose
