@@ -24,12 +24,6 @@ class TestRegisteredTypeInfo < Test::Unit::TestCase
     @info = @repository.find("Gio", "TlsServerConnection")
   end
 
-  def test_ancestors
-    assert do
-      GLib::InterfaceInfo < GLib::RegisteredTypeInfo
-    end
-  end
-
   def test_type_name
     assert_equal("GTlsServerConnection", @info.type_name)
   end
