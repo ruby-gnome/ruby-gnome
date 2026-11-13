@@ -1315,9 +1315,7 @@ union       GDoubleIEEE754;
     /* TODO */
     /* rbgi_object_info_init(rbg_mGLib()); */
     G_DEF_CLASS(GI_TYPE_OBJECT_INFO, "ObjectInfo", rbg_mGLib());
-    /* TODO */
-    /* rbgi_property_info_init(rbg_mGLib()); */
-    G_DEF_CLASS(GI_TYPE_PROPERTY_INFO, "PropertyInfo", rbg_mGLib());
+    rbgi_property_info_init(rbg_mGLib());
     /* TODO */
     /* rbgi_signal_info_init(rbg_mGLib()); */
     G_DEF_CLASS(GI_TYPE_SIGNAL_INFO, "SignalInfo", rbg_mGLib());
