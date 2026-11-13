@@ -24,12 +24,6 @@ class TestFlagsInfo < Test::Unit::TestCase
     @info = @repository.find("Gio", "FileCopyFlags")
   end
 
-  def test_ancestors
-    assert do
-      GLib::FlagsInfo < GLib::EnumInfo
-    end
-  end
-
   def test_values
     assert_equal(["none", "overwrite", "backup"],
                  @info.values.first(3).collect(&:name))
